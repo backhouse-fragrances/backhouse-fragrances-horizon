@@ -1889,6 +1889,31 @@
         "visible_if": "{{ settings.quick_add == true }}"
       },
       {
+        "type": "select",
+        "id": "quick_add_style",
+        "label": "t:settings.quick_add_style",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:options.default"
+          },
+          {
+            "value": "icon",
+            "label": "t:options.icon_only"
+          }
+        ],
+        "default": "default",
+        "visible_if": "{{ settings.quick_add == true }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "quick_add_show_on_hover",
+        "label": "t:settings.quick_add_show_on_hover",
+        "info": "t:info.quick_add_show_on_hover",
+        "default": true,
+        "visible_if": "{{ settings.quick_add == true }}"
+      },
+      {
         "type": "color",
         "id": "quick_add_background",
         "label": "t:settings.background",

@@ -5,6 +5,8 @@
   @param {string} add_to_cart_text - The text to display on the button.
   @param {object} product - The product object to be added to the cart.
   @param {boolean} show_icon - Whether to render the cart icon.
+  @param {string} [icon_markup] - Inline SVG rendered instead of the cart icon.
+  @param {boolean} [icon_only] - Keep the label for assistive tech only (icon buttons).
   @param {string} [class] - Additional CSS classes to apply to the button.
   @param {string} [id] - The ID attribute for the button.
   @param {string} [data_testid] - The data-testid attribute for testing.
@@ -39,7 +41,14 @@
       disabled
     {% endunless %}
   >
-    {% if show_icon %}
+    {% if icon_markup != blank %}
+      <span
+        aria-hidden="true"
+        class="svg-wrapper add-to-cart-icon"
+      >
+        {{- icon_markup -}}
+      </span>
+    {% elsif show_icon %}
       <span
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
@@ -47,7 +56,11 @@
         {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
       </span>
     {% endif %}
-    {{- add_to_cart_text | default: default_add_to_cart_text -}}
+    {%- if icon_only -%}
+      <span class="visually-hidden">{{ add_to_cart_text | default: default_add_to_cart_text }}</span>
+    {%- else -%}
+      {{- add_to_cart_text | default: default_add_to_cart_text -}}
+    {%- endif -%}
     {% comment %} checkmark burst markup {% endcomment %}
     <span class="add-to-cart__added">
       <span class="svg-wrapper add-to-cart__added-icon">

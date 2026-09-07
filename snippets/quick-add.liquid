@@ -54,7 +54,19 @@
     assign render_add = false
     assign render_choose = true
   endif
+
+  # Icon-only style: a small square plus button in the media corner (see quick-add-styles).
+  assign quick_add_icon_only = false
+  if settings.quick_add_style == 'icon'
+    assign quick_add_icon_only = true
+  endif
 %}
+
+{%- capture quick_add_plus_icon -%}{%- if quick_add_icon_only -%}
+  <svg aria-hidden="true" focusable="false" fill="none" width="12" height="12" viewBox="0 0 12 12" class="quick-add__plus-icon">
+    <path d="M6 0v12M0 6h12" stroke="currentColor" stroke-width="1.5"></path>
+  </svg>
+{%- endif -%}{%- endcapture -%}
 
 {% render 'fly-to-cart-styles' %}
 
@@ -78,7 +90,7 @@
   quick-add modal via quick-add-component/handleClick - so it lives outside the form.
 {% endcomment %}
 <quick-add-component
-  class="quick-add custom-color-quick-add"
+  class="quick-add custom-color-quick-add{% if quick_add_icon_only %} quick-add--icon{% endif %}{% unless settings.quick_add_show_on_hover %} quick-add--always-visible{% endunless %}"
   ref="quickAdd"
   data-product-title="{{ product.title }}"
   data-product-id="{{ product.id }}"
@@ -121,6 +133,8 @@
           class: 'quick-add__button quick-add__button--add add-to-cart-button',
           can_add_to_cart: can_add_to_cart,
           show_icon: true,
+          icon_markup: quick_add_plus_icon,
+          icon_only: quick_add_icon_only,
           product: product
         %}
       {%- endform -%}
@@ -137,9 +151,17 @@
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
       >
-        {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        {%- if quick_add_icon_only -%}
+          {{- quick_add_plus_icon -}}
+        {%- else -%}
+          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        {%- endif -%}
       </span>
-      {{- choose_options_text -}}
+      {%- if quick_add_icon_only -%}
+        <span class="visually-hidden">{{ choose_options_text }}</span>
+      {%- else -%}
+        {{- choose_options_text -}}
+      {%- endif -%}
     </button>
   {% endif %}
 </quick-add-component>

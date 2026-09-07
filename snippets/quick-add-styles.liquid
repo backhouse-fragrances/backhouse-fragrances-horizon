@@ -179,4 +179,94 @@
       transition-timing-function: var(--ease-out-cubic);
     }
   }
+
+  /* Icon-only quick add (settings.quick_add_style = icon): a 2rem square in the media
+     corner that rises into view on card hover; the plus rotates on button hover. */
+  .quick-add--icon {
+    --quick-add-inset-inline-end: 0.5rem;
+    --quick-add-inset-block-end: 0.5rem;
+  }
+
+  .quick-add--icon button.quick-add__button {
+    --quick-add-collapsed-width: 2rem;
+    --quick-add-expanded-width: 2rem;
+    --quick-add-icon-width: 0.75rem;
+
+    width: 2rem;
+    height: 2rem;
+    padding: 0.625rem;
+    justify-content: center;
+    border: 0;
+    border-radius: 0;
+    background: var(--quick-add-background, var(--color-background));
+    backdrop-filter: none;
+    translate: 0 5px;
+  }
+
+  .quick-add--icon .quick-add__button.add-to-cart-button {
+    height: 2rem;
+  }
+
+  .quick-add--icon .quick-add__button > .add-to-cart-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .quick-add--icon .quick-add__button > .add-to-cart-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .quick-add--icon .quick-add__button:is(:hover, :focus-visible) {
+    width: 2rem;
+    padding-inline-end: 0.625rem;
+    scale: 1;
+  }
+
+  .quick-add--icon .quick-add__button:active {
+    scale: 1;
+  }
+
+  .quick-add--icon .quick-add__button:is(:hover, :focus-visible) > .add-to-cart-icon svg {
+    rotate: 90deg;
+  }
+
+  product-card:is(:hover, :focus-within) .quick-add--icon .quick-add__button,
+  .quick-add--icon[stay-visible] .quick-add__button {
+    translate: 0 0;
+  }
+
+  .quick-add--icon .quick-add__button[data-added='true'] {
+    width: 2rem;
+  }
+
+  .quick-add--icon .quick-add__button .svg-wrapper .checkmark-burst {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .quick-add--icon button.quick-add__button {
+      transition-property: opacity, translate;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+
+    .quick-add--icon .quick-add__button > .add-to-cart-icon svg {
+      transition: rotate 0.2s ease-in-out;
+    }
+  }
+
+  /* settings.quick_add_show_on_hover = false: keep the button visible on desktop */
+  @media screen and (min-width: 750px) {
+    .quick-add--always-visible button.quick-add__button {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    .quick-add--always-visible button.quick-add__button:disabled {
+      opacity: var(--opacity-muted-text);
+    }
+  }
 {% endstylesheet %}

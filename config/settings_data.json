@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "quick_add_style": "icon",
     "logo": "shopify://shop_images/backhouse-logo.png",
     "logo_inverse": "shopify://shop_images/BH_Frag_Wordmark_lockup_WHITE.svg",
     "logo_height": 28,
