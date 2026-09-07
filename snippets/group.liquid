@@ -29,6 +29,8 @@
     border-style
     spacing-style
     size-style
+    {% if settings.reverse_on_mobile == true %}mobile-group-column-reverse{% endif %}
+    {{ settings.css_class }}
     {{ class }}
     {% if background_color != blank %} color-custom-{{ block_id }}{% endif %}
   "

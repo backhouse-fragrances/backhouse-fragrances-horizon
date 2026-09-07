@@ -292,11 +292,11 @@ function getScrollAxis(el) {
  * @param {'x' | 'y'} axis - The axis to calculate the padding-start of.
  * @returns {number} The padding-start in pixels.
  */
-function calculatePaddingStart(element, axis) {
+export function calculatePaddingStart(element, axis) {
   const computedStyle = getComputedStyle(element);
   const value = axis === 'x' ? computedStyle.paddingInlineStart : computedStyle.paddingBlockStart;
 
-  return parseFloat(value);
+  return parseFloat(value) || 0;
 }
 
 /**

@@ -9,7 +9,7 @@ import {
   viewTransition,
   scheduler,
 } from '@theme/utilities';
-import { Scroller, scrollIntoView } from '@theme/scrolling';
+import { Scroller, scrollIntoView, calculatePaddingStart } from '@theme/scrolling';
 import { SlideshowSelectEvent } from '@theme/events';
 
 // The threshold for determining visibility of slides.
@@ -87,6 +87,7 @@ class SlideshowViewportObserver {
  * @property {HTMLElement} [current]
  * @property {HTMLElement[]} [thumbnails]
  * @property {HTMLElement[]} [dots]
+ * @property {HTMLElement} [progressBar]
  * @property {HTMLButtonElement} [previous]
  * @property {HTMLButtonElement} [next]
  *
@@ -296,6 +297,12 @@ export class Slideshow extends Component {
 
     if (this.#scroll) {
       this.#scroll.to(slide, { instant });
+
+      if (this.refs.progressBar) {
+        const update = () => this.#updateProgressBar();
+        if (instant) update();
+        else this.#scroll.finished.then(update);
+      }
     }
 
     this.current = this.slides?.indexOf(slide) || 0;
@@ -584,6 +591,8 @@ export class Slideshow extends Component {
             visibleSlidesAmount = 1;
           }
         }
+        // Initialize progress bar after layout is ready
+        this.#updateProgressBar();
       });
 
       this.#resizeObserver = new ResizeObserver(async () => {
@@ -596,6 +605,9 @@ export class Slideshow extends Component {
         if (this.hasAttribute('auto-hide-controls')) {
           this.#updateControlsVisibility();
         }
+
+        // Update progress bar on resize
+        this.#updateProgressBar();
       });
 
       this.#resizeObserver.observe(this.refs.slideshowContainer);
@@ -609,6 +621,9 @@ export class Slideshow extends Component {
   #handleScroll = () => {
     const previousIndex = this.#current;
     const index = this.#sync();
+
+    // Update progress bar on scroll
+    this.#updateProgressBar();
 
     if (index === previousIndex) return;
 
@@ -634,6 +649,11 @@ export class Slideshow extends Component {
   #onTransitionEnd = () => {
     this.#updateVisibleSlides();
     this.removeAttribute('transitioning');
+    // Update progress bar after scroll animation completes
+    // Use requestAnimationFrame to ensure DOM has fully settled
+    requestAnimationFrame(() => {
+      this.#updateProgressBar();
+    });
   };
 
   /**
@@ -844,6 +864,97 @@ export class Slideshow extends Component {
     if (!(slideshowControls instanceof HTMLElement)) return;
 
     slideshowControls.hidden = scroller.scrollWidth <= scroller.offsetWidth;
+  }
+
+  /**
+   * Slide step used by next/previous — must match progress bar end position.
+   * @returns {number}
+   */
+  #getProgressScrollStep() {
+    const { visibleSlides } = this;
+    return visibleSlides.length > 1 ? visibleSlides.length : 1;
+  }
+
+  /**
+   * Last slide index reachable via next() before the control is disabled.
+   * @returns {number}
+   */
+  #getLastNavigableIndex() {
+    const slides = this.slides;
+    if (!slides?.length) return 0;
+
+    const step = this.#getProgressScrollStep();
+    let index = 0;
+
+    while (index + step < slides.length) {
+      index += step;
+    }
+
+    return index;
+  }
+
+  /**
+   * Updates the progress bar width based on scroll position and visible slides.
+   * Called on scroll events to sync the progress indicator with carousel position.
+   * Matches reference implementation: starts with initial fill = visible/total ratio.
+   */
+  #updateProgressBar() {
+    const { scroller, progressBar, previous, next } = this.refs;
+    if (!(progressBar instanceof HTMLElement)) return;
+
+    const slides = this.slides;
+    const total = slides?.length || 0;
+    const firstSlide = slides?.[0];
+
+    const gap = parseFloat(getComputedStyle(scroller).columnGap) || 0;
+    const visibleFromObserver = this.visibleSlides.length;
+    const visible =
+      visibleFromObserver > 0
+        ? visibleFromObserver
+        : firstSlide
+          ? Math.floor(scroller.clientWidth / (firstSlide.offsetWidth + gap)) || 1
+          : 1;
+
+    // If no scrollable area or all items visible, show full bar
+    if (!slides?.length || total <= visible) {
+      progressBar.style.width = '100%';
+      if (previous) previous.disabled = true;
+      if (next) next.disabled = true;
+      return;
+    }
+
+    const lastNavigableIndex = this.#getLastNavigableIndex();
+    const lastNavigableSlide = slides[lastNavigableIndex];
+    const axis = this.#scroll?.axis ?? 'x';
+    const paddingStart = calculatePaddingStart(scroller, axis);
+    const effectiveMaxScroll = lastNavigableSlide.offsetLeft - paddingStart;
+    const step = this.#getProgressScrollStep();
+
+    if (effectiveMaxScroll <= 0) {
+      progressBar.style.width = '100%';
+      if (previous) previous.disabled = Boolean(!this.infinite && this.current === 0);
+      if (next) next.disabled = true;
+      return;
+    }
+
+    // Start with initial fill = visible/total, then add scroll progress for remainder
+    const initialFill = (visible / total) * 100;
+    const scrollableRange = 100 - initialFill;
+    const indexAtEnd = !this.infinite && (this.current >= lastNavigableIndex || this.current + step >= total);
+    const scrollAtEnd = scroller.scrollLeft >= effectiveMaxScroll - 1;
+    const atScrollEnd = indexAtEnd || scrollAtEnd;
+
+    const scrollProgress = Math.min(Math.max(scroller.scrollLeft, 0), effectiveMaxScroll);
+    const scrollPct = atScrollEnd
+      ? scrollableRange
+      : (scrollProgress / effectiveMaxScroll) * scrollableRange;
+
+    const finalPct = initialFill + scrollPct;
+
+    progressBar.style.width = `${Math.max(initialFill, Math.min(100, finalPct))}%`;
+
+    if (previous) previous.disabled = Boolean(!this.infinite && this.current === 0);
+    if (next) next.disabled = Boolean(!this.infinite && this.nextIndex >= total);
   }
 
   /**

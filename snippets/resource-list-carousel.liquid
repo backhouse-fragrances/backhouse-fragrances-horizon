@@ -6,25 +6,36 @@
   @param {number} slide_count - The number of slides to display in the carousel
   @param {object} settings - The block or sections settings from the parent block/section.
   @param {string} [slide_width_max] - The maximum width of the slides in the carousel.
-
   @example
   {% render 'resource-list-carousel', slides: slides, slide_count: slide_count, settings: block.settings %}
 {%- enddoc -%}
 
 {% liquid
   assign slideshow_ref = ref | default: 'resourceListCarousel'
+  assign carousel_contain_width = settings.carousel_contain_width | default: false
+  assign carousel_class = 'resource-list__carousel'
 
-  if settings.section_width == 'page-width'
-    assign slideshow_gutters = 'start end'
-    assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
-  else
-    assign slideshow_gutters = null
-    assign gutter_style = '--gutter-slide-width: 0px;'
+  case settings.section_width
+    when 'page-width', 'narrow'
+      assign slideshow_gutters = 'start end'
+      assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
+    else
+      assign slideshow_gutters = null
+      assign gutter_style = '--gutter-slide-width: 0px;'
+  endcase
+
+  if carousel_contain_width
+    assign carousel_class = carousel_class | append: ' resource-list__carousel--contained'
   endif
 
   assign show_arrows = false
-  if settings.icons_style != 'none'
+  if settings.icons_style != 'none' and settings.icons_style != 'progress' and settings.hide_arrows != true
     assign show_arrows = true
+  endif
+
+  assign arrows_position = 'center'
+  if settings.arrow_position == true
+    assign arrows_position = 'top'
   endif
 %}
 
@@ -38,19 +49,53 @@
   {% endfor %}
 {% endcapture %}
 
-<div style="{{ gutter_style }} --slide-width-max: {{ slide_width_max | default: '300px' }};">
+{% if settings.enable_dots == true and slide_count > 1 %}
+  {% capture controls %}
+    {%- render 'slideshow-controls',
+      style: 'dots',
+      autoplay: settings.autoplay,
+      item_count: slide_count,
+      show_arrows: false,
+      arrows_on_media: false,
+      controls_on_media: false,
+      pagination_position: 'center',
+      class: 'carousel-controls'
+    -%}
+  {% endcapture %}
+{% elsif settings.icons_style == 'progress' and slide_count > 1 %}
+  {% capture controls %}
+    {%- render 'slideshow-controls',
+      style: 'progress',
+      item_count: slide_count,
+      show_arrows: false,
+      arrows_on_media: false,
+      controls_on_media: false,
+      pagination_position: 'center',
+      class: 'carousel-controls carousel-controls--progress'
+    -%}
+  {% endcapture %}
+{% endif %}
+
+<div
+  class="resource-list__carousel-wrap{% if carousel_contain_width %} resource-list__carousel-wrap--contained{% endif %}"
+  style="{{ gutter_style }} --slide-width-max: {{ slide_width_max | default: '300px' }};"
+>
   {% render 'slideshow',
     ref: slideshow_ref,
-    class: 'resource-list__carousel',
+    class: carousel_class,
     slides: slides,
     show_arrows: show_arrows,
     icon_style: settings.icons_style,
     icon_shape: settings.icons_shape,
+    arrows_position: arrows_position,
     auto_hide_controls: false,
     infinite: false,
     initial_slide: 0,
     slide_count: slide_count,
-    slideshow_gutters: slideshow_gutters
+    slideshow_gutters: slideshow_gutters,
+    controls: controls,
+    autoplay: settings.autoplay,
+    autoplay_speed: settings.autoplay_speed
   %}
 </div>
 
@@ -62,12 +107,60 @@
     container-type: inline-size;
     container-name: resource-list-carousel;
 
-    .slideshow-control[disabled] {
+    .slideshow-control[disabled]:not(.slideshow-control--progress-arrow) {
       display: none;
     }
 
     .slideshow-control--next {
       margin-inline-start: auto;
+    }
+
+    /* Hide slideshow-arrows overlay when progress controls are present */
+    &:has(.carousel-controls--progress) slideshow-arrows {
+      display: none;
+    }
+
+    /* Align progress track with slide content column (page-width / narrow) */
+    slideshow-controls.carousel-controls--progress {
+      box-sizing: border-box;
+      width: calc(100% - 2 * var(--util-page-margin-offset, 0px));
+      max-width: min(var(--page-content-width, 100%), 100%);
+      margin-inline: auto;
+    }
+
+    .slideshow-controls__progress {
+      padding-inline: 0;
+    }
+  }
+
+  /* Contain in section width: desktop only — markup matches uncontained; overrides below */
+  @media screen and (min-width: 750px) {
+    .resource-list--carousel-contained {
+      --peek-next-slide-size: 0px;
+      grid-column: 2 !important;
+    }
+
+    .resource-list__carousel-wrap--contained {
+      --gutter-slide-width: 0px !important;
+    }
+
+    .resource-list__carousel--contained slideshow-slides[gutters*='start'] {
+      padding-inline-start: 0;
+      scroll-padding-inline-start: 0;
+    }
+
+    .resource-list__carousel--contained slideshow-slides[gutters*='end'] {
+      padding-inline-end: 0;
+    }
+
+    .resource-list__carousel--contained slideshow-controls.carousel-controls--progress {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+    }
+
+    .resource-list__carousel--contained slideshow-arrows {
+      padding-inline: 0;
     }
   }
 

@@ -70,7 +70,7 @@
       style="--thumbnail-radius: {{ thumbnail_radius }}px;"
     {% endif %}
   >
-    {% if show_arrows_separately == false and show_arrows and pagination_position != 'left' %}
+    {% if show_arrows_separately == false and show_arrows and pagination_position != 'left' and style != 'progress' %}
       <div class="slideshow-controls__arrows">
         {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style, icon_shape: shape -%}
 
@@ -175,9 +175,39 @@
             </li>
           {% endfor %}
         </ol>
+      {% when 'progress' %}
+        <div class="slideshow-controls__progress">
+          <div class="slideshow-controls__progress-track">
+            <div class="slideshow-controls__progress-bar" ref="progressBar"></div>
+          </div>
+          <div class="slideshow-controls__progress-arrows">
+            <button
+              class="slideshow-control slideshow-control--previous slideshow-control--progress-arrow"
+              aria-label="{{ 'accessibility.slideshow_previous' | t }}"
+              on:click="/previous"
+              ref="previous"
+              type="button"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+                <path d="m15 6-6 6 6 6"></path>
+              </svg>
+            </button>
+            <button
+              class="slideshow-control slideshow-control--next slideshow-control--progress-arrow"
+              aria-label="{{ 'accessibility.slideshow_next' | t }}"
+              on:click="/next"
+              ref="next"
+              type="button"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+                <path d="m9 6 6 6-6 6"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
     {% endcase %}
 
-    {% if show_arrows_separately == false and show_arrows and pagination_position != 'right' %}
+    {% if show_arrows_separately == false and show_arrows and pagination_position != 'right' and style != 'progress' %}
       <div class="slideshow-controls__arrows">
         {% if pagination_position == 'left' %}
           {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style, icon_shape: shape -%}
@@ -188,7 +218,7 @@
     {% endif %}
   </slideshow-controls>
 
-  {% if show_arrows_separately and show_arrows %}
+  {% if show_arrows_separately and show_arrows and style != 'progress' %}
     <div class="slideshow-controls__arrows">
       {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style, icon_shape: shape -%}
       {%- render 'slideshow-arrow', action: 'next', icon_style: icon_style, icon_shape: shape -%}
@@ -434,6 +464,79 @@
   .slideshow-control[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  /* Slideshow Progress Bar + Arrows */
+  .slideshow-controls__progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    gap: 16px;
+    width: 100%;
+    padding-inline: var(--util-page-margin-offset, var(--page-margin, 16px));
+    box-sizing: border-box;
+  }
+
+  .slideshow-controls__progress-track {
+    flex: 1;
+    height: 2px;
+    background: var(--color-border, #e5e2db);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .slideshow-controls__progress-bar {
+    height: 100%;
+    background: var(--color-foreground, #0e0e0e);
+    width: 0;
+    transition: width 150ms linear;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .slideshow-controls__progress-arrows {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .slideshow-controls__progress-arrows .slideshow-control--progress-arrow {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    background: transparent;
+    border: 1.5px solid var(--color-foreground, #0e0e0e);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 180ms var(--animation-easing, ease), color 180ms var(--animation-easing, ease);
+    padding: 0;
+    color: var(--color-foreground, #0e0e0e);
+    cursor: pointer;
+  }
+
+  .slideshow-controls__progress-arrows .slideshow-control--progress-arrow:hover {
+    background: var(--color-foreground, #0e0e0e);
+    color: var(--color-background, #fff);
+  }
+
+  .slideshow-controls__progress-arrows .slideshow-control--progress-arrow:hover svg {
+    stroke: var(--color-background, #fff);
+  }
+
+  .slideshow-controls__progress-arrows .slideshow-control--progress-arrow svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+  }
+
+  /* Hide progress controls when not in progress mode */
+  .carousel-controls:not(.carousel-controls--progress) .slideshow-controls__progress {
+    display: none;
   }
 
   /* Slideshow Thumbnails */

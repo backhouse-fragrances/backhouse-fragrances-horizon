@@ -12,3 +12,10 @@
 px; --padding-inline-start:{{ settings['padding-inline-start'] | default: 0 }}px; --padding-inline-end:
 {{- settings['padding-inline-end'] | default: 0 -}}
 px;
+{% if settings.custom_mobile_padding == true %}
+  --mobile-padding-block-start: {{ settings['mobile-padding-block-start'] | default: 0 }}px; --mobile-padding-block-end:
+  {{- settings['mobile-padding-block-end'] | default: 0 -}}
+  px; --mobile-padding-inline-start:{{ settings['mobile-padding-inline-start'] | default: 0 }}px; --mobile-padding-inline-end:
+  {{- settings['mobile-padding-inline-end'] | default: 0 -}}
+  px;
+{% endif %}

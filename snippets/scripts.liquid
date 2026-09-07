@@ -278,6 +278,11 @@
   defer="defer"
 ></script>
 
+<script
+  src="{{ 'custom.js' | asset_url }}"
+  defer="defer"
+></script>
+
 <script>
   const supportsNativePopover = 'popover' in HTMLElement.prototype;
   const Theme = {

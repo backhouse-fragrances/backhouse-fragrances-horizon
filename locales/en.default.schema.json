@@ -421,6 +421,7 @@
     "comparison_slider": "Comparison slider"
   },
   "options": {
+    "progress_bar": "Progress bar",
     "above_carousel": "Above carousel",
     "accent": "Accent",
     "all": "All",
@@ -734,6 +735,9 @@
     "below_media": "Below media"
   },
   "settings": {
+    "grid_section_card_layout": "Card layout",
+    "grid_section_carousel_match_collection": "Match Collection list (section grid)",
+    "grid_section_carousel_match_collection_info": "Carousel uses the same section grid as Collection list.",
     "accordion": "Accordion",
     "account": "Account",
     "actions_display_style": "Menu style",
