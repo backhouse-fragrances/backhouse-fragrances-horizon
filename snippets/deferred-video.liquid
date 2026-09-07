@@ -1,0 +1,67 @@
+{%- doc -%}
+  Renders a Shopify-hosted looping background video that only downloads once it is near
+  the viewport (see assets/video-background.js). Sources are emitted without `src`, with
+  rendition metadata so the component activates the smallest file that covers the box.
+
+  @param {object} video - The video object
+  @param {string} [class] - Classes applied to the wrapper element
+  @param {string} [media] - Media query the video is limited to, e.g. '(min-width: 750px)'.
+                            Outside of it the video is never downloaded.
+  @param {string} [testid] - Optional data-testid for the wrapper
+
+  @example
+  {% render 'deferred-video', video: section.settings.video_1, class: 'hero__media' %}
+{%- enddoc -%}
+
+<video-background-component
+  class="deferred-video{% if class != blank %} {{ class | strip }}{% endif %}"
+  {% if media != blank %}
+    data-media="{{ media }}"
+  {% endif %}
+  {% if testid != blank %}
+    data-testid="{{ testid }}"
+  {% endif %}
+>
+  <video
+    playsinline
+    muted
+    autoplay
+    loop
+    preload="none"
+    aria-hidden="true"
+    ref="videoElement"
+  >
+    {%- for source in video.sources -%}
+      <source
+        data-video-source="{{ source.url }}"
+        type="{{ source.mime_type }}"
+        {% if source.width and source.height %}
+          data-video-width="{{ source.width }}"
+          data-video-height="{{ source.height }}"
+        {% endif %}
+        ref="videoSources[]"
+      >
+    {%- endfor -%}
+  </video>
+</video-background-component>
+
+{% stylesheet %}
+  .deferred-video {
+    display: block;
+    overflow: hidden;
+  }
+
+  .deferred-video > video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deferred-video > video {
+      display: none;
+    }
+  }
+{% endstylesheet %}

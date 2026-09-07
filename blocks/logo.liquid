@@ -5,6 +5,24 @@
   if block_settings.inverse and settings.logo_inverse
     assign image = settings.logo_inverse
   endif
+
+  # Concrete sizes: CSS var() is invalid inside the sizes attribute, so browsers fell back to a ~832px file for a ~150px logo.
+  if block_settings.unit == 'percent'
+    assign logo_sizes_desktop = block_settings.percent_width | append: 'vw'
+  elsif image
+    assign logo_sizes_desktop = image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height | round | append: 'px'
+  else
+    assign logo_sizes_desktop = '100vw'
+  endif
+  assign logo_sizes_mobile = logo_sizes_desktop
+  if block_settings.custom_mobile_size
+    if block_settings.unit_mobile == 'percent'
+      assign logo_sizes_mobile = block_settings.percent_width_mobile | append: 'vw'
+    elsif image
+      assign logo_sizes_mobile = image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height_mobile | round | append: 'px'
+    endif
+  endif
+  assign logo_sizes = '(min-width: 750px) ' | append: logo_sizes_desktop | append: ', ' | append: logo_sizes_mobile
 %}
 
 {%- if image -%}
@@ -14,11 +32,11 @@
       | image_url: width: 3840
       | image_tag:
         width: image.width,
-        widths: '240, 352, 832, 1200, 1600, 1920, 2560, 3840',
+        widths: '240, 352, 480, 640, 750, 832, 1200, 1600, 1920, 2560, 3840',
         height: image.height,
         class: 'logo-block__image',
         alt: shop.name,
-        sizes: '(min-width: 750px) calc(var(--logo-width)), 100vw'
+        sizes: logo_sizes
     -}}
   {% endcapture %}
 {%- endif -%}

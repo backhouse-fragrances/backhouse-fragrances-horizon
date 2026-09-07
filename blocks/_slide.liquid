@@ -86,10 +86,7 @@
               fetchpriority: fetchpriority
           }}
         {%- endif -%}
-        {{
-          block_settings.video_1
-          | video_tag: poster: nil, autoplay: true, loop: true, controls: false, muted: true, class: 'slide__video'
-        }}
+        {% render 'deferred-video', video: block_settings.video_1, class: 'slide__video' %}
       {%- endif -%}
     {%- else -%}
       {%- liquid

@@ -9,6 +9,7 @@
   @param {string} parent_block_id - Parent block ID for CSS targeting
   @param {object} block_settings - Block settings object
   @param {object} [section_settings] - Section settings for layout-aware sizing
+  @param {number} [section_index] - Index of the parent section; images in sections after the first load lazily
   @param {string} [block_attributes] - Block shopify attributes for theme editor
 
   @example
@@ -78,6 +79,9 @@
   assign sizes = '(min-width: 750px) 50vw, 100vw'
   assign lazy_sizes = 'auto, ' | append: sizes
   assign loading = 'eager'
+  if section_index and section_index > 1
+    assign loading = 'lazy'
+  endif
 
   # Layout-aware sizing for resource lists
   if section_settings.layout_type
@@ -91,7 +95,13 @@
     endcase
   endif
 
-  assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+  if loading == 'lazy'
+    unless sizes contains 'auto,'
+      assign sizes = 'auto, ' | append: sizes
+    endunless
+  endif
+
+  assign widths = '240, 352, 480, 640, 750, 832, 1200, 1600, 1920, 2560, 3840'
 
   # Generate placeholder info based on content type
   if content_type == 'articles'
