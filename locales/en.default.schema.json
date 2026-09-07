@@ -223,6 +223,10 @@
     "work_quickly_to_ship": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>"
   },
   "info": {
+    "sticky_add_to_cart_style": "Top bar sits below the header on desktop. Mobile keeps the bottom bar.",
+    "zoom_style": "Minimal centres the image and shows previous, close and next buttons instead of the thumbnail strip.",
+    "quick_add_show_on_hover": "Desktop only. On mobile the button follows the Mobile quick add setting.",
+    "submenu_style": "Dropdown shows a compact list under the parent link. Menu items with a third level always use the mega menu.",
     "actions_display_style": "Icons are always used on mobile",
     "applies_on_image_only": "Applies to images only",
     "aspect_ratio_adjusted": "Adjusted in some layouts",
@@ -421,6 +425,11 @@
     "comparison_slider": "Comparison slider"
   },
   "options": {
+    "top_bar": "Top bar",
+    "minimal": "Minimal",
+    "icon_only": "Icon only",
+    "mega_menu": "Mega menu",
+    "dropdown": "Dropdown",
     "progress_bar": "Progress bar",
     "above_carousel": "Above carousel",
     "accent": "Accent",
@@ -735,6 +744,11 @@
     "below_media": "Below media"
   },
   "settings": {
+    "sticky_add_to_cart_style": "Sticky bar style",
+    "zoom_style": "Lightbox style",
+    "quick_add_style": "Quick add style",
+    "quick_add_show_on_hover": "Show on hover only",
+    "submenu_style": "Submenu style",
     "grid_section_card_layout": "Card layout",
     "grid_section_carousel_match_collection": "Match Collection list (section grid)",
     "grid_section_carousel_match_collection_info": "Carousel uses the same section grid as Collection list.",

@@ -300,6 +300,16 @@ class HeaderMenu extends Component {
     let submenu = findSubmenu(item) || (overflowItemSubmenu ? this.overflowMenu : null);
     const hasSubmenu = Boolean(submenu);
 
+    // Dropdown-style submenus sit under their parent link. The menu list clips
+    // overflow, so the submenu stays in the header's coordinate space and receives
+    // the link's inline offset as a CSS variable instead of being nested in the item.
+    if (submenu instanceof HTMLElement && submenu.classList.contains('menu-list__submenu--dropdown')) {
+      const anchor = item.querySelector('.menu-list__link-title') ?? item;
+      const reference = submenu.offsetParent ?? this.headerComponent;
+      const inlineStart = anchor.getBoundingClientRect().left - reference.getBoundingClientRect().left;
+      submenu.style.setProperty('--dropdown-inline-start', `${Math.max(0, Math.round(inlineStart))}px`);
+    }
+
     if (!hasSubmenu && !isDefaultSlot) {
       submenu = this.overflowMenu;
     }

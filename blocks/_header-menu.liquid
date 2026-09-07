@@ -93,8 +93,20 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {% liquid
+          # Dropdown style only applies to parents without a third level; deeper menus keep the mega menu.
+          assign use_dropdown = false
+          if block_settings.submenu_style == 'dropdown' and link.links != blank
+            assign use_dropdown = true
+            for child in link.links
+              if child.links != blank
+                assign use_dropdown = false
+              endif
+            endfor
+          endif
+        %}
         <li
-          class="menu-list__list-item"
+          class="menu-list__list-item{% if use_dropdown %} menu-list__list-item--dropdown{% endif %}"
           on:blur="/deactivate"
           on:pointerenter="/activate"
           on:pointerleave="/deactivate"
@@ -138,12 +150,29 @@
               Collapsed by default via `inert`: keeps the submenu out of the tab order
               and the accessibility tree until it is opened. Toggled in header-menu.js.
             {%- endcomment -%}
-            <div class="menu-list__submenu{{ background_color_classes }}" ref="submenu[]" data-skip-node-update inert>
+            <div class="menu-list__submenu{{ background_color_classes }}{% if use_dropdown %} menu-list__submenu--dropdown{% endif %}" ref="submenu[]" data-skip-node-update inert>
               <div
                 id="submenu-{{ forloop.index }}"
                 class="menu-list__submenu-inner"
                 style="{% render 'submenu-font-styles', settings: block_settings %}"
               >
+                {% if use_dropdown %}
+                  <ul class="dropdown-menu__list" role="list">
+                    {%- for child in link.links -%}
+                      <li class="dropdown-menu__item">
+                        <a
+                          href="{{ child.url }}"
+                          class="dropdown-menu__link{% if child.current %} dropdown-menu__link--current{% endif %}"
+                          {% if child.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{- child.title -}}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {% else %}
                 {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
                 <div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
                   <div
@@ -163,6 +192,7 @@
                     %}
                   </div>
                 </div>
+                {% endif %}
               </div>
             </div>
           {%- endif -%}
@@ -624,6 +654,89 @@
     scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) transparent;
   }
 
+  /** Dropdown submenu: a compact list under the parent link instead of the full-width
+      mega menu. Keeps the stock wrapper (hover bridging, inert toggling, keyboard, More
+      overflow) and only restyles it; header-menu.js provides --dropdown-inline-start. **/
+  .menu-list__list-item--dropdown:where(:not([slot='overflow'])) > .menu-list__submenu--dropdown {
+    --submenu-gap: calc(var(--padding-block-end, var(--header-padding)) + var(--border-bottom-width, 0px));
+
+    width: max-content;
+    min-width: 12.5rem;
+    max-width: 17.5rem;
+    left: var(--dropdown-inline-start, 0px);
+    top: calc(100% - var(--submenu-gap));
+    padding-inline: 0;
+    clip-path: none;
+    transition: none;
+  }
+
+  .menu-list__list-item--dropdown:where(:not([slot='overflow']))
+    > .menu-list__submenu--dropdown
+    > .menu-list__submenu-inner {
+    display: block;
+    /* Transparent bridge over the row padding so the pointer can travel into the panel;
+       the panel itself overlaps the row's bottom border by its 2px line. */
+    margin-block-start: calc(var(--submenu-gap) - var(--border-bottom-width, 0px));
+    padding-block: 1.125rem;
+    padding-inline: 0;
+    transform: none;
+    max-height: calc(100vh - var(--header-height) - 40px);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    border-block-start: 0;
+    box-shadow: 2px 2px 6px rgb(var(--color-foreground-rgb) / 0.05);
+  }
+
+  .menu-list__submenu--dropdown > .menu-list__submenu-inner::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-foreground);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease-in-out 50ms;
+  }
+
+  .menu-list__list-item:has([aria-expanded='true']) > .menu-list__submenu--dropdown > .menu-list__submenu-inner::before {
+    transform: scaleX(1);
+  }
+
+  /* The full-width underlay is sized from the open submenu; a dropdown paints its own panel. */
+  #header-component:has(.menu-list__submenu--dropdown:not([inert])) .header__underlay-open {
+    height: 0;
+  }
+
+  .dropdown-menu__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dropdown-menu__link {
+    display: block;
+    padding: 0.375rem 1.5625rem;
+    font-family: var(--menu-child-font-family);
+    font-style: var(--menu-child-font-style);
+    font-weight: var(--menu-child-font-weight);
+    font-size: var(--menu-child-font-size);
+    line-height: 1.65;
+    text-transform: var(--menu-child-font-case);
+    color: var(--color-foreground);
+    text-decoration: none;
+    white-space: normal;
+    transition: color 0.2s ease-in-out;
+  }
+
+  @media screen and (pointer: fine) {
+    .dropdown-menu__link:hover {
+      color: rgb(var(--color-foreground-rgb) / 0.65);
+    }
+  }
+
   .mega-menu__link {
     font-family: var(--menu-child-font-family);
     font-style: var(--menu-child-font-style);
@@ -949,6 +1062,23 @@
     {
       "type": "header",
       "content": "t:content.submenu_feature"
+    },
+    {
+      "type": "select",
+      "id": "submenu_style",
+      "label": "t:settings.submenu_style",
+      "info": "t:info.submenu_style",
+      "options": [
+        {
+          "value": "mega",
+          "label": "t:options.mega_menu"
+        },
+        {
+          "value": "dropdown",
+          "label": "t:options.dropdown"
+        }
+      ],
+      "default": "mega"
     },
     {
       "type": "select",
