@@ -90,3 +90,9 @@
   max-width: 78rem;
   margin-inline: auto;
 }
+
+/* Slideshow dots: flat discs, no inset ring */
+slideshow-controls .slideshow-controls__dots button::after,
+slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after {
+    box-shadow: none;
+}

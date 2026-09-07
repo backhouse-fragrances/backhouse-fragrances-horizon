@@ -2,7 +2,7 @@
   Renders a slideshow arrow control
 
   @param {string} action - { 'previous' | 'next' } The action to perform when the arrow is clicked.
-  @param {string} [icon_style] - { 'arrow' | 'chevron' } The style of the icon, defaults to 'arrow'.
+  @param {string} [icon_style] - { 'arrow' | 'chevron' } The style of the icon, defaults to 'chevron'.
   @param {string} [icon_shape] - { 'none' | 'circle' | 'square' } The shape of the icon background, defaults to 'none'.
   @param {string} [icon_size] - { 'small' | 'medium' | 'large' } The size of the icon, defaults to 'medium'.
 
@@ -11,11 +11,12 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign icon_name = 'arrow'
-  assign style = icon_style | default: 'arrow'
+  # Store default: carets (chevrons) whenever a caller does not pass an icon_style.
+  assign style = icon_style | default: 'chevron'
   assign shape = icon_shape | default: 'none'
+  assign icon_name = 'arrow'
 
-  if icon_style contains 'chevron'
+  if style contains 'chevron'
     assign icon_name = 'caret'
   endif
 
