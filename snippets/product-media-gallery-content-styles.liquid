@@ -109,4 +109,174 @@
   .product-media-container--zoomable.product-media-container--image {
     cursor: zoom-in;
   }
+
+  /* Minimal lightbox: no thumbnail strip, previous / close / next under the image */
+  .dialog-zoomed-gallery__dialog--minimal .dialog-thumbnails-list-container,
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery__close-button {
+    display: none;
+  }
+
+  /* One media at a time, fitted to the viewport; zoom-dialog.js toggles data-active. */
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-type: none;
+  }
+
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery > .product-media-container:not([data-active]) {
+    display: none;
+  }
+
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery > .product-media-container[data-active] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery > .product-media-container[data-active] .product-media__drag-zoom-wrapper,
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery > .product-media-container[data-active] .product-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .dialog-zoomed-gallery__dialog--minimal .dialog-zoomed-gallery > .product-media-container[data-active] .product-media__image {
+    --product-media-fit: contain;
+
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100dvh;
+    object-fit: contain;
+  }
+
+  .dialog-zoomed-gallery__controls {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: var(--layer-raised);
+    pointer-events: none;
+    padding-block-end: var(--safe-area-inset-bottom);
+  }
+
+  .dialog-zoomed-gallery__control {
+    --control-size: 2.75rem;
+
+    pointer-events: auto;
+    width: var(--control-size);
+    height: var(--control-size);
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    box-shadow: 0 0.125rem 0.625rem rgb(var(--color-foreground-rgb) / 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+    svg {
+      width: 0.75rem;
+      height: auto;
+    }
+  }
+
+  .dialog-zoomed-gallery__control--close {
+    --control-size: 3.125rem;
+
+    svg {
+      width: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .dialog-zoomed-gallery__controls {
+      gap: 1.125rem;
+    }
+
+    .dialog-zoomed-gallery__control--close {
+      --control-size: 3.5rem;
+    }
+  }
+
+  /* .button-unstyled:hover inherits the (transparent) parent background; keep the disc. */
+  .dialog-zoomed-gallery__control:is(:hover, :focus-visible) {
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  @media screen and (pointer: fine) {
+    .dialog-zoomed-gallery__control:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Icon slides out and back in on hover: sideways for previous / next, downwards for close. */
+  @media (prefers-reduced-motion: no-preference) {
+    .dialog-zoomed-gallery__control:hover svg {
+      animation: dialog-zoomed-gallery-icon-inline 0.35s ease-in-out forwards;
+    }
+
+    .dialog-zoomed-gallery__control--close:hover svg {
+      animation-name: dialog-zoomed-gallery-icon-block;
+    }
+  }
+
+  @keyframes dialog-zoomed-gallery-icon-inline {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    50% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    51% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes dialog-zoomed-gallery-icon-block {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    50% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    51% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 {% endstylesheet %}

@@ -264,6 +264,24 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "zoom_style",
+      "label": "t:settings.zoom_style",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "minimal",
+          "label": "t:options.minimal"
+        }
+      ],
+      "default": "default",
+      "info": "t:info.zoom_style",
+      "visible_if": "{{ block.settings.zoom == true }}"
+    },
+    {
       "type": "checkbox",
       "id": "video_loop",
       "label": "t:settings.enable_video_looping",

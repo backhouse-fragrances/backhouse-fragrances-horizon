@@ -29,6 +29,22 @@ export class ZoomDialog extends Component {
   connectedCallback() {
     super.connectedCallback();
     this.refs.dialog.addEventListener('scroll', this.handleScroll);
+    if (this.#isMinimal) this.#showMedia(0);
+  }
+
+  /** Minimal lightbox: one media at a time, swapped instantly instead of scrolled to. */
+  get #isMinimal() {
+    return this.refs.dialog.classList.contains('dialog-zoomed-gallery__dialog--minimal');
+  }
+
+  /**
+   * Marks a media item as the one on screen (minimal lightbox only).
+   * @param {number} index - The index of the media to show.
+   */
+  #showMedia(index) {
+    const { dialog, media } = this.refs;
+    media.forEach((item, i) => item.toggleAttribute('data-active', i === index));
+    dialog.scrollTop = 0;
   }
 
   disconnectedCallback() {
@@ -50,6 +66,7 @@ export class ZoomDialog extends Component {
     const targetThumbnail = thumbnails.children[index];
 
     const open = () => {
+      if (this.#isMinimal) this.#showMedia(index);
       dialog.showModal();
 
       for (const target of [targetThumbnail, targetImage]) {
@@ -191,10 +208,37 @@ export class ZoomDialog extends Component {
    * @param {KeyboardEvent} event - The keyboard event.
    */
   handleKeyDown(event) {
+    if (this.#isMinimal && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+      event.preventDefault();
+      event.key === 'ArrowLeft' ? this.previous() : this.next();
+      return;
+    }
+
     if (event.key !== 'Escape') return;
 
     event.preventDefault();
     this.close();
+  }
+
+  /** Index of the media currently marked selected in the thumbnail list. */
+  get #activeIndex() {
+    const buttons = Array.from(this.refs.thumbnails.querySelectorAll('button'));
+    const index = buttons.findIndex((button) => button.getAttribute('aria-selected') === 'true');
+    return index < 0 ? 0 : index;
+  }
+
+  /** Shows the previous media (wraps around). Used by the minimal lightbox controls. */
+  previous() {
+    const count = this.refs.media.length;
+    if (count < 2) return;
+    this.selectThumbnail((this.#activeIndex - 1 + count) % count);
+  }
+
+  /** Shows the next media (wraps around). Used by the minimal lightbox controls. */
+  next() {
+    const count = this.refs.media.length;
+    if (count < 2) return;
+    this.selectThumbnail((this.#activeIndex + 1) % count);
   }
 
   /**
@@ -248,9 +292,13 @@ export class ZoomDialog extends Component {
     const targetImage = media[index];
 
     if (targetImage) {
-      targetImage.scrollIntoView({
-        behavior: options.behavior,
-      });
+      if (this.#isMinimal) {
+        this.#showMedia(index);
+      } else {
+        targetImage.scrollIntoView({
+          behavior: options.behavior,
+        });
+      }
 
       this.loadHighResolutionImage(targetImage);
     }

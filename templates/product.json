@@ -31,6 +31,7 @@
             "media_radius": 0,
             "extend_media": false,
             "zoom": true,
+            "zoom_style": "minimal",
             "video_loop": false,
             "hide_variants": true,
             "padding-block-start": 0,
@@ -263,6 +264,7 @@
         "disclosures"
       ],
       "settings": {
+        "sticky_add_to_cart_style": "top_bar",
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
         "equal_columns": false,

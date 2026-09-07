@@ -51,9 +51,21 @@ export class DragZoomWrapper extends Component {
     return this.refs.image;
   }
 
+  /**
+   * Scale the image opens at. Defaults to 1.5x; a `data-initial-zoom` attribute
+   * (e.g. "1" for the minimal lightbox) overrides it within the allowed range.
+   */
+  get #initialZoom() {
+    const value = Number(this.dataset.initialZoom);
+    return Number.isFinite(value) && value >= MIN_ZOOM && value <= MAX_ZOOM ? value : DEFAULT_ZOOM;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     if (!this.#image) return;
+
+    this.#scale = this.#initialZoom;
+    this.#startScale = this.#initialZoom;
 
     this.#initResizeListener();
     window.addEventListener(DialogCloseEvent.eventName, this.#resetZoom);
@@ -451,8 +463,8 @@ export class DragZoomWrapper extends Component {
    */
   #resetZoom = () => {
     // Reset scale and translation to defaults
-    this.#scale = DEFAULT_ZOOM;
-    this.#startScale = DEFAULT_ZOOM;
+    this.#scale = this.#initialZoom;
+    this.#startScale = this.#initialZoom;
     this.#translate.x = 0;
     this.#translate.y = 0;
 
@@ -465,7 +477,7 @@ export class DragZoomWrapper extends Component {
     this.#hasDraggedBeyondThreshold = false;
 
     // Update CSS properties to reflect reset state
-    this.style.setProperty('--drag-zoom-scale', DEFAULT_ZOOM.toString());
+    this.style.setProperty('--drag-zoom-scale', this.#initialZoom.toString());
     this.style.setProperty('--drag-zoom-translate-x', '0px');
     this.style.setProperty('--drag-zoom-translate-y', '0px');
   };

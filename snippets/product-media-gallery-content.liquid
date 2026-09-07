@@ -25,6 +25,11 @@
   ></script>
 {%- endif -%}
 {%- liquid
+  assign minimal_zoom = false
+  if block_settings.zoom and block_settings.zoom_style == 'minimal'
+    assign minimal_zoom = true
+  endif
+
   assign selected_product = closest.product
   assign selected_variant_media = selected_product.selected_or_first_available_variant.featured_media
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
@@ -509,7 +514,7 @@
         id="zoom-dialog-{{ block_id }}"
       >
         <dialog
-          class="dialog-zoomed-gallery__dialog"
+          class="dialog-zoomed-gallery__dialog{% if minimal_zoom %} dialog-zoomed-gallery__dialog--minimal{% endif %}"
           ref="dialog"
           on:keydown="/handleKeyDown"
           scroll-lock
@@ -523,6 +528,38 @@
             <span class="visually-hidden">{{ 'actions.close' | t }}</span>
             {{ 'icon-close.svg' | inline_asset_content }}
           </button>
+          {% if minimal_zoom %}
+            <div class="dialog-zoomed-gallery__controls">
+              {% if sorted_media.size > 1 %}
+                <button
+                  type="button"
+                  class="button button-unstyled dialog-zoomed-gallery__control"
+                  aria-label="{{ 'accessibility.slideshow_previous' | t }}"
+                  on:click="/previous"
+                >
+                  <svg aria-hidden="true" focusable="false" fill="none" width="16" viewBox="0 0 16 18"><path d="M11 1 3 9l8 8" stroke="currentColor" stroke-linecap="square"></path></svg>
+                </button>
+              {% endif %}
+              <button
+                type="button"
+                class="button button-unstyled dialog-zoomed-gallery__control dialog-zoomed-gallery__control--close"
+                aria-label="{{ 'actions.close' | t }}"
+                on:click="/close"
+              >
+                <svg aria-hidden="true" focusable="false" fill="none" width="16" viewBox="0 0 16 16"><path d="m1 1 14 14M1 15 15 1" stroke="currentColor" stroke-width="1"></path></svg>
+              </button>
+              {% if sorted_media.size > 1 %}
+                <button
+                  type="button"
+                  class="button button-unstyled dialog-zoomed-gallery__control"
+                  aria-label="{{ 'accessibility.slideshow_next' | t }}"
+                  on:click="/next"
+                >
+                  <svg aria-hidden="true" focusable="false" fill="none" width="16" viewBox="0 0 16 18"><path d="m5 17 8-8-8-8" stroke="currentColor" stroke-linecap="square"></path></svg>
+                </button>
+              {% endif %}
+            </div>
+          {% endif %}
           <div class="dialog-thumbnails-list-container">
             <scroll-hint
               class="dialog-thumbnails-list list-unstyled"
@@ -583,7 +620,12 @@
                 {% endif %}
               >
                 {% if media.media_type == 'image' %}
-                  <drag-zoom-wrapper class="product-media__drag-zoom-wrapper">
+                  <drag-zoom-wrapper
+                    class="product-media__drag-zoom-wrapper"
+                    {% if minimal_zoom %}
+                      data-initial-zoom="1"
+                    {% endif %}
+                  >
                     {%- render 'product-media',
                       media: media,
                       sizes: '100vw',
@@ -918,6 +960,11 @@
 
   :root:active-view-transition .dialog-zoomed-gallery__dialog {
     background-color: transparent;
+  }
+
+  /* Minimal lightbox: the sheet is opaque from the first frame instead of after the morph. */
+  :root:active-view-transition .dialog-zoomed-gallery__dialog--minimal {
+    background-color: var(--color-background);
   }
 
   ::view-transition-group(zoom-dialog-ui) {
