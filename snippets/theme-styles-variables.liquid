@@ -323,10 +323,12 @@
         if preset_name == 'paragraph'
           assign preset_font = '--font-body--family'
           assign preset_style = '--font-body--style'
-          assign preset_weight = '400'
+          # Follow the weight of the chosen body font, the way the heading presets below do.
+          # Stock Horizon hardcodes '400' here, which ignores a Light or Medium body font.
+          assign preset_weight = '--font-body--weight'
           assign preset_case = '--font-body--case'
 
-          echo '--font-[preset_name]--weight: [preset_weight];' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
+          echo '--font-[preset_name]--weight: var([preset_weight]);' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
         else
           assign preset_font_id = 'type_font_[preset_name]' | replace: '[preset_name]', preset_name
           assign preset_font = '--font-[preset_font]--family' | replace: '[preset_font]', settings[preset_font_id]
