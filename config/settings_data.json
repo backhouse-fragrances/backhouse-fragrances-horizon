@@ -9,7 +9,6 @@
  */
 {
   "current": {
-    "quick_add_style": "icon",
     "logo": "shopify://shop_images/backhouse-logo.png",
     "logo_inverse": "shopify://shop_images/BH_Frag_Wordmark_lockup_WHITE.svg",
     "logo_height": 28,
@@ -70,6 +69,7 @@
     "currency_code_enabled_product_pages": false,
     "currency_code_enabled_product_cards": false,
     "currency_code_enabled_cart_items": false,
+    "quick_add_style": "icon",
     "product_corner_radius": 0,
     "card_corner_radius": 4,
     "show_variant_image": false,
@@ -81,6 +81,50 @@
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "16022891438198749303": {
+        "type": "shopify://apps/simple-bundles-kits/blocks/byob/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+        "disabled": false,
+        "settings": {
+          "image_ratio": "adapt",
+          "cart_position": "right",
+          "horizontal_margins": 15,
+          "picker_columns": "3",
+          "button_style": "filled",
+          "hide_product_section": true,
+          "show_mini_cart_description": true,
+          "accent_color": "#000000",
+          "text_color": "#000000",
+          "surface_color": "#ffffff",
+          "muted_color": "#808080",
+          "border_color": "#d1d1d1",
+          "border_radius": 2,
+          "custom_css": ""
+        }
+      },
+      "124348908681409149": {
+        "type": "shopify://apps/simple-bundles-kits/blocks/simple-bundles-v2/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+        "disabled": false,
+        "settings": {
+          "select_placeholder": "Please select an option",
+          "disable_oos_options": true,
+          "show_price_variance": true,
+          "rank_options_by_price_diff": true,
+          "custom_css": "",
+          "custom_js": ""
+        }
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "15181020662106344915": {
+        "type": "shopify://apps/judge-me-reviews/blocks/popup_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": true,
+        "settings": {}
+      }
+    },
     "color_palette": {
       "background": "#ffffff",
       "foreground": "#1C1C1C",
