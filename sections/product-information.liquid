@@ -293,7 +293,8 @@
      bar under the header on desktop. Mobile keeps the default bottom bar. */
   @media screen and (min-width: 750px) {
     .sticky-add-to-cart__bar--top {
-      top: var(--header-height, 0px);
+      /* The sticky header sits at top: -1px, so meet its real bottom edge */
+      top: calc(var(--header-height, 0px) - 1px);
       bottom: auto;
       left: 0;
       width: 100%;
@@ -327,6 +328,17 @@
 
     .sticky-add-to-cart__bar--top[data-stuck='true'] {
       transform: translateY(0);
+    }
+
+    /* Sticky content in this section (product details, grid thumbnail rail) stays clear of the stuck bar:
+       image 3.75rem + padding 2 x 1.125rem + border. */
+    .shopify-section:has(.sticky-add-to-cart__bar--top[data-stuck='true']) {
+      --sticky-bar-offset: calc(6rem + var(--style-border-width, 1px));
+    }
+
+    .shopify-section:has(.sticky-add-to-cart__bar--top) :is(.product-details.sticky-content--desktop, .media-gallery__grid-thumbnails) {
+      top: calc(var(--sticky-header-offset, 0px) + var(--sticky-bar-offset, 0px));
+      transition: top var(--animation-speed, 0.2s) var(--animation-easing, ease);
     }
 
     sticky-add-to-cart:not([data-variant-available='true']) .sticky-add-to-cart__bar--top {
