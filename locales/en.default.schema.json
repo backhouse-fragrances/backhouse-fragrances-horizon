@@ -223,6 +223,8 @@
     "work_quickly_to_ship": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>"
   },
   "info": {
+    "desktop_columns": "Auto fits as many cards of the chosen size as the row allows.",
+    "single_star": "Shows one star instead of the full scale.",
     "sticky_add_to_cart_style": "Top bar sits below the header on desktop. Mobile keeps the bottom bar.",
     "zoom_style": "Minimal centres the image and shows previous, close and next buttons instead of the thumbnail strip.",
     "quick_add_show_on_hover": "Desktop only. On mobile the button follows the Mobile quick add setting.",
@@ -256,6 +258,7 @@
     "media_type_info": "Features are populated from your menu links"
   },
   "names": {
+    "rating_badge": "Rating badge",
     "column": "Column",
     "product_title": "Product title",
     "custom_liquid": "Custom Liquid",
@@ -425,6 +428,12 @@
     "comparison_slider": "Comparison slider"
   },
   "options": {
+    "three_number": "3",
+    "four_number": "4",
+    "five_number": "5",
+    "six_number": "6",
+    "rating_value": "Rating",
+    "review_count": "Review count",
     "thumbnails_left": "Thumbnails (left)",
     "top_bar": "Top bar",
     "minimal": "Minimal",
@@ -745,6 +754,13 @@
     "below_media": "Below media"
   },
   "settings": {
+    "desktop_columns": "Desktop columns",
+    "custom_mobile_vertical_gap": "Custom mobile vertical gap",
+    "mobile_vertical_gap": "Mobile vertical gap",
+    "rating_display": "Show",
+    "hide_rating_text": "Stars only",
+    "single_star": "Single star",
+    "show_empty_rating": "Show when there are no reviews",
     "sticky_add_to_cart_style": "Sticky bar style",
     "zoom_style": "Lightbox style",
     "quick_add_style": "Quick add style",
