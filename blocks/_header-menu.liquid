@@ -94,15 +94,10 @@
     {% capture children %}
       {% for link in block_settings.menu.links %}
         {% liquid
-          # Dropdown style only applies to parents without a third level; deeper menus keep the mega menu.
+          # A third level renders as a flyout beside its parent row, so any depth works here.
           assign use_dropdown = false
           if block_settings.submenu_style == 'dropdown' and link.links != blank
             assign use_dropdown = true
-            for child in link.links
-              if child.links != blank
-                assign use_dropdown = false
-              endif
-            endfor
           endif
         %}
         <li
@@ -159,16 +154,41 @@
                 {% if use_dropdown %}
                   <ul class="dropdown-menu__list" role="list">
                     {%- for child in link.links -%}
-                      <li class="dropdown-menu__item">
+                      <li class="dropdown-menu__item{% if child.links != blank %} dropdown-menu__item--has-children{% endif %}">
                         <a
                           href="{{ child.url }}"
                           class="dropdown-menu__link{% if child.current %} dropdown-menu__link--current{% endif %}"
                           {% if child.current %}
                             aria-current="page"
                           {% endif %}
+                          {% if child.links != blank %}
+                            aria-haspopup="true"
+                          {% endif %}
                         >
                           {{- child.title -}}
+                          {%- if child.links != blank -%}
+                            <span class="svg-wrapper dropdown-menu__caret">
+                              {{- 'icon-caret.svg' | inline_asset_content -}}
+                            </span>
+                          {%- endif -%}
                         </a>
+                        {%- if child.links != blank -%}
+                          <ul class="dropdown-menu__list dropdown-menu__list--nested" role="list">
+                            {%- for grandchild in child.links -%}
+                              <li class="dropdown-menu__item">
+                                <a
+                                  href="{{ grandchild.url }}"
+                                  class="dropdown-menu__link{% if grandchild.current %} dropdown-menu__link--current{% endif %}"
+                                  {% if grandchild.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{- grandchild.title -}}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
                       </li>
                     {%- endfor -%}
                   </ul>
@@ -228,7 +248,7 @@
     >
       <div class="header-menu__inner">
         <nav
-          class="menu-list"
+          class="menu-list{% if block_settings.submenu_style == 'dropdown' %} menu-list--dropdown{% endif %}"
           aria-label="{{ 'accessibility.header_navigation_label' | t }}"
           style="{% render 'menu-font-styles', settings: block_settings, menu_type: 'mega_menu' %}"
         >
@@ -683,7 +703,7 @@
     max-height: calc(100vh - var(--header-height) - 40px);
     background-color: var(--color-background);
     color: var(--color-foreground);
-    border: 1px solid var(--color-border);
+    border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-40));
     border-block-start: 0;
     box-shadow: 2px 2px 6px rgb(var(--color-foreground-rgb) / 0.05);
   }
@@ -714,6 +734,84 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* Third level: a panel beside its parent row, pulled up by the parent's block padding
+     and border so its first row lines up with the row that opened it. */
+  .dropdown-menu__item--has-children {
+    position: relative;
+  }
+
+  /* Prestige only scrolls a panel that has no flyout inside it; scrolling would clip one. */
+  .menu-list__submenu--dropdown > .menu-list__submenu-inner:has(.dropdown-menu__list--nested) {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .dropdown-menu__list--nested {
+    position: absolute;
+    inset-block-start: calc(-1.125rem - 1px);
+    inset-inline-start: 100%;
+    z-index: var(--layer-raised);
+    width: max-content;
+    min-width: 12.5rem;
+    max-width: 17.5rem;
+    padding-block: 1.125rem;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-40));
+    box-shadow: 2px 2px 6px rgb(var(--color-foreground-rgb) / 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  }
+
+  .dropdown-menu__item--has-children:is(:hover, :focus-within) > .dropdown-menu__list--nested {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-menu__item--has-children > .dropdown-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-xs);
+  }
+
+  .dropdown-menu__caret {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex: none;
+    rotate: -90deg;
+  }
+
+  /* Top-level links without a submenu get the underline that wipes in on hover. Links that
+     do open a panel are marked by the panel's own 2px line instead, as on the live site. */
+  .menu-list--dropdown .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)) .menu-list__link-title {
+    position: relative;
+  }
+
+  .menu-list--dropdown
+    .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled))
+    .menu-list__link-title::after {
+    content: '';
+    position: absolute;
+    inset-block-end: -0.125rem;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 2px;
+    background: currentcolor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  @media screen and (pointer: fine) {
+    .menu-list--dropdown
+      .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)):hover
+      .menu-list__link-title::after {
+      transform: scaleX(1);
+    }
   }
 
   .dropdown-menu__link {

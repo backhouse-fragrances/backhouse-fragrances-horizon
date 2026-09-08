@@ -807,8 +807,22 @@
 
   .header__icon--summary .header-drawer-icon {
     margin: auto;
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+
+  /* The close icons that pair with the drawer, and the back arrow, at medium size. */
+
+  .header__icon--summary .header-drawer-icon--close,
+  .menu-drawer__back-button > .svg-wrapper {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  /* No inline padding: the icon starts at the header's page margin and sits close to the
+     search icon, as on the live site. Block padding keeps the tap target height. */
+  .menu-drawer-container .header__icon--summary {
+    padding-inline: 0;
   }
 
   .menu-drawer__featured-content {
@@ -974,6 +988,8 @@
   }
 
   .menu-drawer__title {
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing--body-loose);
     justify-self: center;
     min-width: 0;
     padding: var(--padding-md) var(--padding-sm);
@@ -1162,6 +1178,24 @@
     text-decoration: none;
     justify-content: space-between;
     align-items: center;
+    /* Drawer links use the small menu size rather than the heading scale. */
+    font-size: var(--menu-font-sm--size);
+    line-height: var(--menu-font-sm--line-height);
+    /* Tighter rows: the medium caret plus the stock row minimum made these very tall. */
+    min-height: 0;
+    padding-block: var(--padding-2xs);
+    letter-spacing: var(--letter-spacing--body-loose);
+  }
+
+  /* A hairline under each drawer row, as on the live site. The touch-target minimum is
+     dropped so rows with and without a caret end up the same height. */
+  .menu-drawer__menu > .menu-drawer__list-item {
+    border-block-end: 1px solid rgb(var(--color-border-rgb) / var(--opacity-40));
+    min-height: 0;
+  }
+
+  .menu-drawer__menu > .menu-drawer__list-item > .menu-drawer__menu-item {
+    min-height: 0;
   }
 
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
@@ -1273,16 +1307,23 @@
     width: fit-content;
     height: fit-content;
     margin: 0;
-    padding-block: var(--padding-lg);
+    /* The row sets its own block padding; this wrapper no longer inflates the row. */
+    padding-block: 0;
     padding-inline-start: var(--padding-xl);
     flex-shrink: 0;
   }
 
   .menu-drawer__list-item--divider .menu-drawer__menu-item > .svg-wrapper {
-    padding-block: var(--padding-md);
+    padding-block: 0;
   }
 
   .menu-drawer svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  /* Row carets stay small; the medium size is for the close and back icons. */
+  .menu-drawer__menu-item .svg-wrapper svg {
     width: var(--icon-size-xs);
     height: var(--icon-size-xs);
   }
