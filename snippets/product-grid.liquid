@@ -25,7 +25,15 @@
     {% case section.settings.layout_type %}
       {% when 'grid' %}
         .product-grid--{{ section.id }}:is(.product-grid--grid) {
-          --product-grid-columns-desktop: repeat(auto-fill, minmax({{ product_card_size }}, 1fr));
+          {%- comment -%}
+            section.settings.desktop_columns: 'auto' keeps Horizon's auto-fill, which fits as many
+            cards of the chosen size as the row allows. A number pins the row to exactly that many.
+          {%- endcomment -%}
+          {%- if section.settings.desktop_columns != blank and section.settings.desktop_columns != 'auto' -%}
+            --product-grid-columns-desktop: repeat({{ section.settings.desktop_columns }}, minmax(0, 1fr));
+          {%- else -%}
+            --product-grid-columns-desktop: repeat(auto-fill, minmax({{ product_card_size }}, 1fr));
+          {%- endif -%}
         }
 
 
