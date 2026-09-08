@@ -107,7 +107,7 @@
         "bottom_border_color": "",
         "actions_display_style": "text",
         "actions_font_size": "0.8125rem",
-        "actions_font": "body",
+        "actions_font": "subheading",
         "actions_text_case": "uppercase",
         "background_color_top": "",
         "text_color_top": "",
