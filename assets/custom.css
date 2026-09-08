@@ -96,3 +96,24 @@ slideshow-controls .slideshow-controls__dots button::after,
 slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after {
     box-shadow: none;
 }
+
+/* Wider gap between the grid thumbnail rail and the media grid. The element selector adds
+   specificity because the compiled snippet stylesheet loads after this file. */
+@media screen and (min-width: 750px) {
+    media-gallery.media-gallery--grid-thumbnails .media-gallery__grid-layout {
+        column-gap: var(--gap-xl);
+    }
+}
+
+/* Looser display line height. Doubled :root beats the theme variables, which render in an
+   inline style block after this file. */
+:root:root {
+    --line-height--display-loose: 1.4;
+    --letter-spacing--body-loose: 0.14em;
+}
+
+/* Loose letter spacing on the header nav links and the header action texts (search, account, cart). */
+.menu-list__link,
+.header-actions__action {
+    letter-spacing: var(--letter-spacing--body-loose);
+}
