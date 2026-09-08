@@ -114,41 +114,14 @@
       "default": "grid"
     },
     {
-      "type": "select",
+      "type": "range",
       "id": "desktop_columns",
       "label": "t:settings.desktop_columns",
       "info": "t:info.desktop_columns",
-      "options": [
-        {
-          "value": "auto",
-          "label": "t:options.auto"
-        },
-        {
-          "value": "1",
-          "label": "t:options.one_number"
-        },
-        {
-          "value": "2",
-          "label": "t:options.two_number"
-        },
-        {
-          "value": "3",
-          "label": "t:options.three_number"
-        },
-        {
-          "value": "4",
-          "label": "t:options.four_number"
-        },
-        {
-          "value": "5",
-          "label": "t:options.five_number"
-        },
-        {
-          "value": "6",
-          "label": "t:options.six_number"
-        }
-      ],
-      "default": "auto",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4,
       "visible_if": "{{ section.settings.layout_type == 'grid' }}"
     },
     {

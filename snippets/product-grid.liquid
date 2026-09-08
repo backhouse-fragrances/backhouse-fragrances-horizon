@@ -24,16 +24,17 @@
   @media screen and (min-width: 750px) {
     {% case section.settings.layout_type %}
       {% when 'grid' %}
+        {%- liquid
+          # section.settings.desktop_columns holds the row to exactly this many cards at every
+          # desktop width, instead of Horizon's auto-fill which drops a column as the window
+          # narrows. A legacy 'auto' value coerces to 0, so fall back to the schema default.
+          assign fixed_columns = section.settings.desktop_columns | plus: 0
+          if fixed_columns < 1
+            assign fixed_columns = 4
+          endif
+        -%}
         .product-grid--{{ section.id }}:is(.product-grid--grid) {
-          {%- comment -%}
-            section.settings.desktop_columns: 'auto' keeps Horizon's auto-fill, which fits as many
-            cards of the chosen size as the row allows. A number pins the row to exactly that many.
-          {%- endcomment -%}
-          {%- if section.settings.desktop_columns != blank and section.settings.desktop_columns != 'auto' -%}
-            --product-grid-columns-desktop: repeat({{ section.settings.desktop_columns }}, minmax(0, 1fr));
-          {%- else -%}
-            --product-grid-columns-desktop: repeat(auto-fill, minmax({{ product_card_size }}, 1fr));
-          {%- endif -%}
+          --product-grid-columns-desktop: repeat({{ fixed_columns }}, minmax(0, 1fr));
         }
 
 
@@ -60,15 +61,9 @@
         }
     {% endcase %}
 
-    /* This logic helps prevent displaying one column for an large or extra-large product card size on a small screen. We want it to display at least two columns. */
-    {% case section.settings.product_card_size %}
-      {% when 'extra-large' or 'large' %}
-        @container product-grid (max-width: calc({{ product_card_size }} * 3 + {{ section.settings.columns_gap_horizontal }}px * 2)) {
-          .product-grid--{{ section.id }}:is(.product-grid--grid) {
-            --product-grid-columns-desktop: repeat(2, 1fr);
-          }
-        }
-    {% endcase %}
+    /* Horizon clamped large cards to two columns on a narrow container to stop auto-fill
+       collapsing to one. The desktop column count is explicit now, so that clamp is gone;
+       it would otherwise override the merchant's setting on smaller laptops. */
 
     /* When zoomed out, fit as many 100px-wide columns as possible */
     .product-grid--{{ section.id }}[product-grid-view='zoom-out'] {

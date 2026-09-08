@@ -223,7 +223,7 @@
     "work_quickly_to_ship": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>"
   },
   "info": {
-    "desktop_columns": "Auto fits as many cards of the chosen size as the row allows.",
+    "desktop_columns": "Holds this many columns at every desktop width.",
     "single_star": "Shows one star instead of the full scale.",
     "sticky_add_to_cart_style": "Top bar sits below the header on desktop. Mobile keeps the bottom bar.",
     "zoom_style": "Minimal centres the image and shows previous, close and next buttons instead of the thumbnail strip.",
@@ -428,10 +428,6 @@
     "comparison_slider": "Comparison slider"
   },
   "options": {
-    "three_number": "3",
-    "four_number": "4",
-    "five_number": "5",
-    "six_number": "6",
     "rating_value": "Rating",
     "review_count": "Review count",
     "thumbnails_left": "Thumbnails (left)",
