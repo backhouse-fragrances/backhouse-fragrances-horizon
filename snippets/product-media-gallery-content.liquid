@@ -131,6 +131,12 @@
   endif
   assign has_image_drop = sorted_media | has: 'media_type', 'image'
 
+  # Grid presentation with a left thumbnail rail on desktop (block_settings.grid_desktop_pagination)
+  assign grid_thumbnails = false
+  if media_presentation == 'grid' and block_settings.grid_desktop_pagination == 'thumbnails' and sorted_media.size > 1
+    assign grid_thumbnails = true
+  endif
+
   # Determine if we're in single column mode (carousel or grid with one column)
   assign is_single_column = false
   if media_presentation == 'carousel' or sorted_media.size == 1 or media_presentation == 'grid' and block_settings.media_columns == 'one'
@@ -359,6 +365,9 @@
         {% if block_settings.media_columns == "two" and block_settings.large_first_image%}media-gallery--large-first-image{% endif %}
       {% endif %}
       media-gallery--{{ media_presentation }}
+      {% if grid_thumbnails %}
+        media-gallery--grid-thumbnails
+      {% endif %}
       {% if block_settings.slideshow_mobile_controls_style == 'hint' %}
         media-gallery--hint
       {% endif %}
@@ -462,6 +471,60 @@
     %}
 
     {% if media_presentation == 'grid' %}
+      {% if grid_thumbnails %}
+        <div class="media-gallery__grid-layout">
+          {% comment %} Desktop-only thumbnail rail for the grid; media-gallery.js keeps it in sync with scrolling. {% endcomment %}
+          <scroll-hint
+            class="media-gallery__grid-thumbnails"
+            ref="gridThumbnails"
+            style="--thumbnail-radius: {{ block_settings.thumbnail_radius }}px;"
+          >
+            {% for media in sorted_media %}
+              <button
+                type="button"
+                class="button button-unstyled media-gallery__grid-thumbnail"
+                aria-label="{{ 'accessibility.slide_status' | t: index: forloop.index, length: forloop.length }}"
+                on:click="/scrollToGridMedia/{{ forloop.index0 }}"
+                style="--aspect-ratio: {% if block_settings.aspect_ratio == 'adapt' %}{{ media.preview_image.aspect_ratio | default: 1.0 }}{% else %}{{ block_settings.aspect_ratio }}{% endif %};"
+                ref="gridThumbnailButtons[]"
+                {% if forloop.first %}
+                  aria-selected="true"
+                {% endif %}
+              >
+                {% liquid
+                  assign focal_point_style = ''
+                  if media.presentation.focal_point != blank
+                    assign focal_point_style = 'object-position: ' | append: media.presentation.focal_point | append: ';'
+                  endif
+                %}
+                {{
+                  media.preview_image
+                  | image_url: width: 144
+                  | image_tag: loading: 'lazy', alt: media.alt, style: focal_point_style
+                  | escape
+                }}
+                {% if media.media_type == 'video' or media.media_type == 'external_video' %}
+                  <span class="media-gallery__grid-thumbnail-badge">
+                    {{ 'icon-play.svg' | inline_asset_content }}
+                  </span>
+                {% elsif media.media_type == 'model' %}
+                  <span class="media-gallery__grid-thumbnail-badge">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                      class="icon"
+                      fill="none"
+                      viewBox="0 0 18 21"
+                    >
+                      {% render 'icon', icon: '3d-model' %}
+                    </svg>
+                  </span>
+                {% endif %}
+              </button>
+            {% endfor %}
+          </scroll-hint>
+      {% endif %}
       <ul
         class="media-gallery__grid list-unstyled"
         data-testid="media-gallery-grid"
@@ -506,6 +569,9 @@
           </li>
         {% endfor %}
       </ul>
+      {% if grid_thumbnails %}
+        </div>
+      {% endif %}
     {% endif %}
 
     {%- if block_settings.zoom -%}

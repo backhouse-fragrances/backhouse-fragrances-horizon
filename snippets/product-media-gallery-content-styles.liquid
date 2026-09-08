@@ -279,4 +279,93 @@
       transform: translateY(0);
     }
   }
+
+  /* Grid presentation with a left thumbnail rail (block_settings.grid_desktop_pagination = thumbnails).
+     Sizing mirrors the carousel thumbnails in slideshow-controls. */
+  .media-gallery__grid-thumbnails {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .media-gallery--grid-thumbnails .media-gallery__grid-layout {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: var(--gap-sm);
+      align-items: start;
+    }
+
+    /* Same header-aware offset Horizon gives the sticky product details */
+    body:has(#header-group #header-component[data-sticky-state='active']) .media-gallery--grid-thumbnails {
+      --sticky-header-offset: var(--header-height);
+    }
+
+    .media-gallery__grid-thumbnails {
+      position: sticky;
+      top: var(--sticky-header-offset, 0px);
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xs);
+      /* Room for the selected ring (outline + offset) on every side; the rail is pulled left by the same
+         amount so thumbnails still align with the page margin. Needed because overflow clips the ring. */
+      --thumbnail-ring-space: calc(var(--focus-outline-offset) + var(--focus-outline-width));
+
+      max-height: calc(100vh - var(--sticky-header-offset, 0px));
+      padding: var(--thumbnail-ring-space);
+      margin-inline-start: calc(-1 * var(--thumbnail-ring-space));
+      overflow: hidden auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .media-gallery__grid-thumbnail {
+      position: relative;
+      flex: none;
+      width: clamp(44px, 7vw, var(--thumbnail-width));
+      height: auto;
+      aspect-ratio: var(--aspect-ratio);
+      border-radius: var(--thumbnail-radius, var(--media-radius));
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--thumbnail-radius, var(--media-radius));
+      }
+
+      &[aria-selected='true'] {
+        outline: var(--focus-outline-width) solid currentcolor;
+        outline-offset: calc(var(--focus-outline-offset) / 2);
+        border: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--media-border-opacity));
+      }
+    }
+
+    .media-gallery__grid-thumbnail-badge {
+      position: absolute;
+      top: var(--padding-2xs);
+      right: var(--padding-2xs);
+      width: clamp(16px, 10%, 20px);
+      height: clamp(16px, 10%, 20px);
+      background-color: var(--color-background);
+      border-radius: var(--style-border-radius-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgb(var(--color-foreground-rgb) / var(--opacity-5));
+
+      svg {
+        width: 60%;
+        height: 60%;
+        fill: var(--color-foreground);
+        opacity: 0.6;
+      }
+    }
+
+    /* Leave room for the sticky header when a thumbnail scrolls its media into view */
+    .media-gallery--grid-thumbnails .media-gallery__grid > .product-media-container {
+      scroll-margin-top: calc(var(--sticky-header-offset, 0px) + var(--sticky-bar-offset, 0px) + var(--image-gap, 0px));
+    }
+  }
 {% endstylesheet %}

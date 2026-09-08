@@ -425,6 +425,7 @@
     "comparison_slider": "Comparison slider"
   },
   "options": {
+    "thumbnails_left": "Thumbnails (left)",
     "top_bar": "Top bar",
     "minimal": "Minimal",
     "icon_only": "Icon only",
