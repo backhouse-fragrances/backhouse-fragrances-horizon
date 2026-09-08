@@ -7,6 +7,14 @@
 {%- enddoc -%}
 
 {% stylesheet %}
+  /* block.settings.enable_mobile_gap: a separate vertical gap under 750px. Same
+     specificity as the base rule below, declared after it, so no !important. */
+  @media screen and (max-width: 749px) {
+    .product-grid__card.product-grid__card {
+      gap: var(--product-card-mobile-gap, var(--product-card-gap));
+    }
+  }
+
   .product-grid__card.product-grid__card {
     display: flex;
     flex-flow: column nowrap;

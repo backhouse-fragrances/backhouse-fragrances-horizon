@@ -43,6 +43,9 @@
       "type": "review"
     },
     {
+      "type": "rating-badge"
+    },
+    {
       "type": "sku"
     },
     {
@@ -76,6 +79,23 @@
       "step": 1,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_gap",
+      "label": "t:settings.custom_mobile_vertical_gap",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "t:settings.mobile_vertical_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "visible_if": "{{ block.settings.enable_mobile_gap == true }}"
     },
     {
       "type": "header",

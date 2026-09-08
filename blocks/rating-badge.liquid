@@ -1,0 +1,125 @@
+{%- doc -%}
+  Compact product rating badge, matching the star treatment of the live Prestige theme.
+
+  Reads Shopify's native product review metafields (`product.metafields.reviews.*`), which
+  is where review apps such as Judge.me publish their aggregate rating, so it needs no app
+  embed of its own. Markup and styles live in `snippets/rating-badge.liquid`.
+{%- enddoc -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign product = closest.product
+  assign show_placeholder = false
+
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+    assign show_placeholder = true
+  endif
+-%}
+
+{%- if block_settings.text_color != blank -%}
+  {% style %}
+    .rating-badge-{{ block.id }} {
+      --rating-badge-color: {{ block_settings.text_color }};
+      --rating-badge-color-rgb: {{ block_settings.text_color.rgb }};
+    }
+  {% endstyle %}
+{%- endif -%}
+
+<div
+  class="rating-badge-block rating-badge-{{ block.id }} rating-badge-block--{{ block_settings.alignment }}"
+  {{ block.shopify_attributes }}
+>
+  {%- render 'rating-badge',
+    product: product,
+    display_mode: block_settings.display_mode,
+    show_single_star: block_settings.show_single_star,
+    show_empty: block_settings.show_empty,
+    show_placeholder: show_placeholder,
+    hide_text: block_settings.hide_text
+  -%}
+</div>
+
+{% stylesheet %}
+  .rating-badge-block {
+    display: flex;
+  }
+
+  .rating-badge-block--left {
+    justify-content: flex-start;
+  }
+
+  .rating-badge-block--center {
+    justify-content: center;
+  }
+
+  .rating-badge-block--right {
+    justify-content: flex-end;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.rating_badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.app_required_for_ratings"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "t:settings.rating_display",
+      "options": [
+        {
+          "value": "rating",
+          "label": "t:options.rating_value"
+        },
+        {
+          "value": "count",
+          "label": "t:options.review_count"
+        }
+      ],
+      "default": "rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_text",
+      "label": "t:settings.hide_rating_text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_single_star",
+      "label": "t:settings.single_star",
+      "info": "t:info.single_star",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_empty",
+      "label": "t:settings.show_empty_rating",
+      "default": false
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.rating_badge",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

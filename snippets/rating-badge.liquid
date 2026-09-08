@@ -1,0 +1,156 @@
+{%- doc -%}
+  Renders a compact product rating badge from the Shopify product review metafields.
+
+  The star geometry matches the live Prestige theme: one glyph split into a left and a
+  right half, so a half star is simply the left half filled and the right half faded.
+  Everything is sized from `--font-size--xs` and coloured with `currentColor`, so the
+  badge follows the surrounding colour scheme.
+
+  Meant to be rendered from a Custom Liquid block, in a product card or on a product page:
+
+    {% render 'rating-badge', product: product %}
+    {% render 'rating-badge', product: product, display_mode: 'count' %}
+    {% render 'rating-badge', product: product, show_single_star: true %}
+
+  @param {object} product - The product to read the rating metafields from.
+  @param {boolean} [show_empty] - Render a 0.0 badge when the product has no rating yet.
+  @param {boolean} [show_placeholder] - Render a sample rating (for card placeholders).
+  @param {boolean} [show_single_star] - Show one star instead of the whole scale.
+  @param {string} [display_mode] - 'rating' (default, shows 4.5) or 'count' (shows 12 reviews).
+  @param {boolean} [hide_text] - Stars only, with no number after them.
+{%- enddoc -%}
+
+{%- liquid
+  assign rating_object = product.metafields.reviews.rating.value
+
+  if rating_object != blank and rating_object.rating != blank
+    assign rating_value = rating_object.rating | round: 1
+    assign rating_count = product.metafields.reviews.rating_count.value | default: 0
+    assign rating_max = rating_object.scale_max | default: 5
+  elsif show_placeholder
+    assign rating_value = 4.5
+    assign rating_count = 2
+    assign rating_max = 5
+  elsif show_empty
+    assign rating_value = 0.0
+    assign rating_count = 0
+    assign rating_max = 5
+  else
+    assign hide_rating = true
+  endif
+
+  # Anything from .3 to .7 shows a half star; above that the star rounds up to full.
+  assign decimal = rating_value | modulo: 1
+  assign half_star_index = 0
+
+  if decimal >= 0.3 and decimal <= 0.7
+    assign filled_stars = rating_value | floor
+    assign half_star_index = filled_stars | plus: 1
+  elsif decimal > 0.7
+    assign filled_stars = rating_value | ceil
+  else
+    assign filled_stars = rating_value | floor
+  endif
+
+  if show_single_star
+    assign star_total = 1
+  else
+    assign star_total = rating_max
+  endif
+-%}
+
+{%- unless hide_rating -%}
+  <span class="rating-badge">
+    <span
+      class="rating-badge__stars"
+      role="img"
+      aria-label="{{ 'accessibility.rating' | t: rating: rating_value }}"
+    >
+      {%- for star in (1..star_total) -%}
+        {%- liquid
+          # Each star is drawn as two halves so the same glyph covers full, half and empty.
+          assign left_on = false
+          assign right_on = false
+
+          if show_single_star
+            # A single star just signals "this product has reviews".
+            if filled_stars > 0 or half_star_index > 0
+              assign left_on = true
+              assign right_on = true
+            endif
+          elsif star <= filled_stars
+            assign left_on = true
+            assign right_on = true
+          elsif star == half_star_index
+            assign left_on = true
+          endif
+        -%}
+        <svg
+          class="rating-badge__star"
+          viewBox="0 0 12 11"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            class="rating-badge__star-half{% unless left_on %} rating-badge__star-half--empty{% endunless %}"
+            d="M6 0v8.635L2.292 11 3.48 6.87 0 4.202l4.443-.187L6 0Z"
+          />
+          <path
+            class="rating-badge__star-half{% unless right_on %} rating-badge__star-half--empty{% endunless %}"
+            d="M6 0v8.635L9.708 11 8.52 6.87 12 4.202l-4.443-.187L6 0Z"
+          />
+        </svg>
+      {%- endfor -%}
+    </span>
+
+    {%- unless hide_text -%}
+      <span class="rating-badge__text">
+        {%- if display_mode == 'count' -%}
+          {{- rating_count }} {{ 'content.reviews' | t -}}
+        {%- else -%}
+          ({{ rating_value }})
+        {%- endif -%}
+      </span>
+    {%- endunless -%}
+  </span>
+{%- endunless -%}
+
+{% stylesheet %}
+  .rating-badge {
+    /* The block may set --rating-badge-color / -rgb on an ancestor; fall back to the scheme. */
+    --rating-badge-star-size: var(--font-size--xs);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-2xs);
+    color: var(--rating-badge-color, var(--color-foreground));
+    font-size: var(--font-size--xs);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .rating-badge__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+
+  .rating-badge__star {
+    width: var(--rating-badge-star-size);
+    height: auto;
+    aspect-ratio: 12 / 11;
+    flex: none;
+    fill: currentcolor;
+  }
+
+  /* The unfilled half of a star, and every half of an empty one. */
+  .rating-badge__star-half--empty {
+    fill-opacity: var(--opacity-40);
+  }
+
+  .rating-badge__text {
+    color: rgb(var(--rating-badge-color-rgb, var(--color-foreground-rgb)) / var(--opacity-subdued-text));
+    font-family: var(--font-paragraph--family);
+    font-weight: var(--font-paragraph--weight);
+  }
+{% endstylesheet %}
