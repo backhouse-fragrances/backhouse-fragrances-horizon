@@ -129,4 +129,61 @@ slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after
 .slideshow-control.slideshow-control.slideshow-control--shape-square,
 .slideshow-control.slideshow-control.slideshow-control--shape-circle {
     background-color: var(--color-background);
+    color: var(--color-foreground);
+}
+
+/* Prestige-style button hover: the hover colour wipes across the button instead of
+   cross-fading. Two stacked gradients whose widths swap, which is the mechanism the live
+   theme uses. Every colour comes from Horizon's own button scheme variables, so the theme
+   palette still drives it. Scoped to primary and secondary: .button-custom carries
+   merchant-set inline colours, which these scheme variables would not match.
+   Horizon also reuses .button on icon-only controls (drawer close/back, media poster,
+   zoom gallery, variant remove); those are excluded so they keep their own styling. */
+.button,
+button.shopify-payment-button__button--unbranded {
+    --button-wipe-rest: var(--color-primary-button-background);
+    --button-wipe-hover: var(--color-primary-button-hover-background);
+}
+
+.button-secondary {
+    --button-wipe-rest: var(--color-secondary-button-background);
+    --button-wipe-hover: var(--color-secondary-button-hover-background);
+}
+
+:is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
+        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove) {
+    /* Horizon's --animation-speed-slow is 0.2s, too quick to read as a wipe. */
+    --button-wipe-duration: 0.45s;
+    --button-wipe-easing: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+    background-color: transparent;
+    background-image:
+        linear-gradient(var(--button-wipe-hover), var(--button-wipe-hover)),
+        linear-gradient(var(--button-wipe-rest), var(--button-wipe-rest));
+    background-repeat: no-repeat;
+    background-size: 0 101%, 101% 101%;
+    background-position: left center, right center;
+    transition:
+        background-size var(--button-wipe-duration) var(--button-wipe-easing),
+        color var(--button-wipe-duration) var(--button-wipe-easing),
+        box-shadow var(--button-wipe-duration) var(--button-wipe-easing);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
+        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove, [disabled], [aria-disabled='true']):hover {
+        background-size: 101% 101%, 0 101%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
+        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove) {
+        --button-wipe-duration: 0s;
+    }
+}
+
+/* Marquee links carry the theme's richtext underline; the live scrolling band has none. */
+marquee-component .text-block a {
+    text-decoration: none;
 }

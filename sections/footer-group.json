@@ -55,7 +55,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>About the Backhouse</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -80,7 +80,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>Backhouse Fragrances is a gifting and home fragrance brand based in Newport Beach, California. We design curated gift boxes and fragrance collections for every occasion, from intimate celebrations to large-scale corporate gifting. Each product is crafted with intention, and designed to be remembered long after it is opened.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -101,33 +101,17 @@
               },
               "blocks": {}
             },
-            "email-signup_HafH7P": {
-              "type": "email-signup",
-              "name": "t:names.email_signup",
+            "image_J1k2lM": {
+              "type": "image",
+              "name": "Logo",
               "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "heading": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "input_style": "custom",
-                "border_width": 1,
-                "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.color1 }}",
-                "input_border_color": "",
-                "input_type_preset": "paragraph",
-                "style_class": "button-secondary",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "display_type": "text",
-                "label": "Sign up",
-                "integrated_button": false,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "image": "shopify://shop_images/BH_lockup_WHITE.svg",
+                "link": "",
+                "image_ratio": "adapt",
+                "width": "fit-content",
+                "custom_width": 80,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 60
               },
               "blocks": {}
             }
@@ -135,14 +119,14 @@
           "block_order": [
             "text_pF6rVi",
             "text_HafH7P",
-            "email-signup_HafH7P"
+            "image_J1k2lM"
           ]
         },
-        "menu_footer": {
+        "menu_shop_collections": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
-            "heading": "",
+            "menu": "shop-collections",
+            "heading": "SHOP COLLECTIONS",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
@@ -155,11 +139,11 @@
             "padding-inline-end": 0
           }
         },
-        "menu_main": {
+        "menu_footer": {
           "type": "menu",
           "settings": {
-            "menu": "main-menu",
-            "heading": "",
+            "menu": "footer",
+            "heading": "QUICK LINKS",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
@@ -175,8 +159,8 @@
       },
       "block_order": [
         "group_wErUQf",
-        "menu_footer",
-        "menu_main"
+        "menu_shop_collections",
+        "menu_footer"
       ],
       "name": "t:names.footer",
       "settings": {
