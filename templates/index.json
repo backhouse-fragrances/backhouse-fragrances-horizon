@@ -242,8 +242,8 @@
                   "type": "text",
                   "settings": {
                     "text": "<h3>10 signature scents. Every size, every occasion.</h3>",
-                    "width": "fit-content",
-                    "max_width": "narrow",
+                    "width": "100%",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "h3",
                     "font": "var(--font-body--family)",
@@ -398,8 +398,8 @@
                   "type": "text",
                   "settings": {
                     "text": "<h3>Ribbon-tied, hand-poured, and ready to give.</h3>",
-                    "width": "fit-content",
-                    "max_width": "narrow",
+                    "width": "100%",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "h3",
                     "font": "var(--font-body--family)",
@@ -554,8 +554,8 @@
                   "type": "text",
                   "settings": {
                     "text": "<h3>A refined daily essential in our best-selling LIDO fragrance.</h3>",
-                    "width": "fit-content",
-                    "max_width": "narrow",
+                    "width": "100%",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "h3",
                     "font": "var(--font-body--family)",
@@ -710,8 +710,8 @@
                   "type": "text",
                   "settings": {
                     "text": "<h3>Trusted by J.P. Morgan, Morgan Stanley, AEG, Deloitte, and 200+ other companies.</h3>",
-                    "width": "fit-content",
-                    "max_width": "narrow",
+                    "width": "100%",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "h3",
                     "font": "var(--font-body--family)",
@@ -1151,21 +1151,21 @@
       "name": "t:names.featured_collection",
       "settings": {
         "collection": "backhouse-favorites",
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
-        "max_products": 4,
+        "max_products": 6,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
         "columns_gap": 60,
         "rows_gap": 64,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_style": "chevron",
+        "icons_shape": "circle",
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
         "background_color": "",
-        "padding-block-start": 48,
+        "padding-block-start": 64,
         "padding-block-end": 48
       }
     },
@@ -1251,10 +1251,45 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "text_xzFGzk": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Crafted by hand in Newport Beach, for givers to love and the lucky to receive.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "product_list_text_hDUKmq"
+            "product_list_text_hDUKmq",
+            "text_xzFGzk"
           ]
         },
         "static-product-card": {
@@ -1410,23 +1445,72 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "backhouse-favorites",
-        "layout_type": "grid",
+        "collection": "gift-box-collection",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
-        "max_products": 4,
+        "max_products": 6,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
         "columns_gap": 60,
         "rows_gap": 64,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_style": "chevron",
+        "icons_shape": "circle",
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
         "background_color": "",
         "padding-block-start": 60,
         "padding-block-end": 48
+      }
+    },
+    "marquee_q8TTeY": {
+      "type": "marquee",
+      "blocks": {
+        "text_eGqFwm": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We make things that work better and last longer.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "nowrap",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_eGqFwm"
+      ],
+      "name": "t:names.marquee_section",
+      "settings": {
+        "movement_direction": "normal",
+        "background_color": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "gap_between_elements": 24
       }
     }
   },
@@ -1435,6 +1519,7 @@
     "grid_section_XEXUj8",
     "product_list_fa6P9H",
     "divider_8dbgkf",
-    "product_list_Ny3Ppy"
+    "product_list_Ny3Ppy",
+    "marquee_q8TTeY"
   ]
 }

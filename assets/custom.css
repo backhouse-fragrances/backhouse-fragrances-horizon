@@ -123,3 +123,10 @@ slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after
 .header__column--left {
     gap: var(--gap-2xl) !important;
 }
+
+/* Slideshow square and circle controls take the scheme background instead of the primary
+   button colour. Tripled class beats the snippet stylesheet, which compiles after this file. */
+.slideshow-control.slideshow-control.slideshow-control--shape-square,
+.slideshow-control.slideshow-control.slideshow-control--shape-circle {
+    background-color: var(--color-background);
+}
