@@ -137,8 +137,9 @@ slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after
    theme uses. Every colour comes from Horizon's own button scheme variables, so the theme
    palette still drives it. Scoped to primary and secondary: .button-custom carries
    merchant-set inline colours, which these scheme variables would not match.
-   Horizon also reuses .button on icon-only controls (drawer close/back, media poster,
-   zoom gallery, variant remove); those are excluded so they keep their own styling. */
+   Horizon reuses .button on icon-only controls too (drawer close/back, media poster, zoom
+   gallery, search close). Excluding anything containing an svg covers them all in one
+   condition: the CTA buttons in this theme are text-only. */
 .button,
 button.shopify-payment-button__button--unbranded {
     --button-wipe-rest: var(--color-primary-button-background);
@@ -150,8 +151,7 @@ button.shopify-payment-button__button--unbranded {
     --button-wipe-hover: var(--color-secondary-button-text);
 }
 
-:is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
-        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove) {
+:is(.button, .button-secondary):not(.button-unstyled, .button-custom):not(:has(svg)) {
     /* Horizon's --animation-speed-slow is 0.2s, too quick to read as a wipe. */
     --button-wipe-duration: 0.45s;
     --button-wipe-easing: cubic-bezier(0.785, 0.135, 0.15, 0.86);
@@ -170,8 +170,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
-        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove, [disabled], [aria-disabled='true']):hover {
+    :is(.button, .button-secondary):not(.button-unstyled, .button-custom):not(:has(svg), [disabled], [aria-disabled='true']):hover {
         background-size: 101% 101%, 0 101%;
         color: var(--button-wipe-rest);
         box-shadow: inset 0 0 0 var(--button-border-width, 1px) var(--button-wipe-rest);
@@ -179,8 +178,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
-        .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove) {
+    :is(.button, .button-secondary):not(.button-unstyled, .button-custom):not(:has(svg)) {
         --button-wipe-duration: 0s;
     }
 }

@@ -252,7 +252,7 @@
                 "heading": "",
                 "heading_preset": "h6",
                 "border_style": "underline",
-                "input_style": "default",
+                "input_style": "custom",
                 "style_class": "button-unstyled",
                 "display_type": "text",
                 "label": "Sign up",
@@ -260,7 +260,15 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "border_width": 1,
+                "border_radius": 0,
+                "input_background_color": "rgba(0,0,0,0)",
+                "input_text_color": "{{ settings.color_palette.background }}",
+                "input_border_color": "{{ settings.color_palette.background }}",
+                "input_type_preset": "paragraph",
+                "link_text_color": "{{ settings.color_palette.background }}",
+                "button_type_preset": "paragraph"
               }
             }
           },
@@ -292,7 +300,7 @@
         "copyright": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "show_powered_by": false,
             "font_size": "0.75rem",
             "case": "none"
           }
