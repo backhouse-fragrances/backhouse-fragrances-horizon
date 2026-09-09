@@ -11,6 +11,12 @@
       capture styles
         echo '--resource-list-column-gap-desktop: ' | append: section.settings.columns_gap | append: 'px;'
         echo '--resource-list-row-gap-desktop: ' | append: section.settings.rows_gap | append: 'px;'
+        # Only emitted when the merchant opts in; otherwise the shared styles keep the stock
+        # 12px mobile cap. See snippets/resource-list-styles.liquid.
+        if section.settings.enable_mobile_gap
+          echo '--resource-list-column-gap-mobile: ' | append: section.settings.mobile_columns_gap | append: 'px;'
+          echo '--resource-list-row-gap-mobile: ' | append: section.settings.mobile_rows_gap | append: 'px;'
+        endif
         echo '--resource-list-columns: repeat(' | append: section.settings.columns | append: ', 1fr);'
         echo '--resource-list-columns-mobile: repeat(' | append: section.settings.mobile_columns | append: ', 1fr);'
         echo '--column-count-mobile: ' | append: section.settings.mobile_columns | append: ';'
@@ -19,6 +25,9 @@
       assign classes = 'resource-list__carousel'
       capture styles
         echo '--resource-list-column-gap-desktop: ' | append: section.settings.columns_gap | append: 'px;'
+        if section.settings.enable_mobile_gap
+          echo '--resource-list-column-gap-mobile: ' | append: section.settings.mobile_columns_gap | append: 'px;'
+        endif
 
         if section.settings.peek_desktop == true
           echo '--column-count: ' | append: 1.5 | append: ';'
@@ -126,6 +135,9 @@
         "
         style="
           --resource-list-column-gap-desktop: {{ mobile_carousel_gap }}px;
+          {% if section.settings.enable_mobile_gap %}
+            --resource-list-column-gap-mobile: {{ section.settings.mobile_columns_gap }}px;
+          {% endif %}
           --column-count: {{ section.settings.columns }};
           --column-count-mobile: 1;
           --mobile-card-size: {{ section.settings.mobile_card_size }};
@@ -370,6 +382,36 @@
       "unit": "px",
       "default": 8,
       "visible_if": "{{ section.settings.layout_type == 'grid'}}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_gap",
+      "label": "Custom mobile gap",
+      "info": "Mobile gaps are capped at 12px otherwise.",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'grid' or section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns_gap",
+      "label": "Mobile horizontal gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ section.settings.enable_mobile_gap }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_rows_gap",
+      "label": "Mobile vertical gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ section.settings.enable_mobile_gap and section.settings.layout_type == 'grid' }}"
     },
     {
       "type": "header",

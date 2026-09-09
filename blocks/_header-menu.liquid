@@ -785,20 +785,41 @@
     rotate: -90deg;
   }
 
-  /* Top-level links without a submenu get the underline that wipes in on hover. Links that
-     do open a panel are marked by the panel's own 2px line instead, as on the live site. */
-  .menu-list--dropdown .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)) .menu-list__link-title {
+  /* The header row is taller than a menu item by its block padding, so the strip of padding
+     above the labels sat outside the item. Drifting the cursor up into it left the item and
+     closed the open panel; coming back reopened it, which read as the header flickering.
+     The strip below the item is already bridged by the panel itself, so only the top needs
+     covering. This pseudo-element sits entirely above the trigger, so it never overlaps the
+     label or swallows a click, and being absolute it adds no layout. */
+  .menu-list--dropdown .menu-list__list-item--dropdown > .menu-list__trigger {
+    position: relative;
+  }
+
+  .menu-list--dropdown .menu-list__list-item--dropdown > .menu-list__trigger::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 100%;
+    height: var(--header-padding);
+  }
+
+  /* Top-level links without a submenu get the underline that wipes in on hover. It hangs
+     below the item by the row's padding and border so it lands on the header's bottom edge,
+     level with the 2px line a submenu panel draws, rather than tight under the text.
+     Anchored to the item, which fills the row, not the link, which does not.
+     Safe to make these items positioned: the selector excludes items that own a submenu,
+     so no absolutely-positioned panel depends on this containing block. */
+  .menu-list--dropdown
+    .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)) {
     position: relative;
   }
 
   .menu-list--dropdown
-    .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled))
-    .menu-list__link-title::after {
+    .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled))::after {
     content: '';
     position: absolute;
-    inset-block-end: -0.125rem;
-    inset-inline-start: 0;
-    width: 100%;
+    inset-block-end: calc(-1 * (var(--header-padding) + var(--border-bottom-width, 0px)));
+    inset-inline: var(--gap-sm);
     height: 2px;
     background: currentcolor;
     transform: scaleX(0);
@@ -808,8 +829,7 @@
 
   @media screen and (pointer: fine) {
     .menu-list--dropdown
-      .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)):hover
-      .menu-list__link-title::after {
+      .menu-list__list-item:not(:has(.menu-list__submenu), :has(.button-unstyled)):hover::after {
       transform: scaleX(1);
     }
   }
