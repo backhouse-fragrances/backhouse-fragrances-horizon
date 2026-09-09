@@ -214,3 +214,62 @@ footer ul a {
     width: var(--icon-size-md);
     height: var(--icon-size-md);
 }
+
+/* Footer with five columns. Horizon caps its footer grid at four
+   (grid_columns = total_blocks | at_most: 4) and then spans a lone fifth block across the
+   whole row, so our logo/about/menu/menu/newsletter layout wrapped. The live footer runs
+   all five side by side at content-driven widths, which these fractions approximate.
+   Scoped with :has() so a four-block footer keeps Horizon's own behaviour. */
+@media screen and (min-width: 990px) {
+    .footer-content:has(> :nth-child(5)) {
+        grid-template-columns: 100px 1.6fr 0.8fr 0.9fr 1.5fr;
+    }
+
+    .footer-content--isolated-grid-item-desktop:has(> :nth-child(5)) > :last-child {
+        grid-column: auto;
+    }
+
+    /* Grid items default to min-content width, so the signup form's intrinsic width was
+       stretching its column past the fraction above. */
+    .footer-content:has(> :nth-child(5)) > * {
+        min-width: 0;
+    }
+}
+
+/* Footer signup: live stacks the Subscribe button under the field, left aligned; Horizon
+   lays the input group out as a centred row. Mirrors Horizon's own selector shape so this
+   outranks it - its rule carries two :not() classes, so a plainer selector loses. */
+footer .email-signup__input-group:not(.email-signup__input-group--integrated):not(.email-signup__input-group--underline) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+}
+
+footer .email-signup__input-group .email-signup__input {
+    width: 100%;
+}
+
+footer .email-signup__input-group .email-signup__input {
+    border-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));
+}
+
+/* Footer utilities bar. Live puts the social icons on their own full-width row above the
+   copyright and policy links; Horizon lays all three blocks out as one `1fr auto 1fr` row,
+   which pushed the icons to the right. Also softens the divider: the section's own default
+   falls back to --color-border, which reads too bright on the dark footer. */
+footer .utilities {
+    --divider-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));
+}
+
+@media screen and (min-width: 750px) {
+    footer .utilities:has(.social-icons__wrapper) .social-icons__wrapper {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        justify-self: start;
+    }
+
+    footer .utilities:has(.social-icons__wrapper) > :not(.social-icons__wrapper) {
+        grid-row: 2;
+    }
+}
