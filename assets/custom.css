@@ -199,3 +199,18 @@ footer nav a,
 footer ul a {
     color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
 }
+
+/* Menu drawer: close and back icons at the medium step. Overriding from here rather than
+   the snippet, so the extra class beats `.menu-drawer svg` and `.menu-drawer__back-button >
+   .svg-wrapper` in the compiled stylesheet, which loads after this file. */
+.menu-drawer .menu-drawer__close-button .svg-wrapper svg,
+.menu-drawer .menu-drawer__back-button .svg-wrapper svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+}
+
+.menu-drawer .menu-drawer__back-button > .svg-wrapper,
+.menu-drawer .menu-drawer__close-button > .svg-wrapper {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+}
