@@ -55,11 +55,11 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>About the Backhouse</h2>",
+                "text": "<h6>About the Backhouse</h6>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h3",
+                "type_preset": "h6",
                 "font": "var(--font-body--family)",
                 "font_size": "",
                 "line_height": "normal",
@@ -106,12 +106,12 @@
               "name": "Logo",
               "settings": {
                 "image": "shopify://shop_images/BH_lockup_WHITE.svg",
-                "link": "",
+                "link": "/",
                 "image_ratio": "adapt",
-                "width": "fit-content",
-                "custom_width": 80,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 60
+                "width": "custom",
+                "custom_width": 32,
+                "width_mobile": "custom",
+                "custom_width_mobile": 36
               },
               "blocks": {}
             }
@@ -131,7 +131,7 @@
             "show_as_accordion": false,
             "accordion_icon": "plus",
             "accordion_dividers": false,
-            "heading_preset": "paragraph",
+            "heading_preset": "h6",
             "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -148,25 +148,140 @@
             "show_as_accordion": false,
             "accordion_icon": "plus",
             "accordion_dividers": false,
-            "heading_preset": "paragraph",
+            "heading_preset": "h6",
             "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           }
+        },
+        "group_newsletter_kt": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_kt1Head": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h6>Keep In Touch</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_kt2Copy": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>Join the backhouse family. Enjoy 10% off your <a href=\"/pages/newsletter\">first</a> order.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "email_signup_kt3": {
+              "type": "email-signup",
+              "name": "t:names.email_signup",
+              "settings": {
+                "width": "fill",
+                "custom_width": 100,
+                "heading": "",
+                "heading_preset": "h6",
+                "border_style": "underline",
+                "input_style": "default",
+                "style_class": "button-unstyled",
+                "display_type": "text",
+                "label": "Sign up",
+                "integrated_button": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": [
+            "text_kt1Head",
+            "text_kt2Copy",
+            "email_signup_kt3"
+          ]
         }
       },
       "block_order": [
         "group_wErUQf",
         "menu_shop_collections",
-        "menu_footer"
+        "menu_footer",
+        "group_newsletter_kt"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
         "gap": 40,
-        "background_color": "{{ settings.color_palette.color1 }}",
+        "background_color": "{{ settings.color_palette.foreground }}",
         "padding-block-start": 36,
         "padding-block-end": 36
       }
@@ -192,11 +307,12 @@
         "social_icons": {
           "type": "social-links",
           "settings": {
-            "facebook_url": "https://www.facebook.com",
-            "instagram_url": "https://www.instagram.com",
-            "youtube_url": "https://www.youtube.com",
-            "tiktok_url": "https://www.tiktok.com",
-            "twitter_url": "https://www.twitter.com"
+            "facebook_url": "https://facebook.com/backhousefragrances",
+            "instagram_url": "https://instagram.com/backhousefragrances",
+            "youtube_url": "",
+            "tiktok_url": "",
+            "twitter_url": "",
+            "pinterest_url": "https://pinterest.com/backhousefragrances"
           }
         }
       },
@@ -208,7 +324,7 @@
       "settings": {
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "{{ settings.color_palette.color1 }}",
+        "background_color": "{{ settings.color_palette.foreground }}",
         "divider_thickness": 1,
         "padding-block-start": 12,
         "padding-block-end": 16

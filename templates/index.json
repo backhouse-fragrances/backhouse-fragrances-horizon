@@ -1229,39 +1229,8 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0
           },
-          "blocks": {
-            "product_list_text_hDUKmq": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h2>Gifting</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "enable_mobile_size": true,
-                "mobile_font_size": "1.125rem"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_hDUKmq"
-          ]
+          "blocks": {},
+          "block_order": []
         },
         "static-product-card": {
           "type": "_product-card",
@@ -1431,7 +1400,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 28,
         "background_color": "",
-        "padding-block-start": 60,
+        "padding-block-start": 0,
         "padding-block-end": 48
       }
     },
@@ -1584,92 +1553,6 @@
         "padding-block-start": 12,
         "padding-block-end": 12,
         "gap_between_elements": 100
-      }
-    },
-    "section_8z9mN0": {
-      "type": "section",
-      "blocks": {
-        "text_icon_P1q2rS": {
-          "type": "text-icon",
-          "name": "Text Icon",
-          "settings": {
-            "icon_position": "left",
-            "icon": "heart",
-            "text": "<h6>Designed for gifting</h6><p>Curated and personal, our bespoke gift boxes are designed for an unforgettable unboxing experience.</p>",
-            "text_width": "100%",
-            "alignment": "center",
-            "content_direction": "column",
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 24,
-            "icon_width": 24,
-            "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"m12 21.844-9.588-10a5.672 5.672 0 0 1-1.063-6.551v0a5.673 5.673 0 0 1 9.085-1.474L12 5.384l1.566-1.565a5.673 5.673 0 0 1 9.085 1.474v0a5.673 5.673 0 0 1-1.062 6.548L12 21.844Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
-          },
-          "blocks": {}
-        },
-        "text_icon_T3u4vW": {
-          "type": "text-icon",
-          "name": "Text Icon",
-          "settings": {
-            "icon_position": "left",
-            "icon": "star",
-            "text": "<h6>Five Stars, Again and Again</h6><p>Our customers' favorite scents—time-tested and star-approved.</p>",
-            "text_width": "100%",
-            "alignment": "center",
-            "content_direction": "column",
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 24,
-            "icon_width": 24,
-            "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"m12.695 1.676 3.198 6.334 6.154.61a.77.77 0 0 1 .477 1.313l-5.064 5.02 1.878 6.82a.777.777 0 0 1-1.1.894l-6.24-3.09-6.23 3.086a.777.777 0 0 1-1.1-.893l1.878-6.821-5.068-5.02a.77.77 0 0 1 .478-1.313l6.154-.61 3.192-6.33a.783.783 0 0 1 1.393 0Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
-          },
-          "blocks": {}
-        },
-        "text_icon_X5y6zZ": {
-          "type": "text-icon",
-          "name": "Text Icon",
-          "settings": {
-            "icon_position": "left",
-            "icon": "chat_bubble",
-            "text": "<h6>Carefree Guarantee</h6><p>A happy customer is our number one goal. Thoughtful and personal support, always.</p>",
-            "text_width": "100%",
-            "alignment": "center",
-            "content_direction": "column",
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 24,
-            "icon_width": 24,
-            "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"M12 23.25c6.213 0 11.25-5.037 11.25-11.25S18.213.75 12 .75.75 5.787.75 12 5.787 23.25 12 23.25Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> <path d=\"M8.25 8.625a.375.375 0 1 1 0 .75.375.375 0 0 1 0-.75m7.5 0a.375.375 0 1 1 0 .75.375.375 0 0 1 0-.75M18.048 15a6.752 6.752 0 0 1-12.1 0\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_icon_P1q2rS",
-        "text_icon_T3u4vW",
-        "text_icon_X5y6zZ"
-      ],
-      "name": "t:names.section",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 40,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 100,
-        "background_color": "",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 64,
-        "padding-block-end": 64
       }
     },
     "section_A2b3cD": {
@@ -1943,6 +1826,224 @@
         "padding-block-start": 64,
         "padding-block-end": 64
       }
+    },
+    "grid_section_ic8Xq2": {
+      "type": "grid-section",
+      "name": "Icons with text",
+      "blocks": {
+        "carousel_card_ic1": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "text_icon_P1q2rS": {
+              "type": "text-icon",
+              "name": "Text Icon",
+              "settings": {
+                "icon_position": "left",
+                "icon": "heart",
+                "text": "<h6>Designed for gifting</h6><p>Curated and personal, our bespoke gift boxes are designed for an unforgettable unboxing experience.</p>",
+                "text_width": "100%",
+                "alignment": "center",
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 24,
+                "icon_width": 24,
+                "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"m12 21.844-9.588-10a5.672 5.672 0 0 1-1.063-6.551v0a5.673 5.673 0 0 1 9.085-1.474L12 5.384l1.566-1.565a5.673 5.673 0 0 1 9.085 1.474v0a5.673 5.673 0 0 1-1.062 6.548L12 21.844Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_icon_P1q2rS"
+          ]
+        },
+        "carousel_card_ic2": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "text_icon_T3u4vW": {
+              "type": "text-icon",
+              "name": "Text Icon",
+              "settings": {
+                "icon_position": "left",
+                "icon": "star",
+                "text": "<h6>Five Stars, Again and Again</h6><p>Our customers' favorite scents—time-tested and star-approved.</p>",
+                "text_width": "100%",
+                "alignment": "center",
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 24,
+                "icon_width": 24,
+                "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"m12.695 1.676 3.198 6.334 6.154.61a.77.77 0 0 1 .477 1.313l-5.064 5.02 1.878 6.82a.777.777 0 0 1-1.1.894l-6.24-3.09-6.23 3.086a.777.777 0 0 1-1.1-.893l1.878-6.821-5.068-5.02a.77.77 0 0 1 .478-1.313l6.154-.61 3.192-6.33a.783.783 0 0 1 1.393 0Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_icon_T3u4vW"
+          ]
+        },
+        "carousel_card_ic3": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "text_icon_X5y6zZ": {
+              "type": "text-icon",
+              "name": "Text Icon",
+              "settings": {
+                "icon_position": "left",
+                "icon": "chat_bubble",
+                "text": "<h6>Carefree Guarantee</h6><p>A happy customer is our number one goal. Thoughtful and personal support, always.</p>",
+                "text_width": "100%",
+                "alignment": "center",
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 24,
+                "icon_width": 24,
+                "custom_svg": "<svg width=\"100%\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke-width=\"1.5\" viewBox=\"0 0 24 24\"> <path clip-rule=\"evenodd\" d=\"M12 23.25c6.213 0 11.25-5.037 11.25-11.25S18.213.75 12 .75.75 5.787.75 12 5.787 23.25 12 23.25Z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> <path d=\"M8.25 8.625a.375.375 0 1 1 0 .75.375.375 0 0 1 0-.75m7.5 0a.375.375 0 1 1 0 .75.375.375 0 0 1 0-.75M18.048 15a6.752 6.752 0 0 1-12.1 0\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_icon_X5y6zZ"
+          ]
+        }
+      },
+      "block_order": [
+        "carousel_card_ic1",
+        "carousel_card_ic2",
+        "carousel_card_ic3"
+      ],
+      "settings": {
+        "layout_type": "grid",
+        "columns": 3,
+        "mobile_columns": "1",
+        "carousel_on_mobile": true,
+        "mobile_card_size": "100%",
+        "enable_dots": true,
+        "hide_arrows": true,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "columns_gap": 40,
+        "rows_gap": 24,
+        "section_width": "page-width",
+        "gap": 12,
+        "padding-block-start": 64,
+        "padding-block-end": 64,
+        "full_width_on_mobile": false
+      }
     }
   },
   "order": [
@@ -1953,7 +2054,7 @@
     "section_rt7Kp2",
     "product_list_Ny3Ppy",
     "marquee_q8TTeY",
-    "section_8z9mN0",
+    "grid_section_ic8Xq2",
     "section_A2b3cD"
   ]
 }

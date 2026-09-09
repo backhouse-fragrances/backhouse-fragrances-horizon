@@ -142,12 +142,12 @@ slideshow-controls .slideshow-controls__dots button[aria-selected='true']::after
 .button,
 button.shopify-payment-button__button--unbranded {
     --button-wipe-rest: var(--color-primary-button-background);
-    --button-wipe-hover: var(--color-primary-button-hover-background);
+    --button-wipe-hover: var(--color-primary-button-text);
 }
 
 .button-secondary {
     --button-wipe-rest: var(--color-secondary-button-background);
-    --button-wipe-hover: var(--color-secondary-button-hover-background);
+    --button-wipe-hover: var(--color-secondary-button-text);
 }
 
 :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
@@ -173,6 +173,8 @@ button.shopify-payment-button__button--unbranded {
     :is(.button, .button-secondary):not(.button-unstyled, .button-custom, .close-button, .menu-drawer__back-button,
         .deferred-media__poster-button, .dialog-zoomed-gallery__control, .variant-item__remove, [disabled], [aria-disabled='true']):hover {
         background-size: 101% 101%, 0 101%;
+        color: var(--button-wipe-rest);
+        box-shadow: inset 0 0 0 var(--button-border-width, 1px) var(--button-wipe-rest);
     }
 }
 
@@ -186,4 +188,16 @@ button.shopify-payment-button__button--unbranded {
 /* Marquee links carry the theme's richtext underline; the live scrolling band has none. */
 marquee-component .text-block a {
     text-decoration: none;
+}
+
+/* Footer, matching the live layout: body copy and menu links set back from the headings,
+   the way the live theme does. Scoped to the footer element - there is no #footer-group in
+   the DOM; the group renders as <footer> > .shopify-section-group-footer-group. The column
+   headings already come out small and uppercase from their h6 preset, so only colour here.
+   --opacity-subdued-text (0.8) reads too bright against the dark footer; live uses 0.65. */
+footer .text-block p,
+footer .menu a,
+footer nav a,
+footer ul a {
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
 }
