@@ -377,6 +377,19 @@ p:empty {
   }
 }
 
+/* Section width option "Full width with margins": content spans the whole grid the way a
+   full-width section does, but keeps a page-margin gutter on both sides. Deliberately a
+   separate class from .section--full-width-margin above - the header and mega menu hardcode
+   that one alongside their own width class, so reusing it would change them too. */
+/* Two classes deliberately: most section children also carry .spacing-style, which sets
+   padding-inline further down this file. At equal specificity that would win on order and
+   flatten the gutter, which is why Horizon's rule above is doubled up the same way. */
+.section.section--full-width-padded > * {
+  grid-column: 1 / -1;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
 /* Some section content break out to full width of the page */
 .section > .force-full-width {
   grid-column: 1 / -1;

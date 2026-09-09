@@ -86,7 +86,7 @@
       # Define sizes based on page width setting whether this is called from a section or block
 
       if block.settings
-        if section.settings.section_width == 'full-width'
+        if section.settings.section_width == 'full-width' or section.settings.section_width == 'full-width-padded'
           assign sizes = '100vw'
         else
           case settings.page_width

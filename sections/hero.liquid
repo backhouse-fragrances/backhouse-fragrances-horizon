@@ -555,6 +555,13 @@
     grid-column: 2 / 3;
   }
 
+  /* Hero uses the raw section_width value as a class, so the padded option needs its own
+     rule here. The media grid is a sibling and stays full bleed. */
+  .hero__content-wrapper.full-width-padded {
+    grid-column: 1 / -1;
+    padding-inline: var(--page-margin);
+  }
+
   .hero__content-wrapper {
     position: relative;
     inset: 0;
@@ -1078,6 +1085,10 @@
         {
           "value": "full-width",
           "label": "t:options.full"
+        },
+        {
+          "value": "full-width-padded",
+          "label": "Full width with margins"
         }
       ],
       "default": "page-width"

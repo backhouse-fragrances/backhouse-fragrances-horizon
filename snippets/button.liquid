@@ -22,6 +22,7 @@
     size-style
     {{ block_settings.style_class }}
     {{ block_settings.style_class }}--{{ block.id }}
+    {% if block_settings.style_class == 'button-unstyled' %}button-link{% endif %}
   "
   style="{% render 'size-style', settings: block_settings %}"
   {%- if block_settings.open_in_new_tab -%}
@@ -32,3 +33,22 @@
 >
   {{ block_settings.label }}
 </a>
+
+{% stylesheet %}
+  /* Button style "Link": a 1px rule in the label's own colour, sitting under the text.
+     Scoped to this class rather than .button-unstyled, which the theme reuses for facet
+     clear-all links, header actions and disclosure toggles that must stay unlined.
+     currentcolor means it follows the hover dim the link style already applies. */
+  .button-link {
+    position: relative;
+  }
+
+  .button-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    height: 1px;
+    background-color: currentcolor;
+  }
+{% endstylesheet %}
