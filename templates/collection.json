@@ -85,6 +85,7 @@
         "text_tqQTNE",
         "text_twGGkJ"
       ],
+      "disabled": true,
       "name": "t:names.heading",
       "settings": {
         "content_direction": "column",
@@ -258,6 +259,7 @@
           ]
         }
       },
+      "disabled": true,
       "settings": {
         "layout_type": "grid",
         "desktop_columns": 4,
