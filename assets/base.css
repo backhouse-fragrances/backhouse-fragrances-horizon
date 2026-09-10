@@ -383,9 +383,16 @@ p:empty {
    that one alongside their own width class, so reusing it would change them too. */
 /* Two classes deliberately: most section children also carry .spacing-style, which sets
    padding-inline further down this file. At equal specificity that would win on order and
-   flatten the gutter, which is why Horizon's rule above is doubled up the same way. */
+   flatten the gutter, which is why Horizon's rule above is doubled up the same way.
+   A carousel that breaks out with .force-full-width is left unpadded: padding on the list
+   narrows the scroll track, so the next slide clips at the margin instead of peeking at the
+   screen edge. It gets its inset the way page-width carousels do, as `gutters` padding on
+   the track itself (see resource-list-carousel.liquid). */
 .section.section--full-width-padded > * {
   grid-column: 1 / -1;
+}
+
+.section.section--full-width-padded > *:not(.force-full-width) {
   padding-left: var(--page-margin);
   padding-right: var(--page-margin);
 }

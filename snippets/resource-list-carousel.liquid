@@ -19,6 +19,11 @@
     when 'page-width', 'narrow'
       assign slideshow_gutters = 'start end'
       assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
+    when 'full-width-padded'
+      # Same bleed-with-inset as page-width, but the inset is the page margin itself rather
+      # than the offset that centres a page-width content column.
+      assign slideshow_gutters = 'start end'
+      assign gutter_style = '--gutter-slide-width: var(--page-margin);'
     else
       assign slideshow_gutters = null
       assign gutter_style = '--gutter-slide-width: 0px;'
@@ -145,6 +150,12 @@
        .section--full-width-padded outranks .force-full-width on its own. */
     .section--page-width > .resource-list--carousel-contained {
       grid-column: 2;
+    }
+
+    /* base.css leaves a breakout carousel unpadded so it can bleed; a contained one on
+       "full width with margins" needs the margins back, since its gutters are zeroed below. */
+    .section--full-width-padded > .resource-list--carousel-contained {
+      padding-inline: var(--page-margin);
     }
 
     .resource-list__carousel-wrap--contained {
