@@ -133,7 +133,7 @@
         "section_height_custom": 90,
         "background_color": "",
         "toggle_overlay": true,
-        "overlay_color": "#12121266",
+        "overlay_color": "#12121273",
         "overlay_style": "solid",
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
@@ -216,7 +216,7 @@
                 "background_image_position": "cover",
                 "video_position": "cover",
                 "toggle_overlay": true,
-                "overlay_color": "#00000042",
+                "overlay_color": "#00000080",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "border": "none",
@@ -372,7 +372,7 @@
                 "background_image_position": "cover",
                 "video_position": "cover",
                 "toggle_overlay": true,
-                "overlay_color": "#00000042",
+                "overlay_color": "#00000080",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "border": "none",
@@ -528,7 +528,7 @@
                 "background_image_position": "cover",
                 "video_position": "cover",
                 "toggle_overlay": true,
-                "overlay_color": "#00000042",
+                "overlay_color": "#00000080",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "border": "none",
@@ -684,7 +684,7 @@
                 "background_image_position": "cover",
                 "video_position": "cover",
                 "toggle_overlay": true,
-                "overlay_color": "#00000042",
+                "overlay_color": "#00000080",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "border": "none",
@@ -1170,7 +1170,8 @@
         "gap": 28,
         "background_color": "",
         "padding-block-start": 64,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "carousel_contain_width": true
       }
     },
     "divider_8dbgkf": {
@@ -1518,7 +1519,8 @@
         "gap": 28,
         "background_color": "",
         "padding-block-start": 0,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "carousel_contain_width": true
       }
     },
     "marquee_q8TTeY": {
@@ -2202,7 +2204,7 @@
         "section_height_custom": 50,
         "background_color": "",
         "toggle_overlay": true,
-        "overlay_color": "#00000042",
+        "overlay_color": "#0000008C",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "blurred_reflection": false,

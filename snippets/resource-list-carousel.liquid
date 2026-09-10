@@ -137,7 +137,14 @@
   @media screen and (min-width: 750px) {
     .resource-list--carousel-contained {
       --peek-next-slide-size: 0px;
-      grid-column: 2 !important;
+    }
+
+    /* The list keeps .force-full-width so mobile still gets its edge-to-edge track; from
+       750px a contained carousel hands placement back to the section's width setting.
+       Only page-width has to be restated - "full width" already resolves to 1 / -1, and
+       .section--full-width-padded outranks .force-full-width on its own. */
+    .section--page-width > .resource-list--carousel-contained {
+      grid-column: 2;
     }
 
     .resource-list__carousel-wrap--contained {

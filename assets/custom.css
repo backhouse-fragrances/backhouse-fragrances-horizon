@@ -169,6 +169,11 @@ button.shopify-payment-button__button--unbranded {
         box-shadow var(--button-wipe-duration) var(--button-wipe-easing);
 }
 
+
+.email-signup__input, .email-signup__button--text {
+    padding-block: var(--padding-md) !important;
+}
+
 @media (hover: hover) and (pointer: fine) {
     :is(.button, .button-secondary):not(.button-unstyled, .button-custom):not(:has(svg), [disabled], [aria-disabled='true']):hover {
         background-size: 101% 101%, 0 101%;
@@ -272,4 +277,22 @@ footer .utilities {
     footer .utilities:has(.social-icons__wrapper) > :not(.social-icons__wrapper) {
         grid-row: 2;
     }
+}
+
+/* Menu drawer. The row rules are drawn at 40% of the border colour, which reads heavier than
+   anything else in the theme; drop them to the same 15% the footer uses. Keeping
+   --color-border-rgb rather than the foreground means a merchant's divider colour still wins.
+   The rows also sit tight, so lift each one a step up the theme's own padding scale
+   (lg -> 2xl, about 16px more per row). Scoped under .menu-drawer to outrank the source rules,
+   since custom.css is linked ahead of the compiled snippet styles. */
+.menu-drawer .menu-drawer__menu > .menu-drawer__list-item,
+.menu-drawer :is(.menu-drawer__list-item--divider, .menu-drawer__menu-container--divider) {
+    border-color: rgb(var(--color-border-rgb) / var(--opacity-15));
+}
+
+.menu-drawer :is(
+    .menu-drawer__menu-item--mainlist,
+    .menu-drawer__list-item--divider .menu-drawer__menu-item:not(.menu-drawer__menu-item--child)
+) {
+    min-height: calc(2 * var(--padding-2xl) + var(--icon-size-xs));
 }

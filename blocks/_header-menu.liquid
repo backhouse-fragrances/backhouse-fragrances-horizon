@@ -378,12 +378,19 @@
     height: 100%;
     margin-block: 0;
 
+    /* Invisible hit area that keeps the pointer "inside" the item while it travels toward
+       the open panel. header-menu.js sizes --box-height as (header bottom - link top), so
+       the box is meant to stop exactly at the header's bottom edge - but `top` then pushes
+       it down by --header-padding, overhanging the header by that much. The overhang grows
+       the header's paint bounds, and the pointermove handler toggling `display` re-rasters
+       that layer, flashing the header background full-width in the strip below its border.
+       Subtracting the offset lands the box back on the header's bottom edge. */
     &::after {
       content: '';
       position: absolute;
       display: none;
       top: var(--header-padding);
-      height: var(--box-height);
+      height: calc(var(--box-height, 0px) - var(--header-padding));
       left: 0;
       right: 0;
     }

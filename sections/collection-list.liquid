@@ -168,6 +168,14 @@
       "visible_if": "{{ section.settings.layout_type == 'grid' or section.settings.layout_type == 'carousel' }}"
     },
     {
+      "type": "checkbox",
+      "id": "carousel_contain_width",
+      "label": "Contain to section width",
+      "info": "Fits the chosen number of columns exactly, with no peek of the next slide. Desktop only.",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
       "type": "select",
       "id": "mobile_columns",
       "label": "t:settings.mobile_columns",

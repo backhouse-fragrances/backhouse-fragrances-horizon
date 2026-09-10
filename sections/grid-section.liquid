@@ -98,6 +98,9 @@
         resource-list
         carousel-list
         {% if section.settings.peek_desktop == true %}carousel--peek{% endif %}
+        {% if section.settings.layout_type == 'carousel' and section.settings.carousel_contain_width %}
+          resource-list--carousel-contained
+        {% endif %}
         {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
           hidden--mobile
         {% endif %}
@@ -310,6 +313,14 @@
       "step": 1,
       "default": 4,
       "visible_if": "{{ section.settings.peek_desktop == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_contain_width",
+      "label": "Contain to section width",
+      "info": "Fits the chosen number of columns exactly, with no peek of the next slide. Desktop only.",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'carousel' and section.settings.peek_desktop == false }}"
     },
     {
       "type": "checkbox",
