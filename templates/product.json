@@ -337,6 +337,7 @@
       "block_order": [
         "disclosures"
       ],
+      "disabled": true,
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -393,6 +394,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 8,
+            "enable_mobile_gap": false,
+            "mobile_gap": 16,
             "background_color": "",
             "border": "none",
             "border_width": 1,
@@ -480,6 +483,7 @@
       "block_order": [
         "text_cbcgyb"
       ],
+      "disabled": true,
       "name": "t:names.product_recommendations",
       "settings": {
         "product": "{{ closest.product }}",
@@ -488,6 +492,7 @@
         "carousel_on_mobile": false,
         "max_products": 4,
         "columns": 4,
+        "carousel_contain_width": false,
         "mobile_columns": "2",
         "columns_gap": 12,
         "rows_gap": 24,
