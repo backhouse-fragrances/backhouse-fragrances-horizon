@@ -296,3 +296,23 @@ footer .utilities {
 ) {
     min-height: calc(2 * var(--padding-2xl) + var(--icon-size-xs));
 }
+
+/* Footer menu columns render their heading as a <summary>, which picks up the theme's bare
+   `summary { padding-block: var(--padding-sm) }`. The group-block columns (About, Keep In
+   Touch) use a plain text block with no such padding, so the menu headings sat ~11px lower
+   than their neighbours. Drop the leading padding on desktop only - below 990px the menu is
+   a real accordion and that padding is the tap target. */
+@media screen and (min-width: 990px) {
+    footer .footer-content .menu__details > .menu__heading {
+        padding-block-start: 0;
+    }
+}
+
+/* The newsletter column is an fr track, so past about 1600px it keeps growing and the email
+   field becomes a ~440px slab (live holds it near 290px). Cap the column's contents rather
+   than the track, so every narrower breakpoint is left exactly as it was. */
+@media screen and (min-width: 990px) {
+    footer .footer-content > :last-child .group-block-content {
+        max-width: 320px;
+    }
+}
