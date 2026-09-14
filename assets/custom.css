@@ -316,3 +316,12 @@ footer .utilities {
         max-width: 320px;
     }
 }
+
+/* Predictive search modal: close icon at the small step instead of Horizon's xs. The
+   `.button` compound is needed because this file loads before the compiled stylesheet,
+   where the snippet's rule has the same specificity and would otherwise win. */
+.button.predictive-search__close-modal-button .svg-wrapper,
+.button.predictive-search__close-modal-button svg {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+}

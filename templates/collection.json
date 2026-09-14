@@ -10,50 +10,55 @@
 {
   "sections": {
     "section": {
-      "type": "section",
+      "type": "collection-heading",
       "blocks": {
-        "text_tqQTNE": {
-          "type": "text",
-          "name": "t:names.title",
+        "video": {
+          "type": "_full-width-video",
+          "static": true,
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}</h1>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
+            "source": "uploaded",
+            "video": "{{ closest.collection.metafields.custom.video.value }}",
+            "video_url": "",
+            "video_autoplay": true,
+            "video_loop": true,
+            "alt": "",
+            "aspect_ratio": "custom",
+            "height_desktop": 500,
+            "height_mobile": 350
+          },
+          "blocks": {}
+        },
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text": "",
+            "read_only": false,
+            "alignment": "center",
+            "show_alignment": true,
             "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "custom_class": ""
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
-        "text_twGGkJ": {
+        "description": {
           "type": "text",
-          "name": "t:names.description",
+          "static": true,
           "settings": {
             "text": "{{ closest.collection.description }}",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "",
@@ -81,11 +86,9 @@
           "blocks": {}
         }
       },
-      "block_order": [
-        "text_tqQTNE",
-        "text_twGGkJ"
+      "custom_css": [
+        "{--max-width--body-normal: 53.5em;}"
       ],
-      "name": "t:names.heading",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,

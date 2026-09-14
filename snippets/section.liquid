@@ -5,6 +5,7 @@
   @param {string} children - The children of the section
   @param {string} section_id - The ID of the section
   @param {string} background_color - The background color of the section
+  @param {string} [full_width_children] - Content rendered edge-to-edge above the section content, regardless of the section width setting
 {%- enddoc -%}
 
 {% liquid
@@ -54,6 +55,16 @@
       background_image_position: section.settings.background_image_position
     %}
   </div>
+
+  {% liquid
+    # Strip so a slot whose block renders nothing (e.g. a video block with no video) does not leave an empty row
+    assign full_width_children = full_width_children | strip
+  %}
+  {% if full_width_children != blank %}
+    <div class="force-full-width custom-section-full-width">
+      {{ full_width_children }}
+    </div>
+  {% endif %}
 
   <div
     class="border-style custom-section-content"
@@ -110,6 +121,12 @@
   }
 
   .custom-section-content {
+    z-index: var(--layer-flat);
+  }
+
+  /* Sits above the section background media like .custom-section-content does */
+  .custom-section-full-width {
+    position: relative;
     z-index: var(--layer-flat);
   }
 {% endstylesheet %}
