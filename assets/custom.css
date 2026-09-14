@@ -325,3 +325,20 @@ footer .utilities {
     width: var(--icon-size-sm);
     height: var(--icon-size-sm);
 }
+
+/* Header dropdown submenus: sentence case and Light weight, independent of the top-level nav.
+   .dropdown-menu__link and .mega-menu__link(--parent) share --menu-child-font-weight /
+   --menu-child-font-case / --menu-parent-font-weight / --menu-parent-font-case with the
+   top-level nav (both come from the single "Primary link" typeface + case theme setting via
+   submenu-font-styles.liquid / menu-font-styles.liquid), so overriding those variables would
+   also change the top-level nav. Targeting the link classes directly keeps the top-level nav
+   on its own uppercase/Regular setting and only changes the submenus. The .menu-list__submenu-inner
+   ancestor (common to both the dropdown and mega-menu submenu markup) is needed for specificity:
+   this file loads before the compiled block stylesheet, where the bare link classes have the
+   same specificity and would otherwise win on source order. */
+.menu-list__submenu-inner .dropdown-menu__link,
+.menu-list__submenu-inner .mega-menu__link,
+.menu-list__submenu-inner .mega-menu__link--parent {
+    text-transform: none;
+    font-weight: 300;
+}
