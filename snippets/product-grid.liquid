@@ -32,6 +32,12 @@
           if fixed_columns < 1
             assign fixed_columns = 4
           endif
+
+          # A 4-column grid with only 1-3 products leaves an empty trailing column and makes
+          # the cards narrower than a 3-column row would; drop to 3 columns for that case only.
+          if fixed_columns == 4 and products.size > 0 and products.size <= 3
+            assign fixed_columns = 3
+          endif
         -%}
         .product-grid--{{ section.id }}:is(.product-grid--grid) {
           --product-grid-columns-desktop: repeat({{ fixed_columns }}, minmax(0, 1fr));
