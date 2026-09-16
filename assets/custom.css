@@ -395,3 +395,17 @@ footer .utilities {
 .share-buttons .share-buttons__native:not([hidden]) {
     gap: var(--padding-xs);
 }
+
+/* Product gallery: the circled "+" zoom cursor, matching live.
+
+   Horizon styles the zoom hotspot with `cursor: zoom-in`, which draws the OS magnifier.
+   Live uses a 36x36 SVG - white disc, dark plus - at `cursor: url(...) 18 18, zoom-in`,
+   the 18 18 centring it on the pointer. Same glyph here, inlined as a data URI so it costs
+   no extra request, with zoom-in kept as the fallback for anything that can't load it.
+
+   The `.product-media-container` ancestor is for specificity: Horizon's own rule is a
+   single class in product-media-gallery-content-styles.liquid, which compiles into
+   styles.css and loads after this file, so an equal-specificity override would lose. */
+.product-media-container .product-media-container__zoom-button {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18Zm0 0' fill='%23ffffff'/%3E%3Cpath d='M24.688 18.516h-6.172v6.172h-1.032v-6.172h-6.172v-1.032h6.172v-6.172h1.032v6.172h6.172' fill='%231c1c1c'/%3E%3C/svg%3E") 18 18, zoom-in;
+}
