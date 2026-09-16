@@ -56,6 +56,21 @@
   defer
 ></script>
 
+{%- comment -%}
+  Bottom-anchored sticky for the product details column. Horizon only offers a
+  top-anchored sticky, which pins a column taller than the viewport immediately and leaves
+  its lower half unreachable; this recomputes a negative top offset so the column scrolls
+  through and then holds, matching the live storefront. Paired with the
+  .product-details.sticky-content--desktop rule in custom.css.
+{%- endcomment -%}
+{% if template.name == 'product' %}
+  <script
+    src="{{ 'sticky-details.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+{% endif %}
+
 {% if settings.transition_to_main_product or settings.page_transition_enabled %}
   {%- comment -%}
     Inlined to avoid a network round trip for a render blocking asset.
