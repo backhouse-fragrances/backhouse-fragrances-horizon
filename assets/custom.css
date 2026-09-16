@@ -350,3 +350,48 @@ footer .utilities {
 .rte :is(ul, ol).flex {
     flex-direction: column;
 }
+
+/* Product page: widen the details column on large screens.
+
+   Horizon's own >=1200px rule is `grid-template-columns: 2fr 1fr` for media-left (details
+   take a third of the grid), so restating 2fr 1fr would be a no-op - the ratio is what has
+   to change. The two tracks are named so only these numbers need touching, and so the
+   media-right layout (which lists the columns the other way round) stays in step.
+
+   Specificity: Horizon's selector is
+   `.product-information__grid:not(.a, .b).product-information--media-left` = (0,3,0), and
+   :not() takes the highest specificity of its arguments. custom.css is linked before the
+   compiled styles.css, so an equal-specificity rule here would lose on source order.
+   Qualifying with the `product-component` element name makes it (0,3,1). The two excluded
+   classes are kept so the "equal columns" setting and the no-media layout still win. */
+@media screen and (min-width: 1200px) {
+    product-component.product-information__grid:not(
+            .product-information__grid--half,
+            .product-information--media-none
+        ) {
+        --product-media-track: 3fr;
+        --product-details-track: 2fr;
+    }
+
+    product-component.product-information__grid:not(
+            .product-information__grid--half,
+            .product-information--media-none
+        ).product-information--media-left {
+        grid-template-columns: var(--product-media-track) var(--product-details-track);
+    }
+
+    product-component.product-information__grid:not(
+            .product-information__grid--half,
+            .product-information--media-none
+        ).product-information--media-right {
+        grid-template-columns: var(--product-details-track) var(--product-media-track);
+    }
+}
+
+/* Tighten the gap between the Share label and its glyph. The block's own rule is
+   `.share-buttons__native:not([hidden])` (0,2,0) and lives in the compiled styles.css,
+   which loads after this file - so the same selector here would lose on source order.
+   The extra `.share-buttons` ancestor takes it to (0,3,0). */
+.share-buttons .share-buttons__native:not([hidden]) {
+    gap: var(--padding-xs);
+}
