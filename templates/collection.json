@@ -37,7 +37,7 @@
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
-            "type_preset": "h2",
+            "type_preset": "h1",
             "font": "var(--font-body--family)",
             "font_size": "",
             "line_height": "normal",
@@ -88,7 +88,7 @@
         }
       },
       "custom_css": [
-        ".h2 {--max-width--body-normal: 46.5em; text-wrap: nowrap;}",
+        ".h1 {--max-width--body-normal: 46.5em; text-wrap: nowrap;}",
         ".rte {--max-width--body-normal: 53.5em;}"
       ],
       "settings": {
