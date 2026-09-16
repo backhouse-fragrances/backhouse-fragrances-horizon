@@ -1,0 +1,435 @@
+{%- doc -%}
+  Renders a product's personalizer options as line item properties.
+
+  Reads `product.metafields.personalizer.options.value` - an array of
+  `{ id, label, type, choices, required }` - and renders one control per option: a text
+  field, a single-select, or a checkbox list. Each control carries
+  `name="properties[<label>]"` and `form="BuyButtons-ProductForm-<section id>"`, so its
+  value rides along with add to cart even though the control lives outside the `<form>`
+  element, the same way Horizon's own product-custom-property block does.
+
+  `required` is enforced by the browser's own constraint validation rather than by script,
+  so add to cart is blocked and the message is announced the way every other invalid field
+  on the page is. See the notes on each control for how that is wired.
+
+  Replaces the Infinite Options app widget, which injects its own container regardless of
+  whether its app embed is enabled.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign product = closest.product
+  assign personalizer_options = product.metafields.personalizer.options.value
+  assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
+  assign placeholder = block_settings.placeholder | default: 'Choose…'
+%}
+
+{% if personalizer_options == blank or personalizer_options.size == 0 %}
+  {% if request.design_mode %}
+    <div
+      class="personalizer personalizer--empty spacing-style"
+      style="{% render 'spacing-style', settings: block_settings %}"
+      {{ block.shopify_attributes }}
+    >
+      <p class="personalizer__empty-note">
+        This product has no personalizer options set on its metafield yet.
+      </p>
+    </div>
+  {% endif %}
+{% else %}
+  <script
+    src="{{ 'personalizer-options.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+
+  <div
+    class="personalizer spacing-style"
+    style="{% render 'spacing-style', settings: block_settings %}"
+    {{ block.shopify_attributes }}
+  >
+    {% for personalizer_option in personalizer_options %}
+      {% liquid
+        assign field_id = 'Personalizer-' | append: block.id | append: '-' | append: forloop.index0
+        assign property_name = 'properties[' | append: personalizer_option.label | append: ']'
+      %}
+
+      {%- capture label_content -%}
+        {{- personalizer_option.label | escape -}}
+        {%- if personalizer_option.required -%}
+          <span class="personalizer-option__required" aria-hidden="true">*</span>
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {% case personalizer_option.type %}
+        {% when 'text' %}
+          <div class="personalizer-option">
+            <label class="personalizer-option__label" for="{{ field_id }}">{{ label_content }}</label>
+            <div class="field">
+              <input
+                type="text"
+                class="field__input"
+                id="{{ field_id }}"
+                name="{{ property_name | escape }}"
+                form="{{ product_form_id }}"
+                value=""
+                autocomplete="off"
+                {% if personalizer_option.required %}
+                  required
+                {% endif %}
+              >
+            </div>
+          </div>
+
+        {% when 'dropdown' %}
+          {%- comment -%}
+            The native select carries the name, the form and the required flag, and is a
+            working control on its own; CSS swaps it for the custom UI only once
+            <personalizer-select> upgrades (:defined), so a failed or slow script leaves a
+            usable select rather than a dead button.
+
+            Once upgraded the select is not hidden but laid over the trigger at zero
+            opacity. A `display: none` or `visibility: hidden` required field makes Chrome
+            refuse to submit with "not focusable" and no visible message; keeping the
+            select in flow, at the trigger's own size, puts the browser's validation bubble
+            exactly where the shopper is looking.
+          {%- endcomment -%}
+          <personalizer-select class="personalizer-option personalizer-select">
+            <label class="personalizer-option__label" id="{{ field_id }}-label" for="{{ field_id }}">
+              {{ label_content }}
+            </label>
+
+            <div class="personalizer-select__ui" ref="ui">
+              <select
+                class="field__input personalizer-select__native"
+                id="{{ field_id }}"
+                name="{{ property_name | escape }}"
+                form="{{ product_form_id }}"
+                ref="native"
+                {% if personalizer_option.required %}
+                  required
+                {% endif %}
+              >
+                <option value="">{{ placeholder | escape }}</option>
+                {% for choice in personalizer_option.choices %}
+                  <option value="{{ choice | escape }}">{{ choice | escape }}</option>
+                {% endfor %}
+              </select>
+
+              <button
+                type="button"
+                class="field__input personalizer-select__trigger"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                aria-controls="{{ field_id }}-menu"
+                aria-labelledby="{{ field_id }}-label {{ field_id }}-value"
+                {% if personalizer_option.required %}
+                  aria-required="true"
+                {% endif %}
+                ref="trigger"
+                on:click="/toggle"
+                on:keydown="/handleTriggerKeydown"
+              >
+                <span class="personalizer-select__value" id="{{ field_id }}-value" ref="value">
+                  {{- placeholder | escape -}}
+                </span>
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  class="icon icon-caret personalizer-select__caret"
+                  viewBox="0 0 10 6"
+                >
+                  {%- render 'icon', icon: 'caret' -%}
+                </svg>
+              </button>
+
+              <ul
+                class="personalizer-select__menu"
+                id="{{ field_id }}-menu"
+                role="listbox"
+                aria-labelledby="{{ field_id }}-label"
+                ref="menu"
+                hidden
+              >
+                {% for choice in personalizer_option.choices %}
+                  <li
+                    class="personalizer-select__option"
+                    id="{{ field_id }}-option-{{ forloop.index0 }}"
+                    role="option"
+                    aria-selected="false"
+                    data-value="{{ choice | escape }}"
+                    ref="options[]"
+                    on:click="/choose/{{ forloop.index0 }}"
+                  >
+                    {{- choice | escape -}}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </personalizer-select>
+
+        {% when 'multiselect' %}
+          {%- comment -%}
+            Checkboxes sharing one property name would collide - the cart keeps a single
+            value per key - so the boxes stay unnamed and the hidden input holds the joined
+            selection, which is also how it reads on the order.
+
+            A hidden input is barred from constraint validation, and `required` on a
+            checkbox means "tick this one" rather than "tick any of these", so a required
+            group is enforced with setCustomValidity on the first box instead. The boxes
+            carry `form` so they take part in the product form's validation; being unnamed,
+            they still submit nothing.
+          {%- endcomment -%}
+          <personalizer-checkboxes
+            class="personalizer-option"
+            data-message="{{ block_settings.required_message | default: 'Please choose at least one option.' | escape }}"
+            {% if personalizer_option.required %}
+              data-required
+            {% endif %}
+          >
+            <fieldset class="personalizer-option__fieldset">
+              <legend class="personalizer-option__label">{{ label_content }}</legend>
+
+              <input
+                type="hidden"
+                name="{{ property_name | escape }}"
+                form="{{ product_form_id }}"
+                value=""
+                ref="value"
+              >
+
+              <ul class="personalizer-choices" role="list">
+                {% for choice in personalizer_option.choices %}
+                  <li>
+                    <label class="personalizer-choice">
+                      <input
+                        type="checkbox"
+                        value="{{ choice | escape }}"
+                        form="{{ product_form_id }}"
+                        ref="boxes[]"
+                        on:change="/sync"
+                      >
+                      <span>{{ choice | escape }}</span>
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </fieldset>
+          </personalizer-checkboxes>
+      {% endcase %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .personalizer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .personalizer-option + .personalizer-option {
+    margin-top: var(--padding-lg);
+  }
+
+  .personalizer-option__label {
+    display: block;
+    margin-block-end: var(--margin-xs);
+    color: var(--color-foreground);
+  }
+
+  .personalizer-option__required {
+    margin-inline-start: 0.15em;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  }
+
+  .personalizer-option__fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .personalizer__empty-note {
+    color: var(--color-foreground-subdued);
+    font-size: var(--font-size--sm);
+  }
+
+  /* Single select ------------------------------------------------------------------- */
+
+  .personalizer-select {
+    display: block;
+  }
+
+  .personalizer-select__ui {
+    position: relative;
+  }
+
+  /* No upgrade, no custom UI: the native select is left to do the job. */
+  .personalizer-select:not(:defined) .personalizer-select__trigger,
+  .personalizer-select:not(:defined) .personalizer-select__menu {
+    display: none;
+  }
+
+  /* Upgraded: the select stays in place at the trigger's size so a required-field bubble
+     still points at the control, but it is invisible and untouchable. */
+  .personalizer-select:defined .personalizer-select__native {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .personalizer-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--padding-sm);
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 0;
+  }
+
+  .personalizer-select__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Until something is chosen the trigger reads as placeholder text, the muted weight
+     Horizon gives an empty field rather than a filled one. */
+  .personalizer-select:not([data-chosen]) .personalizer-select__value {
+    color: rgb(var(--color-input-text-rgb) / var(--opacity-60));
+  }
+
+  .personalizer-select__caret {
+    flex-shrink: 0;
+    width: var(--icon-size-xs);
+    color: rgb(var(--color-input-text-rgb) / var(--opacity-70));
+  }
+
+  .personalizer-select__menu {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(100% + var(--padding-xs));
+    z-index: var(--layer-heightened);
+    max-height: 16rem;
+    overflow-y: auto;
+    margin: 0;
+    padding: var(--padding-xs);
+    list-style: none;
+    background-color: var(--color-background);
+    box-shadow: var(--input-box-shadow), var(--shadow-popover);
+  }
+
+  .personalizer-select__option {
+    padding: var(--padding-sm) var(--padding-md);
+    /* The menu inherits from the trigger, which is an input control, so the rows would
+       otherwise take the input text colour rather than the page's. */
+    color: var(--color-foreground);
+    cursor: pointer;
+  }
+
+  .personalizer-select__option[aria-selected='true'] {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+  }
+
+  .personalizer-select__option:hover,
+  .personalizer-select__option[data-active] {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  }
+
+  /* Multi select -------------------------------------------------------------------- */
+
+  .personalizer-choices {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .personalizer-choice {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm);
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .personalizer-select__trigger,
+    .personalizer-select__option {
+      transition-property: background-color, box-shadow;
+      transition-duration: var(--animation-speed);
+      transition-timing-function: var(--animation-easing);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Personalizer options",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Dropdown placeholder",
+      "default": "Choose…"
+    },
+    {
+      "type": "text",
+      "id": "required_message",
+      "label": "Message when a required group has nothing chosen",
+      "default": "Please choose at least one option.",
+      "info": "Shown on multi-select options that are marked required."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

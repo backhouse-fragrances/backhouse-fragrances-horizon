@@ -535,11 +535,23 @@
                 "row_product_details",
                 "row_shipping_exchanges"
               ]
+            },
+            "personalizer_options": {
+              "type": "_personalizer-options",
+              "settings": {
+                "placeholder": "Choose…",
+                "required_message": "Please choose at least one option.",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
             }
           },
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
+            "personalizer_options",
             "buy_buttons_eYQEYi",
             "text_aEtTtq",
             "share_buttons",
