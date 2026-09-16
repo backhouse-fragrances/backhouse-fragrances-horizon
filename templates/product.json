@@ -308,7 +308,7 @@
               "blocks": {}
             },
             "share_buttons": {
-              "type": "share-buttons",
+              "type": "_share-buttons",
               "settings": {
                 "label": "Share",
                 "alignment": "left",
