@@ -88,7 +88,8 @@
         }
       },
       "custom_css": [
-        ".h2 {--max-width--body-normal: 46.5em; text-wrap: nowrap;}"
+        ".h2 {--max-width--body-normal: 46.5em; text-wrap: nowrap;}",
+        ".rte {--max-width--body-normal: 53.5em;}"
       ],
       "settings": {
         "content_direction": "column",
