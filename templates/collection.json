@@ -40,15 +40,26 @@
             "type_preset": "h1",
             "font": "var(--font-body--family)",
             "font_size": "",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
             "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
           },
           "blocks": {}
         },
@@ -88,7 +99,7 @@
         }
       },
       "custom_css": [
-        ".h1 {--max-width--body-normal: 46.5em; text-wrap: nowrap;}",
+        ".h1 {--max-width--body-normal: 37.5em; text-wrap: unset;}",
         ".rte {--max-width--body-normal: 53.5em;}"
       ],
       "settings": {
