@@ -409,3 +409,16 @@ footer .utilities {
 .product-media-container .product-media-container__zoom-button {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18Zm0 0' fill='%23ffffff'/%3E%3Cpath d='M24.688 18.516h-6.172v6.172h-1.032v-6.172h-6.172v-1.032h6.172v-6.172h1.032v6.172h6.172' fill='%231c1c1c'/%3E%3C/svg%3E") 18 18, zoom-in;
 }
+
+/* Infinite Options (Shoppad) cleanup, paired with the remover in custom.js.
+
+   The app injects #infiniteoptions-container into the product page even with its app embed
+   switched off. custom.js removes it, but the container is injected asynchronously and JS
+   can only ever catch up after the fact - this wins that race, so the app's option UI never
+   flashes next to the personalizer block that replaced it.
+
+   Remove both once the app has been uninstalled. */
+#infiniteoptions-container,
+[id^='infiniteoptions-container'] {
+    display: none !important;
+}
