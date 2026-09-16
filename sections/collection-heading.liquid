@@ -18,7 +18,7 @@
 {% endcapture %}
 
 {% capture children %}
-  {% content_for 'block', type: '_heading', id: 'heading', text: heading_text %}
+  {% content_for 'block', type: 'text', id: 'heading', fallback_text: heading_text %}
 
   {% if description_text != blank %}
     {% content_for 'block', type: 'text', id: 'description' %}
@@ -571,11 +571,14 @@
           "static": true
         },
         "heading": {
-          "type": "_heading",
+          "type": "text",
+          "name": "t:names.heading",
           "static": true,
           "settings": {
-            "type_preset": "h2",
-            "alignment": "center"
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h2"
           }
         },
         "description": {

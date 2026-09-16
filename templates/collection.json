@@ -29,9 +29,14 @@
           "blocks": {}
         },
         "heading": {
-          "type": "_heading",
+          "type": "text",
+          "name": "t:names.heading",
           "static": true,
           "settings": {
+            "text": "",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
@@ -39,10 +44,6 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text": "",
-            "read_only": false,
-            "alignment": "center",
-            "show_alignment": true,
             "text_color": "",
             "padding-block-start": 0,
             "padding-block-end": 0,

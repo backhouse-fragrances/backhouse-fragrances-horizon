@@ -1,4 +1,15 @@
-{% render 'text', block: block, class: block.settings.custom_class %}
+{%- doc -%}
+  Renders a text block. Also usable as a static block (e.g. a section-defined heading or
+  description) by passing fallback_text: shown whenever the block's own richtext setting
+  is left blank, the same mechanism blocks/_heading.liquid uses.
+
+  @param {string} [fallback_text]
+
+  @example
+  {% content_for 'block', type: 'text', id: 'heading', fallback_text: '<h1>Fallback</h1>' %}
+{%- enddoc -%}
+
+{% render 'text', block: block, class: block.settings.custom_class, fallback_text: fallback_text %}
 
 {% schema %}
 {
