@@ -1,0 +1,226 @@
+{%- doc -%}
+  Renders a share control for the closest product, or for the current page when the
+  block is used outside a product context.
+
+  Web Share is the only mechanism offered, so the button is rendered hidden and
+  share-buttons.js reveals it only where `navigator.share` exists - a browser without it
+  shows nothing rather than a control that can't do anything. The theme editor is the
+  exception: the block always renders there so it stays selectable.
+{%- enddoc -%}
+
+<script
+  src="{{ 'share-buttons.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  assign block_settings = block.settings
+  assign product = closest.product
+
+  # Share the product the block sits inside; fall back to whatever page it is on.
+  if product != blank
+    assign share_path = product.url
+    assign share_title = product.title
+  else
+    assign share_path = request.path
+    assign share_title = page_title
+  endif
+
+  assign share_url = shop.url | append: share_path
+
+  case block_settings.alignment
+    when 'center'
+      assign alignment = 'center'
+    when 'right'
+      assign alignment = 'flex-end'
+    else
+      assign alignment = 'flex-start'
+  endcase
+%}
+
+<share-buttons-component
+  class="share-buttons spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %} --share-buttons-alignment: {{ alignment }};"
+  data-share-url="{{ share_url }}"
+  data-share-title="{{ share_title | escape }}"
+  {{ block.shopify_attributes }}
+>
+  <button
+    class="share-buttons__native"
+    type="button"
+    ref="nativeButton"
+    on:click="/shareNatively"
+    {%- if block_settings.label == blank %} aria-label="Share"{% endif %}
+    {%- unless request.design_mode %} hidden{% endunless %}
+  >
+    {%- if block_settings.label != blank -%}
+      <span class="share-buttons__label {{ block_settings.type_preset }}">{{ block_settings.label | escape }}</span>
+    {%- endif -%}
+    <svg
+      class="share-buttons__icon"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="m6.41 6.852 3.182-2.037M6.409 9.148l3.183 2.037m1.793-5.352c1.168 0 2.115-.97 2.115-2.166 0-1.197-.947-2.167-2.115-2.167-1.169 0-2.116.97-2.116 2.167 0 1.196.947 2.166 2.116 2.166Zm0 8.667c1.168 0 2.115-.97 2.115-2.167 0-1.196-.947-2.166-2.115-2.166-1.169 0-2.116.97-2.116 2.166 0 1.197.947 2.167 2.116 2.167Zm-6.77-4.333c1.169 0 2.116-.97 2.116-2.167 0-1.197-.947-2.167-2.116-2.167C3.447 5.833 2.5 6.803 2.5 8c0 1.197.947 2.167 2.115 2.167Z"
+        stroke="currentColor"
+        stroke-linecap="square"
+      />
+    </svg>
+  </button>
+</share-buttons-component>
+
+{% stylesheet %}
+  .share-buttons {
+    display: flex;
+    justify-content: var(--share-buttons-alignment, flex-start);
+    /* Faded once, at the root, so the label and the glyph share one colour. */
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
+  }
+
+  /* A `display` declared on a class outranks the UA stylesheet's `[hidden] {display: none}`,
+     which would leave the server-rendered `hidden` inert and show the button on browsers
+     that can't share. Scoping the layout rule to :not([hidden]) keeps the attribute in
+     charge of whether the button exists at all. */
+  .share-buttons__native:not([hidden]) {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-lg);
+  }
+
+  .share-buttons__native {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: color var(--animation-speed) var(--animation-easing);
+  }
+
+  /* base.css gives the type preset classes their own colour at `.paragraph:not(.button)`,
+     which outranks a single class here - two classes, in a stylesheet that loads after
+     base.css, hands the label back to the root colour above. */
+  .share-buttons .share-buttons__label {
+    color: inherit;
+  }
+
+  .share-buttons__native:hover {
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .share-buttons__icon {
+    display: block;
+    flex-shrink: 0;
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Share",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Share",
+      "info": "Leave blank to show the icon on its own."
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:settings.preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        }
+      ],
+      "default": "paragraph"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Share",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
