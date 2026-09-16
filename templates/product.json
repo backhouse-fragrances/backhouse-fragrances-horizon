@@ -12,24 +12,6 @@
     "main": {
       "type": "product-information",
       "blocks": {
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "heading": "Disclosures",
-            "heading_preset": "h4",
-            "open_by_default": false,
-            "icon": "caret",
-            "disclosure_heading_preset": "h5",
-            "text_color": "",
-            "dividers": true,
-            "divider_color": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -324,19 +306,233 @@
                 "custom_class": ""
               },
               "blocks": {}
+            },
+            "accordion_product_info": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "divider_color": "#dddddd",
+                "type_preset": "h6",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "row_scent_glossary": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Scent Glossary",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_scent_glossary": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>APOLENA [sea salt]</strong></p><p><em>key notes: sea salt, sage, ambrette seed</em></p><p>Our favorite mild fragrance showcases the beautiful complexities of sea notes. Composed of sea salt, sage, and ambrette seed, it evokes feelings of freedom and pleasure, like an enjoyable walk along Balboa Island on a beautiful summer morning.</p><p><strong>BLACK STRIPE [cassis]</strong></p><p><em>key notes: cassis, bergamot, musk</em></p><p>Create a welcoming mood with this warm and sophisticated scent that begins with bergamot and cassis, developed over a white rose and musk.&nbsp; Perfect for a cocktail hour with friends or while relaxing with your favorite book (or social media site:)</p><p><strong>GROVE [orange blossom]</strong></p><p><em>key notes: orange blossom, jasmine, bergamot</em></p><p>Transport yourself to a grove of orange trees, with their tiny white flowers in bloom. This light but strong scent will take you there.</p><p><strong>HARRIETS TREE [grapefruit]</strong></p><p><em>key notes:&nbsp; grapefruit, peach, berries</em></p><p>A vibrant citrus fragrance that illustrates invigorating notes of tropical fruits, crisp citrus, and exotic greens.&nbsp; It is light and sweet, while still noticeable in your surrounding space.</p><p><strong>JACK [pumpkin]</strong></p><p><em>key notes: pumpkin, cinnamon, vanilla</em></p><p>A sophisticated fall fragrance with top notes of cinnamon and vanilla which intermingle with baked pumpkin, while graham cracker base notes add a creamy, toasty character. An ode to special times together as we begin the holiday season carving pumpkins into Jack-o'-lanterns.</p><p><strong>LIDO [sandalwood]</strong></p><p><em>key notes: sandalwood, musk, violet</em></p><p>This bestselling scent is warm and comforting, highlighting its creamy facets while balancing the sharpness of sandalwood paired with sweet violet and woodsy musk.&nbsp; Perfect for any occasion and any time of year.</p><p><strong>LITTLE BRANCH [amber]</strong></p><p><em>key notes: amber, sage, oakmoss</em></p><p>This captivating fragrance begins with hints of citrus and an infusion of sage that enhance the natural, earthy quality. Lavender adds a soft floral and herbal touch to the heart of this scent, while amber and oakmoss round out the base for a beautiful, deep character.</p><p><strong>MARGARET [currant]</strong></p><p><em>key notes: currant, musk, rhubarb</em></p><p>A sophisticated and playfully sweet scent with aspects of pink currant and rhubarb over a heart of white jasmine petals and musky base.&nbsp; A wonderful balance of notes will light up the room for any occasion.</p><p><strong>MR. DOUGLAS [pine]</strong></p><p><em>key notes: pine, cedarwood, fir</em></p><p>Our popular pine scented candle that makes you think “Christmas time”, with mild citrus top notes, earthy undercurrents of cedar and evergreen, and a woody, fir base. But for some, the scent of pine is a year-round fav, like taking a hike on your favorite pine tree lined trail.</p><p><strong>PINK STRIPE [berry]</strong></p><p><em>key notes: berry, pink peppercorn, rose petals</em></p><p>The tangy richness of freshly picked blackcurrant berries and lively accents of flowery rose petals create this light, floral, and feminine scent.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_scent_glossary"
+                  ]
+                },
+                "row_candle_care": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Candle Care",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_candle_care": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>How to burn the backhouse:</strong></p><p>+ Burn candle within sight and on a flat surface</p><p>+ Keep away from pets, little ones &amp; combustibles</p><p>+ Burn on a heat resistant surface</p><p>+ Before relighting, trim wick 1/4\" and remove loose pieces</p><p>+ Stop burning when only 1/4” of wax remains</p><p>+ Don’t burn for more than 4 hours at a time. It will be tough, but trust us on this one.</p><p>+ Enjoy! And show us the spaces you love by tagging #burnthebackhouse on social media.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_candle_care"
+                  ]
+                },
+                "row_product_details": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Product Details",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_product_details": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>We use a proprietary blended soy/vegetable wax,&nbsp;phthalate-free premium fragrance oil, and&nbsp;lead-free wick.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_product_details"
+                  ]
+                },
+                "row_shipping_exchanges": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Shipping + Exchanges",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_shipping_exchanges": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>Shipping:</strong></p><p>We only ship within the United States. All orders are processed and shipped from our backhouse in Newport Beach within 2–4 business days. Once shipped, continental domestic orders may take 2–4 days to arrive, dependent on location.&nbsp; Alaska and Hawaii may take a bit longer. Backhouse prefers UPS ground shipping (estimated 1–4 days)&nbsp;but might use Fedex Ground/2-day or USPS in some instances.</p><p><strong>Returns:</strong></p><p>We will gladly accept returns/exchanges on any items that are in their original condition along with all packaging.&nbsp;Please email us at&nbsp;<a href=\"mailto:hello@backhousefragrances.com\">hello@backhousefragrances.com</a>&nbsp;with your request for return and we’ll issue a Return Authorization Form with a Return Authorization Number (RA#), along with instructions for returning your candle.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_shipping_exchanges"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_scent_glossary",
+                "row_candle_care",
+                "row_product_details",
+                "row_shipping_exchanges"
+              ]
             }
           },
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "text_aEtTtq",
+            "accordion_product_info"
           ]
         }
       },
-      "block_order": [
-        "disclosures"
-      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -357,15 +553,15 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>You may also like </h2>",
-            "width": "fit-content",
+            "text": "<h2>You May Also Like</h2>",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
+            "alignment": "center",
+            "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "1.25rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -392,8 +588,8 @@
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product_card_gap": 8,
-            "enable_mobile_gap": false,
+            "product_card_gap": 20,
+            "enable_mobile_gap": true,
             "mobile_gap": 16,
             "background_color": "",
             "border": "none",
@@ -402,16 +598,16 @@
             "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 8,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_gallery_DNizbJ": {
+            "product_card_gallery_677WP3": {
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -424,79 +620,137 @@
               },
               "blocks": {}
             },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
+            "product_card_group_FqrqMi": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
               "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "text_color": "",
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 10,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "product_title_R8Rz7K": {
+                  "type": "product-title",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "width": "fit-content",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h6",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "rating_badge_LrHhPm": {
+                  "type": "rating-badge",
+                  "name": "t:names.rating_badge",
+                  "settings": {
+                    "display_mode": "rating",
+                    "hide_text": false,
+                    "show_single_star": false,
+                    "show_empty": false,
+                    "alignment": "left",
+                    "text_color": ""
+                  },
+                  "blocks": {}
+                },
+                "price_Ux3CXh": {
+                  "type": "price",
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "custom",
+                    "width": "fit-content",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "product_title_R8Rz7K",
+                "rating_badge_LrHhPm",
+                "price_Ux3CXh"
+              ]
             }
           },
           "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
+            "product_card_gallery_677WP3",
+            "product_card_group_FqrqMi"
           ]
         }
       },
       "block_order": [
         "text_cbcgyb"
       ],
-      "disabled": true,
       "name": "t:names.product_recommendations",
       "settings": {
         "product": "{{ closest.product }}",
         "recommendation_type": "related",
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
-        "max_products": 4,
+        "max_products": 10,
         "columns": 4,
-        "carousel_contain_width": false,
+        "carousel_contain_width": true,
         "mobile_columns": "2",
-        "columns_gap": 12,
+        "columns_gap": 60,
         "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_style": "chevron",
+        "icons_shape": "circle",
         "section_width": "page-width",
         "gap": 28,
         "background_color": "",

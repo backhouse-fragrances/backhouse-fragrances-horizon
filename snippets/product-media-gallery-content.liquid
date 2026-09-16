@@ -1060,6 +1060,15 @@
     overflow: clip;
   }
 
+  /* Minimal lightbox: its sheet is opaque from the first frame (above), and the sheet's group
+     sits one layer above the item groups, so the morphing image was painted behind a solid
+     sheet for the whole transition and only appeared once it finished. Lift the item above
+     the sheet for this style only; the default dialog keeps its sheet transparent mid-morph. */
+  :root:has(.dialog-zoomed-gallery__dialog--minimal)::view-transition-group(gallery-item-open),
+  :root:has(.dialog-zoomed-gallery__dialog--minimal)::view-transition-group(gallery-item-close) {
+    z-index: calc(var(--layer-overlay) + 2);
+  }
+
   ::view-transition-group(gallery-item-open) {
     animation-timing-function: var(--spring-d300-b0-easing);
     animation-duration: var(--spring-d300-b0-duration);

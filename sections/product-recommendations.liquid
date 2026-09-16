@@ -127,6 +127,7 @@
           resource-list
           {% if section.settings.layout_type == 'carousel' %}
             force-full-width
+            {% if section.settings.carousel_contain_width %}resource-list--carousel-contained{% endif %}
           {% endif %}
           {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
             hidden--mobile

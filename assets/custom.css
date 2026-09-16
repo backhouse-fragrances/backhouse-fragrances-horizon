@@ -342,3 +342,11 @@ footer .utilities {
     text-transform: none;
     font-weight: 300;
 }
+
+/* Product descriptions pasted in with utility classes (`flex flex-col gap-1 ...`) collide
+   with Horizon's own .flex, which sets display: flex; nothing defines flex-col, so a
+   bulleted list lays its items out side by side as columns. Restore the stacking inside
+   rich text while keeping the flex gap as the spacing between items. */
+.rte :is(ul, ol).flex {
+    flex-direction: column;
+}

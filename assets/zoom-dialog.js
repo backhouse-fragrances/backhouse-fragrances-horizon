@@ -65,6 +65,8 @@ export class ZoomDialog extends Component {
     const targetImage = media[index];
     const targetThumbnail = thumbnails.children[index];
 
+    await this.#ensureMediaPainted(targetImage);
+
     const open = () => {
       if (this.#isMinimal) this.#showMedia(index);
       dialog.showModal();
@@ -97,6 +99,31 @@ export class ZoomDialog extends Component {
     targetImage.style.removeProperty('view-transition-name');
 
     this.selectThumbnail(index, { behavior: 'instant' });
+  }
+
+  /**
+   * Resolves once the media's image has pixels to paint, or after a short grace period.
+   *
+   * The dialog's images are lazy and their container is not rendered until the dialog
+   * opens, so at the moment the view transition snapshots the new state the image has not
+   * loaded. The old snapshot drops instantly (step-start), leaving a blank hole until the
+   * image lands. Starting the fetch now and waiting for decode fills that snapshot; the cap
+   * keeps the click responsive on a slow connection, where the old behaviour resumes.
+   *
+   * @param {HTMLElement | undefined} mediaContainer - The media container element
+   * @param {number} [graceMs] - Longest wait before opening regardless
+   */
+  async #ensureMediaPainted(mediaContainer, graceMs = 400) {
+    const image = mediaContainer?.querySelector('img.product-media__image');
+    if (!(image instanceof HTMLImageElement)) return;
+    if (image.complete && image.naturalWidth > 0) return;
+
+    image.loading = 'eager';
+
+    await Promise.race([
+      image.decode().catch(() => {}),
+      new Promise((resolve) => setTimeout(resolve, graceMs)),
+    ]);
   }
 
   /**
