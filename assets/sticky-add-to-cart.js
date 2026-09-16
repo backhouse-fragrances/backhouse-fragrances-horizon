@@ -349,6 +349,12 @@ class StickyAddToCartComponent extends Component {
    * @returns {boolean}
    */
   #isChatActive() {
+    // Inbox pins its launcher to the bottom-right, so only the bottom bar can sit on top
+    // of it. The top bar can't collide with it at all, and gating it here is what silently
+    // removed this store's sticky add-to-cart: Horizon 3.x had no chat gate, 4.0 added one
+    // that doesn't check which bar style is in use.
+    if (this.refs.stickyBar?.classList.contains('sticky-add-to-cart__bar--top')) return false;
+
     if (!customElements.get('shopify-chat')) return false;
     return Boolean(document.querySelector('shopify-chat'));
   }
