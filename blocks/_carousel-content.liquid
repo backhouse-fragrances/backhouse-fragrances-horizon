@@ -8,17 +8,36 @@
     assign slideshow_class = slideshow_class | append: ' color-custom-' | append: block.id
   endif
 
-  if section.settings.section_width == 'page-width'
-    assign slideshow_gutters = 'start end'
-    assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
-  else
-    assign slideshow_gutters = null
-    assign gutter_style = '--gutter-slide-width: 0px;'
-  endif
+  # The track breaks out to the full viewport, so its inset has to come from the slideshow
+  # gutters rather than padding on a wrapper - padding would narrow the scroll track and
+  # clip the peeking slide at the margin instead of letting it run to the screen edge.
+  # Stock Horizon only grants those gutters to page-width, which leaves a narrow or
+  # full-width-padded carousel bleeding edge to edge on mobile with no margin at all. Same
+  # widths, same insets as resource-list-carousel.liquid already uses.
+  case section.settings.section_width
+    when 'page-width', 'narrow'
+      assign slideshow_gutters = 'start end'
+      assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
+    when 'full-width-padded'
+      # Same bleed-with-inset, but the inset is the page margin itself rather than the
+      # offset that centres a page-width content column.
+      assign slideshow_gutters = 'start end'
+      assign gutter_style = '--gutter-slide-width: var(--page-margin);'
+    else
+      assign slideshow_gutters = null
+      assign gutter_style = '--gutter-slide-width: 0px;'
+  endcase
 
   assign show_arrows = false
   if icons_style != 'none'
     assign show_arrows = true
+  endif
+
+  # Stock Horizon gives a carousel arrows only. Dots read better for a short set of
+  # equal-weight slides - testimonials, say - where there is nothing to scrub through.
+  assign show_dots = false
+  if section.settings.controls_style == 'dots'
+    assign show_dots = true
   endif
 
   assign slide_position = block.settings.position
@@ -39,6 +58,25 @@
   {% render 'border-override', settings: block.settings %}
 {% endcapture %}
 
+{% capture carousel_controls %}
+  {%- if show_dots -%}
+    {%- comment -%}
+      Off the media and centred under the track, not floating over a slide - a carousel's
+      slides are cards on the page background rather than full-bleed imagery.
+    {%- endcomment -%}
+    {%- render 'slideshow-controls',
+      style: 'dots',
+      autoplay: false,
+      item_count: slide_count,
+      show_arrows: false,
+      arrows_on_media: false,
+      controls_on_media: false,
+      pagination_position: 'center',
+      icon_style: icons_style
+    -%}
+  {%- endif -%}
+{% endcapture %}
+
 <div
   class="force-full-width"
   style="{{ gutter_style }}"
@@ -47,6 +85,7 @@
     class: slideshow_class,
     style: slideshow_style,
     slides: blocks_content,
+    controls: carousel_controls,
     show_arrows: show_arrows,
     icon_style: icons_style,
     icon_shape: section.settings.icons_shape,
