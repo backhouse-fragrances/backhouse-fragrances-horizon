@@ -1545,6 +1545,7 @@
         "section_width": "narrow",
         "columns_gap": 12,
         "background_color": "",
+        "controls_style": "dots",
         "icons_style": "arrow",
         "icons_shape": "none",
         "padding-block-start": 64,
