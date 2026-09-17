@@ -3102,7 +3102,7 @@
                   "settings": {
                     "text": "<p>Custom corporate projects typically start at 5 gifts. For smaller orders or last-minute needs, our self-service gifting collection is a great option.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3149,7 +3149,7 @@
                   "settings": {
                     "text": "<p>Yes, we can ship to each recipient individually! We charge a $7 flat shipping rate for each address. You provide your list, and we do the rest!</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3196,7 +3196,7 @@
                   "settings": {
                     "text": "<p>Email us at hello@backhousefragrances.com or call us at 949-612-6226 and our team will be happy to help.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3243,7 +3243,7 @@
                   "settings": {
                     "text": "<p>Self-service gifting lets you order directly from our storefront. Custom gifting offers branded packaging, curated sets, and concierge support.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3290,7 +3290,7 @@
                   "settings": {
                     "text": "<p>Yes! We love sending samples. Experience the scents, the packaging, and the full unboxing experience before you commit to your order. Just mention it when you reach out and we&rsquo;ll set you up.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3337,7 +3337,7 @@
                   "settings": {
                     "text": "<p>No, only within the US.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3384,7 +3384,7 @@
                   "settings": {
                     "text": "<p>Absolutely. Custom branded labels, hang tags, ribbon, and inserts are all part of our concierge gifting service. Just share your logo and brand guidelines, and we&rsquo;ll handle the rest.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3431,7 +3431,7 @@
                   "settings": {
                     "text": "<p>Yes! You can add a personalized message with each order.</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3478,7 +3478,7 @@
                   "settings": {
                     "text": "<p>No worries! Enter their email and send them an e-gift. We handle the rest!</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3525,7 +3525,7 @@
                   "settings": {
                     "text": "<p>Orders typically ship within 7-14 business days, once logos are approved and payment is received. If you need them sooner, we suggest sending an e-gift!</p>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",
@@ -3734,9 +3734,14 @@
           "blocks": {}
         },
         "form": {
-          "type": "contact-form",
+          "type": "contact-form-detailed",
           "name": "t:names.contact_form",
           "settings": {
+            "first_name_label": "First Name",
+            "last_name_label": "Last Name",
+            "company_label": "Company",
+            "email_label": "Email",
+            "message_label": "Tell Us About Your Project",
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
