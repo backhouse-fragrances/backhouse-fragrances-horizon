@@ -1,4 +1,14 @@
-{% assign block_settings = block.settings %}
+{% liquid
+  assign block_settings = block.settings
+
+  # Only collapse when there is actually something to reveal - a "Load more" under a list
+  # that is already complete is a button that does nothing.
+  assign visible_count = block_settings.visible_count | default: 4
+  assign load_more = false
+  if block_settings.enable_load_more and visible_count > 0 and block.blocks.size > visible_count
+    assign load_more = true
+  endif
+%}
 
 {% render 'contrast-override',
   background_color: block_settings.background_color,
@@ -7,7 +17,7 @@
 %}
 
 <div
-  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.background_color != blank or block_settings.text_color != blank %} color-custom-{{ block.id }}{% endif %}{% if block_settings.background_color != blank %} accordion--custom-background{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}"
+  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.background_color != blank or block_settings.text_color != blank %} color-custom-{{ block.id }}{% endif %}{% if block_settings.background_color != blank %} accordion--custom-background{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}{% if load_more %} accordion--collapsed{% endif %}"
   style="
     --summary-font-family: var(--font-{{ block_settings.type_preset }}--family);
      --summary-font-style: var(--font-{{ block_settings.type_preset }}--style);
@@ -22,9 +32,84 @@
   {{ block.shopify_attributes }}
 >
   {% content_for 'blocks' %}
+
+  {%- if load_more -%}
+    {%- comment -%}
+      The cut-off has to be a literal in nth-child, which a custom property cannot supply, so
+      the rule is written per block rather than living in the stylesheet below. Doing it in CSS
+      rather than with script also means the extra rows are never painted and then withdrawn.
+    {%- endcomment -%}
+    {%- assign hide_from = visible_count | plus: 1 -%}
+    <style>
+      .accordion--{{ block.id }}.accordion--collapsed > accordion-custom:nth-child(n + {{ hide_from }}) {
+        display: none;
+      }
+      /* The closing divider belongs to the last row still on screen, not to the real last
+         child, which is hidden while collapsed. */
+      .accordion--{{ block.id }}.accordion--collapsed.accordion--dividers
+        > accordion-custom:nth-child({{ visible_count }})
+        .details {
+        border-block-end: calc(var(--style-border-width) * var(--show-fallback-borders)) solid
+          var(--color-border);
+      }
+    </style>
+
+    <button
+      class="accordion__load-more"
+      type="button"
+      data-accordion-load-more="{{ visible_count }}"
+    >
+      {{- block_settings.load_more_label | default: 'Load More' -}}
+    </button>
+  {%- endif -%}
 </div>
 
 {% render 'accordion-styles' %}
+
+{% stylesheet %}
+  .accordion__load-more {
+    display: block;
+    margin-block-start: var(--padding-lg);
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: var(--font-size--sm);
+    letter-spacing: var(--letter-spacing--body-loose);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    cursor: pointer;
+  }
+
+  .accordion__load-more:hover {
+    opacity: var(--opacity-subdued-text, 0.7);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  // Delegated so it covers every accordion on the page, and any rendered later by the
+  // section rendering API, without holding a reference to markup that may be replaced.
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-accordion-load-more]');
+    if (!button) return;
+
+    const accordion = button.closest('.accordion');
+    if (!accordion) return;
+
+    accordion.classList.remove('accordion--collapsed');
+    button.remove();
+
+    // Move focus to the first row that had been hidden, so a keyboard user carries on from
+    // where the list grew rather than being dropped back at the top of the document.
+    const shown = parseInt(button.dataset.accordionLoadMore, 10);
+    const rows = accordion.querySelectorAll('accordion-custom');
+    const revealed = Number.isFinite(shown) ? rows[shown] : null;
+    revealed?.querySelector('summary')?.focus({ preventScroll: true });
+  });
+{% endjavascript %}
 
 {% schema %}
 {
@@ -65,6 +150,27 @@
       "label": "t:settings.divider_color",
       "placeholder": "t:settings.default",
       "visible_if": "{{ block.settings.dividers }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_load_more",
+      "label": "Show a few rows at a time",
+      "default": false,
+      "info": "Hides the rest behind a button, the way the live FAQ does."
+    },
+    {
+      "type": "number",
+      "id": "visible_count",
+      "label": "Rows shown",
+      "default": 4,
+      "visible_if": "{{ block.settings.enable_load_more }}"
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "Button label",
+      "default": "Load More",
+      "visible_if": "{{ block.settings.enable_load_more }}"
     },
     {
       "type": "select",

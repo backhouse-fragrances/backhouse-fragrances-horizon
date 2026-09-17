@@ -2572,7 +2572,10 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "enable_load_more": true,
+            "visible_count": 4,
+            "load_more_label": "Load More"
           },
           "blocks": {
             "faq_1": {
