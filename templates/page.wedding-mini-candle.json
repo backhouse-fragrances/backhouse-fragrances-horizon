@@ -354,7 +354,8 @@
         "group_stack"
       ],
       "custom_css": [
-        ".image-block, .image-block__image {--ratio: 400 / 290 !important;}"
+        ".image-block, .image-block__image {--ratio: 400 / 290 !important;}",
+        "@media screen and (max-width: 749px) {.image-block--height-fill, .image-block--height-fill .image-block__image {--ratio: 335 / 384 !important;} .image-block:not(.image-block--height-fill), .image-block:not(.image-block--height-fill) .image-block__image {--ratio: 335 / 180 !important;}}"
       ]
     },
     "divider_intro": {
@@ -1349,14 +1350,14 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.75rem",
                     "enable_mobile_size": false,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
+                    "letter_spacing": "loose",
+                    "case": "uppercase",
                     "wrap": "",
                     "text_color": "",
                     "background": false,
@@ -1381,14 +1382,14 @@
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "h5",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.25rem",
+                    "enable_mobile_size": true,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
+                    "letter_spacing": "loose",
+                    "case": "uppercase",
                     "wrap": "",
                     "text_color": "",
                     "background": false,
@@ -1688,7 +1689,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>★★★★★</p><p><strong>Guests loved them!</strong></p><p>“We had a 150 guest wedding and the wedding favors turned out better than I could have ever dreamed! We chose to do three different scents and they all smelt amazing. We literally had guests stealing other people’s candles while they were dancing, they smelt that good!”</p>",
+                    "text": "<p>★★★★★</p><p><strong>GUESTS LOVED THEM!</strong></p><p>“We had a 150 guest wedding and the wedding favors turned out better than I could have ever dreamed! We chose to do three different scents and they all smelt amazing. We literally had guests stealing other people’s candles while they were dancing, they smelt that good!”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1755,74 +1756,6 @@
                 "author"
               ]
             },
-            "quote_everyone_wants": {
-              "type": "_card",
-              "name": "t:names.card",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "background_media": "none",
-                "background_color": "",
-                "video": "",
-                "video_position": "cover",
-                "background_image": "",
-                "background_image_position": "cover",
-                "aspect_ratio": "adapt",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quote": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>★★★★★</p><p><strong>Gift something everyone wants!</strong></p><p>“The entire creative team at Taco Bell loved the custom Mr. Douglas minis we ordered for our holiday party. The cute bag with the red &amp; white ribbon looked so festive! Backhouse does all labeling for you — you just send the graphic of your choice. It’s the best corporate gift that doesn’t feel like a corporate gift! Thank you Backhouse!”</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "center",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0,
-                    "custom_class": ""
-                  }
-                }
-              },
-              "block_order": [
-                "quote"
-              ]
-            },
             "quote_love_love": {
               "type": "_card",
               "name": "t:names.card",
@@ -1857,7 +1790,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>★★★★★</p><p><strong>Love, love, love!</strong></p><p>“The quality and presentation are just beautiful. The guests loved the amazing fragrances, the beautiful presentation not only of the candle itself but each came in a darling muslin bag with ribbon. We are all forever fans of this lovely company.”</p>",
+                    "text": "<p>★★★★★</p><p><strong>LOVE, LOVE, LOVE!</strong></p><p>“The quality and presentation are just beautiful. The guests loved the amazing fragrances, the beautiful presentation not only of the candle itself but each came in a darling muslin bag with ribbon. We are all forever fans of this lovely company.”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1958,7 +1891,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>★★★★★</p><p><strong>The best favors!!</strong></p><p>“Our guests were blown away by how nice our party favors were! I even continued receiving text messages days after our wedding from friends &amp; family sending me photos of their candles burning. Every candle was perfect, down to the cute little muslin bag each one came in. I would recommend that anyone include these in your next event if you really want to make a lasting impression!”</p>",
+                    "text": "<p>★★★★★</p><p><strong>THE BEST FAVORS!!</strong></p><p>“Our guests were blown away by how nice our party favors were! I even continued receiving text messages days after our wedding from friends &amp; family sending me photos of their candles burning. Every candle was perfect, down to the cute little muslin bag each one came in. I would recommend that anyone include these in your next event if you really want to make a lasting impression!”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -2028,7 +1961,6 @@
           },
           "block_order": [
             "quote_guests_loved",
-            "quote_everyone_wants",
             "quote_love_love",
             "quote_best_favors"
           ]

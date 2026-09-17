@@ -38,7 +38,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
         "section_width": "full-width",
-        "section_height": "custom",
+        "section_height": "full-screen",
         "section_height_custom": 78,
         "background_color": "",
         "toggle_overlay": true,

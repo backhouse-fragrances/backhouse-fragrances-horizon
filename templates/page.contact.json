@@ -231,7 +231,7 @@
               "type": "contact-form-submit-button",
               "static": true,
               "settings": {
-                "label": "Send",
+                "label": "Send message",
                 "style_class": "button",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
                 "custom_button_text": "{{ settings.color_palette.background }}",
