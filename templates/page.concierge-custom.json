@@ -1484,7 +1484,8 @@
       ],
       "custom_css": [
         ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}",
-        "slideshow-controls[controls-on-media][pagination-position=\"center\"] {width: fit-content; left: auto; right: 48px; justify-content: flex-end;}"
+        "slideshow-controls[controls-on-media][pagination-position=\"center\"] {width: fit-content; left: auto; right: 48px; justify-content: flex-end;}",
+        "slideshow-controls {mix-blend-mode: normal;}"
       ],
       "settings": {
         "display_mode": "full_frame",
