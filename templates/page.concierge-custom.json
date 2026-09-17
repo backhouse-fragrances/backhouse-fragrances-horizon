@@ -118,8 +118,8 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "SHOP THE BACKHOUSE",
-            "link": "shopify://collections/shop-all-products",
+            "label": "Get a Quote",
+            "link": "#",
             "open_in_new_tab": false,
             "style_class": "button-custom",
             "custom_button_background": "{{ settings.color_palette.background }}",
