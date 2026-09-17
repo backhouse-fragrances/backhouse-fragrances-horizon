@@ -1,0 +1,470 @@
+{% comment %}
+  BH Text CTA — Section
+  ─────────────────────
+  Floating "Text Us" button. Appears after the user scrolls past
+  the first section on the page. All content is editable via the
+  theme customizer — no code changes needed.
+
+  To use: add to any page template's JSON under "sections" and "order":
+    "bh_text_cta": {
+      "type": "bh-text-cta",
+      "settings": {}
+    }
+{% endcomment %}
+
+{%- assign phone_raw         = section.settings.phone_number | strip -%}
+{%- assign phone_href        = phone_raw | remove: '(' | remove: ')' | remove: ' ' | remove: '-' -%}
+{%- assign eyebrow           = section.settings.eyebrow_text -%}
+{%- assign subtext           = section.settings.sub_text -%}
+{%- assign btn_label         = section.settings.button_label -%}
+{%- assign hide_inbox        = section.settings.hide_inbox -%}
+{%- assign bg_color          = section.settings.button_bg_color -%}
+{%- assign text_color        = section.settings.button_text_color -%}
+{%- assign font_size         = section.settings.font_size -%}
+{%- assign icon_size         = section.settings.icon_size -%}
+{%- assign hide_label_mobile = section.settings.hide_label_mobile -%}
+{%- assign icon_style        = section.settings.icon_style -%}
+
+{% if hide_inbox %}
+<script>
+(function () {
+  function killInbox() {
+    var el = document.getElementById('shopify-chat')
+           || document.querySelector('inbox-online-store-chat')
+           || document.querySelector('[id^="shopify-chat"]');
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
+      return true;
+    }
+    return false;
+  }
+
+  if (!killInbox()) {
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (
+            node.nodeType === 1 && (
+              node.tagName === 'INBOX-ONLINE-STORE-CHAT' ||
+              node.id === 'shopify-chat' ||
+              (node.id && node.id.indexOf('shopify-chat') === 0)
+            )
+          ) {
+            node.parentNode && node.parentNode.removeChild(node);
+            observer.disconnect();
+          }
+        });
+      });
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    var attempts = 0;
+    var poll = setInterval(function () {
+      if (killInbox() || attempts++ > 50) clearInterval(poll);
+    }, 200);
+  }
+})();
+</script>
+{% endif %}
+
+<div id="bh-text-cta" class="bh-text-cta" role="complementary" aria-label="Contact via text">
+
+  <div class="bh-text-cta__card" id="bh-text-card" aria-hidden="true">
+    {% if eyebrow != blank %}
+      <p class="bh-text-cta__card-eyebrow">{{ eyebrow }}</p>
+    {% endif %}
+    <a href="sms:+1{{ phone_href }}" class="bh-text-cta__card-number">
+      {{ phone_raw }}
+    </a>
+    {% if subtext != blank %}
+      <p class="bh-text-cta__card-sub">{{ subtext }}</p>
+    {% endif %}
+    <div class="bh-text-cta__card-arrow" aria-hidden="true"></div>
+  </div>
+
+  <button
+    class="bh-text-cta__btn"
+    id="bh-text-btn"
+    aria-expanded="false"
+    aria-controls="bh-text-card"
+    aria-label="{{ btn_label }}"
+  >
+    {%- comment -%} Icon selector {%- endcomment -%}
+    <svg class="bh-text-cta__icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {% case icon_style %}
+
+        {% when 'phone' %}
+        {%- comment -%} Phone handset {%- endcomment -%}
+        <path d="M6.5 3C6.5 3 5 3 4 4.5C3 6 3.5 7.5 4.5 8.5C5.5 9.5 7 11 8.5 12.5C10 14 11.5 15.5 12.5 16.5C13.5 17.5 15 17 16 16C17 15 17 13.5 17 13.5L14.5 11.5C14.5 11.5 13.5 12.5 13 12.5C12.5 12.5 11 11.5 9.5 10C8 8.5 7.5 7 7.5 6.5C7.5 6 8.5 5 8.5 5L6.5 3Z" fill="currentColor"/>
+
+        {% when 'sms' %}
+        {%- comment -%} Envelope with lines suggesting a message {%- endcomment -%}
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 5.5C3 4.672 3.672 4 4.5 4H15.5C16.328 4 17 4.672 17 5.5V13.5C17 14.328 16.328 15 15.5 15H4.5C3.672 15 3 14.328 3 13.5V5.5ZM4.5 5.5L10 9.5L15.5 5.5H4.5ZM4.5 13.5V7.2L10 11.2L15.5 7.2V13.5H4.5Z" fill="currentColor"/>
+
+        {% when 'arrow' %}
+        {%- comment -%} Minimal send / paper plane arrow {%- endcomment -%}
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707 10.707a1 1 0 000-1.414l-6-6a1 1 0 00-1.414 1.414L13.586 9H4a1 1 0 000 2h9.586l-4.293 4.293a1 1 0 101.414 1.414l6-6z" fill="currentColor"/>
+
+        {% when 'send' %}
+        {%- comment -%} Paper plane / send {%- endcomment -%}
+        <path d="M3.5 3L17 10L3.5 17V12L13 10L3.5 8V3Z" fill="currentColor"/>
+
+        {% else %}
+        {%- comment -%} Default: chat bubble {%- endcomment -%}
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9.784C4 5.844 4.815 5 8.62 5H11.38C15.185 5 16 5.844 16 9.784C16 13.723 15.185 14.901 11.38 14.901H10.83C10.802 14.935 10.77 14.967 10.734 14.996L8.543 16.86C8.129 17.194 7.514 16.898 7.514 16.367V14.87C4.653 14.688 4 13.308 4 9.784ZM10 10.667C10.368 10.667 10.667 10.368 10.667 10C10.667 9.632 10.368 9.333 10 9.333C9.632 9.333 9.333 9.632 9.333 10C9.333 10.368 9.632 10.667 10 10.667ZM13.333 10C13.333 10.368 13.035 10.667 12.667 10.667C12.299 10.667 12 10.368 12 10C12 9.632 12.299 9.333 12.667 9.333C13.035 9.333 13.333 9.632 13.333 10ZM7.333 10.667C7.702 10.667 8 10.368 8 10C8 9.632 7.702 9.333 7.333 9.333C6.965 9.333 6.667 9.632 6.667 10C6.667 10.368 6.965 10.667 7.333 10.667Z" fill="currentColor"/>
+
+      {% endcase %}
+    </svg>
+    <span class="bh-text-cta__label">{{ btn_label }}</span>
+  </button>
+
+</div>
+
+<style>
+  /* ─────────────────────────────────────────
+     BH Text CTA — Floating Button
+     Matches Backhouse brand system precisely:
+     zero radius · Open Sans · uppercase · dark
+  ───────────────────────────────────────── */
+
+  #bh-text-cta.bh-text-cta {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 18;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  #bh-text-cta.bh-text-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* ── Toggle button ── */
+  #bh-text-cta .bh-text-cta__btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: {{ bg_color }};
+    color: {{ text_color }};
+    border: none;
+    cursor: pointer;
+    padding: 0 18px;
+    height: 52px;
+    font-family: "Open Sans", sans-serif;
+    font-size: {{ font_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    white-space: nowrap;
+  }
+
+  #bh-text-cta .bh-text-cta__btn:hover {
+    opacity: 0.85;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.30);
+  }
+
+  #bh-text-cta .bh-text-cta__icon {
+    flex-shrink: 0;
+    color: {{ text_color }};
+    width: {{ icon_size }}px;
+    height: {{ icon_size }}px;
+  }
+
+  /* ── Mobile label visibility ── */
+  {% if hide_label_mobile %}
+  @media screen and (max-width: 749px) {
+    #bh-text-cta .bh-text-cta__label {
+      display: none;
+    }
+    #bh-text-cta .bh-text-cta__btn {
+      padding: 0 14px;
+    }
+  }
+  {% endif %}
+
+  /* ── Tooltip card ── */
+  #bh-text-cta .bh-text-cta__card {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    right: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 22px 24px 20px;
+    width: 220px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.13);
+    text-align: right;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  #bh-text-cta:hover .bh-text-cta__card,
+  #bh-text-cta .bh-text-cta__card.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  #bh-text-cta .bh-text-cta__card-eyebrow {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    margin: 0 0 10px;
+  }
+
+  #bh-text-cta .bh-text-cta__card-number {
+    display: block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: #1c1c1c;
+    text-decoration: none;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+  }
+
+  #bh-text-cta .bh-text-cta__card-number:hover {
+    color: #555;
+  }
+
+  #bh-text-cta .bh-text-cta__card-sub {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: #6a6a6a;
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
+
+  #bh-text-cta .bh-text-cta__card-arrow {
+    position: absolute;
+    bottom: -7px;
+    right: 22px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    transform: rotate(45deg);
+  }
+
+  /* ── Mobile: touch-toggle instead of hover ── */
+  @media (hover: none) {
+    #bh-text-cta:hover .bh-text-cta__card {
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+    }
+    #bh-text-cta .bh-text-cta__card.is-open {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      pointer-events: auto !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #bh-text-cta.bh-text-cta,
+    #bh-text-cta .bh-text-cta__card {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const wrapper = document.getElementById('bh-text-cta');
+  const btn     = document.getElementById('bh-text-btn');
+  const card    = document.getElementById('bh-text-card');
+  if (!wrapper || !btn || !card) return;
+
+  function setupScrollTrigger() {
+    const hero = document.querySelector('.shopify-section');
+
+    if (hero && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            wrapper.classList.add('is-visible');
+          } else {
+            wrapper.classList.remove('is-visible');
+            card.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }, { threshold: 0.1 });
+      io.observe(hero);
+    } else {
+      var threshold = window.innerHeight * 0.75;
+      function onScroll() {
+        if (window.scrollY > threshold) {
+          wrapper.classList.add('is-visible');
+        } else {
+          wrapper.classList.remove('is-visible');
+          card.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    var isTouch = window.matchMedia('(hover: none)').matches;
+    if (!isTouch) return;
+    var isOpen = card.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    card.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  document.addEventListener('click', function (e) {
+    var isTouch = window.matchMedia('(hover: none)').matches;
+    if (!isTouch) return;
+    if (!wrapper.contains(e.target)) {
+      card.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      card.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  btn.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      card.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  setupScrollTrigger();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Text CTA Button",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact Details"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "(949) 612-6226",
+      "info": "Display format, e.g. (949) 612-6226. Used for both display and sms: link."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Text",
+      "default": "Need Assistance?"
+    },
+    {
+      "type": "text",
+      "id": "sub_text",
+      "label": "Sub Text",
+      "default": "Text us for gifting & order support"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Text Us"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "icon_style",
+      "label": "Icon",
+      "default": "chat",
+      "options": [
+        { "value": "chat",  "label": "Chat Bubble" },
+        { "value": "phone", "label": "Phone" },
+        { "value": "sms",   "label": "Envelope / SMS" },
+        { "value": "arrow", "label": "Arrow" },
+        { "value": "send",  "label": "Send / Paper Plane" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text & Icon Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_label_mobile",
+      "label": "Hide label on mobile",
+      "default": true,
+      "info": "Shows icon only below 750px — cleaner when space is tight."
+    },
+    {
+      "type": "header",
+      "content": "Behaviour"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_inbox",
+      "label": "Hide Shopify Inbox on this page",
+      "default": true,
+      "info": "Removes the Inbox chat widget from the DOM so both buttons don't compete."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text CTA Button"
+    }
+  ]
+}
+{% endschema %}

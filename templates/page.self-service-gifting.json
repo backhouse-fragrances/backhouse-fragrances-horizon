@@ -1113,6 +1113,9 @@
       "block_order": [
         "media",
         "content"
+      ],
+      "custom_css": [
+        ".media-with-content {--media-height: 50vw !important; --media-height-mobile: 100vw !important;}"
       ]
     },
     "marquee_occasions": {
@@ -3084,7 +3087,7 @@
         "section_width": "full-width",
         "full_width_on_mobile": false,
         "section_height": "custom",
-        "section_height_custom": 55,
+        "section_height_custom": 40,
         "background_media": "image",
         "background_color": "",
         "video": "",
@@ -3168,7 +3171,8 @@
         "link"
       ],
       "custom_css": [
-        ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}"
+        ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}",
+        "@media screen and (max-width: 749px) {.section {--section-min-height: 260px !important;}}"
       ]
     },
     "main": {
@@ -3180,6 +3184,26 @@
         "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
+      }
+    },
+    "bh_text_cta": {
+      "type": "bh-text-cta",
+      "name": "Text CTA Button",
+      "custom_css": [
+        ".bh-text-cta__label {color: rgb(255, 255, 255); font-size: 1.12rem; font-family: \"Open Sans\"; font-weight: 600; font-style: normal; letter-spacing: 0px;}"
+      ],
+      "settings": {
+        "phone_number": "(949) 612-6226",
+        "eyebrow_text": "Need Assistance?",
+        "sub_text": "Text us for gifting & order support",
+        "button_label": "Text Us",
+        "icon_style": "chat",
+        "button_bg_color": "#5c5c5c",
+        "button_text_color": "#ffffff",
+        "font_size": 11,
+        "icon_size": 28,
+        "hide_label_mobile": false,
+        "hide_inbox": true
       }
     }
   },
@@ -3194,6 +3218,7 @@
     "section_ask_ai",
     "section_faq",
     "section_custom_gifting",
+    "bh_text_cta",
     "main"
   ]
 }

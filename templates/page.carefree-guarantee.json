@@ -117,8 +117,8 @@
       "settings": {
         "movement_direction": "normal",
         "background_color": "",
-        "padding-block-start": 80,
-        "padding-block-end": 80,
+        "padding-block-start": 56,
+        "padding-block-end": 56,
         "gap_between_elements": 100
       },
       "blocks": {
@@ -134,7 +134,7 @@
             "font_size": "2.8125rem",
             "enable_mobile_size": true,
             "mobile_font_size": "1.6rem",
-            "line_height": "normal",
+            "line_height": "loose",
             "letter_spacing": "loose",
             "case": "uppercase",
             "wrap": "nowrap",
@@ -166,7 +166,7 @@
             "font_size": "2.8125rem",
             "enable_mobile_size": true,
             "mobile_font_size": "1.6rem",
-            "line_height": "normal",
+            "line_height": "loose",
             "letter_spacing": "loose",
             "case": "uppercase",
             "wrap": "nowrap",
@@ -433,7 +433,7 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Shop now",
+                    "label": "SHOP NOW",
                     "link": "shopify://collections/shop-all-products",
                     "open_in_new_tab": false,
                     "style_class": "button-unstyled",
