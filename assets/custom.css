@@ -422,3 +422,19 @@ footer .utilities {
 [id^='infiniteoptions-container'] {
     display: none !important;
 }
+
+/* Roomier accordion summaries, matching live's product details rows.
+
+   base.css gives every `summary` `padding-block: var(--padding-sm)` from a bare type
+   selector, and Horizon's own `.accordion .details__header` rule (accordion-styles.liquid,
+   compiled into styles.css) only sets type and `min-height` - it never touches padding.
+   So this two-class selector wins on specificity and there is nothing later in the cascade
+   to fight.
+
+   Scoped to `.accordion` on purpose: `disclosures` uses the same `.details__header` class
+   for the footer's localisation and policy toggles, and those keep their own tighter
+   padding. This was previously set per-section on the product template; it lives here now
+   so the product accordions and the Concierge Gifting FAQ stay in step. */
+.accordion .details__header {
+    padding-block: var(--padding-xl);
+}

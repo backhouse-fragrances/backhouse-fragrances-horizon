@@ -559,9 +559,6 @@
           ]
         }
       },
-      "custom_css": [
-        ".accordion .details__header {padding-block: var(--padding-xl);}"
-      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
