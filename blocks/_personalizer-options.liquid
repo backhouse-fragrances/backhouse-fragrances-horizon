@@ -2,8 +2,11 @@
   Renders a product's personalizer options as line item properties.
 
   Reads `product.metafields.personalizer.options.value` - an array of
-  `{ id, label, type, choices, required }` - and renders one control per option: a text
-  field, a single-select, or a checkbox list. Each control carries
+  `{ id, label, type, choices, required, heading }` - and renders one control per option:
+  `text` a text field, `dropdown` a single-select, `multiselect` and `checkbox` a checkbox
+  list. `label` is always the line item property key; `heading` is set on `checkbox`
+  options and is the wording shown to the shopper, so the key can stay an internal name.
+  Each control carries
   `name="properties[<label>]"` and `form="BuyButtons-ProductForm-<section id>"`, so its
   value rides along with add to cart even though the control lives outside the `<form>`
   element, the same way Horizon's own product-custom-property block does.
@@ -52,10 +55,17 @@
       {% liquid
         assign field_id = 'Personalizer-' | append: block.id | append: '-' | append: forloop.index0
         assign property_name = 'properties[' | append: personalizer_option.label | append: ']'
+
+        # `label` is always the property key. A checkbox group also carries `heading`, the
+        # wording the shopper sees, so the key can stay an internal name.
+        assign display_label = personalizer_option.label
+        if personalizer_option.heading != blank
+          assign display_label = personalizer_option.heading
+        endif
       %}
 
       {%- capture label_content -%}
-        {{- personalizer_option.label | escape -}}
+        {{- display_label | escape -}}
         {%- if personalizer_option.required -%}
           <span class="personalizer-option__required" aria-hidden="true">*</span>
         {%- endif -%}
@@ -168,7 +178,7 @@
             </div>
           </personalizer-select>
 
-        {% when 'multiselect' %}
+        {% when 'multiselect' or 'checkbox' %}
           {%- comment -%}
             Checkboxes sharing one property name would collide - the cart keeps a single
             value per key - so the boxes stay unnamed and the hidden input holds the joined
