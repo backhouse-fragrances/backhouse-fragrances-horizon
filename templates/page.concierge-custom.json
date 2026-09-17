@@ -2515,7 +2515,7 @@
       ],
       "name": "t:names.marquee_section",
       "settings": {
-        "movement_direction": "normal",
+        "movement_direction": "reverse",
         "background_color": "#efefef",
         "padding-block-start": 28,
         "padding-block-end": 28,
