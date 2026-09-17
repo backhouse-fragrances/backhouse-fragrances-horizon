@@ -9,6 +9,174 @@
  */
 {
   "sections": {
+    "hero_nVb9n9": {
+      "type": "hero",
+      "blocks": {
+        "text_G3YJqB": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Concierge Gifting</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "loose",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "text_TRtieb": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Custom Corporate Gifting, Curated to Leave a Lasting Impression</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": "hero-heading"
+          },
+          "blocks": {}
+        },
+        "text_FdAD8y": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Starting at $48 per gift, we'll help you design a custom gifting program that leaves a lasting impression, from hand-poured candles to branded packaging, whether you're sending 5 gifts or 500.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "button_TD7iBr": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "SHOP THE BACKHOUSE",
+            "link": "shopify://collections/shop-all-products",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "{{ settings.color_palette.background }}",
+            "custom_button_text": "{{ settings.color_palette.foreground }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_G3YJqB",
+        "text_TRtieb",
+        "text_FdAD8y",
+        "button_TD7iBr"
+      ],
+      "custom_css": [
+        ".text-block {text-wrap: unset;}",
+        ".hero-heading {--max-width--body-normal: 22.5em;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "video",
+        "video_1": "shopify://files/videos/REDUCED Homepage Update - 7:28.mp4",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "custom",
+        "section_height_custom": 90,
+        "background_color": "",
+        "toggle_overlay": true,
+        "overlay_color": "#12121273",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
     "main": {
       "type": "main-page",
       "blocks": {
@@ -23,23 +191,34 @@
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
           },
           "blocks": {}
         },
         "page-content": {
           "type": "page-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -50,12 +229,14 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
       }
     }
   },
   "order": [
+    "hero_nVb9n9",
     "main"
   ]
 }
