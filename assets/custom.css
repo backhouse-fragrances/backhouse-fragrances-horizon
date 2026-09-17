@@ -438,3 +438,17 @@ footer .utilities {
 .accordion .details__header {
     padding-block: var(--padding-xl);
 }
+
+/* Hide the slideshow autoplay toggle.
+
+   Horizon renders a pause/play control alongside the dots whenever a slideshow autoplays
+   (snippets/slideshow-controls.liquid). The live storefront shows dots alone, so both
+   states of the toggle are hidden here rather than per section.
+
+   Note this removes the only way to stop an auto-advancing slideshow, which WCAG 2.2.2
+   asks for on moving content. Swapping `display: none` for the theme's `visually-hidden`
+   pattern would hide it just as thoroughly while leaving it reachable by keyboard. */
+.slideshow-control.icon-pause,
+.slideshow-control.icon-play {
+    display: none;
+}
