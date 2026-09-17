@@ -26,11 +26,23 @@ export class PersonalizerSelect extends Component {
   /** @type {AbortController | undefined} */
   #abortController;
 
+  /** The label whose `for` was dropped on upgrade, so it can be restored on disconnect. */
+  #label = null;
+
   connectedCallback() {
     super.connectedCallback();
 
     // A back/forward navigation can restore a selection the markup doesn't reflect.
     if (this.refs.native.value) this.#render(this.refs.native.value);
+
+    // The label points at the native select with `for`, which is what keeps the field
+    // usable when this component never upgrades. Once it has, that association is a
+    // liability: activating a label activates its control, and `pointer-events: none`
+    // does not stop that - so tapping the label opened iOS's native picker on top of our
+    // menu. The trigger already carries the same label through aria-labelledby, so the
+    // association is redundant here.
+    this.#label = this.querySelector(`label[for="${CSS.escape(this.refs.native.id)}"]`);
+    this.#label?.removeAttribute('for');
 
     // Fresh each time: a section morph can disconnect and reconnect this element, and an
     // aborted controller can't be reused.
@@ -43,6 +55,10 @@ export class PersonalizerSelect extends Component {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#abortController?.abort();
+
+    // Put the label back, so a disconnected-but-still-rendered field (a section morph
+    // mid-swap, say) is never left with an unlabelled select.
+    if (this.#label && this.refs.native?.id) this.#label.setAttribute('for', this.refs.native.id);
   }
 
   get #isOpen() {
