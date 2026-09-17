@@ -1286,7 +1286,8 @@
         "link"
       ],
       "custom_css": [
-        ".button-unstyled {text-transform: uppercase; letter-spacing: var(--letter-spacing-loose); text-decoration: underline; text-underline-offset: 6px;}"
+        ".button-unstyled {text-transform: uppercase; letter-spacing: var(--letter-spacing-loose); text-decoration: underline; text-underline-offset: 6px;}",
+        ".section-content-wrapper {max-width: 980px; margin-inline: auto;}"
       ],
       "settings": {
         "content_direction": "column",
@@ -4204,7 +4205,10 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      }
+      },
+      "custom_css": [
+        ".section-content-wrapper {max-width: 980px; margin-inline: auto;}"
+      ]
     },
     "main": {
       "type": "main-page",
@@ -4263,6 +4267,81 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "divider_occasions": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "divider_logistics": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "divider_faq": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "divider_contact": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "divider_ask_ai": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
@@ -4275,11 +4354,16 @@
     "slideshow_gift_guide",
     "section_testimonials",
     "media_why_backhouse",
+    "divider_occasions",
     "marquee_occasions",
+    "divider_logistics",
     "media_logistics",
+    "divider_faq",
     "section_faq",
+    "divider_contact",
     "section_contact",
     "section_self_service",
+    "divider_ask_ai",
     "section_ask_ai",
     "main"
   ]

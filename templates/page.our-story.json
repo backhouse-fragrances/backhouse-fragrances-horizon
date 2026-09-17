@@ -164,6 +164,9 @@
       "block_order": [
         "heading",
         "content"
+      ],
+      "custom_css": [
+        ".section-content-wrapper {max-width: 680px; margin-inline: auto;}"
       ]
     },
     "section_shop_cards": {
@@ -792,12 +795,44 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "divider_cards": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "divider_testimonials": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "hero_founder",
     "section_story",
+    "divider_cards",
     "section_shop_cards",
+    "divider_testimonials",
     "carousel_testimonials",
     "main"
   ]
