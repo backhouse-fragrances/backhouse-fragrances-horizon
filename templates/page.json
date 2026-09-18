@@ -23,6 +23,8 @@
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
             "font_size": "1.5rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "1.25rem",
             "line_height": "tight",
             "letter_spacing": "loose",
             "case": "uppercase",
@@ -33,9 +35,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "enable_mobile_size": true,
-            "mobile_font_size": "1.25rem"
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -49,15 +49,15 @@
         "heading",
         "page-content"
       ],
+      "custom_css": [
+        ".section-content-wrapper {max-width: 680px; margin-inline: auto;}"
+      ],
       "settings": {
         "content_direction": "column",
         "gap": 48,
         "padding-block-start": 64,
         "padding-block-end": 64
-      },
-      "custom_css": [
-        ".section-content-wrapper {max-width: 680px; margin-inline: auto;}"
-      ]
+      }
     },
     "hero_banner": {
       "type": "hero",
@@ -65,18 +65,14 @@
       "settings": {
         "media_type_1": "image",
         "image_1": "shopify://shop_images/backhouse-corporate-gifting-aeg-newport-beach-lit-candle.jpg",
-        "video_1": "",
         "media_type_2": "image",
         "image_2": "",
-        "video_2": "",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
         "image_1_mobile": "shopify://shop_images/backhouse-corporate-gifting-aeg-custom-candles-newport-beach.jpg",
-        "video_1_mobile": "",
         "media_type_2_mobile": "image",
         "image_2_mobile": "",
-        "video_2_mobile": "",
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",

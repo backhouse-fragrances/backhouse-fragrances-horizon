@@ -11,22 +11,21 @@
   "sections": {
     "hero_banner": {
       "type": "hero",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.hero {--hero-min-height: 400px !important; min-height: 400px !important;}}"
+      ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
         "image_1": "shopify://shop_images/2500x900px_danielle_backhouse_founder_newport_beach_1.jpg",
-        "video_1": "",
         "media_type_2": "image",
         "image_2": "",
-        "video_2": "",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
         "image_1_mobile": "shopify://shop_images/1100_x_1500_image_profile_for_website.jpg",
-        "video_1_mobile": "",
         "media_type_2_mobile": "image",
         "image_2_mobile": "",
-        "video_2_mobile": "",
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
@@ -49,55 +48,10 @@
         "reflection_opacity": 75,
         "padding-block-start": 0,
         "padding-block-end": 0
-      },
-      "custom_css": [
-        "@media screen and (max-width: 749px) {.hero {--hero-min-height: 400px !important; min-height: 400px !important;}}"
-      ]
+      }
     },
     "section_message": {
       "type": "section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 20,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "page-width",
-        "full_width_on_mobile": false,
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video": "",
-        "video_position": "cover",
-        "background_image": "",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 64,
-        "padding-block-end": 64,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": false,
-        "section_id": ""
-      },
       "blocks": {
         "heading": {
           "type": "text",
@@ -167,11 +121,7 @@
           "type": "custom-liquid",
           "name": "t:names.custom_liquid",
           "settings": {
-            "custom_liquid": "<style>#shopify-chat, shopify-chat {display: none !important;}</style>",
-            "background_color": "",
-            "section_width": "page-width",
-            "padding-block-start": 0,
-            "padding-block-end": 0
+            "custom_liquid": "<style>#shopify-chat, shopify-chat {display: none !important;}</style>"
           }
         }
       },
@@ -183,44 +133,25 @@
       "custom_css": [
         ".section-content-wrapper {max-width: 680px; margin-inline: auto;}",
         "@media screen and (max-width: 749px) {.section-content-wrapper {max-width: 350px;}}"
-      ]
-    },
-    "divider_cards": {
-      "type": "divider",
-      "name": "t:names.divider",
+      ],
       "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "section_cards": {
-      "type": "section",
-      "settings": {
-        "content_direction": "row",
+        "content_direction": "column",
         "vertical_on_mobile": true,
         "reverse_on_mobile": false,
-        "horizontal_alignment": "center",
+        "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 30,
-        "enable_mobile_gap": true,
-        "mobile_gap": 24,
+        "gap": 20,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
         "section_width": "page-width",
         "full_width_on_mobile": false,
-        "section_height": "custom",
-        "section_height_custom": 64,
+        "section_height": "",
+        "section_height_custom": 50,
         "background_media": "none",
         "background_color": "",
-        "video": "",
         "video_position": "cover",
         "background_image": "",
         "background_image_position": "cover",
@@ -243,7 +174,25 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
+      }
+    },
+    "divider_cards": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_cards": {
+      "type": "section",
       "blocks": {
         "card_1": {
           "type": "group",
@@ -271,7 +220,6 @@
             "custom_height": 100,
             "background_media": "image",
             "background_color": "",
-            "video": "",
             "video_position": "cover",
             "background_image": "shopify://shop_images/backhouse-fragrances-grove-orange-blossom-candle-7038597.jpg",
             "background_image_position": "cover",
@@ -348,9 +296,8 @@
             "custom_height": 100,
             "background_media": "image",
             "background_color": "",
-            "video": "",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/Backhouse-34_web.jpg",
+            "background_image": "shopify://shop_images/ezgif.com-webp-to-jpg-converter.jpg",
             "background_image_position": "cover",
             "toggle_overlay": true,
             "overlay_color": "#0000004d",
@@ -425,7 +372,6 @@
             "custom_height": 100,
             "background_media": "image",
             "background_color": "",
-            "video": "",
             "video_position": "cover",
             "background_image": "shopify://shop_images/1100_x_1500_image_profile_for_website_19525a78-b0d6-4032-b96e-60ec6d44a4eb.jpg",
             "background_image_position": "cover",
@@ -484,7 +430,48 @@
       ],
       "custom_css": [
         "@media screen and (max-width: 749px) {.group-block {min-height: 332px;}}"
-      ]
+      ],
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 30,
+        "enable_mobile_gap": true,
+        "mobile_gap": 24,
+        "section_width": "page-width",
+        "full_width_on_mobile": false,
+        "section_height": "custom",
+        "section_height_custom": 64,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image": "",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 64,
+        "padding-block-end": 64,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
+      }
     },
     "main": {
       "type": "main-page",

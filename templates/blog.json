@@ -91,17 +91,16 @@
           "block_order": []
         }
       },
-      "block_order": [],
-      "settings": {
-        "padding-block-start": 64,
-        "padding-block-end": 64
-      },
       "custom_css": [
         ".blog-posts {--columns-gap: 60px; --rows-gap: 60px;}",
         ".blog-post-item:not([data-blog-index$=\"-1\"]) .blog-post-card__image {height: auto; aspect-ratio: 1 / 1;}",
         "@media screen and (min-width: 750px) {.blog-post-item:not([data-blog-index$=\"-1\"]) {--col-span: 2; --blog-post-card-scale: 0.6;}}",
         "@media screen and (max-width: 749px) {.blog-posts {--rows-gap: 36px;} .blog-post-card__image {height: auto; aspect-ratio: 1 / 1;}}"
-      ]
+      ],
+      "settings": {
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
     }
   },
   "order": [
