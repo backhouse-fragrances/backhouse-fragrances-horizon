@@ -3841,6 +3841,14 @@
             }
           },
           "block_order": []
+        },
+        "thank_you_redirect": {
+          "type": "custom-liquid",
+          "name": "t:names.custom_liquid",
+          "settings": {
+            "custom_liquid": "<script>if (new URLSearchParams(location.search).get('contact_posted') === 'true') { location.replace('/pages/thank-you-custom-corp'); }</script>"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -3848,7 +3856,8 @@
         "eyebrow",
         "heading",
         "intro",
-        "form"
+        "form",
+        "thank_you_redirect"
       ],
       "custom_css": [
         ".contact-form__input--textarea {min-height: 120px; height: 120px;}",
