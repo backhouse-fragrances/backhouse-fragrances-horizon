@@ -1,6 +1,11 @@
 {% liquid
-  assign section_collections = collections
-  assign max_items = 20
+  if section.settings.collection_list != blank
+    assign section_collections = section.settings.collection_list
+    assign max_items = section.settings.collection_list.count
+  else
+    assign section_collections = collections
+    assign max_items = 20
+  endif
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
@@ -103,6 +108,11 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "t:settings.collection_list"
+    },
     {
       "type": "header",
       "content": "t:content.cards_layout"
