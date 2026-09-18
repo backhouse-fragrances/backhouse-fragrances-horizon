@@ -12,6 +12,32 @@
     "main": {
       "type": "main-blog",
       "blocks": {
+        "title": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.blog.title }}</h1>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.5rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "1.25rem",
+            "line_height": "tight",
+            "letter_spacing": "loose",
+            "case": "none",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 48,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "static-blog-post-card": {
           "type": "_blog-post-card",
           "static": true,
@@ -91,16 +117,18 @@
           "block_order": []
         }
       },
-      "block_order": [],
+      "block_order": [
+        "title"
+      ],
       "settings": {
         "padding-block-start": 64,
         "padding-block-end": 64
       },
       "custom_css": [
         ".blog-posts {--columns-gap: 60px; --rows-gap: 60px;}",
-        ".blog-post-item:not([data-blog-index$=\"-1\"]) .blog-post-card__image {height: auto; aspect-ratio: 1 / 1;}",
-        "@media screen and (min-width: 750px) {.blog-post-item:not([data-blog-index$=\"-1\"]) {--col-span: 2; --blog-post-card-scale: 0.6;}}",
-        "@media screen and (max-width: 749px) {.blog-posts {--rows-gap: 36px;} .blog-post-card__image {height: auto; aspect-ratio: 1 / 1;}}"
+        ".blog-post-card__image {height: auto; aspect-ratio: 1 / 1;}",
+        "@media screen and (min-width: 750px) {.blog-post-item {--col-span: 2; --blog-post-card-scale: 0.6;} .blog-post-card--horizontal {flex-direction: column;} .blog-post-card--horizontal > .blog-post-card__image-container {flex-basis: auto;} .blog-post-card--horizontal .blog-post-card__content {flex-basis: auto; flex-grow: 0;}}",
+        "@media screen and (max-width: 749px) {.blog-posts {--rows-gap: 36px;}}"
       ]
     }
   },
