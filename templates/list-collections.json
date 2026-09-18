@@ -189,7 +189,10 @@
         "gap": 0,
         "padding-block-start": 64,
         "padding-block-end": 64
-      }
+      },
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.resource-list {--resource-list-row-gap-mobile: 24px;}}"
+      ]
     }
   },
   "order": [
