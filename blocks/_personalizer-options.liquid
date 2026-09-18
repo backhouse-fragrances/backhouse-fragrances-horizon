@@ -327,7 +327,7 @@
     max-height: 16rem;
     overflow-y: auto;
     margin: 0;
-    padding: var(--padding-xs);
+    padding: 0;
     list-style: none;
     background-color: var(--color-background);
     box-shadow: var(--input-box-shadow), var(--shadow-popover);
@@ -362,13 +362,16 @@
     cursor: pointer;
   }
 
-  .personalizer-select__option[aria-selected='true'] {
+  .personalizer-select__option:hover,
+  .personalizer-select__option[data-active] {
     background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 
-  .personalizer-select__option:hover,
-  .personalizer-select__option[data-active] {
-    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  /* The chosen value is inverted so it can never be mistaken for the hovered row. Declared
+     after the hover rule so it also wins while the pointer sits on it. */
+  .personalizer-select__option[aria-selected='true'] {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
   }
 
   /* Multi select -------------------------------------------------------------------- */
