@@ -55,9 +55,9 @@
         "border_radius": 0,
         "padding-block-start": 64,
         "padding-block-end": 64,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 40,
+        "mobile-padding-block-end": 24,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
         "css_class": "",
@@ -317,7 +317,7 @@
       "settings": {
         "columns": 3,
         "mobile_columns": "1",
-        "section_width": "page-width",
+        "section_width": "full-width-padded",
         "columns_gap": 70,
         "background_color": "",
         "controls_style": "none",
@@ -878,7 +878,8 @@
       },
       "block_order": [],
       "custom_css": [
-        ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}"
+        ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}",
+        "@media screen and (max-width: 749px) {.section-carousel {--padding-block-start: 24px !important; --padding-block-end: 24px !important;}}"
       ]
     },
     "divider_archive": {
@@ -931,9 +932,9 @@
         "border_radius": 0,
         "padding-block-start": 64,
         "padding-block-end": 64,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 32,
+        "mobile-padding-block-end": 32,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
         "css_class": "",
