@@ -452,3 +452,22 @@ footer .utilities {
 .slideshow-control.icon-play {
     display: none;
 }
+
+/* Keep summary icons at full size when the label wraps.
+
+   base.css lays every `summary` out as a flex row and summary-icon-styles.liquid gives the
+   caret/plus wrapper a fixed `--icon-size-xs` box, but nothing stops it shrinking, so a long
+   accordion question on a phone squeezes the `+` down to a few pixels. */
+summary .svg-wrapper {
+    flex-shrink: 0;
+}
+
+/* Underline the "Read more" link on blog listing cards.
+
+   _blog-post-description.liquid renders the link with the card's text colour and no
+   decoration; live underlines it. Scoped to `.blog-posts` (the main-blog section) so the
+   homepage's featured-post cards keep their own treatment. */
+.blog-posts .blog-post-card__content-text a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
