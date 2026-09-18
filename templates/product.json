@@ -583,7 +583,7 @@
         "padding-block-start": 48,
         "padding-block-end": 0,
         "custom_mobile_padding": true,
-        "mobile-padding-block-start": 12,
+        "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0
