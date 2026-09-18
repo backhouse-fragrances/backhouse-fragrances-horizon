@@ -479,7 +479,7 @@ summary .svg-wrapper {
    above their select and the next label starts 10px under it. Match the personalizer's
    fields, which sit next to them: body-weight labels, 8px to the control, and a proper
    gap between the groups. */
-#simple-bundles-io-options label {
+#simple-bundles-io-options label:not([hidden]) {
     display: block;
     font-weight: var(--font-body--weight, 300);
     margin-block-end: var(--padding-xs, 8px);

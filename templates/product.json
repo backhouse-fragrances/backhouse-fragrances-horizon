@@ -546,11 +546,23 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               }
+            },
+            "simple_bundles": {
+              "type": "shopify://apps/simple-bundles-kits/blocks/infinite-options-selector/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+              "settings": {
+                "select_placeholder": "Please select an option",
+                "disable_oos_options": true,
+                "show_price_variance": true,
+                "rank_options_by_price_diff": true,
+                "custom_css": "",
+                "custom_js": "(function () {\n  function hideSingleOptions() {\n    var root = document.getElementById('simple-bundles-io-options');\n    if (!root) return;\n    root.querySelectorAll('select').forEach(function (select) {\n      var real = Array.prototype.filter.call(select.options, function (o) { return o.value.trim() !== ''; });\n      if (real.length !== 1) return;\n      if (!real[0].disabled && select.value !== real[0].value) {\n        select.value = real[0].value;\n        select.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      select.hidden = true;\n      var label = root.querySelector('label[for=\"' + select.id + '\"]');\n      if (label) label.hidden = true;\n    });\n  }\n  hideSingleOptions();\n  new MutationObserver(hideSingleOptions).observe(document.body, { childList: true, subtree: true });\n})();"
+              }
             }
           },
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
+            "simple_bundles",
             "personalizer_options",
             "buy_buttons_eYQEYi",
             "text_aEtTtq",
