@@ -267,6 +267,7 @@
     "search_results_view_all": "View all",
     "search_results_view_all_button": "View all",
     "seller_note": "Gifting the backhouse? Click here to leave a gift message or to contact backhouse.",
+    "seller_note_placeholder": "Type your note here:",
     "shipping_policy": "Shipping calculated at checkout.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
     "store_owner_link_html": "Are you the store owner? <a href=\"{{ link }}\">Log in here</a>",
