@@ -68,7 +68,7 @@
     "button_text_case_secondary": "uppercase",
     "cart_type": "drawer",
     "cart_price_font": "subheading",
-    "show_cart_note": false,
+    "show_cart_note": true,
     "show_add_discount_code": true,
     "icon_stroke": "default",
     "palette_input_border": "{{ settings.color_palette.color3 }}",
