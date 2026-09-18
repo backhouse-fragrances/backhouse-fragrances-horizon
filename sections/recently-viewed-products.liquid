@@ -1,0 +1,407 @@
+{% liquid
+  assign viewed_products = blank
+  assign order_ids = blank
+
+  if search.performed
+    assign viewed_products = search.results | where: 'object_type', 'product'
+
+    if search.terms contains 'id:'
+      assign order_ids = search.terms | replace: 'id:', '' | split: ' OR '
+    endif
+  endif
+
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<recently-viewed-products
+  section-id="{{ section.id }}"
+  hidden
+>
+  <div
+    class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  ></div>
+
+  <div
+    data-testid="recently-viewed-products"
+    class="
+      section
+      section--{{ section.settings.section_width }}
+      {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
+      section-resource-list
+      spacing-style
+      gap-style
+    "
+    style="
+      {% render 'spacing-style', settings: section.settings %}
+      {% render 'gap-style', value: section.settings.gap %}
+    "
+  >
+    <div class="section-resource-list__header">
+      {%- content_for 'block', type: '_product-list-content', id: 'static-header' -%}
+    </div>
+
+    {% capture list_items %}
+      {% assign rendered = 0 %}
+      {% if order_ids != blank %}
+        {% for _id in order_ids %}
+          {% assign int_id = _id | times: 1 %}
+          {% assign product = viewed_products | find: 'id', int_id %}
+          {% if product != blank %}
+            {% if rendered > 0 %}<!--@list/split-->{% endif %}
+            <div
+              class="resource-list__item"
+              data-product-id="{{ product.id }}"
+            >
+              {% content_for 'block',
+                type: '_product-card',
+                id: 'static-product-card',
+                closest.product: product,
+                product_view_context: 'collection'
+              %}
+            </div>
+            {% assign rendered = rendered | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endcapture %}
+
+    {% liquid
+      assign list_items_array = list_items | strip | split: '<!--@list/split-->'
+      assign slide_count = rendered
+    %}
+
+    {% render 'resource-list',
+      list_items: list_items,
+      list_items_array: list_items_array,
+      settings: section.settings,
+      slide_count: slide_count,
+      content_type: 'products',
+      test_id: 'recently-viewed-resource-list-grid'
+    %}
+
+    <div
+      class="section-resource-list__content"
+      style="--horizontal-alignment: {{ section.settings.horizontal_alignment }};"
+    >
+      {%- content_for 'blocks' -%}
+    </div>
+  </div>
+</recently-viewed-products>
+
+<script type="module">
+  import { RecentlyViewed } from '@theme/recently-viewed-products';
+
+  if (!customElements.get('recently-viewed-products')) {
+    customElements.define(
+      'recently-viewed-products',
+      class RecentlyViewedProducts extends HTMLElement {
+        connectedCallback() {
+          this.#renderRecentlyViewed();
+        }
+
+        /**
+         * Fetches this section re-rendered through the search route, filtered to the
+         * locally stored recently viewed product ids, and swaps it in.
+         */
+        async #renderRecentlyViewed() {
+          const viewedProducts = RecentlyViewed.getProducts();
+          if (viewedProducts.length === 0) return;
+
+          const sectionId = this.getAttribute('section-id');
+          if (!sectionId) return;
+
+          const url = new URL(Theme.routes.search_url, window.location.origin);
+          url.searchParams.set('q', viewedProducts.map((/** @type {string} */ id) => `id:${id}`).join(' OR '));
+          url.searchParams.set('resources[type]', 'product');
+          url.searchParams.set('section_id', sectionId);
+
+          let html;
+          try {
+            const response = await fetch(url);
+            if (!response.ok) return;
+            html = await response.text();
+          } catch (error) {
+            return;
+          }
+
+          const parsedDocument = new DOMParser().parseFromString(html, 'text/html');
+          const newRoot = parsedDocument.querySelector('recently-viewed-products');
+          if (!newRoot || !newRoot.querySelector('[data-product-id]')) return;
+
+          this.innerHTML = newRoot.innerHTML;
+          this.removeAttribute('hidden');
+        }
+      }
+    );
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Recently viewed products",
+  "class": "ui-test-recently-viewed-products",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "t:settings.layout_type",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:options.grid"
+        },
+        {
+          "value": "carousel",
+          "label": "t:options.carousel"
+        },
+        {
+          "value": "editorial",
+          "label": "t:options.editorial"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_on_mobile",
+      "label": "t:settings.carousel_on_mobile",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type != 'carousel' }}"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "visible_if": "{{ section.settings.layout_type != 'editorial' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_contain_width",
+      "label": "Contain to section width",
+      "info": "Fits the chosen number of columns exactly, with no peek of the next slide. Desktop only.",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "t:settings.mobile_columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:options.one_number"
+        },
+        {
+          "value": "2",
+          "label": "t:options.two_number"
+        }
+      ],
+      "default": "2",
+      "visible_if": "{{ section.settings.layout_type == 'grid' and section.settings.carousel_on_mobile == false }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_card_size",
+      "label": "t:settings.mobile_columns",
+      "options": [
+        {
+          "value": "60cqw",
+          "label": "t:options.one_number"
+        },
+        {
+          "value": "44cqw",
+          "label": "t:options.two_number"
+        }
+      ],
+      "default": "60cqw",
+      "visible_if": "{{ section.settings.layout_type == 'carousel' or section.settings.carousel_on_mobile == true }}"
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.layout_type == 'grid' or section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "range",
+      "id": "rows_gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.layout_type == 'grid'}}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.carousel_navigation",
+      "visible_if": "{{ section.settings.layout_type == 'carousel' or section.settings.carousel_on_mobile == true }}"
+    },
+    {
+      "type": "select",
+      "id": "icons_style",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "arrow",
+          "label": "t:options.arrows"
+        },
+        {
+          "value": "chevron",
+          "label": "t:options.chevrons"
+        },
+        {
+          "value": "arrows_large",
+          "label": "t:options.arrows_large"
+        },
+        {
+          "value": "chevron_large",
+          "label": "t:options.chevron_large"
+        },
+        {
+          "value": "none",
+          "label": "t:options.none"
+        }
+      ],
+      "default": "arrow",
+      "visible_if": "{{ section.settings.layout_type == 'carousel' or section.settings.carousel_on_mobile == true }}"
+    },
+    {
+      "type": "select",
+      "id": "icons_shape",
+      "label": "t:settings.icon_background",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "circle",
+          "label": "t:options.circle"
+        },
+        {
+          "value": "square",
+          "label": "t:options.square"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.icons_style != 'none' and section.settings.layout_type == 'carousel' or section.settings.carousel_on_mobile == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.section_layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        },
+        {
+          "value": "full-width-padded",
+          "label": "Full width with margins"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently viewed products"
+    }
+  ]
+}
+{% endschema %}
