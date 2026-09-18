@@ -228,8 +228,8 @@
       "settings": {
         "movement_direction": "normal",
         "background_color": "",
-        "padding-block-start": 8,
-        "padding-block-end": 8,
+        "padding-block-start": 16,
+        "padding-block-end": 32,
         "gap_between_elements": 100
       },
       "blocks": {
@@ -265,36 +265,12 @@
             "open_in_new_tab": false,
             "icon_color": ""
           }
-        },
-        "logo_4": {
-          "type": "icon",
-          "settings": {
-            "icon": "apple",
-            "image_upload": "shopify://shop_images/orangecoast-logo.png",
-            "width": 92,
-            "link": "",
-            "open_in_new_tab": false,
-            "icon_color": ""
-          }
-        },
-        "logo_5": {
-          "type": "icon",
-          "settings": {
-            "icon": "apple",
-            "image_upload": "shopify://shop_images/2024-Naples-Getaway-Giveaway-Logos2.jpg",
-            "width": 92,
-            "link": "",
-            "open_in_new_tab": false,
-            "icon_color": ""
-          }
         }
       },
       "block_order": [
         "logo_1",
         "logo_2",
-        "logo_3",
-        "logo_4",
-        "logo_5"
+        "logo_3"
       ]
     },
     "divider_press": {
