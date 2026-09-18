@@ -4005,8 +4005,8 @@
       "type": "divider",
       "name": "t:names.divider",
       "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
+        "background_color": "{{ settings.color_palette.foreground }}",
+        "divider_color": "#ffffff26",
         "section_width": "full-width",
         "thickness": 0.5,
         "corner_radius": "square",
