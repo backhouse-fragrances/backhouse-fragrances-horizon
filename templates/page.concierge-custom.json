@@ -1655,8 +1655,8 @@
                     "image_ratio": "square",
                     "width": "fill",
                     "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 75,
                     "height": "fit",
                     "border": "none",
                     "border_width": 1,
@@ -1680,7 +1680,7 @@
                     "type_preset": "custom",
                     "font": "var(--font-accent--family)",
                     "font_size": "1.25rem",
-                    "enable_mobile_size": false,
+                    "enable_mobile_size": true,
                     "mobile_font_size": "1rem",
                     "line_height": "loose",
                     "letter_spacing": "normal",
@@ -1706,7 +1706,7 @@
                 "author": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&mdash; Kelly, AEG</p>",
+                    "text": "<p>— Kelly, AEG</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1804,8 +1804,8 @@
                     "image_ratio": "square",
                     "width": "fill",
                     "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 75,
                     "height": "fit",
                     "border": "none",
                     "border_width": 1,
@@ -1829,7 +1829,7 @@
                     "type_preset": "custom",
                     "font": "var(--font-accent--family)",
                     "font_size": "1.25rem",
-                    "enable_mobile_size": false,
+                    "enable_mobile_size": true,
                     "mobile_font_size": "1rem",
                     "line_height": "loose",
                     "letter_spacing": "normal",
@@ -1953,8 +1953,8 @@
                     "image_ratio": "square",
                     "width": "fill",
                     "custom_width": 100,
-                    "width_mobile": "fill",
-                    "custom_width_mobile": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 75,
                     "height": "fit",
                     "border": "none",
                     "border_width": 1,
@@ -1978,7 +1978,7 @@
                     "type_preset": "custom",
                     "font": "var(--font-accent--family)",
                     "font_size": "1.25rem",
-                    "enable_mobile_size": false,
+                    "enable_mobile_size": true,
                     "mobile_font_size": "1rem",
                     "line_height": "loose",
                     "letter_spacing": "normal",
@@ -2270,6 +2270,21 @@
         "padding-block-end": 0
       }
     },
+    "divider_occasions": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "marquee_occasions": {
       "type": "marquee",
       "blocks": {
@@ -2521,6 +2536,21 @@
         "padding-block-start": 28,
         "padding-block-end": 28,
         "gap_between_elements": 80
+      }
+    },
+    "divider_logistics": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "media_logistics": {
@@ -2999,6 +3029,21 @@
         "padding-block-end": 0
       }
     },
+    "divider_faq": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_faq": {
       "type": "section",
       "blocks": {
@@ -3075,6 +3120,9 @@
             "icon": "plus",
             "dividers": true,
             "divider_color": "",
+            "enable_load_more": true,
+            "visible_count": 4,
+            "load_more_label": "Load More",
             "type_preset": "",
             "background_color": "",
             "text_color": "",
@@ -3086,10 +3134,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "enable_load_more": true,
-            "visible_count": 4,
-            "load_more_label": "Load More"
+            "padding-inline-end": 0
           },
           "blocks": {
             "faq_1": {
@@ -3627,6 +3672,21 @@
         "section_id": ""
       }
     },
+    "divider_contact": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_contact": {
       "type": "section",
       "blocks": {
@@ -3941,6 +4001,21 @@
         "section_id": ""
       }
     },
+    "divider_ask_ai": {
+      "type": "divider",
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_ask_ai": {
       "type": "section",
       "blocks": {
@@ -4166,6 +4241,9 @@
         "intro",
         "buttons"
       ],
+      "custom_css": [
+        ".section-content-wrapper {max-width: 980px; margin-inline: auto;}"
+      ],
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -4205,10 +4283,7 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
-      "custom_css": [
-        ".section-content-wrapper {max-width: 980px; margin-inline: auto;}"
-      ]
+      }
     },
     "main": {
       "type": "main-page",
@@ -4266,81 +4341,6 @@
         "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
-      }
-    },
-    "divider_occasions": {
-      "type": "divider",
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "divider_logistics": {
-      "type": "divider",
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "divider_faq": {
-      "type": "divider",
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "divider_contact": {
-      "type": "divider",
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "divider_ask_ai": {
-      "type": "divider",
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
       }
     }
   },

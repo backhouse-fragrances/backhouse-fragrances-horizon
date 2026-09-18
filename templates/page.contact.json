@@ -22,48 +22,6 @@
     },
     "section_portrait": {
       "type": "section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "narrow",
-        "full_width_on_mobile": false,
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video": "",
-        "video_position": "cover",
-        "background_image": "",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 56,
-        "padding-block-end": 16,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": false,
-        "section_id": ""
-      },
       "blocks": {
         "portrait": {
           "type": "image",
@@ -95,10 +53,7 @@
       "custom_css": [
         ".image-block {max-width: 260px; margin-inline: auto;}",
         "@media screen and (max-width: 749px) {.image-block {max-width: 400px;}}"
-      ]
-    },
-    "section_contact": {
-      "type": "section",
+      ],
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -111,13 +66,12 @@
         "gap": 12,
         "enable_mobile_gap": false,
         "mobile_gap": 12,
-        "section_width": "page-width",
+        "section_width": "narrow",
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
         "background_color": "",
-        "video": "",
         "video_position": "cover",
         "background_image": "",
         "background_image_position": "cover",
@@ -130,8 +84,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 16,
-        "padding-block-end": 72,
+        "padding-block-start": 56,
+        "padding-block-end": 16,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
@@ -140,7 +94,10 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
+      }
+    },
+    "section_contact": {
+      "type": "section",
       "blocks": {
         "heading": {
           "type": "text",
@@ -249,11 +206,7 @@
           "type": "custom-liquid",
           "name": "t:names.custom_liquid",
           "settings": {
-            "custom_liquid": "<style>#shopify-chat, shopify-chat {display: none !important;}</style>",
-            "background_color": "",
-            "section_width": "page-width",
-            "padding-block-start": 0,
-            "padding-block-end": 0
+            "custom_liquid": "<style>#shopify-chat, shopify-chat {display: none !important;}</style>"
           }
         }
       },
@@ -266,7 +219,48 @@
       "custom_css": [
         ".contact-form__input--textarea {min-height: 140px; height: 140px;}",
         ".section-content-wrapper {max-width: 680px; margin-inline: auto;}"
-      ]
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-width",
+        "full_width_on_mobile": false,
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image": "",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 16,
+        "padding-block-end": 72,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
+      }
     }
   },
   "order": [
