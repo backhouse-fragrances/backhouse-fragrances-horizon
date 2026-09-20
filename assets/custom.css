@@ -493,3 +493,14 @@ summary .svg-wrapper {
 #simple-bundles-io-options select:last-child {
     margin-block-end: 0;
 }
+
+/* Collapse the Simple Bundles app block when it has nothing to show.
+
+   The block renders on every product (its script tag and an empty options container), and
+   on bundles whose single-option pickers are hidden it is still a zero-height flex child,
+   so the product details column pays a gap above and below it. Hide the wrapper itself
+   unless at least one picker is actually visible. Scoped to this block's id so the other
+   app blocks in the column (reviews) are untouched. */
+.shopify-app-block[id$="__simple_bundles"]:not(:has(select:not([hidden]))) {
+    display: none;
+}
