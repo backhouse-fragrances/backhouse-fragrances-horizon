@@ -3,7 +3,7 @@
 
   Reads `product.metafields.personalizer.options.value` - an array of
   `{ id, label, type, choices, required, heading }` - and renders one control per option:
-  `text` a text field, `dropdown` a single-select, `multiselect` and `checkbox` a checkbox
+  `text` a text field, `dropdown` a single-select, `radio` a radio group, `multiselect` and `checkbox` a checkbox
   list. `label` is always the line item property key; `heading` is set on `checkbox`
   options and is the wording shown to the shopper, so the key can stay an internal name.
   Each control carries
@@ -178,6 +178,35 @@
             </div>
           </personalizer-select>
 
+        {% when 'radio' %}
+          {%- comment -%}
+            Radios share the property name, so the browser submits the checked value under
+            the key on its own, and  on each radio makes the group as a whole
+            required - constraint validation covers it without any script.
+          {%- endcomment -%}
+          <div class="personalizer-option">
+            <fieldset class="personalizer-option__fieldset">
+              <legend class="personalizer-option__label">{{ label_content }}</legend>
+              <ul class="personalizer-choices" role="list">
+                {% for choice in personalizer_option.choices %}
+                  <li>
+                    <label class="personalizer-choice">
+                      <input
+                        type="radio"
+                        name="{{ property_name | escape }}"
+                        value="{{ choice | escape }}"
+                        form="{{ product_form_id }}"
+                        {% if personalizer_option.required %}
+                          required
+                        {% endif %}
+                      >
+                      <span>{{ choice | escape }}</span>
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </fieldset>
+          </div>
         {% when 'multiselect' or 'checkbox' %}
           {%- comment -%}
             Checkboxes sharing one property name would collide - the cart keeps a single
@@ -271,6 +300,13 @@
 
   .personalizer-select__ui {
     position: relative;
+  }
+
+  /* Before the upgrade the native select is the control, so it takes the full column
+     rather than the width of its widest option. */
+  .personalizer-select__native {
+    display: block;
+    width: 100%;
   }
 
   /* No upgrade, no custom UI: the native select is left to do the job. */
