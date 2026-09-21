@@ -19,6 +19,12 @@
   so add to cart is blocked and the message is announced the way every other invalid field
   on the page is. See the notes on each control for how that is wired.
 
+  An option with `conditionOptionId` is shown only while the option it names holds a
+  matching value: `conditionOperator` is `equals` (the default), `not_equals` or
+  `contains`, tested against `conditionValue`. Such an option renders hidden with its
+  controls disabled and the script lifts both once the condition holds - so it is never
+  submitted, and never blocks add to cart as a required field the shopper could not see.
+
   Replaces the Infinite Options app widget, which injects its own container regardless of
   whether its app embed is enabled.
 {%- enddoc -%}
@@ -50,7 +56,7 @@
     fetchpriority="low"
   ></script>
 
-  <div
+  <personalizer-options
     class="personalizer spacing-style"
     style="{% render 'spacing-style', settings: block_settings %}"
     {{ block.shopify_attributes }}
@@ -78,7 +84,24 @@
         if personalizer_option.choices contains default_value
           assign default_choice = default_value
         endif
+
+        # A conditional option starts hidden with its controls disabled; the script lifts
+        # both once the option it depends on holds a matching value.
+        assign is_conditional = false
+        if personalizer_option.conditionOptionId != blank
+          assign is_conditional = true
+        endif
       %}
+
+      {%- capture option_attributes -%}
+        data-personalizer-option="{{ personalizer_option.id | escape }}"
+        {%- if is_conditional %}
+          data-condition-option="{{ personalizer_option.conditionOptionId | escape }}"
+          data-condition-operator="{{ personalizer_option.conditionOperator | default: 'equals' | escape }}"
+          data-condition-value="{{ personalizer_option.conditionValue | escape }}"
+          hidden
+        {%- endif -%}
+      {%- endcapture -%}
 
       {%- capture label_content -%}
         {{- display_label | escape -}}
@@ -89,7 +112,7 @@
 
       {% case personalizer_option.type %}
         {% when 'text' %}
-          <div class="personalizer-option">
+          <div class="personalizer-option" {{ option_attributes }}>
             <label class="personalizer-option__label" for="{{ field_id }}">{{ label_content }}</label>
             <div class="field">
               <input
@@ -100,6 +123,9 @@
                 form="{{ product_form_id }}"
                 value="{{ default_value | escape }}"
                 autocomplete="off"
+                {% if is_conditional %}
+                  disabled
+                {% endif %}
                 {% if personalizer_option.placeholder != blank %}
                   placeholder="{{ personalizer_option.placeholder | escape }}"
                 {% endif %}
@@ -125,6 +151,7 @@
           {%- endcomment -%}
           <personalizer-select
             class="personalizer-option personalizer-select"
+            {{ option_attributes }}
             {% if default_choice %}
               data-chosen
             {% endif %}
@@ -140,6 +167,9 @@
                 name="{{ property_name | escape }}"
                 form="{{ product_form_id }}"
                 ref="native"
+                {% if is_conditional %}
+                  disabled
+                {% endif %}
                 {% if personalizer_option.required %}
                   required
                 {% endif %}
@@ -215,7 +245,7 @@
             the key on its own, and  on each radio makes the group as a whole
             required - constraint validation covers it without any script.
           {%- endcomment -%}
-          <div class="personalizer-option">
+          <div class="personalizer-option" {{ option_attributes }}>
             <fieldset class="personalizer-option__fieldset">
               <legend class="personalizer-option__label">{{ label_content }}</legend>
               <ul class="personalizer-choices" role="list">
@@ -232,6 +262,9 @@
                         {% endif %}
                         {% if personalizer_option.required %}
                           required
+                        {% endif %}
+                        {% if is_conditional %}
+                          disabled
                         {% endif %}
                       >
                       <span>{{ choice | escape }}</span>
@@ -255,6 +288,7 @@
           {%- endcomment -%}
           <personalizer-checkboxes
             class="personalizer-option"
+            {{ option_attributes }}
             data-message="{{ block_settings.required_message | default: 'Please choose at least one option.' | escape }}"
             {% if personalizer_option.required %}
               data-required
@@ -269,6 +303,9 @@
                 form="{{ product_form_id }}"
                 value=""
                 ref="value"
+                {% if is_conditional %}
+                  disabled
+                {% endif %}
               >
 
               <ul class="personalizer-choices" role="list">
@@ -282,6 +319,9 @@
                         {% if default_choices contains choice %}
                           checked
                         {% endif %}
+                        {% if is_conditional %}
+                          disabled
+                        {% endif %}
                         ref="boxes[]"
                         on:change="/sync"
                       >
@@ -294,17 +334,20 @@
           </personalizer-checkboxes>
       {% endcase %}
     {% endfor %}
-  </div>
+  </personalizer-options>
 {% endif %}
 
 {% stylesheet %}
   .personalizer {
     display: flex;
     flex-direction: column;
+    gap: var(--padding-lg);
   }
 
-  .personalizer-option + .personalizer-option {
-    margin-top: var(--padding-lg);
+  /* A conditional option waits hidden for the script. The wrappers below set their own
+     `display`, which would otherwise win over the attribute. */
+  .personalizer-option[hidden] {
+    display: none;
   }
 
   .personalizer-option__label {

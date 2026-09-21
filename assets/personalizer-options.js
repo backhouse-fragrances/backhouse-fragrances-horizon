@@ -1,6 +1,121 @@
 import { Component } from '@theme/component';
 
 /**
+ * The block as a whole, showing and hiding the options that carry a condition.
+ *
+ * An option with `data-condition-option` starts hidden with its controls disabled, and
+ * stays that way until the option it names holds a matching value. Disabled is what keeps
+ * it honest: a disabled control is left out of the submission and barred from constraint
+ * validation, so a required field the shopper never saw can't block add to cart. Every
+ * control in the block fires `change` on a native element - the custom select dispatches
+ * one on its `<select>` - so one listener here covers all of them.
+ *
+ * @extends Component<{}>
+ */
+export class PersonalizerOptions extends Component {
+  requiredRefs = [];
+
+  /** @type {AbortController | undefined} */
+  #abortController;
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.#abortController = new AbortController();
+    const { signal } = this.#abortController;
+    this.addEventListener('change', this.update, { signal });
+    this.addEventListener('input', this.update, { signal });
+
+    this.update();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#abortController?.abort();
+  }
+
+  /**
+   * Re-evaluates every condition. An arrow so it can be handed to addEventListener as is
+   * and still see `this`.
+   */
+  update = () => {
+    const conditional = [...this.querySelectorAll('[data-condition-option]')];
+
+    // A source may itself be conditional, so one pass can leave a chain half settled.
+    // Each pass settles at least one more link, so the count bounds the passes needed.
+    for (let pass = 0; pass <= conditional.length; pass++) {
+      let changed = false;
+
+      for (const option of conditional) {
+        if (!(option instanceof HTMLElement)) continue;
+
+        const { conditionOption = '', conditionOperator, conditionValue } = option.dataset;
+        const source = this.querySelector(`[data-personalizer-option="${CSS.escape(conditionOption)}"]`);
+        const visible =
+          source instanceof HTMLElement &&
+          !source.hidden &&
+          this.#matches(this.#valuesOf(source), conditionOperator, conditionValue);
+
+        if (option.hidden === !visible) continue;
+
+        option.hidden = !visible;
+        for (const control of option.querySelectorAll('input, select')) {
+          if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
+            control.disabled = !visible;
+          }
+        }
+        changed = true;
+      }
+
+      if (!changed) break;
+    }
+  };
+
+  /**
+   * The values an option holds right now: the text typed, the choice picked, or every box
+   * ticked. Hidden inputs are skipped - the checkbox group's is a copy of its boxes.
+   * @param {HTMLElement} option
+   * @returns {string[]}
+   */
+  #valuesOf(option) {
+    const values = [];
+
+    for (const control of option.querySelectorAll('input, select')) {
+      if (!(control instanceof HTMLInputElement || control instanceof HTMLSelectElement)) continue;
+      if (control.type === 'hidden') continue;
+
+      if (control.type === 'checkbox' || control.type === 'radio') {
+        if (control.checked) values.push(control.value);
+      } else if (control.value) {
+        values.push(control.value);
+      }
+    }
+
+    return values;
+  }
+
+  /**
+   * @param {string[]} values
+   * @param {string | undefined} operator - `equals` (the default), `not_equals` or `contains`.
+   * @param {string | undefined} target
+   */
+  #matches(values, operator, target = '') {
+    switch (operator) {
+      case 'contains':
+        return values.join(', ').toLowerCase().includes(target.toLowerCase());
+      case 'not_equals':
+        return !values.includes(target);
+      default:
+        return values.includes(target);
+    }
+  }
+}
+
+if (!customElements.get('personalizer-options')) {
+  customElements.define('personalizer-options', PersonalizerOptions);
+}
+
+/**
  * A single-select dropdown for a personalizer option.
  *
  * The native `<select>` is the source of truth: it carries the `properties[...]` name and
