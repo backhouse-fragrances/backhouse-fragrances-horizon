@@ -212,6 +212,29 @@
               },
               "blocks": {}
             },
+            "simple_bundles": {
+              "type": "shopify://apps/simple-bundles-kits/blocks/infinite-options-selector/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+              "settings": {
+                "select_placeholder": "Please select an option",
+                "disable_oos_options": true,
+                "show_price_variance": true,
+                "rank_options_by_price_diff": true,
+                "custom_css": "",
+                "custom_js": "(function () {\n  function hideSingleOptions() {\n    var root = document.getElementById('simple-bundles-io-options');\n    if (!root) return;\n    root.querySelectorAll('select').forEach(function (select) {\n      var real = Array.prototype.filter.call(select.options, function (o) { return o.value.trim() !== ''; });\n      if (real.length !== 1) return;\n      if (!real[0].disabled && select.value !== real[0].value) {\n        select.value = real[0].value;\n        select.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      select.hidden = true;\n      var label = root.querySelector('label[for=\"' + select.id + '\"]');\n      if (label) label.hidden = true;\n    });\n  }\n  hideSingleOptions();\n  new MutationObserver(hideSingleOptions).observe(document.body, { childList: true, subtree: true });\n})();"
+              }
+            },
+            "personalizer_options": {
+              "type": "_personalizer-options",
+              "settings": {
+                "placeholder": "Choose…",
+                "required_message": "Please choose at least one option.",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -273,6 +296,40 @@
               },
               "block_order": []
             },
+            "text_Ab3pyT": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Can't decide? Click <a href=\"https://backhousefragrances.com/pages/corporate-gifting#gifting-form\" target=\"_blank\" title=\"https://backhousefragrances.com/pages/corporate-gifting#gifting-form\"><strong>here</strong></a> to get in touch with the backhouse team.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
+              },
+              "blocks": {}
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
@@ -326,6 +383,9 @@
                 "icon": "plus",
                 "dividers": true,
                 "divider_color": "#dddddd",
+                "enable_load_more": false,
+                "visible_count": 4,
+                "load_more_label": "Load More",
                 "type_preset": "h6",
                 "background_color": "",
                 "text_color": "",
@@ -535,28 +595,6 @@
                 "row_product_details",
                 "row_shipping_exchanges"
               ]
-            },
-            "personalizer_options": {
-              "type": "_personalizer-options",
-              "settings": {
-                "placeholder": "Choose…",
-                "required_message": "Please choose at least one option.",
-                "padding-block-start": 0,
-                "padding-block-end": 8,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
-            },
-            "simple_bundles": {
-              "type": "shopify://apps/simple-bundles-kits/blocks/infinite-options-selector/e553276b-36b2-446d-b80a-aa47fe5f96ac",
-              "settings": {
-                "select_placeholder": "Please select an option",
-                "disable_oos_options": true,
-                "show_price_variance": true,
-                "rank_options_by_price_diff": true,
-                "custom_css": "",
-                "custom_js": "(function () {\n  function hideSingleOptions() {\n    var root = document.getElementById('simple-bundles-io-options');\n    if (!root) return;\n    root.querySelectorAll('select').forEach(function (select) {\n      var real = Array.prototype.filter.call(select.options, function (o) { return o.value.trim() !== ''; });\n      if (real.length !== 1) return;\n      if (!real[0].disabled && select.value !== real[0].value) {\n        select.value = real[0].value;\n        select.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      select.hidden = true;\n      var label = root.querySelector('label[for=\"' + select.id + '\"]');\n      if (label) label.hidden = true;\n    });\n  }\n  hideSingleOptions();\n  new MutationObserver(hideSingleOptions).observe(document.body, { childList: true, subtree: true });\n})();"
-              }
             }
           },
           "block_order": [
@@ -565,6 +603,7 @@
             "simple_bundles",
             "personalizer_options",
             "buy_buttons_eYQEYi",
+            "text_Ab3pyT",
             "text_aEtTtq",
             "share_buttons",
             "accordion_product_info"
@@ -647,6 +686,21 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 0
+      }
+    },
+    "divider_kRb8Tn": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 62,
+        "padding-block-end": 16
       }
     },
     "product_recommendations_qggXJq": {
@@ -859,21 +913,6 @@
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
-    },
-    "divider_kRb8Tn": {
-      "type": "divider",
-      "name": "t:names.divider_section",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 62,
-        "padding-block-end": 16
       }
     }
   },
