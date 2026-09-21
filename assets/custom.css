@@ -477,11 +477,12 @@ summary .svg-wrapper {
    The app embed injects a bare label/select pair per bundle component into the product
    form (`#simple-bundles-io-options`) with no layout of its own: inline labels sit 2px
    above their select and the next label starts 10px under it. Match the personalizer's
-   fields, which sit next to them: body-weight labels, 8px to the control, and a proper
-   gap between the groups. */
+   fields, which sit next to them: uppercase heading-weight labels, 8px to the control,
+   and a proper gap between the groups. */
 #simple-bundles-io-options label:not([hidden]) {
     display: block;
-    font-weight: var(--font-body--weight, 300);
+    font-weight: var(--font-heading--weight, 400);
+    text-transform: uppercase;
     margin-block-end: var(--padding-xs, 8px);
 }
 
