@@ -85,6 +85,10 @@
           assign default_choice = default_value
         endif
 
+        # The app lets the same choice be entered twice. Rendered twice it would show two
+        # rows both marked as the selected value, so each choice is kept once.
+        assign choices = personalizer_option.choices | uniq
+
         # A conditional option starts hidden with its controls disabled; the script lifts
         # both once the option it depends on holds a matching value.
         assign is_conditional = false
@@ -175,7 +179,7 @@
                 {% endif %}
               >
                 <option value="">{{ option_placeholder | escape }}</option>
-                {% for choice in personalizer_option.choices %}
+                {% for choice in choices %}
                   <option
                     value="{{ choice | escape }}"
                     {% if choice == default_choice %}
@@ -222,7 +226,7 @@
                 ref="menu"
                 hidden
               >
-                {% for choice in personalizer_option.choices %}
+                {% for choice in choices %}
                   <li
                     class="personalizer-select__option"
                     id="{{ field_id }}-option-{{ forloop.index0 }}"
@@ -249,7 +253,7 @@
             <fieldset class="personalizer-option__fieldset">
               <legend class="personalizer-option__label">{{ label_content }}</legend>
               <ul class="personalizer-choices" role="list">
-                {% for choice in personalizer_option.choices %}
+                {% for choice in choices %}
                   <li>
                     <label class="personalizer-choice">
                       <input
@@ -309,7 +313,7 @@
               >
 
               <ul class="personalizer-choices" role="list">
-                {% for choice in personalizer_option.choices %}
+                {% for choice in choices %}
                   <li>
                     <label class="personalizer-choice">
                       <input
@@ -485,11 +489,10 @@
     background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 
-  /* The chosen value is inverted so it can never be mistaken for the hovered row. Declared
-     after the hover rule so it also wins while the pointer sits on it. */
+  /* The chosen row sits a step darker than the hovered one so the two never read the same.
+     Declared after the hover rule so it also wins while the pointer sits on it. */
   .personalizer-select__option[aria-selected='true'] {
-    background-color: var(--color-foreground);
-    color: var(--color-background);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));
   }
 
   /* Multi select -------------------------------------------------------------------- */
