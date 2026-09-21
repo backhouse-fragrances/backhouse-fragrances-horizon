@@ -2,11 +2,15 @@
   Renders a product's personalizer options as line item properties.
 
   Reads `product.metafields.personalizer.options.value` - an array of
-  `{ id, label, type, choices, required, heading }` - and renders one control per option:
-  `text` a text field, `dropdown` a single-select, `radio` a radio group, `multiselect` and `checkbox` a checkbox
-  list. `label` is always the line item property key; `heading` is set on `checkbox`
-  options and is the wording shown to the shopper, so the key can stay an internal name.
-  Each control carries
+  `{ id, label, type, choices, required, heading, placeholder, defaultChoice }` - and
+  renders one control per option: `text` a text field, `dropdown` a single-select,
+  `radio` a radio group, `multiselect` and `checkbox` a checkbox list. `label` is always
+  the line item property key; `heading` is set on `checkbox` options and is the wording
+  shown to the shopper, so the key can stay an internal name. `placeholder` overrides the
+  block's dropdown placeholder for that one option and is the hint text of a `text` field.
+  `defaultChoice` pre-selects a choice - one value for `text`, `dropdown` and `radio`, one
+  or a list for `multiselect` and `checkbox` - and is ignored when it names something
+  that is not in `choices`. Each control carries
   `name="properties[<label>]"` and `form="BuyButtons-ProductForm-<section id>"`, so its
   value rides along with add to cart even though the control lives outside the `<form>`
   element, the same way Horizon's own product-custom-property block does.
@@ -62,6 +66,18 @@
         if personalizer_option.heading != blank
           assign display_label = personalizer_option.heading
         endif
+
+        # An option's own placeholder wins over the block setting. `defaultChoice` may be a
+        # string or a list: `join` wraps a lone string, so both come out of `split` as an
+        # array. A default that is not one of the choices is dropped rather than shown as
+        # chosen; a text field has no choices and takes the value as typed.
+        assign option_placeholder = personalizer_option.placeholder | default: placeholder
+        assign default_choices = personalizer_option.defaultChoice | join: '||' | split: '||'
+        assign default_value = default_choices | first
+        assign default_choice = nil
+        if personalizer_option.choices contains default_value
+          assign default_choice = default_value
+        endif
       %}
 
       {%- capture label_content -%}
@@ -82,8 +98,11 @@
                 id="{{ field_id }}"
                 name="{{ property_name | escape }}"
                 form="{{ product_form_id }}"
-                value=""
+                value="{{ default_value | escape }}"
                 autocomplete="off"
+                {% if personalizer_option.placeholder != blank %}
+                  placeholder="{{ personalizer_option.placeholder | escape }}"
+                {% endif %}
                 {% if personalizer_option.required %}
                   required
                 {% endif %}
@@ -104,7 +123,12 @@
             select in flow, at the trigger's own size, puts the browser's validation bubble
             exactly where the shopper is looking.
           {%- endcomment -%}
-          <personalizer-select class="personalizer-option personalizer-select">
+          <personalizer-select
+            class="personalizer-option personalizer-select"
+            {% if default_choice %}
+              data-chosen
+            {% endif %}
+          >
             <label class="personalizer-option__label" id="{{ field_id }}-label" for="{{ field_id }}">
               {{ label_content }}
             </label>
@@ -120,9 +144,16 @@
                   required
                 {% endif %}
               >
-                <option value="">{{ placeholder | escape }}</option>
+                <option value="">{{ option_placeholder | escape }}</option>
                 {% for choice in personalizer_option.choices %}
-                  <option value="{{ choice | escape }}">{{ choice | escape }}</option>
+                  <option
+                    value="{{ choice | escape }}"
+                    {% if choice == default_choice %}
+                      selected
+                    {% endif %}
+                  >
+                    {{- choice | escape -}}
+                  </option>
                 {% endfor %}
               </select>
 
@@ -141,7 +172,7 @@
                 on:keydown="/handleTriggerKeydown"
               >
                 <span class="personalizer-select__value" id="{{ field_id }}-value" ref="value">
-                  {{- placeholder | escape -}}
+                  {{- default_choice | default: option_placeholder | escape -}}
                 </span>
                 <svg
                   aria-hidden="true"
@@ -166,7 +197,7 @@
                     class="personalizer-select__option"
                     id="{{ field_id }}-option-{{ forloop.index0 }}"
                     role="option"
-                    aria-selected="false"
+                    aria-selected="{% if choice == default_choice %}true{% else %}false{% endif %}"
                     data-value="{{ choice | escape }}"
                     ref="options[]"
                     on:click="/choose/{{ forloop.index0 }}"
@@ -196,6 +227,9 @@
                         name="{{ property_name | escape }}"
                         value="{{ choice | escape }}"
                         form="{{ product_form_id }}"
+                        {% if choice == default_choice %}
+                          checked
+                        {% endif %}
                         {% if personalizer_option.required %}
                           required
                         {% endif %}
@@ -245,6 +279,9 @@
                         type="checkbox"
                         value="{{ choice | escape }}"
                         form="{{ product_form_id }}"
+                        {% if default_choices contains choice %}
+                          checked
+                        {% endif %}
                         ref="boxes[]"
                         on:change="/sync"
                       >
@@ -449,7 +486,8 @@
       "type": "text",
       "id": "placeholder",
       "label": "Dropdown placeholder",
-      "default": "Choose…"
+      "default": "Choose…",
+      "info": "An option that sets its own placeholder in the metafield overrides this."
     },
     {
       "type": "text",
