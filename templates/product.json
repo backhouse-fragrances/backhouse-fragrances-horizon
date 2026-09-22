@@ -619,7 +619,7 @@
         "enable_sticky_add_to_cart": true,
         "sticky_add_to_cart_style": "top_bar",
         "background_color": "",
-        "padding-block-start": 48,
+        "padding-block-start": 24,
         "padding-block-end": 0,
         "custom_mobile_padding": true,
         "mobile-padding-block-start": 0,
