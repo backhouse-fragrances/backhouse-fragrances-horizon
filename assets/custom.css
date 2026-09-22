@@ -514,3 +514,14 @@ summary .svg-wrapper {
 .cart-note .cart-note__label {
     font-size: var(--font-size--md, 1rem);
 }
+
+/* Footer block spacing on mobile.
+
+   The footer has one gap setting, 12px, sized for the desktop columns. Stacked into a
+   single column on a phone the blocks need more air between them. The section writes the
+   variable inline, so the override has to outrank it. */
+@media screen and (max-width: 749px) {
+    .footer-content {
+        --footer-gap: 24px !important;
+    }
+}
