@@ -1,0 +1,144 @@
+{%- doc -%}
+  Renders a breadcrumb trail for the current page: Home, then the collection, blog, page
+  or product the shopper is on. Nothing renders on the homepage, cart, collections list,
+  search or 404, where a trail would only repeat the page.
+
+  A product reached through a collection shows that collection; one opened directly shows
+  the first collection it belongs to, so the trail never stops at Home alone.
+
+  @param {string} [class] - Extra classes for the nav element.
+
+  @example
+  {% render 'breadcrumbs' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign template_name = template | split: '.' | first
+  assign skip = 'index,cart,list-collections,search,404,password,gift_card' | split: ','
+-%}
+
+{%- unless skip contains template_name -%}
+  <nav class="breadcrumbs {{ class }}" aria-label="{{ 'accessibility.breadcrumbs' | t }}">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ 'content.breadcrumbs_home' | t }}</a>
+      </li>
+
+      {%- case template_name -%}
+        {%- when 'page' -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+          </li>
+
+        {%- when 'product' -%}
+          {%- liquid
+            assign crumb_collection = collection
+            if crumb_collection == blank
+              assign crumb_collection = product.collections | first
+            endif
+          -%}
+          {%- if crumb_collection != blank -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+            </li>
+          {%- endif -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+          </li>
+
+        {%- when 'collection' -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ collection.url }}/{{ current_tags | join: '+' }}" aria-current="page">
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+            </li>
+          {%- endif -%}
+
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ blog.url }}/tagged/{{ current_tags | join: '+' }}" aria-current="page">
+                {{- current_tags | join: ' + ' -}}
+              </a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+            </li>
+          {%- endif -%}
+
+        {%- when 'article' -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+          </li>
+
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+          </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endunless -%}
+
+{% stylesheet %}
+  .breadcrumbs {
+    margin: 0;
+    font-size: var(--font-size--2xs);
+  }
+
+  .breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--margin-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumbs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--margin-2xs);
+  }
+
+  .breadcrumbs__item:not(:last-child)::after {
+    content: '/';
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  }
+
+  .breadcrumbs__link {
+    color: currentColor;
+    text-decoration: none;
+  }
+
+  .breadcrumbs__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .breadcrumbs__link[aria-current='page'] {
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  }
+
+  @media screen and (max-width: 749px) {
+    .breadcrumbs {
+      font-size: 0.625rem;
+    }
+  }
+{% endstylesheet %}

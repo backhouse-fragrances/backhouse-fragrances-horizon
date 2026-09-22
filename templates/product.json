@@ -914,9 +914,24 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "breadcrumbs": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% render 'breadcrumbs' %}",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      },
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.section {padding-block-end: 12px;}}"
+      ]
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "divider_aAYmDY",
     "178953492882341c0c",

@@ -402,7 +402,10 @@
               }
             }
           },
-          "block_order": ["hairline", "heading"]
+          "block_order": [
+            "hairline",
+            "heading"
+          ]
         },
         "static-product-card": {
           "type": "_product-card",
@@ -548,7 +551,10 @@
               ]
             }
           },
-          "block_order": ["card-gallery", "product_card_group_9ynTLj"]
+          "block_order": [
+            "card-gallery",
+            "product_card_group_9ynTLj"
+          ]
         }
       },
       "settings": {
@@ -564,9 +570,21 @@
         "padding-block-start": 0,
         "padding-block-end": 64
       }
+    },
+    "breadcrumbs": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% render 'breadcrumbs' %}",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 12
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "section",
     "main",
     "recently_viewed"

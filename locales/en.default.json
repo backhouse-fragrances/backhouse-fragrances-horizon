@@ -50,6 +50,7 @@
     "search_results_count": "{{ count }} search results found for \"{{ query }}\"",
     "search_results_no_results": "No results found for \"{{ query }}\"",
     "search_suggestions_available": "Search suggestions available for \"{{ query }}\"",
+    "breadcrumbs": "Breadcrumbs",
     "skip_to_product_info": "Skip to product information",
     "skip_to_results_list": "Skip to results list",
     "skip_to_text": "Skip to content",
@@ -150,6 +151,7 @@
     }
   },
   "content": {
+    "breadcrumbs_home": "Home",
     "cancel": "Cancel",
     "discount": "Discount",
     "account_title": "Account",
