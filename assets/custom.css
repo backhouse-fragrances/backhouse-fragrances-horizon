@@ -505,3 +505,12 @@ summary .svg-wrapper {
 .shopify-app-block[id$="__simple_bundles"]:not(:has(select:not([hidden]))) {
     display: none;
 }
+
+/* Cart note label.
+
+   Horizon sets the "add a note" summary at the 2xs size, a caption under the totals. Here
+   it is the gifting call to action, so it reads at the drawer's body size like the item
+   titles and the estimated total beside it. */
+.cart-note .cart-note__label {
+    font-size: var(--font-size--md, 1rem);
+}
