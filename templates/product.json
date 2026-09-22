@@ -686,7 +686,10 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 0
-      }
+      },
+      "custom_css": [
+        ".jm-review-widget {padding-block-start: 0;}"
+      ]
     },
     "divider_kRb8Tn": {
       "type": "divider",
