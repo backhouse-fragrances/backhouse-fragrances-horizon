@@ -283,17 +283,17 @@ footer .utilities {
    anything else in the theme; drop them to the same 15% the footer uses. Keeping
    --color-border-rgb rather than the foreground means a merchant's divider colour still wins.
    The rows also sit tight, so lift each one a step up the theme's own padding scale
-   (lg -> 2xl, about 16px more per row). Scoped under .menu-drawer to outrank the source rules,
-   since custom.css is linked ahead of the compiled snippet styles. */
+   (lg -> 2xl, about 16px more per row). Every level gets the same row height: a submenu row
+   was half a top-level one (31px against 62px), which read as a different menu rather than a
+   deeper one. The `li` in the selector is what carries it: the source sets a 0 minimum at
+   .menu-drawer__menu > .menu-drawer__list-item > .menu-drawer__menu-item, so a class-only
+   override ties and loses, custom.css being linked ahead of the compiled snippet styles. */
 .menu-drawer .menu-drawer__menu > .menu-drawer__list-item,
 .menu-drawer :is(.menu-drawer__list-item--divider, .menu-drawer__menu-container--divider) {
     border-color: rgb(var(--color-border-rgb) / var(--opacity-15));
 }
 
-.menu-drawer :is(
-    .menu-drawer__menu-item--mainlist,
-    .menu-drawer__list-item--divider .menu-drawer__menu-item:not(.menu-drawer__menu-item--child)
-) {
+.menu-drawer .menu-drawer__menu li .menu-drawer__menu-item {
     min-height: calc(2 * var(--padding-2xl) + var(--icon-size-xs));
 }
 
