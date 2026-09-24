@@ -24,7 +24,7 @@
             "font": "var(--font-heading--family)",
             "font_size": "1.5rem",
             "enable_mobile_size": true,
-            "mobile_font_size": "1.25rem",
+            "mobile_font_size": "1.125rem",
             "line_height": "tight",
             "letter_spacing": "loose",
             "case": "none",

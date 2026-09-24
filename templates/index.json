@@ -57,8 +57,8 @@
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -106,6 +106,8 @@
         "button_H9gpTf"
       ],
       "custom_css": [
+        ".hero {min-height: 576px !important;}",
+        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important;}}",
         ".text-block {text-wrap: unset;}",
         ".hero-heading {--max-width--body-normal: 22.5em;}"
       ],
@@ -847,8 +849,8 @@
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "0.875rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1238,8 +1240,8 @@
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -2134,8 +2136,8 @@
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -2213,7 +2215,11 @@
         "reflection_opacity": 75,
         "padding-block-start": 40,
         "padding-block-end": 40
-      }
+      },
+      "custom_css": [
+        ".hero {min-height: 576px !important;}",
+        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important;}}"
+      ]
     }
   },
   "order": [

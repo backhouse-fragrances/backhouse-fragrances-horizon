@@ -12,7 +12,8 @@
     "hero_banner": {
       "type": "hero",
       "custom_css": [
-        "@media screen and (max-width: 749px) {.hero {--hero-min-height: 400px !important; min-height: 400px !important; }}"
+        ".hero {min-height: 576px !important;}",
+        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important;}}"
       ],
       "name": "t:names.hero",
       "settings": {
@@ -94,8 +95,8 @@
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
