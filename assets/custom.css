@@ -525,3 +525,13 @@ summary .svg-wrapper {
         --footer-gap: 24px !important;
     }
 }
+
+/* Product card rating badge.
+
+   The card's title, rating and price are one group, so a single 10px gap sits between all
+   three. The stars read as part of the title rather than a third line of their own, so pull
+   them up to 6px and leave the price where it is. The block has no padding setting of its
+   own and a negative offset could not be one anyway. */
+.product-card__content .rating-badge-block {
+    margin-block-start: -4px;
+}
