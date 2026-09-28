@@ -114,18 +114,6 @@
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
 
-                <div class="cart-drawer__recommendations">
-                  {% liquid
-                    assign cart_recommendations_seed_id = cart.items.last.product_id | default: cart.items.first.product_id
-                  %}
-                  {% render 'cart-recommendations',
-                    product_id: cart_recommendations_seed_id,
-                    section_id: 'cart-recommendations',
-                    intent: 'related',
-                    limit: 3
-                  %}
-                </div>
-
                 <div class="cart-drawer__summary">
                   {% render 'cart-summary', section_id: 'cart-drawer-section' %}
                 </div>
