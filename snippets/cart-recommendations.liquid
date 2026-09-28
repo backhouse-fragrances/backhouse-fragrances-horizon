@@ -99,20 +99,35 @@
     width, the track pads by it, and the arrows container spans the whole track so
     the buttons sit in the gutters, off the card.
   */
+  /*
+    The card spans the full content width, so its edges line up exactly with the
+    cart line above it. The carets are pulled outward instead (see slideshow-arrows
+    below): each straddles a card edge, overhanging only into the drawer's own side
+    padding, which is wider than half a caret, so nothing is ever clipped. cqw here
+    is the carousel's own width, i.e. the content box.
+  */
   .cart-drawer__recommendations .resource-list__carousel {
-    /* Half an arrow: the button straddles the card edge, its centre on the border. */
-    --cart-rec-arrow-gutter: calc(var(--minimum-touch-target, 44px) / 2);
-    --mobile-card-size: calc(100cqw - 2 * var(--cart-rec-arrow-gutter));
+    /* Carets at 85% of the touch target, per review. */
+    --cart-rec-arrow-size: calc(var(--minimum-touch-target, 44px) * 0.85);
+    --cart-rec-arrow-half: calc(var(--cart-rec-arrow-size) / 2);
+    --mobile-card-size: 100cqw;
     --slide-width-max: 100%;
   }
 
-  .cart-drawer__recommendations .resource-list__carousel slideshow-slides {
-    padding-inline: var(--cart-rec-arrow-gutter);
-    scroll-padding-inline: var(--cart-rec-arrow-gutter);
+  /*
+    slideshow-container is overflow-x: clip, which cuts the half of each caret that
+    overhangs the card. The slides are clipped by the slideshow-slides scroll
+    container itself, so freeing the wrapper only lets the carets show in full; they
+    stay inside the drawer's own side padding.
+  */
+  .cart-drawer__recommendations .resource-list__carousel slideshow-container {
+    overflow-x: visible;
   }
 
   .cart-drawer__recommendations .resource-list__carousel slideshow-arrows {
-    width: 100%;
+    /* Extend the arrows layer half a caret past each card edge so the carets straddle them. */
+    inset-inline: calc(-1 * var(--cart-rec-arrow-half));
+    width: auto;
     padding-inline: 0;
     align-items: center;
     /* Horizon blends arrows into imagery; on a white card that hides the square. */
@@ -122,6 +137,17 @@
   .cart-drawer__recommendations .resource-list__carousel slideshow-arrows .slideshow-control {
     /* Always visible in the drawer; Horizon reveals them on hover only. */
     opacity: 1;
+    width: var(--cart-rec-arrow-size);
+    height: var(--cart-rec-arrow-size);
+    min-width: var(--cart-rec-arrow-size);
+    min-height: var(--cart-rec-arrow-size);
+    padding: 0;
+  }
+
+  /* Grey square with a dark caret; Horizon's default is the button colour. */
+  .cart-drawer__recommendations .resource-list__carousel slideshow-arrows .slideshow-control--shape-square {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10, 0.1));
+    color: var(--color-foreground);
   }
 
   /*
@@ -171,14 +197,14 @@
     grid-column: 2;
     grid-row: 1;
     padding-block: 0;
-    /* The arrow overlaps the card by half its width; keep text out from under it. */
-    padding-inline-end: var(--cart-rec-arrow-gutter);
+    /* The caret overlaps the card by half its width; keep text out from under it. */
+    padding-inline-end: var(--cart-rec-arrow-half);
   }
 
   .cart-drawer__recommendations .cart-recommendations__item .resource-card__add-button {
     grid-column: 2;
     grid-row: 2;
     justify-self: end;
-    margin-inline-end: var(--cart-rec-arrow-gutter);
+    margin-inline-end: var(--cart-rec-arrow-half);
   }
 {% endstylesheet %}
