@@ -112,6 +112,24 @@
               >
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
+
+                  {%- comment -%}
+                    Inside the items scroll region on purpose. As a sibling it competes
+                    with .cart-drawer__items for height, and that box is a flex child
+                    with overflow-y: auto, so it shrinks to nothing and the line items
+                    vanish in a short viewport. Here it scrolls with them, as on live.
+                  {%- endcomment -%}
+                  <div class="cart-drawer__recommendations">
+                    {% liquid
+                      assign cart_recommendations_seed_id = cart.items.last.product_id | default: cart.items.first.product_id
+                    %}
+                    {% render 'cart-recommendations',
+                      product_id: cart_recommendations_seed_id,
+                      section_id: 'cart-recommendations',
+                      intent: 'related',
+                      limit: 3
+                    %}
+                  </div>
                 </scroll-hint>
 
                 <div class="cart-drawer__summary">

@@ -1,0 +1,245 @@
+{% comment %}
+  Renders the cart recommendations (upsell) widget shown in the cart drawer and on the
+  cart page.
+
+  This section is fetched through the Section Rendering API by `cart-recommendations.js`
+  (via `<cart-recommendations>`, rendered by `snippets/cart-recommendations.liquid`): when
+  the request carries `product_id` and `intent`, Liquid's `recommendations.products` is
+  populated and this file renders the actual product grid, which the component injects
+  into itself. On a normal page render (no `product_id` in the request),
+  `recommendations.performed` is false, so this file renders only the placeholder
+  `<cart-recommendations>` element (with a seed product id), letting the component fetch
+  its own content without ever having to morph -- and clobber -- the section it lives in.
+  That distinction matters most in the cart drawer, whose open state a morph would
+  destroy.
+
+  {section.id} - this section's id ("cart-recommendations" wherever it's placed in
+  templates/cart.json) is also the fixed `section_id` the cart drawer's own
+  `<cart-recommendations>` element requests, since the drawer snippet has no section
+  instance of its own to point at and reuses this one's stored settings instead.
+{% endcomment %}
+
+{% liquid
+  assign seed_product_id = cart.items.last.product_id | default: cart.items.first.product_id
+
+  if recommendations.performed
+    assign cart_product_ids = cart.items | map: 'product_id'
+    assign filtered_products = recommendations.products
+    for cart_product_id in cart_product_ids
+      assign filtered_products = filtered_products | reject: 'id', cart_product_id
+    endfor
+  endif
+%}
+
+{%- if cart.item_count == 0 -%}
+  {%- comment -%} Nothing to recommend against an empty cart. {%- endcomment -%}
+{%- elsif recommendations.performed -%}
+  {%- if filtered_products.size > 0 -%}
+    {% render 'resource-list-styles' %}
+
+    <div
+      class="cart-recommendations__inner section section--page-width section-resource-list spacing-style gap-style"
+      style="
+        {% render 'spacing-style', settings: section.settings %}
+        {% render 'gap-style', value: 24 %}
+      "
+    >
+      <div class="section-resource-list__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cart-recommendations__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+
+      {% capture list_items %}
+        {% for product in filtered_products limit: section.settings.max_products %}
+          <div class="resource-list__item">
+            {% render 'resource-card',
+              resource_type: 'product',
+              resource: product,
+              image_width: 500,
+              image_aspect_ratio: '1 / 1',
+              product_view_context: 'recommendation'
+            %}
+          </div>
+          {% unless forloop.last %}
+            <!--@list/split-->
+          {% endunless %}
+        {% endfor %}
+      {% endcapture %}
+
+      {% liquid
+        assign list_items_array = list_items | strip | split: '<!--@list/split-->'
+      %}
+
+      {% render 'resource-list',
+        list_items: list_items,
+        list_items_array: list_items_array,
+        settings: section.settings,
+        slide_count: section.settings.max_products,
+        content_type: 'products',
+        test_id: 'cart-recommendations-grid'
+      %}
+    </div>
+  {%- endif -%}
+{%- else -%}
+  {% render 'cart-recommendations',
+    product_id: seed_product_id,
+    section_id: section.id,
+    intent: section.settings.recommendation_type,
+    limit: section.settings.max_products
+  %}
+{%- endif -%}
+
+{% stylesheet %}
+  /* Live sets this in sentence case at body size, centred - not the uppercase h4 preset. */
+  .cart-recommendations__heading {
+    margin: 0;
+    font-size: var(--font-size--md, 1rem);
+    font-weight: var(--font-weight-medium, 500);
+    letter-spacing: normal;
+    text-transform: none;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart recommendations",
+  "class": "cart-recommendations-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We think you'll love these."
+    },
+    {
+      "type": "header",
+      "content": "Recommendations"
+    },
+    {
+      "type": "select",
+      "id": "recommendation_type",
+      "label": "Recommendation type",
+      "options": [
+        {
+          "value": "related",
+          "label": "Related"
+        },
+        {
+          "value": "complementary",
+          "label": "Complementary"
+        }
+      ],
+      "default": "related"
+    },
+    {
+      "type": "paragraph",
+      "content": "Complementary uses product pairings curated in the Search & Discovery app. Nothing renders until pairings are set up there."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Number of products",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "icons_style",
+      "label": "Icon",
+      "options": [
+        {
+          "value": "arrow",
+          "label": "Arrows"
+        },
+        {
+          "value": "chevron",
+          "label": "Chevrons"
+        },
+        {
+          "value": "arrows_large",
+          "label": "Large arrows"
+        },
+        {
+          "value": "chevron_large",
+          "label": "Large chevrons"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "arrow",
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "select",
+      "id": "icons_shape",
+      "label": "Icon background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ section.settings.icons_style != 'none' and section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ]
+}
+{% endschema %}
