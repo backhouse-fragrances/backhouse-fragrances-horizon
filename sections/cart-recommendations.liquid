@@ -46,7 +46,7 @@
     >
       <div class="section-resource-list__content">
         {%- if section.settings.heading != blank -%}
-          <h2 class="cart-recommendations__heading h4">{{ section.settings.heading }}</h2>
+          <h2 class="cart-recommendations__heading">{{ section.settings.heading }}</h2>
         {%- endif -%}
       </div>
 
@@ -57,7 +57,7 @@
               resource_type: 'product',
               resource: product,
               image_width: 500,
-              image_aspect_ratio: '4 / 5',
+              image_aspect_ratio: '1 / 1',
               product_view_context: 'recommendation'
             %}
           </div>
@@ -91,8 +91,14 @@
 {%- endif -%}
 
 {% stylesheet %}
+  /* Live sets this in sentence case at body size, centred - not the uppercase h4 preset. */
   .cart-recommendations__heading {
     margin: 0;
+    font-size: var(--font-size--md, 1rem);
+    font-weight: var(--font-weight-medium, 500);
+    letter-spacing: normal;
+    text-transform: none;
+    text-align: center;
   }
 {% endstylesheet %}
 
