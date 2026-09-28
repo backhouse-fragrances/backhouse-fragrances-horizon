@@ -246,4 +246,46 @@
     justify-self: end;
     margin-inline-end: var(--cart-rec-arrow-half);
   }
+  /*
+    Mobile: Horizon's featured-collection slider pattern. No carets; Horizon's own
+    carousel wrap already reaches the drawer edges here (force-full-width), the track
+    pads by the drawer padding so the first and last card line up with the content
+    edge, and the slide is narrower than the content so the next card peeks.
+
+    "resource-list__carousel" is on two elements - the outer .resource-list and the
+    slideshow-component inside it - so these rules name the component explicitly.
+  */
+  @media screen and (max-width: 749px) {
+    .cart-drawer__recommendations slideshow-component.resource-list__carousel {
+      --cart-rec-peek: 40px;
+      /*
+        Bleed this one element to the drawer edges. It is width: 100%, so the negative
+        margin alone would only shift it; the explicit width is what widens it, and
+        100cqw then measures the full drawer width.
+      */
+      margin-inline: calc(-1 * var(--cart-drawer-padding, 20px));
+      width: calc(100% + 2 * var(--cart-drawer-padding, 20px));
+      --mobile-card-size: calc(100cqw - 2 * var(--cart-drawer-padding, 20px) - var(--cart-rec-peek));
+    }
+
+    .cart-drawer__recommendations slideshow-component.resource-list__carousel slideshow-slides {
+      padding-inline: var(--cart-drawer-padding, 20px);
+      scroll-padding-inline: var(--cart-drawer-padding, 20px);
+      /* The track's gap resolves to 0 here; keep the peeking card off the current one. */
+      gap: var(--gap-md, 16px);
+    }
+
+    .cart-drawer__recommendations slideshow-component.resource-list__carousel slideshow-arrows {
+      display: none;
+    }
+
+    /* No carets to clear on mobile. */
+    .cart-drawer__recommendations .cart-recommendations__item .resource-card__content > .resource-card__title {
+      padding-inline-end: 0;
+    }
+
+    .cart-drawer__recommendations .cart-recommendations__item .resource-card__add-button {
+      margin-inline-end: 0;
+    }
+  }
 {% endstylesheet %}

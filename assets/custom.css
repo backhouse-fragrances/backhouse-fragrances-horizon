@@ -515,6 +515,14 @@ summary .svg-wrapper {
     font-size: var(--font-size--md, 1rem);
 }
 
+/* At that size the label wraps to two lines on mobile, and the summary is a flex row
+   with no gap: the plus icon (a 14px SVG) then gives up width to the label and renders
+   squeezed to ~8px. Keep it at its intrinsic size and off the label. */
+.cart-note__summary .cart-totals__icon {
+    flex-shrink: 0;
+    margin-inline-start: var(--gap-sm, 8px);
+}
+
 /* Footer block spacing on mobile.
 
    The footer has one gap setting, 12px, sized for the desktop columns. Stacked into a
