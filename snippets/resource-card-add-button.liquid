@@ -93,9 +93,12 @@
     z-index: var(--layer-raised, 2);
   }
 
+  /* A clear rectangle rather than a near-square: wide padding, touch-target height. */
   .resource-card__add-button .button {
-    padding-block: var(--padding-3xs, 4px);
-    padding-inline: var(--padding-md, 12px);
+    min-width: 96px;
+    min-height: var(--minimum-touch-target, 44px);
+    padding-block: 0;
+    padding-inline: var(--padding-xl, 24px);
     font-size: var(--font-size--body-sm, 0.875rem);
   }
 {% endstylesheet %}

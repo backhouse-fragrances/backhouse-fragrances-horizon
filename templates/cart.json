@@ -68,8 +68,8 @@
         "recommendation_type": "related",
         "max_products": 3,
         "layout_type": "grid",
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_style": "chevron",
+        "icons_shape": "square",
         "padding-block-start": 0,
         "padding-block-end": 48
       }
