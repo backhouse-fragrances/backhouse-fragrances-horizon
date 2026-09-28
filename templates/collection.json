@@ -327,7 +327,7 @@
         "enable_infinite_scroll": true,
         "products_per_page": 24,
         "product_grid_width": "full-width",
-        "full_width_on_mobile": true,
+        "full_width_on_mobile": false,
         "columns_gap_horizontal": 50,
         "columns_gap_vertical": 50,
         "padding-inline-start": 24,
