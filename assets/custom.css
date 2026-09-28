@@ -535,3 +535,16 @@ summary .svg-wrapper {
 .product-card__content .rating-badge-block {
     margin-block-start: -4px;
 }
+
+/* Cart summary tax note.
+
+   "Taxes, discounts and shipping calculated at checkout." is rendered by
+   snippets/tax-info.liquid inside .cart-totals__tax-note, which only the cart summary
+   (drawer and cart page) uses. Hidden to keep the drawer footer short; the installments
+   line above it is off via the theme setting instead (show_installments).
+
+   custom.css loads before the compiled snippet styles, so Horizon's own
+   .cart-totals__item { display: flex } would win a tie on order; outrank it. */
+.cart-totals__container .cart-totals__item.cart-totals__tax-note {
+    display: none;
+}

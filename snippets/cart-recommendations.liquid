@@ -71,6 +71,18 @@
     flex-grow: 1;
   }
 
+  /*
+    The carets overhang into the side padding only; never show a horizontal bar.
+    Which box scrolls depends on the summary-sticky setting: the items box when
+    sticky, .cart-drawer__content when not (Horizon then sets the items box to
+    overflow: unset at higher specificity). Clip both, with enough specificity to
+    hold in either mode.
+  */
+  .theme-drawer__dialog .cart-drawer__items:has(> .cart-drawer__recommendations cart-recommendations),
+  .theme-drawer__dialog .cart-drawer__content:has(cart-recommendations) {
+    overflow-x: clip;
+  }
+
   .cart-drawer__items > .cart-drawer__recommendations {
     margin-block-start: auto;
   }
@@ -109,7 +121,12 @@
   .cart-drawer__recommendations .resource-list__carousel {
     /* Carets at 85% of the touch target, per review. */
     --cart-rec-arrow-size: calc(var(--minimum-touch-target, 44px) * 0.85);
-    --cart-rec-arrow-half: calc(var(--cart-rec-arrow-size) / 2);
+    /*
+      Half a caret, but never within 2px of the drawer's side padding: on Windows a
+      classic vertical scrollbar takes width inside the scroll region, and an overhang
+      that lands on the padding edge can tip into horizontal overflow by rounding.
+    */
+    --cart-rec-arrow-half: min(calc(var(--cart-rec-arrow-size) / 2), calc(var(--cart-drawer-padding, 20px) - 2px));
     --mobile-card-size: 100cqw;
     --slide-width-max: 100%;
   }
