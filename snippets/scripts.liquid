@@ -57,18 +57,6 @@
 ></script>
 
 {%- comment -%}
-  Cart drawer recommendations. Loaded globally on purpose: the drawer markup is
-  re-rendered in place on every cart change, and a script tag inserted that way is
-  never executed by the browser, so registering the element here is the only way it
-  is reliably defined before the drawer needs it.
-{%- endcomment -%}
-<script
-  src="{{ 'cart-recommendations.js' | asset_url }}"
-  type="module"
-  defer
-></script>
-
-{%- comment -%}
   Bottom-anchored sticky for the product details column. Horizon only offers a
   top-anchored sticky, which pins a column taller than the viewport immediately and leaves
   its lower half unreachable; this recomputes a negative top offset so the column scrolls
