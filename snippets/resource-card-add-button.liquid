@@ -93,9 +93,15 @@
     z-index: var(--layer-raised, 2);
   }
 
-  /* A clear rectangle rather than a near-square: wide padding, touch-target height. */
-  .resource-card__add-button .button {
+  /*
+    A clear rectangle at touch-target height. Horizon sets an explicit height on
+    .button (52px here), so min-height alone cannot shorten it; set height too. The
+    element selectors keep this ahead of any equal-specificity theme rule.
+  */
+  .resource-card__add-button button.button,
+  .resource-card__add-button a.button {
     min-width: 96px;
+    height: var(--minimum-touch-target, 44px);
     min-height: var(--minimum-touch-target, 44px);
     padding-block: 0;
     padding-inline: var(--padding-xl, 24px);
