@@ -50,16 +50,28 @@
         {%- endif -%}
       </div>
 
+      {% liquid
+        assign shown_count = filtered_products.size | at_most: section.settings.max_products
+      %}
+
       {% capture list_items %}
         {% for product in filtered_products limit: section.settings.max_products %}
           <div class="resource-list__item">
-            {% render 'resource-card',
-              resource_type: 'product',
-              resource: product,
-              image_width: 500,
-              image_aspect_ratio: '1 / 1',
-              product_view_context: 'recommendation'
-            %}
+            {%- comment -%}
+              The add button sits beside the card, not inside it: resource-card is a
+              stock snippet, and its full-card overlay link would otherwise swallow the
+              click. The box border and grid live on this wrapper.
+            {%- endcomment -%}
+            <div class="cart-recommendations__item">
+              {% render 'resource-card',
+                resource_type: 'product',
+                resource: product,
+                image_width: 500,
+                image_aspect_ratio: '1 / 1',
+                product_view_context: 'recommendation'
+              %}
+              {% render 'resource-card-add-button', product: product, section_id: section.id %}
+            </div>
           </div>
           {% unless forloop.last %}
             <!--@list/split-->
@@ -71,14 +83,22 @@
         assign list_items_array = list_items | strip | split: '<!--@list/split-->'
       %}
 
-      {% render 'resource-list',
-        list_items: list_items,
-        list_items_array: list_items_array,
-        settings: section.settings,
-        slide_count: section.settings.max_products,
-        content_type: 'products',
-        test_id: 'cart-recommendations-grid'
-      %}
+      {%- if shown_count > 1 -%}
+        {%- comment -%} Two or more: the carousel, with arrows and dots from the settings. {%- endcomment -%}
+        {% render 'resource-list',
+          list_items: list_items,
+          list_items_array: list_items_array,
+          settings: section.settings,
+          slide_count: shown_count,
+          content_type: 'products',
+          test_id: 'cart-recommendations-grid'
+        %}
+      {%- else -%}
+        {%- comment -%} A single recommendation needs no slider chrome. {%- endcomment -%}
+        <div class="cart-recommendations__single" data-testid="cart-recommendations-single">
+          {{ list_items }}
+        </div>
+      {%- endif -%}
     </div>
   {%- endif -%}
 {%- else -%}
@@ -164,7 +184,14 @@
           "label": "Carousel"
         }
       ],
-      "default": "grid"
+      "default": "carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dots",
+      "label": "Show dots",
+      "info": "Dots and arrows only appear when there is more than one product.",
+      "default": true
     },
     {
       "type": "select",

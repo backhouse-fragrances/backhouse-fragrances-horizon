@@ -1,0 +1,101 @@
+{%- doc -%}
+  Renders a small "Add" button for a resource card (used by the cart recommendations
+  widget). Reuses Horizon's own add-to-cart mechanism: a `product-form-component`
+  wrapping a `{% form 'product' %}`, the same pattern `snippets/quick-add.liquid` uses
+  for its single-variant "Add" path. Submitting it adds via AJAX and dispatches the
+  standard cart-lines-update event, which is what makes the cart drawer refresh and the
+  cart-recommendations widget re-fetch (filtering the added product out).
+
+  Products with more than one variant render a link to the product page instead of a
+  form: this card is injected into the DOM client-side by cart-recommendations.js
+  (fetched, not morphed), and wiring Horizon's quick-add variant picker/modal to work
+  reliably inside an injected fragment was judged too fragile for this widget. Letting
+  the shopper choose on the PDP is the safe fallback.
+
+  @param {object} product - The product to render the button for.
+  @param {string} [section_id] - The section id to pass through to the add button's
+    product form (data-section-id). Matches the pattern in snippets/quick-add.liquid and
+    blocks/buy-buttons.liquid.
+
+  @example
+  {% render 'resource-card-add-button', product: resource, section_id: section.id %}
+{%- enddoc -%}
+
+{% liquid
+  assign variant = product.selected_or_first_available_variant
+  assign can_add_to_cart = false
+  if variant.available
+    assign can_add_to_cart = true
+  endif
+  assign add_to_cart_text = 'actions.add' | t
+  assign choose_text = 'actions.choose' | t
+  assign product_form_id = 'ResourceCard-ProductForm-' | append: product.id
+%}
+
+<div class="resource-card__add-button">
+  {%- if product.has_only_default_variant -%}
+    <product-form-component
+      data-section-id="{{ section_id }}"
+      data-product-id="{{ product.id }}"
+      on:submit="/handleSubmit"
+    >
+      <div
+        class="visually-hidden"
+        aria-live="assertive"
+        role="status"
+        aria-atomic="true"
+        ref="liveRegion"
+      ></div>
+      {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input
+          type="hidden"
+          name="id"
+          ref="variantId"
+          value="{{ variant.id }}"
+          {% if variant.available == false %}
+            disabled
+          {% endif %}
+        >
+        <input
+          type="hidden"
+          name="quantity"
+          value="1"
+        >
+        {% render 'add-to-cart-button',
+          add_to_cart_text: add_to_cart_text,
+          class: 'add-to-cart-button',
+          can_add_to_cart: can_add_to_cart,
+          show_icon: false,
+          product: product
+        %}
+      {%- endform -%}
+    </product-form-component>
+  {%- else -%}
+    <a
+      href="{{ product.url }}"
+      class="button"
+    >
+      {{- choose_text -}}
+    </a>
+  {%- endif -%}
+</div>
+
+{% render 'add-to-cart-button-styles' %}
+
+{% stylesheet %}
+  /*
+    resource-card's full-card overlay link (.resource-card__link, absolutely
+    positioned) would otherwise sit over this button and swallow the click - the
+    same problem quick-add solves with --layer-raised.
+  */
+  .resource-card__add-button {
+    position: relative;
+    z-index: var(--layer-raised, 2);
+  }
+
+  .resource-card__add-button .button {
+    padding-block: var(--padding-3xs, 4px);
+    padding-inline: var(--padding-md, 12px);
+    font-size: var(--font-size--body-sm, 0.875rem);
+  }
+{% endstylesheet %}
