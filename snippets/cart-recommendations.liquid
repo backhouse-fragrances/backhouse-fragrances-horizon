@@ -91,6 +91,12 @@
     /* .cart-drawer__items already pads its contents; only separate from the last line. */
     padding-inline: 0;
     margin-block-start: var(--padding-xl, 24px);
+    /*
+      The section's bottom padding setting (48px; spacing-style floors it at 20px on
+      mobile) would sit between the dots and the summary. The summary brings its own
+      16px, so the widget ends at the dots and sits on the summary.
+    */
+    padding-block-end: 0;
     display: block;
   }
 
