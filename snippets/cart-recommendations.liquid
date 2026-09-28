@@ -192,7 +192,8 @@
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 84px 1fr;
+    /* thumb | title (spans 2-3) then price | Add button on the second row */
+    grid-template-columns: 84px 1fr auto;
     grid-template-rows: 1fr auto;
     column-gap: var(--padding-md, 12px);
     row-gap: var(--padding-sm, 8px);
@@ -216,16 +217,31 @@
     grid-row: 1 / 3;
   }
 
+  /*
+    The content block (title + price) flattens too, so the price can sit on the
+    Add button's row and the card loses a row of height.
+  */
   .cart-drawer__recommendations .cart-recommendations__item .resource-card__content {
-    grid-column: 2;
+    display: contents;
+  }
+
+  .cart-drawer__recommendations .cart-recommendations__item .resource-card__content > .resource-card__title {
+    grid-column: 2 / 4;
     grid-row: 1;
-    padding-block: 0;
+    margin: 0;
     /* The caret overlaps the card by half its width; keep text out from under it. */
     padding-inline-end: var(--cart-rec-arrow-half);
   }
 
-  .cart-drawer__recommendations .cart-recommendations__item .resource-card__add-button {
+  .cart-drawer__recommendations .cart-recommendations__item .resource-card__content > :not(.resource-card__title) {
     grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    margin: 0;
+  }
+
+  .cart-drawer__recommendations .cart-recommendations__item .resource-card__add-button {
+    grid-column: 3;
     grid-row: 2;
     justify-self: end;
     margin-inline-end: var(--cart-rec-arrow-half);
