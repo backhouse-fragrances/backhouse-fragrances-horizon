@@ -43,7 +43,12 @@
         "divider_width": 0.5,
         "divider_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 15,
-        "padding-block-end": 15
+        "padding-block-end": 15,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 10,
+        "mobile-padding-block-end": 10,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0
       }
     },
     "header_section": {
