@@ -544,17 +544,36 @@ summary .svg-wrapper {
 }
 
 /* The gift message is the drawer's one call to action, and as plain text between two
-   hairlines it read as a caption rather than something to open. The row becomes a tinted
-   panel: it carries its own edges, so the eye finds it without underlining two lines of
-   text or faking a bolder cut of a Light body font. */
-.cart-note .cart-note__summary {
-    padding: var(--padding-md, 13px) var(--padding-lg, 16px);
+   hairlines it read as a caption rather than something to open. The tint sits on the whole
+   accordion, so the panel holds the prompt and the note field together as one block instead
+   of a grey bar with a loose field under it. */
+.cart-note {
     background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5, 0.05));
+    padding: var(--padding-md, 13px) var(--padding-lg, 16px);
+}
+
+/* The panel supplies the padding now, and Horizon's own hover already dims the label. */
+.cart-note .cart-note__summary {
+    padding: 0;
     cursor: pointer;
 }
 
-.cart-note .cart-note__summary:hover {
-    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10, 0.1));
+/* Separates the note field from the prompt; the panel's own padding closes it below. */
+.cart-note .cart-note__inner {
+    padding-block: var(--padding-md, 13px) 0;
+}
+
+/* An inline-block textarea sits on its line's baseline, leaving a few pixels under it that
+   made the panel deeper below the field than above the prompt. */
+.cart-note .cart-note__instructions {
+    display: block;
+}
+
+/* Horizon frames this row with a hairline above and below, which the tint now does on its
+   own; together they read as three stacked lines. The ancestor in the selector outranks
+   `.cart-actions` in the compiled stylesheet, which loads after this file. */
+.cart-totals .cart-actions {
+    border-block: none;
 }
 
 /* At that size the label wraps to two lines on mobile, and the summary is a flex row

@@ -61,7 +61,12 @@
                   {{ 'content.seller_note' | t }}
                 </span>
 
-                <span class="cart-totals__icon">
+                {%- comment -%}
+                  icon-plus opts this into the shared plus-to-minus animation in
+                  snippets/summary-icon-styles.liquid, which accordion-custom-component
+                  already loads: the upright stroke turns and fades as the note opens.
+                {%- endcomment -%}
+                <span class="cart-totals__icon icon-plus">
                   {{- 'icon-plus.svg' | inline_asset_content -}}
                 </span>
               </summary>
