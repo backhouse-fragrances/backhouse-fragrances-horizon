@@ -86,7 +86,7 @@
             "font": "var(--font-body--family)",
             "font_size": "",
             "enable_mobile_size": true,
-            "mobile_font_size": "0.875rem",
+            "mobile_font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",

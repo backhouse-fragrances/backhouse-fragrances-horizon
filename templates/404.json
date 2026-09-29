@@ -60,7 +60,7 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "enable_mobile_size": true,
-            "mobile_font_size": "0.875rem"
+            "mobile_font_size": "1rem"
           },
           "blocks": {}
         },
