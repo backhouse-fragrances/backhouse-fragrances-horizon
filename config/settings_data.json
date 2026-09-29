@@ -157,8 +157,8 @@
           "agent_inherit_fonts": true,
           "agent_font": "system_ui_n4",
           "agent_font_size": 14,
-          "agent_activator_font_size": 13,
-          "agent_border_radius": 16
+          "agent_activator_font_size": 14,
+          "agent_border_radius": 20
         }
       },
       "855628211100114053": {
