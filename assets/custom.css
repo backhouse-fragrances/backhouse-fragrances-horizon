@@ -298,6 +298,32 @@ footer .utilities {
     min-height: calc(2 * var(--padding-2xl) + var(--icon-size-xs));
 }
 
+/* Text icon cards: heading level without a size change.
+
+   Each card holds a heading and a paragraph in one rich text field, so the block carries no
+   size preset and every element is sized by its own tag. The heading was an <h6> for its
+   size alone, which skipped two levels after the <h3> product titles above it and failed an
+   accessibility check. It is an <h2> now, and this holds it at the h6 scale: the same
+   properties base.css sets on h6, plus the h6 margin from text-block-styles.liquid, which a
+   bare `.text-block h2` would otherwise replace. Scoped to this block, the only one in the
+   theme that puts a heading in rich text. */
+.text-icon-block .text-block.rte :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-h6--family);
+    font-style: var(--font-h6--style);
+    font-weight: var(--font-h6--weight);
+    font-size: var(--font-h6--size);
+    line-height: var(--font-h6--line-height);
+    letter-spacing: var(--font-h6--letter-spacing);
+    text-transform: var(--font-h6--case);
+    margin-block: var(--font-h6--spacing);
+}
+
+/* The rule above outranks Horizon's `.text-block.text-block > *:first-child` reset, which
+   would otherwise drop the top margin of the first line. Without this the card grows 3px. */
+.text-icon-block .text-block.rte > :is(h1, h2, h3, h4, h5, h6):first-child {
+    margin-block-start: 0;
+}
+
 /* Footer menu columns render their heading as a <summary>, which picks up the theme's bare
    `summary { padding-block: var(--padding-sm) }`. The group-block columns (About, Keep In
    Touch) use a plain text block with no such padding, so the menu headings sat ~11px lower
