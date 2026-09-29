@@ -4087,6 +4087,7 @@
         "heading",
         "link"
       ],
+      "disabled": true,
       "custom_css": [
         ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}"
       ],
