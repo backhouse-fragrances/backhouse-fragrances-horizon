@@ -6,6 +6,9 @@
   A product reached through a collection shows that collection; one opened directly shows
   the first collection it belongs to, so the trail never stops at Home alone.
 
+  The trail carries schema.org BreadcrumbList microdata, so search engines read the same
+  items the shopper sees. Positions are counted as the items render.
+
   @param {string} [class] - Extra classes for the nav element.
 
   @example
@@ -18,16 +21,20 @@
 -%}
 
 {%- unless skip contains template_name -%}
+  {%- assign crumb_position = 1 -%}
   <nav class="breadcrumbs {{ class }}" aria-label="{{ 'accessibility.breadcrumbs' | t }}">
-    <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">
-        <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ 'content.breadcrumbs_home' | t }}</a>
+    <ol class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a class="breadcrumbs__link" href="{{ routes.root_url }}" itemprop="item"><span itemprop="name">{{ 'content.breadcrumbs_home' | t }}</span></a>
+        <meta itemprop="position" content="{{ crumb_position }}">
       </li>
 
       {%- case template_name -%}
         {%- when 'page' -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page" itemprop="item"><span itemprop="name">{{ page.title }}</span></a>
+            <meta itemprop="position" content="{{ crumb_position }}">
           </li>
 
         {%- when 'product' -%}
@@ -38,57 +45,79 @@
             endif
           -%}
           {%- if crumb_collection != blank -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ crumb_collection.url }}" itemprop="item"><span itemprop="name">{{ crumb_collection.title }}</span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
           {%- endif -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page" itemprop="item"><span itemprop="name">{{ product.title }}</span></a>
+            <meta itemprop="position" content="{{ crumb_position }}">
           </li>
 
         {%- when 'collection' -%}
           {%- if current_tags -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ collection.url }}" itemprop="item"><span itemprop="name">{{ collection.title }}</span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ collection.url }}/{{ current_tags | join: '+' }}" aria-current="page">
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ collection.url }}/{{ current_tags | join: '+' }}" aria-current="page" itemprop="item"><span itemprop="name">
                 {{- current_tags | join: ' + ' -}}
-              </a>
+              </span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
           {%- else -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page" itemprop="item"><span itemprop="name">{{ collection.title }}</span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
           {%- endif -%}
 
         {%- when 'blog' -%}
           {%- if current_tags -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ blog.url }}" itemprop="item"><span itemprop="name">{{ blog.title }}</span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ blog.url }}/tagged/{{ current_tags | join: '+' }}" aria-current="page">
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ blog.url }}/tagged/{{ current_tags | join: '+' }}" aria-current="page" itemprop="item"><span itemprop="name">
                 {{- current_tags | join: ' + ' -}}
-              </a>
+              </span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
           {%- else -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+            {%- assign crumb_position = crumb_position | plus: 1 -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page" itemprop="item"><span itemprop="name">{{ blog.title }}</span></a>
+              <meta itemprop="position" content="{{ crumb_position }}">
             </li>
           {%- endif -%}
 
         {%- when 'article' -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a class="breadcrumbs__link" href="{{ blog.url }}" itemprop="item"><span itemprop="name">{{ blog.title }}</span></a>
+            <meta itemprop="position" content="{{ crumb_position }}">
           </li>
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page" itemprop="item"><span itemprop="name">{{ article.title }}</span></a>
+            <meta itemprop="position" content="{{ crumb_position }}">
           </li>
 
         {%- else -%}
-          <li class="breadcrumbs__item">
-            <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page" itemprop="item"><span itemprop="name">{{ page_title }}</span></a>
+            <meta itemprop="position" content="{{ crumb_position }}">
           </li>
       {%- endcase -%}
     </ol>
