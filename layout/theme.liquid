@@ -28,6 +28,14 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    {%- comment -%}
+      Negate app script. The live theme carries this same tag in its head, loaded the same
+      way, so it is kept as the vendor supplies it rather than deferred.
+    {%- endcomment -%}
+    {% # theme-check-disable ParserBlockingScript, RemoteAsset %}
+    <script src="https://sapi.negate.io/script/Jkwt5iC2H7Y4ZaudxqBvhA==?shop=backhouse-fragrances.myshopify.com"></script>
+    {% # theme-check-enable ParserBlockingScript, RemoteAsset %}
+
     {{ content_for_header }}
   </head>
 
