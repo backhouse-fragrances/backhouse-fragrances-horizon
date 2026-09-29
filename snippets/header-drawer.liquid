@@ -1213,6 +1213,18 @@
     border-block-end: none;
   }
 
+  /* That row's own link needs its hairline too: the row's border sits below the whole group,
+     so without this the parent link and the first child below it run together. */
+  .menu-drawer__menu--childlist > .menu-drawer__list-item--flat > .menu-drawer__menu-item {
+    border-block-end: 1px solid rgb(var(--color-border-rgb) / var(--opacity-40));
+  }
+
+  /* Horizon separates a group from what follows with a margin, which now reads as one
+     uneven gap among evenly spaced hairlines. The hairlines do that job instead. */
+  .menu-drawer__menu--childlist > .menu-drawer__list-item--flat {
+    margin-block-end: 0;
+  }
+
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
     display: flex;
     flex-direction: column;
