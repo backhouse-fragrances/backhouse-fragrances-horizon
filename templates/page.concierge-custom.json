@@ -2723,7 +2723,7 @@
                     "body": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Custom projects are designed for orders that make a statement. Minimums start at 5 units, enough to leave a lasting impression across your entire team or client list.</p>",
+                        "text": "<p>Custom projects are designed for orders that make a statement. Minimums start at 25 units, enough to leave a lasting impression across your entire team or client list.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
