@@ -289,6 +289,7 @@ footer .utilities {
    .menu-drawer__menu > .menu-drawer__list-item > .menu-drawer__menu-item, so a class-only
    override ties and loses, custom.css being linked ahead of the compiled snippet styles. */
 .menu-drawer .menu-drawer__menu > .menu-drawer__list-item,
+.menu-drawer .menu-drawer__menu--childlist > .menu-drawer__list-item--flat > .menu-drawer__menu-item,
 .menu-drawer :is(.menu-drawer__list-item--divider, .menu-drawer__menu-container--divider) {
     border-color: rgb(var(--color-border-rgb) / var(--opacity-15));
 }
