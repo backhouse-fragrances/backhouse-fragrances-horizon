@@ -1225,6 +1225,12 @@
     margin-block-end: 0;
   }
 
+  /* Step the third level in so it reads as belonging to the row above it. The text moves,
+     not the row, so the hairlines stay aligned down the whole panel. */
+  .menu-drawer__menu--grandchildlist > .menu-drawer__list-item > .menu-drawer__menu-item {
+    padding-inline-start: var(--padding-lg);
+  }
+
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
     display: flex;
     flex-direction: column;
