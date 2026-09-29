@@ -112,6 +112,33 @@
   {% endfor %}
 </div>
 
+{%- comment -%}
+  The merchant's social URLs live here, but the Organization node is printed in
+  sections/header.liquid, which cannot read another section's block settings. This adds
+  sameAs to that same Organization by repeating its @id: search engines merge nodes that
+  share one. Nothing renders when no social URL is set.
+{%- endcomment -%}
+{%- liquid
+  assign social_profile_urls = ''
+  for link_key in social_links
+    assign social_profile_url = block.settings[link_key]
+    if social_profile_url != blank
+      assign social_profile_urls = social_profile_urls | append: social_profile_url | append: '|'
+    endif
+  endfor
+  assign social_profile_urls = social_profile_urls | split: '|'
+-%}
+{%- if social_profile_urls.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": {{ request.origin | append: '/#organization' | json }},
+      "sameAs": {{ social_profile_urls | json }}
+    }
+  </script>
+{%- endif -%}
+
 {% stylesheet %}
   .social-icons__wrapper {
     display: flex;

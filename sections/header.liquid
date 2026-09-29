@@ -327,6 +327,8 @@
   {
     "@context": "http://schema.org",
     "@type": "Organization",
+    {%- comment -%} A stable id so other blocks can add to this same Organization; blocks/social-links.liquid adds sameAs. {%- endcomment -%}
+    "@id": {{ request.origin | append: '/#organization' | json }},
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
