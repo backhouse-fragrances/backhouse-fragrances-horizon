@@ -243,7 +243,7 @@
                 "text_PCbVhC": {
                   "type": "text",
                   "settings": {
-                    "text": "<h3>10 signature scents. Every size, every occasion.</h3>",
+                    "text": "<h2>10 signature scents. Every size, every occasion.</h2>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -399,7 +399,7 @@
                 "text_rkyNhL": {
                   "type": "text",
                   "settings": {
-                    "text": "<h3>Ribbon-tied, hand-poured, and ready to give.</h3>",
+                    "text": "<h2>Ribbon-tied, hand-poured, and ready to give.</h2>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -555,7 +555,7 @@
                 "text_xqxGdE": {
                   "type": "text",
                   "settings": {
-                    "text": "<h3>A refined daily essential in our best-selling LIDO fragrance.</h3>",
+                    "text": "<h2>A refined daily essential in our best-selling LIDO fragrance.</h2>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -711,7 +711,7 @@
                 "text_eJVXxi": {
                   "type": "text",
                   "settings": {
-                    "text": "<h3>Trusted by J.P. Morgan, Morgan Stanley, AEG, Deloitte, and 200+ other companies.</h3>",
+                    "text": "<h2>Trusted by J.P. Morgan, Morgan Stanley, AEG, Deloitte, and 200+ other companies.</h2>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",

@@ -94,7 +94,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h6>About the Backhouse</h6>",
+                "text": "<h2>About the Backhouse</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -260,7 +260,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h6>Keep In Touch</h6>",
+                "text": "<h2>Keep In Touch</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
