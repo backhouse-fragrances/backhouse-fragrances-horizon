@@ -84,7 +84,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Starting at $48 per gift, we'll help you design a custom gifting program that leaves a lasting impression, from hand-poured candles to branded packaging, whether you're sending 5 gifts or 500.</p>",
+            "text": "<p>Starting at $48 per gift, we'll help you design a custom gifting program that leaves a lasting impression, from hand-poured candles to branded packaging, whether you're sending 25 gifts or 500.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
