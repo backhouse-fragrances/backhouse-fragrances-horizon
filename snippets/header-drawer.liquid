@@ -1198,6 +1198,21 @@
     min-height: 0;
   }
 
+  /* A third-level list shrinks to the width of its longest link, because the row holding it
+     is a flex column aligned to the start. Horizon widens the second-level list for that
+     reason already (see .menu-drawer__list-item--flat .menu-drawer__menu--childlist); the
+     third level needs the same, or its hairlines stop short of the row edge. */
+  .menu-drawer__list-item--flat .menu-drawer__menu--grandchildlist {
+    width: 100%;
+  }
+
+  /* The row that holds a third-level list draws the hairline that closes the group, so the
+     last item in that list would repeat it a fraction of a pixel higher and read as one
+     thick line. */
+  .menu-drawer__list-item--flat > .menu-drawer__menu--grandchildlist > .menu-drawer__list-item:last-child {
+    border-block-end: none;
+  }
+
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
     display: flex;
     flex-direction: column;
