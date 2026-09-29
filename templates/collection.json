@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "breadcrumbs": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% render 'breadcrumbs' %}",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 16,
+        "padding-block-end": 12
+      }
+    },
     "section": {
       "type": "collection-heading",
       "blocks": {
@@ -133,9 +144,9 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 24,
+        "mobile-padding-block-end": 24,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
         "css_class": "",
@@ -346,6 +357,10 @@
           "static": true,
           "settings": {
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 0,
@@ -356,16 +371,23 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
           },
           "blocks": {
             "hairline": {
@@ -377,7 +399,8 @@
                 "width_percent": 100,
                 "padding-block-start": 0,
                 "padding-block-end": 0
-              }
+              },
+              "blocks": {}
             },
             "heading": {
               "type": "text",
@@ -395,11 +418,22 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 64,
                 "padding-block-end": 48,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -561,25 +595,19 @@
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "columns": 4,
+        "carousel_contain_width": false,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
         "columns_gap": 50,
         "rows_gap": 50,
+        "icons_style": "arrow",
+        "icons_shape": "none",
         "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
         "gap": 0,
+        "background_color": "",
         "padding-block-start": 0,
         "padding-block-end": 64
-      }
-    },
-    "breadcrumbs": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "{% render 'breadcrumbs' %}",
-        "background_color": "",
-        "section_width": "page-width",
-        "padding-block-start": 16,
-        "padding-block-end": 12
       }
     }
   },
