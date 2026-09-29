@@ -174,6 +174,22 @@
   }
 
   /*
+    Horizon gives the controls row a 44px minimum height and pads the dots list, which
+    left a band of space between the dots and the summary. The row shrinks to the dots
+    and keeps one small gap from the card. overflow: visible keeps each dot's full hit
+    area, which the list's padding used to hold.
+  */
+  .cart-drawer__recommendations .resource-list__carousel slideshow-controls {
+    min-height: 0;
+    margin-block-start: var(--padding-md, 12px);
+  }
+
+  .cart-drawer__recommendations .resource-list__carousel .slideshow-controls__dots {
+    padding: 0;
+    overflow: visible;
+  }
+
+  /*
     Each recommendation is a bordered box: thumbnail left, title and price right,
     Add button bottom-right. The stock resource-card becomes display: contents so
     its media and content take part in this grid directly.
