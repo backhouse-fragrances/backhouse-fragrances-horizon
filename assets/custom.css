@@ -540,6 +540,21 @@ summary .svg-wrapper {
    titles and the estimated total beside it. */
 .cart-note .cart-note__label {
     font-size: var(--font-size--md, 1rem);
+    color: var(--color-foreground);
+}
+
+/* The gift message is the drawer's one call to action, and as plain text between two
+   hairlines it read as a caption rather than something to open. The row becomes a tinted
+   panel: it carries its own edges, so the eye finds it without underlining two lines of
+   text or faking a bolder cut of a Light body font. */
+.cart-note .cart-note__summary {
+    padding: var(--padding-md, 13px) var(--padding-lg, 16px);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5, 0.05));
+    cursor: pointer;
+}
+
+.cart-note .cart-note__summary:hover {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10, 0.1));
 }
 
 /* At that size the label wraps to two lines on mobile, and the summary is a flex row
