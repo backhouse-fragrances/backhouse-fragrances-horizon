@@ -32,6 +32,15 @@
       assign can_add_to_cart = false
       assign add_to_cart_text = 'products.product.unavailable' | t
     endif
+
+    # A product tagged coming-soon swaps the wording while it cannot be bought; stock
+    # still decides can_add_to_cart.
+    unless can_add_to_cart
+      capture unavailable_label
+        render 'sold-out-label', product: product, default_label: add_to_cart_text
+      endcapture
+      assign add_to_cart_text = unavailable_label | strip
+    endunless
   endif
 %}
 

@@ -1290,6 +1290,17 @@
       },
       {
         "type": "header",
+        "content": "Coming soon"
+      },
+      {
+        "type": "text",
+        "id": "coming_soon_label",
+        "label": "Label",
+        "default": "Coming soon",
+        "info": "Shown instead of \"Sold out\" on an out-of-stock product that has the tag coming-soon."
+      },
+      {
+        "type": "header",
         "content": "t:names.typography"
       },
       {

@@ -1,0 +1,29 @@
+{%- doc -%}
+  Outputs the label of a product that cannot be bought. Stock still decides whether the
+  product is buyable - this only picks the wording: the label passed in ("Sold out") by
+  default, or the theme's "Coming soon" label (Theme settings > Badges) when the product
+  carries the `coming-soon` tag. The tag is matched by handle, so "Coming Soon" and
+  "coming soon" count as well.
+
+  @param {object} product - The product
+  @param {string} default_label - The label to output when the product is not tagged
+
+  @example
+  {% render 'sold-out-label', product: product, default_label: sold_out_label %}
+{%- enddoc -%}
+
+{%- liquid
+  assign label = default_label
+
+  if settings.coming_soon_label != blank
+    for tag in product.tags
+      assign tag_handle = tag | handleize
+      if tag_handle == 'coming-soon'
+        assign label = settings.coming_soon_label | escape
+        break
+      endif
+    endfor
+  endif
+
+  echo label
+-%}
