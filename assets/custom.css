@@ -556,3 +556,16 @@ summary .svg-wrapper {
 .cart-totals__container .cart-totals__item.cart-totals__tax-note {
     display: none;
 }
+
+/* Judge.me rating badge on a product with no reviews.
+
+   The app block always renders, and on a product with no reviews its badge stays hidden,
+   leaving a zero-height box. The surrounding group still spaces it like a real line, so a
+   gap showed between the title and the price. Hide the whole app block until the product
+   has a review; the badge reappears on its own with the first one.
+
+   Matched on the app's own count attribute rather than on emptiness, since the box holds
+   markup either way. */
+.shopify-block:has(.jdgm-prev-badge[data-number-of-reviews='0']) {
+    display: none;
+}
