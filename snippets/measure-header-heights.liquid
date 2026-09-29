@@ -17,9 +17,14 @@
 
 {% if only_when_first_section %}
   <script>
-    const section = document.currentScript.closest('.shopify-section');
-    if (section && section === section.closest('#MainContent')?.firstElementChild) {
-      window.measureHeaderHeights?.();
+    /* Braces keep `section` out of the global scope. A page with two hero sections renders
+       this twice, and the second `const section` would otherwise throw
+       "Identifier 'section' has already been declared" and skip the whole block. */
+    {
+      const section = document.currentScript.closest('.shopify-section');
+      if (section && section === section.closest('#MainContent')?.firstElementChild) {
+        window.measureHeaderHeights?.();
+      }
     }
   </script>
 {% elsif only_on_desktop %}
