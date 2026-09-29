@@ -148,7 +148,7 @@
           "featured_products": [],
           "background_color": "#FFFFFF",
           "font_color": "#000000",
-          "agent_invert_activator_colors": false,
+          "agent_invert_activator_colors": true,
           "button_color": "#5c5c5c",
           "button_icon": "chat_bubble",
           "button_text": "no_text",
