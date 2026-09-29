@@ -201,6 +201,11 @@
         "type": "shopify://apps/microsoft-clarity/blocks/brandAgents_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
         "disabled": false,
         "settings": {}
+      },
+      "10312807297210203588": {
+        "type": "shopify://apps/aftersell/blocks/utm-triggers/509ec35d-0632-4dfc-a105-fa799cd9d149",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {
