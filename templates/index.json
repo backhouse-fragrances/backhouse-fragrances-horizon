@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>MADE TO BE GIVEN. HAND-POURED IN NEWPORT BEACH</p>",
+            "text": "<h1>MADE TO BE GIVEN. HAND-POURED IN NEWPORT BEACH</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
