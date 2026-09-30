@@ -11,6 +11,7 @@
   @param {number} slide_count - Number of slides for carousel layouts
   @param {string} content_type - Type of content: 'products' | 'collections' | 'articles'
   @param {string} [test_id] - Data test ID for the main resource list
+  @param {boolean} [keep_carousel] - Keep the carousel even when it holds no more items than `columns` (for carousels that show one card at a time, like the cart drawer upsell)
 
   @example
   {% render 'resource-list',
@@ -36,7 +37,7 @@
   A carousel with no more items than `columns` has nothing to scroll on desktop, so it is
   shown as a grid there instead: the row is centred and each item keeps the width it would
   have in `columns` columns. Phones keep the carousel, where one card and a peek still
-  overflow.
+  overflow. Callers whose carousel shows one card at a time pass `keep_carousel: true`.
 {%- enddoc -%}
 
 {% liquid
@@ -66,7 +67,7 @@
   # `slide_count` is the section's item limit, so count what the list really holds.
   assign item_count = list_items_array.size
   assign center_grid = false
-  if layout_type == 'carousel' and item_count > 0 and item_count <= columns
+  if layout_type == 'carousel' and item_count > 0 and item_count <= columns and keep_carousel != true
     assign layout_type = 'grid'
     assign carousel_on_mobile = true
     assign center_grid = true
