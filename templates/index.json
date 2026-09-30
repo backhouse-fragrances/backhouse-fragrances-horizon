@@ -1510,7 +1510,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
-        "columns": 4,
+        "columns": 3,
         "carousel_contain_width": true,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
