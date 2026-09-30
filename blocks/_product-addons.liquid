@@ -416,6 +416,12 @@
     min-width: 0;
   }
 
+  /* A tap on a phone flashed the browser's grey highlight over the whole row; the tick is
+     feedback enough. The property inherits, so the box and its label both lose it. */
+  .product-addons__toggle {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* Horizon's checkbox label is inline, so it is given the row: the whole line, the price
      included, then toggles the box. */
   .product-addons__toggle .checkbox__label {

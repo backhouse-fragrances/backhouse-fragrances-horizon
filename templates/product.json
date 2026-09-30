@@ -253,7 +253,7 @@
               "type": "_product-addons",
               "settings": {
                 "layout": "dropdown",
-                "heading": "Add a Hurricane candle",
+                "heading": "Add an extra candle",
                 "none_label": "No thanks",
                 "trim_suffix": "candle",
                 "note": "added with your gift set",
