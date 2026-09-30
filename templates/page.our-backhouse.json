@@ -22,11 +22,10 @@
     },
     "hero_video": {
       "type": "hero",
-      "name": "t:names.hero",
       "disabled": true,
+      "name": "t:names.hero",
       "settings": {
         "media_type_1": "video",
-        "video_1": "",
         "media_type_2": "image",
         "image_2": "",
         "stack_media_on_mobile": false,
@@ -61,8 +60,8 @@
     },
     "divider_intro": {
       "type": "divider",
-      "name": "t:names.divider",
       "disabled": true,
+      "name": "t:names.divider",
       "settings": {
         "background_color": "",
         "divider_color": "{{ settings.color_palette.color3 }}",
