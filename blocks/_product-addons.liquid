@@ -1,0 +1,567 @@
+{%- doc -%}
+  Renders a control that adds a second product to the cart together with the one being
+  viewed.
+
+  Reads `product.metafields.custom.addons.value` - a list of product references. A blank
+  entry, an add-on that is sold out and the product itself are left out. Each add-on is
+  shown with its title minus the `trim_suffix` setting taken off the end (case ignored,
+  along with the space before it), and the price of its first available variant. There are
+  two looks, chosen with the `layout` setting:
+
+  `dropdown` - "No thanks" (the default) plus one row per add-on. The price goes in the
+  heading when every add-on costs the same, on each row when they differ, and a note under
+  the field names the chosen add-on.
+
+  `card` - a tinted panel with the chosen add-on's picture on the left and, on the right, a
+  checkbox headed by the `heading` setting with the price at its end, above the same
+  dropdown without a "No thanks" row (the first add-on is picked to begin with, so the
+  picture is never empty). The add-on is only added while the box is ticked, and picking a
+  different one in the dropdown ticks it. The checkbox is Horizon's own markup and styles
+  (snippets/checkbox.liquid), rebuilt here only because the price has to sit inside its
+  label.
+
+  Reuses `<personalizer-select>` from assets/personalizer-options.js, so it looks and
+  behaves like the personalizer's dropdowns. The dropdown styling is that block's
+  stylesheet, so keep blocks/_personalizer-options.liquid in the template. The native
+  select and the checkbox have NO `name` and NO `form` attribute, so neither submits by
+  itself: assets/product-addons.js appends the chosen add-on to the product form's data on
+  the `formdata` event, as its own cart line carrying the line item property
+  `<cart line label>: <this product's title>`.
+{%- enddoc -%}
+
+{% liquid
+  assign product = closest.product
+  assign addons = product.metafields.custom.addons.value
+  assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
+  assign field_id = 'ProductAddons-' | append: block.id
+  assign none_label = block.settings.none_label | default: 'No thanks'
+  assign heading = block.settings.heading
+
+  assign is_card = false
+  if block.settings.layout == 'card'
+    assign is_card = true
+  endif
+
+  # The suffix is matched against the end of each title, lower-cased, with the space that
+  # precedes it, so "LIDO [sandalwood] Candle" reads "LIDO [sandalwood]" and a title that
+  # only contains the word somewhere else is left alone.
+  assign suffix = block.settings.trim_suffix | strip | downcase
+  assign suffix_with_space = ' ' | append: suffix
+  assign suffix_size = suffix_with_space | size
+
+  # First pass: how many add-ons can be bought, and do they all cost the same? The rows
+  # can't be written until this is known, because a shared price goes in the heading and
+  # differing prices go on the rows.
+  assign usable_count = 0
+  assign first_price = nil
+  assign same_price = true
+
+  for addon in addons
+    if addon == blank or addon.available == false or addon.id == product.id
+      continue
+    endif
+
+    assign price = addon.selected_or_first_available_variant.price
+    if usable_count == 0
+      assign first_price = price
+    elsif price != first_price
+      assign same_price = false
+    endif
+    assign usable_count = usable_count | plus: 1
+  endfor
+%}
+
+{% if usable_count == 0 %}
+  {% if request.design_mode %}
+    <div
+      class="product-addons product-addons--empty spacing-style"
+      style="{% render 'spacing-style', settings: block.settings %}"
+      {{ block.shopify_attributes }}
+    >
+      <p class="product-addons__note">
+        This product has no add-ons set on its Add-ons metafield yet.
+      </p>
+    </div>
+  {% endif %}
+{% else %}
+  {%- liquid
+    assign options_html = ''
+    assign rows_html = ''
+
+    # The dropdown's list starts with "No thanks" at row 0, so its add-ons count from 1. The
+    # boxed look has no such row, so its add-ons count from 0.
+    assign row_index = 0
+    if is_card
+      assign row_index = -1
+    endif
+
+    # What the boxed look opens with: the first add-on's picture, name and price.
+    assign card_thumb_1x = ''
+    assign card_thumb_2x = ''
+    assign card_thumb_alt = ''
+    assign card_first_name = ''
+    assign card_price_text = ''
+  -%}
+
+  {%- for addon in addons -%}
+    {%- liquid
+      # The same test as the first pass, so both passes agree on which rows exist.
+      assign is_usable = true
+      if addon == blank or addon.available == false or addon.id == product.id
+        assign is_usable = false
+      endif
+    -%}
+
+    {%- if is_usable -%}
+      {%- liquid
+        assign row_index = row_index | plus: 1
+        assign variant = addon.selected_or_first_available_variant
+        assign price_text = variant.price | money_without_trailing_zeros
+
+        assign display_name = addon.title
+        if suffix != blank
+          assign title_lower = addon.title | downcase
+          assign title_size = addon.title | size
+          assign tail_start = title_size | minus: suffix_size
+          if tail_start > 0
+            assign tail = title_lower | slice: tail_start, suffix_size
+            if tail == suffix_with_space
+              assign display_name = addon.title | slice: 0, tail_start
+            endif
+          endif
+        endif
+
+        assign row_text = display_name | escape
+        unless same_price
+          assign row_text = row_text | append: ' (+' | append: price_text | append: ')'
+        endunless
+
+        assign thumb_1x = ''
+        assign thumb_2x = ''
+        if is_card and addon.featured_image != blank
+          assign thumb_1x = addon.featured_image | image_url: width: 160 | escape
+          assign thumb_2x = addon.featured_image | image_url: width: 320 | escape
+        endif
+
+        if is_card and row_index == 0
+          assign card_thumb_1x = thumb_1x
+          assign card_thumb_2x = thumb_2x
+          assign card_thumb_alt = addon.title
+          assign card_first_name = display_name
+          assign card_price_text = price_text
+        endif
+      -%}
+
+      {%- capture option_html -%}
+        <option
+          value="{{ display_name | escape }}"
+          data-variant-id="{{ variant.id }}"
+          data-title="{{ addon.title | escape }}"
+          data-price="{{ price_text | escape }}"
+          {%- if is_card %}
+            {%- if thumb_1x != blank %}
+          data-image="{{ thumb_1x }}"
+          data-image-2x="{{ thumb_2x }}"
+            {%- endif %}
+            {%- if row_index == 0 %}
+          selected
+            {%- endif %}
+          {%- endif %}
+        >
+          {{- row_text -}}
+        </option>
+      {%- endcapture -%}
+
+      {%- capture row_html -%}
+        <li
+          class="personalizer-select__option"
+          id="{{ field_id }}-option-{{ row_index }}"
+          role="option"
+          aria-selected="{% if is_card and row_index == 0 %}true{% else %}false{% endif %}"
+          data-value="{{ display_name | escape }}"
+          ref="options[]"
+          on:click="/choose/{{ row_index }}"
+        >
+          {{- row_text -}}
+        </li>
+      {%- endcapture -%}
+
+      {%- assign options_html = options_html | append: option_html -%}
+      {%- assign rows_html = rows_html | append: row_html -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- liquid
+    # The dropdown is named by its own label; the boxed look has none, so the checkbox's
+    # text names it instead.
+    assign labelled_by = field_id | append: '-label'
+    assign initial_value = none_label
+    if is_card
+      assign labelled_by = field_id | append: '-toggle-text'
+      assign initial_value = card_first_name
+    endif
+    assign trigger_labelled_by = labelled_by | append: ' ' | append: field_id | append: '-value'
+  -%}
+
+  {%- comment -%}
+    The dropdown itself, shared by both looks: the same select, trigger and list the
+    personalizer renders, less the `name`, `form` and `required` it carries there.
+  {%- endcomment -%}
+  {%- capture ui_html -%}
+    <div class="personalizer-select__ui" ref="ui">
+      <select
+        class="field__input personalizer-select__native"
+        id="{{ field_id }}"
+        {% if is_card %}
+          aria-labelledby="{{ labelled_by }}"
+        {% endif %}
+        ref="native"
+      >
+        {%- unless is_card -%}
+          <option value="{{ none_label | escape }}" selected>{{ none_label | escape }}</option>
+        {%- endunless -%}
+        {{ options_html }}
+      </select>
+
+      <button
+        type="button"
+        class="field__input personalizer-select__trigger"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls="{{ field_id }}-menu"
+        aria-labelledby="{{ trigger_labelled_by }}"
+        ref="trigger"
+        on:click="/toggle"
+        on:keydown="/handleTriggerKeydown"
+      >
+        <span class="personalizer-select__value" id="{{ field_id }}-value" ref="value">
+          {{- initial_value | escape -}}
+        </span>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="icon icon-caret personalizer-select__caret"
+          viewBox="0 0 10 6"
+        >
+          {%- render 'icon', icon: 'caret' -%}
+        </svg>
+      </button>
+
+      <ul
+        class="personalizer-select__menu"
+        id="{{ field_id }}-menu"
+        role="listbox"
+        aria-labelledby="{{ labelled_by }}"
+        ref="menu"
+        hidden
+      >
+        {%- unless is_card -%}
+          <li
+            class="personalizer-select__option"
+            id="{{ field_id }}-option-0"
+            role="option"
+            aria-selected="true"
+            data-value="{{ none_label | escape }}"
+            ref="options[]"
+            on:click="/choose/0"
+          >
+            {{- none_label | escape -}}
+          </li>
+        {%- endunless -%}
+        {{ rows_html }}
+      </ul>
+    </div>
+  {%- endcapture -%}
+
+  <script
+    src="{{ 'personalizer-options.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+  <script
+    src="{{ 'product-addons.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+
+  {% if is_card %}
+    {% render 'checkbox-styles' %}
+
+    <product-addons
+      class="product-addons product-addons--card spacing-style"
+      style="{% render 'spacing-style', settings: block.settings %}"
+      data-form-id="{{ product_form_id }}"
+      data-parent-title="{{ product.title | escape }}"
+      data-property-name="{{ block.settings.property_name | default: 'Add-on for' | escape }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="product-addons__panel">
+        <div class="product-addons__media">
+          <img
+            class="product-addons__thumb"
+            ref="thumb"
+            {% if card_thumb_1x != blank %}
+              src="{{ card_thumb_1x }}"
+              srcset="{{ card_thumb_1x }} 1x, {{ card_thumb_2x }} 2x"
+            {% else %}
+              hidden
+            {% endif %}
+            width="72"
+            height="72"
+            loading="lazy"
+            alt="{{ card_thumb_alt | escape }}"
+          >
+        </div>
+
+        <div class="product-addons__body">
+          <div class="checkbox product-addons__toggle">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              id="{{ field_id }}-toggle"
+              data-addon-toggle
+            >
+            <label class="checkbox__label" for="{{ field_id }}-toggle">
+              {{ 'icon-checkmark.svg' | inline_asset_content }}
+              <span
+                class="checkbox__label-text personalizer-option__label"
+                id="{{ field_id }}-toggle-text"
+              >
+                {{- heading | escape -}}
+              </span>
+              <span class="product-addons__price personalizer-option__label" ref="price">
+                {{- '+' | append: card_price_text -}}
+              </span>
+            </label>
+          </div>
+
+          <personalizer-select
+            class="personalizer-option personalizer-select product-addons__select"
+            data-chosen
+          >
+            {{ ui_html }}
+          </personalizer-select>
+        </div>
+      </div>
+    </product-addons>
+  {% else %}
+    {%- assign first_price_text = first_price | money_without_trailing_zeros -%}
+    {%- capture label_content -%}
+      {{- heading | escape -}}
+      {%- if same_price -%}
+        {{- ' (+' | append: first_price_text | append: ')' -}}
+      {%- endif -%}
+    {%- endcapture -%}
+
+    <product-addons
+      class="product-addons spacing-style"
+      style="{% render 'spacing-style', settings: block.settings %}"
+      data-form-id="{{ product_form_id }}"
+      data-parent-title="{{ product.title | escape }}"
+      data-property-name="{{ block.settings.property_name | default: 'Add-on for' | escape }}"
+      data-note="{{ block.settings.note | escape }}"
+      {{ block.shopify_attributes }}
+    >
+      <personalizer-select class="personalizer-option personalizer-select" data-chosen>
+        <label class="personalizer-option__label" id="{{ field_id }}-label" for="{{ field_id }}">
+          {{ label_content }}
+        </label>
+
+        {{ ui_html }}
+      </personalizer-select>
+
+      <p class="product-addons__note" ref="note" hidden></p>
+    </product-addons>
+  {% endif %}
+{% endif %}
+
+{% stylesheet %}
+  .product-addons {
+    display: block;
+  }
+
+  .product-addons__note {
+    margin-block-start: var(--margin-xs);
+    color: var(--color-foreground-subdued);
+    font-size: var(--font-size--sm);
+  }
+
+  /* Boxed look ---------------------------------------------------------------------- */
+
+  /* The tint is the one Horizon's cart drawer gives its gift message. The panel sits inside
+     the block rather than on it, so the block's own padding setting stays outside the tint
+     and outside the outline. */
+  .product-addons__panel {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: var(--padding-md);
+    align-items: start;
+    padding: var(--padding-md);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5, 0.05));
+  }
+
+  /* Inset, so ticking the box adds an outline without moving anything. */
+  .product-addons__panel:has([data-addon-toggle]:checked) {
+    box-shadow: inset 0 0 0 1px var(--color-foreground);
+  }
+
+  .product-addons__thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--color-background);
+  }
+
+  /* Lets the dropdown's trigger shrink and clip instead of stretching the grid column. */
+  .product-addons__body {
+    min-width: 0;
+  }
+
+  /* Horizon's checkbox label is inline, so it is given the row: the whole line, the price
+     included, then toggles the box. */
+  .product-addons__toggle .checkbox__label {
+    flex: 1;
+    align-items: center;
+    gap: var(--padding-sm);
+    min-width: 0;
+  }
+
+  /* Horizon keeps a checkbox's text to one line and clips it with an ellipsis. In a phone-width
+     column that cut the heading to "ADD A HURRICA...", so here it wraps instead. */
+  .product-addons__toggle .checkbox__label-text {
+    padding-inline-start: 0;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  /* The heading label's bottom margin is for a label sitting above a field. */
+  .product-addons__toggle .personalizer-option__label {
+    margin-block-end: 0;
+  }
+
+  .product-addons__price {
+    flex-shrink: 0;
+    margin-inline-start: auto;
+    white-space: nowrap;
+  }
+
+  .product-addons__select {
+    margin-block-start: var(--padding-sm);
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-addons__panel {
+      grid-template-columns: 64px 1fr;
+    }
+
+    /* The checkbox's line height is its own size, too tight for a heading on two lines. */
+    .product-addons__toggle .checkbox__label-text {
+      line-height: 1.3;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product add-ons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Style",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "card",
+          "label": "Boxed with checkbox"
+        }
+      ],
+      "default": "dropdown"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Add a candle"
+    },
+    {
+      "type": "text",
+      "id": "none_label",
+      "label": "Label for no add-on",
+      "default": "No thanks",
+      "info": "Dropdown style only."
+    },
+    {
+      "type": "text",
+      "id": "trim_suffix",
+      "label": "Leave off the end of product names",
+      "default": "candle",
+      "info": "Case is ignored. Leave blank to show full product titles."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note after the chosen add-on",
+      "default": "added with your gift set",
+      "info": "Dropdown style only. Shown under the dropdown after the add-on's name and price."
+    },
+    {
+      "type": "text",
+      "id": "property_name",
+      "label": "Cart line label",
+      "default": "Add-on for",
+      "info": "Shown on the add-on's cart line, followed by this product's name."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

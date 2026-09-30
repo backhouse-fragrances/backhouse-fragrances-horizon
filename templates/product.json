@@ -249,6 +249,22 @@
               },
               "blocks": {}
             },
+            "product_addons": {
+              "type": "_product-addons",
+              "settings": {
+                "layout": "dropdown",
+                "heading": "Add a Hurricane candle",
+                "none_label": "No thanks",
+                "trim_suffix": "candle",
+                "note": "added with your gift set",
+                "property_name": "Add-on for",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -616,6 +632,7 @@
             "variant_picker_R3rGDr",
             "simple_bundles",
             "personalizer_options",
+            "product_addons",
             "buy_buttons_eYQEYi",
             "text_Ab3pyT",
             "text_aEtTtq",
