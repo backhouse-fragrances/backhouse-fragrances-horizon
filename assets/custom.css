@@ -630,3 +630,29 @@ summary .svg-wrapper {
 .shopify-block:has(.jdgm-prev-badge[data-number-of-reviews='0']) {
     display: none;
 }
+
+/* Hero with no text blocks and auto height.
+
+   In this mode Horizon's hero sets `aspect-ratio: auto` on its media (still upstream in 4.2.0).
+   That drops the ratio the image's width/height attributes give (on phones, the <source>'s),
+   so the hero is a sliver until the photo downloads and then grows to full height, pushing
+   the page down: a large layout shift (CLS) on Brand Story and any page on page.json.
+
+   `revert-layer` gives the image back the ratio from those attributes, so its space is held
+   from first paint. Once the photo loads its own ratio applies, which is the same one, so
+   the finished layout does not change. Only the <img> is matched: videos and the <picture>
+   wrapper keep Horizon's rule. */
+.hero--no-blocks-auto-height img.hero__media {
+    aspect-ratio: revert-layer;
+}
+
+/* Cart drawer: no fade under the upsell.
+
+   Horizon's <scroll-hint> (assets/scrolling.js) writes an inline mask-image on the items
+   list that fades its last 10% while there is more to scroll. The "We think you'll love
+   these" carousel sits at the bottom of that list, so its ADD buttons were fading out.
+   The script sets the mask inline, so only !important overrides it. */
+.cart-drawer__items:has(cart-recommendations) {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
