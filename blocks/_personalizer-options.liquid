@@ -454,26 +454,34 @@
     background-color: var(--color-background);
     box-shadow: var(--input-box-shadow), var(--shadow-popover);
 
-    /* The list scrolls past ~6 choices, and touch platforms only flash an overlay
-       scrollbar while a finger is moving - so there was nothing to say the list carried
-       on. Styling the WebKit scrollbar opts out of the overlay behaviour and leaves the
-       track permanently drawn; `scrollbar-width`/`-color` do the same on Firefox. */
-    scrollbar-width: thin;
-    scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) transparent;
+    /* The list scrolls past ~6 choices, but Safari (Mac and iPhone) and Chrome on a phone
+       only show their scrollbar while the list is moving, so nothing said it carried on.
+       Styling ::-webkit-scrollbar no longer keeps it up: Safari on iOS ignores it, and
+       Chrome skips it once `scrollbar-width` is set. So the browser's own is hidden and
+       personalizer-options.js draws one that stays (see [data-scrollable] below). */
+    scrollbar-width: none;
   }
 
   .personalizer-select__menu::-webkit-scrollbar {
-    width: 0.5rem;
-    -webkit-appearance: none;
+    display: none;
   }
 
-  .personalizer-select__menu::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-40));
-    border-radius: 0.25rem;
-  }
-
-  .personalizer-select__menu::-webkit-scrollbar-track {
-    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  /* The drawn scrollbar: a track and a thumb painted as backgrounds into a gutter on the
+     right. A background stays put while the rows scroll over it, and the gutter keeps the
+     rows' hover and selected fills off it. The script sets [data-scrollable] only when the
+     list overflows, and the thumb's size and offset as it scrolls. */
+  .personalizer-select__menu[data-scrollable] {
+    padding-inline-end: 0.75rem;
+    background-image:
+      linear-gradient(rgb(var(--color-foreground-rgb) / var(--opacity-40)) 0 0),
+      linear-gradient(rgb(var(--color-foreground-rgb) / var(--opacity-10)) 0 0);
+    background-size:
+      0.25rem var(--personalizer-thumb-size, 0px),
+      0.25rem 100%;
+    background-position:
+      right 0.25rem top var(--personalizer-thumb-offset, 0px),
+      right 0.25rem top 0;
+    background-repeat: no-repeat;
   }
 
   .personalizer-select__option {
