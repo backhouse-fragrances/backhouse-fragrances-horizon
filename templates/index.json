@@ -1507,10 +1507,10 @@
       "name": "t:names.featured_collection",
       "settings": {
         "collection": "fall-candle-collection",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 6,
-        "columns": 3,
+        "columns": 4,
         "carousel_contain_width": true,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
