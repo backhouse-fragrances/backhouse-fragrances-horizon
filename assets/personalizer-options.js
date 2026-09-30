@@ -165,6 +165,11 @@ export class PersonalizerSelect extends Component {
     document.addEventListener('pointerdown', this.#handleDocumentPointerDown, {
       signal: this.#abortController.signal,
     });
+
+    this.refs.menu.addEventListener('scroll', this.#updateScrollbar, {
+      passive: true,
+      signal: this.#abortController.signal,
+    });
   }
 
   disconnectedCallback() {
@@ -197,6 +202,27 @@ export class PersonalizerSelect extends Component {
     this.close();
   };
 
+  /**
+   * Sizes and places the scrollbar the list draws for itself (see the menu styles in
+   * blocks/_personalizer-options.liquid), because browsers only show their own while the
+   * list is moving. A field, like the handler above, so it can be a listener as it is.
+   */
+  #updateScrollbar = () => {
+    const { menu } = this.refs;
+
+    // The attribute brings the gutter, which narrows the rows, so measure again after it.
+    menu.toggleAttribute('data-scrollable', menu.scrollHeight > menu.clientHeight + 1);
+    if (!menu.hasAttribute('data-scrollable')) return;
+
+    const { scrollHeight, clientHeight, scrollTop } = menu;
+    const thumb = Math.max((clientHeight * clientHeight) / scrollHeight, 24);
+    const travel = scrollHeight - clientHeight;
+    const offset = travel > 0 ? (scrollTop / travel) * (clientHeight - thumb) : 0;
+
+    menu.style.setProperty('--personalizer-thumb-size', `${thumb}px`);
+    menu.style.setProperty('--personalizer-thumb-offset', `${offset}px`);
+  };
+
   /** Opens or closes the list. Bound declaratively via `on:click`. */
   toggle() {
     this.#isOpen ? this.close() : this.open();
@@ -209,6 +235,7 @@ export class PersonalizerSelect extends Component {
     }
 
     this.refs.menu.hidden = false;
+    this.#updateScrollbar();
     this.refs.trigger.setAttribute('aria-expanded', 'true');
     this.#setActive(this.#rows.findIndex((row) => row.getAttribute('aria-selected') === 'true'));
   }
