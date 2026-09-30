@@ -183,18 +183,6 @@
     "marquee_clients": {
       "type": "marquee",
       "blocks": {
-        "logo_morgan_stanley": {
-          "type": "icon",
-          "settings": {
-            "icon": "apple",
-            "image_upload": "shopify://shop_images/MorganStanley_Logo_web.png",
-            "width": 160,
-            "link": "",
-            "open_in_new_tab": false,
-            "icon_color": ""
-          },
-          "blocks": {}
-        },
         "logo_jp_morgan": {
           "type": "icon",
           "settings": {
@@ -305,7 +293,6 @@
         }
       },
       "block_order": [
-        "logo_morgan_stanley",
         "logo_jp_morgan",
         "logo_nissan",
         "logo_starbucks",
