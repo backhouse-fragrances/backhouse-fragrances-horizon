@@ -1460,7 +1460,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Download Our Gift Guide →",
-                "link": "https://cdn.shopify.com/s/files/1/0152/2076/8868/files/Backhouse_Holiday_Corporate_Gifting_Lookbook_2026_Sept14_26.pdf?v=1789585584",
+                "link": "https://cdn.shopify.com/s/files/1/0152/2076/8868/files/Backhouse_Holiday_Corporate_Gifting_Lookbook_2026.pdf?v=1790792391",
                 "open_in_new_tab": true,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
