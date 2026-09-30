@@ -32,6 +32,11 @@
   - bento_gap: Gap for bento layout in pixels
   - mobile_card_size: Mobile card size for carousel
   - carousel_on_mobile: Boolean for mobile carousel fallback
+
+  A carousel with no more items than `columns` has nothing to scroll on desktop, so it is
+  shown as a grid there instead: the row is centred and each item keeps the width it would
+  have in `columns` columns. Phones keep the carousel, where one card and a peek still
+  overflow.
 {%- enddoc -%}
 
 {% liquid
@@ -56,6 +61,16 @@
   assign bento_gap = settings.bento_gap | default: 16
   assign mobile_card_size = settings.mobile_card_size | default: '60cqw'
   assign slide_width_max = '450px'
+  assign carousel_on_mobile = settings.carousel_on_mobile
+
+  # `slide_count` is the section's item limit, so count what the list really holds.
+  assign item_count = list_items_array.size
+  assign center_grid = false
+  if layout_type == 'carousel' and item_count > 0 and item_count <= columns
+    assign layout_type = 'grid'
+    assign carousel_on_mobile = true
+    assign center_grid = true
+  endif
 
   case layout_type
     when 'grid'
@@ -63,7 +78,13 @@
       capture resource_list_styles
         echo '--resource-list-column-gap-desktop: ' | append: columns_gap | append: 'px;'
         echo '--resource-list-row-gap-desktop: ' | append: rows_gap | append: 'px;'
-        echo '--resource-list-columns: repeat(' | append: columns | append: ', 1fr);'
+        if center_grid
+          assign column_gaps = columns | minus: 1
+          echo '--resource-list-columns: repeat(' | append: item_count | append: ', calc((100% - ' | append: column_gaps | append: ' * var(--resource-list-column-gap)) / ' | append: columns | append: '));'
+          echo 'justify-content: center;'
+        else
+          echo '--resource-list-columns: repeat(' | append: columns | append: ', 1fr);'
+        endif
         echo '--resource-list-columns-mobile: repeat(' | append: mobile_columns | append: ', 1fr);'
         echo '--column-count-mobile: ' | append: mobile_columns | append: ';'
       endcapture
@@ -100,11 +121,11 @@
 <div
   class="
     resource-list
-    {% if settings.layout_type == 'carousel' %}
+    {% if layout_type == 'carousel' %}
       force-full-width
       {% if settings.carousel_contain_width %}resource-list--carousel-contained{% endif %}
     {% endif %}
-    {% if settings.carousel_on_mobile and settings.layout_type != 'carousel' %}
+    {% if carousel_on_mobile and layout_type != 'carousel' %}
       hidden--mobile
     {% endif %}
     {{ resource_list_classes }}
@@ -114,7 +135,7 @@
     data-testid="{{ test_id }}"
   {% endif %}
 >
-  {% case settings.layout_type %}
+  {% case layout_type %}
     {% when 'grid' %}
       {{ list_items }}
 
@@ -143,10 +164,10 @@
 </div>
 
 {% comment %} Mobile carousel for non-carousel layouts {% endcomment %}
-{% if settings.layout_type != 'carousel' and settings.carousel_on_mobile %}
+{% if layout_type != 'carousel' and carousel_on_mobile %}
   {% liquid
     assign mobile_carousel_gap = settings.columns_gap | default: 16
-    if settings.layout_type == 'bento'
+    if layout_type == 'bento'
       assign mobile_carousel_gap = settings.bento_gap | default: 16
     endif
   %}

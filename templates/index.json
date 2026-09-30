@@ -107,7 +107,7 @@
       ],
       "custom_css": [
         ".hero {min-height: 576px !important;}",
-        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important;}}",
+        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important; }}",
         ".text-block {text-wrap: unset;}",
         ".hero-heading {--max-width--body-normal: 22.5em;}"
       ],
@@ -1506,7 +1506,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "gift-box-collection",
+        "collection": "fall-candle-collection",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
@@ -2184,6 +2184,10 @@
         "text_i4HdF9",
         "button_ifVMDt"
       ],
+      "custom_css": [
+        ".hero {min-height: 576px !important;}",
+        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important; }}"
+      ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -2215,11 +2219,7 @@
         "reflection_opacity": 75,
         "padding-block-start": 40,
         "padding-block-end": 40
-      },
-      "custom_css": [
-        ".hero {min-height: 576px !important;}",
-        "@media screen and (max-width: 749px) {.hero {min-height: 400px !important;}}"
-      ]
+      }
     }
   },
   "order": [
