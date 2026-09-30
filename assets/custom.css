@@ -645,3 +645,14 @@ summary .svg-wrapper {
 .hero--no-blocks-auto-height img.hero__media {
     aspect-ratio: revert-layer;
 }
+
+/* Cart drawer: no fade under the upsell.
+
+   Horizon's <scroll-hint> (assets/scrolling.js) writes an inline mask-image on the items
+   list that fades its last 10% while there is more to scroll. The "We think you'll love
+   these" carousel sits at the bottom of that list, so its ADD buttons were fading out.
+   The script sets the mask inline, so only !important overrides it. */
+.cart-drawer__items:has(cart-recommendations) {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
