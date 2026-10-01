@@ -353,6 +353,14 @@ footer .utilities {
     height: var(--icon-size-sm);
 }
 
+/* Quick-add modal: close icon at the medium step, like the menu drawer, instead of Horizon's
+   xs. The button stays the 44px touch target; only the glyph grows. `.button` outranks
+   base.css's `.close-button svg`. */
+.button.quick-add-modal__close svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+}
+
 /* Header dropdown submenus: sentence case and Light weight, independent of the top-level nav.
    .dropdown-menu__link and .mega-menu__link(--parent) share --menu-child-font-weight /
    --menu-child-font-case / --menu-parent-font-weight / --menu-parent-font-case with the
