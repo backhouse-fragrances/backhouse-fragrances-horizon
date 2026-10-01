@@ -8,9 +8,16 @@
 
   Products with more than one variant render a link to the product page instead of a
   form: this card is injected into the DOM client-side by cart-recommendations.js
-  (fetched, not morphed), and wiring Horizon's quick-add variant picker/modal to work
-  reliably inside an injected fragment was judged too fragile for this widget. Letting
-  the shopper choose on the PDP is the safe fallback.
+  (fetched, not morphed) and carries no variant picker of its own, so the shopper
+  chooses on the PDP.
+
+  A product with personalizer options or add-ons (the metafields read by
+  blocks/_personalizer-options.liquid and blocks/_product-addons.liquid) is not added
+  directly either, even with a single variant: that would skip the choices. Its button
+  opens Horizon's quick-add modal over the cart drawer, the same one product cards use
+  (snippets/quick-add.liquid), which holds those blocks. The component takes the product
+  page from data-product-url, since there is no product card around it. The modal is only
+  rendered when quick add is on (layout/theme.liquid), so without it the link is used.
 
   @param {object} product - The product to render the button for.
   @param {string} [section_id] - The section id to pass through to the add button's
@@ -30,10 +37,26 @@
   assign add_to_cart_text = 'actions.add' | t
   assign choose_text = 'actions.choose' | t
   assign product_form_id = 'ResourceCard-ProductForm-' | append: product.id
+
+  assign personalizer_options = product.metafields.personalizer.options.value
+  assign product_addons = product.metafields.custom.addons.value
+  assign has_shopper_choices = false
+  if personalizer_options != blank and personalizer_options.size > 0
+    assign has_shopper_choices = true
+  endif
+  if product_addons != blank and product_addons.size > 0
+    assign has_shopper_choices = true
+  endif
+
+  # The same condition layout/theme.liquid renders the quick-add modal under.
+  assign has_quick_add_modal = false
+  if settings.quick_add or settings.mobile_quick_add
+    assign has_quick_add_modal = true
+  endif
 %}
 
 <div class="resource-card__add-button">
-  {%- if product.has_only_default_variant -%}
+  {%- if product.has_only_default_variant and has_shopper_choices == false -%}
     <product-form-component
       data-section-id="{{ section_id }}"
       data-product-id="{{ product.id }}"
@@ -70,6 +93,19 @@
         %}
       {%- endform -%}
     </product-form-component>
+  {%- elsif has_shopper_choices and has_quick_add_modal -%}
+    <quick-add-component
+      data-product-title="{{ product.title }}"
+      data-product-url="{{ product.url }}"
+    >
+      <button
+        type="button"
+        class="button"
+        on:click="quick-add-component/handleClick"
+      >
+        {{- choose_text -}}
+      </button>
+    </quick-add-component>
   {%- else -%}
     <a
       href="{{ product.url }}"
@@ -91,6 +127,11 @@
   .resource-card__add-button {
     position: relative;
     z-index: var(--layer-raised, 2);
+  }
+
+  /* The quick-add element wraps a block-level button; as an inline element it would split around it. */
+  .resource-card__add-button quick-add-component {
+    display: block;
   }
 
   /*

@@ -22,7 +22,8 @@ export class QuickAddComponent extends Component {
     );
     const productLink = hotspotProduct?.getHotspotProductLink();
 
-    return productLink?.href || '';
+    // A quick add outside a product card or hotspot (the cart drawer's recommendations) names its page.
+    return productLink?.href || this.dataset.productUrl || '';
   }
 
   /**
@@ -227,6 +228,25 @@ export class QuickAddComponent extends Component {
   }
 
   /**
+   * Gives the fetched product form an id of its own in the modal. The product page names its
+   * form after its section, so on a product page it matches the page's own form, and controls
+   * tied to a form by a `form` attribute (personalizer options) would bind to the page's form.
+   * @param {Element} productGrid - The product grid element
+   */
+  #scopeFormIds(productGrid) {
+    for (const form of productGrid.querySelectorAll('form[id]')) {
+      const id = form.getAttribute('id');
+      const scopedId = `quick-add-${id}`;
+
+      form.setAttribute('id', scopedId);
+      for (const element of productGrid.querySelectorAll('[form], [data-form-id]')) {
+        if (element.getAttribute('form') === id) element.setAttribute('form', scopedId);
+        if (element.getAttribute('data-form-id') === id) element.setAttribute('data-form-id', scopedId);
+      }
+    }
+  }
+
+  /**
    * Re-renders the variant picker.
    * @param {Element} productGrid - The product grid element
    */
@@ -234,6 +254,8 @@ export class QuickAddComponent extends Component {
     const modalContent = document.getElementById('quick-add-modal-content');
 
     if (!productGrid || !modalContent) return;
+
+    this.#scopeFormIds(productGrid);
 
     if (isMobileBreakpoint()) {
       const productDetails = productGrid.querySelector('.product-details');
@@ -258,6 +280,14 @@ export class QuickAddComponent extends Component {
       if (variantPicker) {
         productGrid.appendChild(variantPicker);
       }
+
+      // Blocks marked data-quick-add-keep (personalizer options, add-ons) sit inside
+      // .product-details, which is removed below. Keep them, ahead of the form.
+      const keptBlocks = productDetails?.querySelectorAll('[data-quick-add-keep]') ?? [];
+      for (const block of keptBlocks) {
+        productGrid.appendChild(block);
+      }
+
       if (productFormComponent) {
         productGrid.appendChild(productFormComponent);
       }

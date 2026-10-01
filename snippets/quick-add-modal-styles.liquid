@@ -201,7 +201,8 @@
   }
 
   .quick-add-modal__content variant-picker,
-  .quick-add-modal__content product-form-component {
+  .quick-add-modal__content product-form-component,
+  .quick-add-modal__content > [data-quick-add-keep] {
     @media screen and (max-width: 749px) {
       grid-column: 1 / -1;
     }
@@ -460,12 +461,20 @@
       product-inventory,
       product-inventory *,
       .view-more-details__wrapper,
-      .view-more-details__wrapper *
+      .view-more-details__wrapper *,
+      [data-quick-add-keep],
+      [data-quick-add-keep] *
     ) {
     @media screen and (min-width: 750px) {
       /* stylelint-disable-next-line declaration-no-important */
       display: none !important;
     }
+  }
+
+  /* Blocks marked data-quick-add-keep (personalizer options, add-ons) are direct children of
+     .product-details, so they miss the side padding the group block's children get. */
+  .quick-add-modal__content .product-details > [data-quick-add-keep] {
+    margin-inline: var(--padding-3xl);
   }
 
   .quick-add-modal__content
@@ -482,7 +491,9 @@
           product-inventory,
           product-inventory *,
           .view-more-details__wrapper,
-          .view-more-details__wrapper *
+          .view-more-details__wrapper *,
+          [data-quick-add-keep],
+          [data-quick-add-keep] *
         ),
       .buy-buttons-block
     ) {
