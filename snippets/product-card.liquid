@@ -27,6 +27,16 @@
     assign has_quick_add = true
   endif
 
+  # Personalized products are bought on the product page (see snippets/quick-add.liquid).
+  assign card_personalizer_options = product.metafields.personalizer.options.value
+  assign card_product_addons = product.metafields.custom.addons.value
+  if card_personalizer_options != blank and card_personalizer_options.size > 0
+    assign has_quick_add = false
+  endif
+  if card_product_addons != blank and card_product_addons.size > 0
+    assign has_quick_add = false
+  endif
+
   assign has_mobile_quick_add = false
   if has_quick_add and settings.mobile_quick_add
     assign has_mobile_quick_add = true
