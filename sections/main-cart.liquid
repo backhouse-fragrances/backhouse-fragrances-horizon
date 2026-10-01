@@ -46,6 +46,9 @@
       </div>
 
       <div class="cart-page__items">
+        {%- if settings.cart_rewards_enabled -%}
+          {% render 'cart-rewards', context: 'page' %}
+        {%- endif -%}
         {%- content_for 'block', id: 'cart-page-items', type: '_cart-products' %}
       </div>
 

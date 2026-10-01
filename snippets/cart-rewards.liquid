@@ -1,0 +1,445 @@
+{% doc %}
+  Renders the cart rewards bar, a progress track with one marker per reward tier, and (with
+  `output: 'config'`) the JSON that `assets/cart-rewards.js` reads to add and remove free gifts.
+
+  Tiers are the Active entries of the `cart_reward` metaobject definition (Content > Metaobjects >
+  Cart reward), shown in order of threshold. An entry is skipped when it is outside its optional
+  `starts_at` / `ends_at` window, when its threshold is not above zero, or when it is a Free gift
+  without an available `gift_variant` (the bar never advertises a gift it cannot add). Nothing
+  renders while `settings.cart_rewards_enabled` is off, or, for the bar, while the cart is empty.
+  Callers also check the setting, so that a disabled feature does not pull in this snippet's CSS.
+
+  The bar only displays tiers and adds or removes the gift line. What the reward is worth is a
+  separate Shopify automatic discount that the merchant creates.
+
+  QUALIFYING SUBTOTAL. The amount compared with every tier threshold is the sum of
+  `final_line_price` (the line price after line level discounts, in the shopper's currency) of all
+  cart lines EXCLUDING gift lines. A gift line is one added by `cart-rewards.js`, marked with the
+  hidden line item property `_cart_reward` = the tier's handle. Properties starting with an
+  underscore are not shown in the cart or at checkout. The gift therefore never counts toward the
+  threshold that unlocked it. The merchant's automatic discount must use the same basis: a minimum
+  purchase amount equal to the tier threshold, measured on the cart subtotal without the gift
+  (in Shopify's Buy X get Y: buy any items for the minimum amount, get the gift variant free).
+
+  @param {string} [context] - 'drawer' or 'page'. Only changes spacing. Defaults to 'page'.
+  @param {string} [output] - 'bar' (default) renders the markup. 'config' renders the JSON config
+    and the script tag, and is rendered once from `snippets/scripts.liquid`.
+
+  @example
+  {% render 'cart-rewards', context: 'drawer' %}
+{% enddoc %}
+
+{%- liquid
+  assign output = output | default: 'bar'
+  assign context = context | default: 'page'
+
+  assign qualifying_cents = 0
+  for item in cart.items
+    if item.properties['_cart_reward'] == blank
+      assign qualifying_cents = qualifying_cents | plus: item.final_line_price
+    endif
+  endfor
+
+  comment
+    First pass over the entries: which are valid (their handles and thresholds), the highest
+    threshold (the end of the bar), the last tier's name and the nearest tier still locked. The
+    second pass finds the valid entries again by handle, because an entry cannot be picked out of
+    the metaobject list by position.
+  endcomment
+  assign now_seconds = 'now' | date: '%s' | plus: 0
+  assign valid_handles = '' | split: ','
+  assign valid_thresholds = '' | split: ','
+  assign max_cents = 0
+  assign last_label = ''
+  assign next_cents = 0
+  assign next_label = ''
+
+  if settings.cart_rewards_enabled
+    for entry in metaobjects.cart_reward.values
+      assign threshold_cents = entry.threshold.value | append: '' | plus: 0
+      assign keep = true
+
+      if threshold_cents <= 0
+        assign keep = false
+      endif
+
+      if entry.starts_at.value != blank
+        assign starts_seconds = entry.starts_at.value | date: '%s' | plus: 0
+        if starts_seconds > now_seconds
+          assign keep = false
+        endif
+      endif
+
+      if entry.ends_at.value != blank
+        assign ends_seconds = entry.ends_at.value | date: '%s' | plus: 0
+        if ends_seconds <= now_seconds
+          assign keep = false
+        endif
+      endif
+
+      if entry.reward_type.value == 'Free gift'
+        assign gift_variant = entry.gift_variant.value
+        if gift_variant == blank or gift_variant.available == false
+          assign keep = false
+        endif
+      endif
+
+      if keep
+        assign handle_list = entry.system.handle | split: '~'
+        assign valid_handles = valid_handles | concat: handle_list
+        assign threshold_list = threshold_cents | prepend: '0000000000' | slice: -10, 10 | split: '~'
+        assign valid_thresholds = valid_thresholds | concat: threshold_list
+
+        if threshold_cents >= max_cents
+          assign max_cents = threshold_cents
+          assign last_label = entry.label.value
+        endif
+
+        if threshold_cents > qualifying_cents
+          if next_cents == 0 or threshold_cents < next_cents
+            assign next_cents = threshold_cents
+            assign next_label = entry.label.value
+          endif
+        endif
+      endif
+    endfor
+  endif
+-%}
+
+{%- if output == 'config' and settings.cart_rewards_enabled -%}
+  {%- comment -%}
+    Free gift tiers only. `cartCount` lets the script skip its first /cart.js request on an empty cart.
+  {%- endcomment -%}
+  <script
+    type="application/json"
+    id="cart-rewards-config"
+  >
+    {
+      "cartCount": {{ cart.item_count }},
+      "tiers": [
+        {%- assign gift_tiers = 0 -%}
+        {%- for entry in metaobjects.cart_reward.values -%}
+          {%- if valid_handles contains entry.system.handle and entry.reward_type.value == 'Free gift' -%}
+            {%- if gift_tiers > 0 -%},{%- endif -%}
+            {
+              "handle": {{ entry.system.handle | json }},
+              "threshold": {{ entry.threshold.value | append: '' | plus: 0 }},
+              "variantId": {{ entry.gift_variant.value.id }}
+            }
+            {%- assign gift_tiers = gift_tiers | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  <script
+    src="{{ 'cart-rewards.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+{%- elsif output == 'bar' and valid_handles.size > 0 and cart.item_count > 0 -%}
+  {%- liquid
+    assign progress = qualifying_cents | times: 100.0 | divided_by: max_cents | at_most: 100 | round: 2
+    assign shown_cents = qualifying_cents | at_most: max_cents
+
+    if next_cents > 0
+      assign message = settings.cart_rewards_message_progress | default: "You're [amount] away from [reward]!"
+      assign reward_name = next_label | escape
+    else
+      assign message = settings.cart_rewards_message_unlocked | default: "You've unlocked [reward]!"
+      assign reward_name = last_label | escape
+    endif
+
+    assign remaining_money = next_cents | minus: qualifying_cents | at_least: 0 | money
+    assign message = message | escape | replace: '[amount]', remaining_money | replace: '[reward]', reward_name
+    assign message_text = message | strip_html
+
+    assign bar_style = ''
+    if settings.cart_rewards_color != blank
+      assign color_brightness = settings.cart_rewards_color | color_brightness
+      assign on_color = 'var(--color-white)'
+      if color_brightness > 150
+        assign on_color = 'rgb(0 0 0)'
+      endif
+      assign bar_style = '--cart-rewards-color: [color]; --cart-rewards-on-color: [on_color];'
+      assign bar_style = bar_style | replace: '[color]', settings.cart_rewards_color | replace: '[on_color]', on_color
+    endif
+
+    comment
+      Second pass: each tier's markup is captured with its zero padded threshold in front, then the
+      list is sorted as text, which is numeric order, and the prefix is cut off when printing.
+    endcomment
+    assign tier_items = '' | split: ','
+    assign valid_thresholds = valid_thresholds | sort
+    assign label_lines = 2
+    if valid_handles.size > 2
+      assign label_lines = 3
+    endif
+  -%}
+
+  {%- for entry in metaobjects.cart_reward.values -%}
+    {%- if valid_handles contains entry.system.handle -%}
+      {%- liquid
+        assign tier_cents = entry.threshold.value | append: '' | plus: 0
+        assign position = tier_cents | times: 100.0 | divided_by: max_cents | round: 2
+        assign edge = 'middle'
+        if position >= 85
+          assign edge = 'end'
+        elsif position <= 15
+          assign edge = 'start'
+        endif
+
+        comment
+          The widest this label may be, in percent of the bar, so it stays clear of the neighbouring
+          labels. A centred label may fill the distance to its nearest neighbour. A label pinned to the
+          start or end of the bar only extends one way, so it gets half of that distance.
+        endcomment
+        assign previous_cents = 0
+        assign following_cents = 0
+        for threshold in valid_thresholds
+          assign threshold_value = threshold | plus: 0
+          if threshold_value < tier_cents
+            assign previous_cents = threshold_value
+          elsif threshold_value > tier_cents and following_cents == 0
+            assign following_cents = threshold_value
+          endif
+        endfor
+
+        assign label_share = 100
+        if previous_cents > 0
+          assign label_share = tier_cents | minus: previous_cents | times: 100.0 | divided_by: max_cents
+        endif
+        if following_cents > 0
+          assign following_share = following_cents | minus: tier_cents | times: 100.0 | divided_by: max_cents
+          assign label_share = label_share | at_most: following_share
+        endif
+        if edge != 'middle' and label_share < 100
+          assign label_share = label_share | times: 0.5
+        endif
+        assign label_share = label_share | round: 2
+      -%}
+      {%- capture tier_html -%}
+        <li
+          class="cart-rewards__tier"
+          style="--cart-rewards-position: {{ position }}%; --cart-rewards-label-share: {{ label_share }}"
+          data-handle="{{ entry.system.handle }}"
+          data-edge="{{ edge }}"
+          {% if qualifying_cents >= tier_cents %}
+            data-reached
+          {% endif %}
+        >
+          <span class="cart-rewards__marker">
+            {%- render 'cart-rewards-icon', reward_type: entry.reward_type.value -%}
+          </span>
+          <span class="cart-rewards__label">{{ entry.label.value | escape }}</span>
+        </li>
+      {%- endcapture -%}
+      {%- assign tier_key = tier_cents | prepend: '0000000000' | slice: -10, 10 -%}
+      {%- assign tier_item = tier_html | prepend: tier_key | split: '<!--never-->' -%}
+      {%- assign tier_items = tier_items | concat: tier_item -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign tier_items = tier_items | sort -%}
+
+  <div
+    class="cart-rewards cart-rewards--{{ context }}"
+    style="--cart-rewards-progress: {{ progress }}%; --cart-rewards-label-lines: {{ label_lines }}; {{ bar_style }}"
+    data-cart-rewards
+  >
+    <p
+      class="cart-rewards__message"
+      id="cart-rewards-message-{{ context }}"
+      aria-live="polite"
+    >
+      {{- message -}}
+    </p>
+
+    <div class="cart-rewards__bar">
+      <div
+        class="cart-rewards__track"
+        role="progressbar"
+        aria-labelledby="cart-rewards-message-{{ context }}"
+        aria-valuemin="0"
+        aria-valuemax="{{ max_cents | divided_by: 100.0 }}"
+        aria-valuenow="{{ shown_cents | divided_by: 100.0 }}"
+        aria-valuetext="{{ message_text }}"
+      >
+        <span class="cart-rewards__fill"></span>
+      </div>
+
+      <ol class="cart-rewards__tiers">
+        {%- for tier_item in tier_items -%}
+          {{- tier_item | slice: 10, 100000 -}}
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .cart-rewards {
+    --cart-rewards-marker-size: 2rem;
+    --cart-rewards-track-height: 0.375rem;
+    --cart-rewards-label-gap: var(--gap-2xs);
+    --cart-rewards-label-line: 1.125rem;
+    --cart-rewards-label-lines: 2;
+    --cart-rewards-color: var(--color-primary-button-background);
+    --cart-rewards-on-color: var(--color-primary-button-text);
+
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: var(--gap-lg);
+    padding-block: var(--padding-lg);
+  }
+
+  .cart-rewards--drawer {
+    padding-inline: var(--cart-drawer-padding);
+    margin-block-end: var(--margin-lg);
+    border-block-end: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
+  }
+
+  .cart-rewards--page {
+    padding-block-start: 0;
+  }
+
+  .cart-rewards__message {
+    margin: 0;
+    text-align: center;
+    font-size: var(--font-size--sm);
+    font-weight: 500;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  /*
+    The bar is inset by half a marker so a marker sitting on 0% or 100% stays inside the container.
+    Its height reserves two label lines, so the layout does not move when a label wraps.
+  */
+  .cart-rewards__bar {
+    position: relative;
+    margin-inline: calc(var(--cart-rewards-marker-size) / 2);
+    min-height: calc(
+      var(--cart-rewards-marker-size) + var(--cart-rewards-label-gap) + var(--cart-rewards-label-lines) *
+        var(--cart-rewards-label-line)
+    );
+    container-type: inline-size;
+  }
+
+  .cart-rewards__track {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(var(--cart-rewards-marker-size) / 2);
+    height: var(--cart-rewards-track-height);
+    translate: 0 -50%;
+    overflow: hidden;
+    border-radius: var(--cart-rewards-track-height);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  }
+
+  .cart-rewards__fill {
+    display: block;
+    width: var(--cart-rewards-progress);
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--cart-rewards-color);
+    transition: width var(--animation-speed) var(--animation-easing);
+  }
+
+  .cart-rewards__tiers {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cart-rewards__tier {
+    position: absolute;
+    top: 0;
+    left: var(--cart-rewards-position);
+    translate: -50% 0;
+    width: var(--cart-rewards-marker-size);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .cart-rewards__marker {
+    display: grid;
+    place-items: center;
+    width: var(--cart-rewards-marker-size);
+    height: var(--cart-rewards-marker-size);
+    border: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-25));
+    border-radius: 50%;
+    background-color: var(--color-background);
+    transition:
+      background-color var(--animation-speed) var(--animation-easing),
+      border-color var(--animation-speed) var(--animation-easing),
+      color var(--animation-speed) var(--animation-easing);
+  }
+
+  .cart-rewards__tier[data-reached] {
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .cart-rewards__tier[data-reached] .cart-rewards__marker {
+    border-color: var(--cart-rewards-color);
+    background-color: var(--cart-rewards-color);
+    color: var(--cart-rewards-on-color);
+  }
+
+  .cart-rewards__icon {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .cart-rewards__label {
+    position: absolute;
+    top: calc(var(--cart-rewards-marker-size) + var(--cart-rewards-label-gap));
+    left: 50%;
+    translate: -50% 0;
+    display: -webkit-box;
+    width: max-content;
+    max-width: min(8rem, calc(var(--cart-rewards-label-share, 100) * 1cqw));
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--cart-rewards-label-lines);
+    line-clamp: var(--cart-rewards-label-lines);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    font-size: var(--font-size--xs);
+    line-height: var(--cart-rewards-label-line);
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .cart-rewards__tier[data-reached] .cart-rewards__label {
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  /* Pinned labels sit half a marker past the bar, so they may be that much wider. */
+  .cart-rewards__tier[data-edge='start'] .cart-rewards__label,
+  .cart-rewards__tier[data-edge='end'] .cart-rewards__label {
+    max-width: min(
+      8rem,
+      calc(var(--cart-rewards-label-share, 100) * 1cqw + var(--cart-rewards-marker-size) / 2)
+    );
+  }
+
+  .cart-rewards__tier[data-edge='start'] .cart-rewards__label {
+    left: 0;
+    translate: none;
+    text-align: start;
+  }
+
+  .cart-rewards__tier[data-edge='end'] .cart-rewards__label {
+    right: 0;
+    left: auto;
+    translate: none;
+    text-align: end;
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .cart-rewards__fill,
+    .cart-rewards__marker {
+      transition: none;
+    }
+  }
+{% endstylesheet %}

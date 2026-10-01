@@ -1632,6 +1632,40 @@
       },
       {
         "type": "header",
+        "content": "Cart rewards"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_rewards_enabled",
+        "label": "Show cart rewards",
+        "info": "Shows a progress bar toward the rewards set up under Content > Metaobjects > Cart reward, and adds free gifts to the cart automatically. The discount itself is a separate automatic discount.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_rewards_message_progress",
+        "label": "Message while a reward is locked",
+        "info": "Use [amount] for how much is left to spend and [reward] for the next reward's name.",
+        "default": "You're [amount] away from [reward]!",
+        "visible_if": "{{ settings.cart_rewards_enabled }}"
+      },
+      {
+        "type": "text",
+        "id": "cart_rewards_message_unlocked",
+        "label": "Message when every reward is unlocked",
+        "info": "Use [reward] for the name of the last reward.",
+        "default": "You've unlocked [reward]!",
+        "visible_if": "{{ settings.cart_rewards_enabled }}"
+      },
+      {
+        "type": "color",
+        "id": "cart_rewards_color",
+        "label": "Bar color",
+        "info": "Leave empty to use the primary button color.",
+        "visible_if": "{{ settings.cart_rewards_enabled }}"
+      },
+      {
+        "type": "header",
         "content": "t:content.product_media"
       },
       {
