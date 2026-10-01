@@ -3683,7 +3683,7 @@
           "type": "custom-liquid",
           "name": "t:names.custom_liquid",
           "settings": {
-            "custom_liquid": "<div id=\"gifting-form\"></div>"
+            "custom_liquid": "<div id=\"gifting-form\"></div>\n<div data-calendly-popup=\"https://calendly.com/hello-backhousefragrances/new-meeting\" data-calendly-trigger=\"#book-a-meeting\" hidden></div>\n<script src=\"{{ 'calendly-popup.js' | asset_url }}\" type=\"module\"></script>"
           },
           "blocks": {}
         },
@@ -3896,6 +3896,7 @@
     },
     "divider_booking": {
       "type": "divider",
+      "disabled": true,
       "name": "t:names.divider",
       "settings": {
         "background_color": "",
@@ -3911,6 +3912,7 @@
     },
     "section_booking": {
       "type": "section",
+      "disabled": true,
       "blocks": {
         "anchor": {
           "type": "custom-liquid",
