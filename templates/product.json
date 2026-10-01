@@ -252,7 +252,7 @@
             "product_addons": {
               "type": "_product-addons",
               "settings": {
-                "layout": "dropdown",
+                "layout": "card",
                 "heading": "Add an extra candle",
                 "none_label": "No thanks",
                 "trim_suffix": "candle",
