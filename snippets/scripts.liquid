@@ -70,6 +70,15 @@
 ></script>
 
 {%- comment -%}
+  Cart rewards free gift. Loaded globally for the same reason as the recommendations: the
+  drawer is re-rendered in place, so a script inside its markup would never run. The snippet
+  prints the tier config the script reads, then the script tag.
+{%- endcomment -%}
+{% if settings.cart_rewards_enabled %}
+  {% render 'cart-rewards', output: 'config' %}
+{% endif %}
+
+{%- comment -%}
   Bottom-anchored sticky for the product details column. Horizon only offers a
   top-anchored sticky, which pins a column taller than the viewport immediately and leaves
   its lower half unreachable; this recomputes a negative top offset so the column scrolls

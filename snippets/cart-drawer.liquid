@@ -106,6 +106,15 @@
             {%- if cart.empty? -%}
               {{ empty_cart_drawer_content }}
             {%- else -%}
+              {%- comment -%}
+                Above the scrolling region on purpose, so the rewards progress stays in view while the
+                lines scroll. It is a fixed height flex item (flex: none) and .cart-drawer__content, the
+                box that scrolls, takes the rest. It sits inside the hydration keyed inner node, so
+                every cart change re-renders it.
+              {%- endcomment -%}
+              {% if settings.cart_rewards_enabled %}
+                {% render 'cart-rewards', context: 'drawer' %}
+              {% endif %}
               <scroll-hint
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
