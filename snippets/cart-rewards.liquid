@@ -300,6 +300,11 @@
     border-block-end: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
   }
 
+  /* With the bar right under it, the drawer header gives up most of its bottom padding. */
+  cart-drawer-component:has(.cart-rewards--drawer) .theme-drawer__header {
+    padding-block-end: var(--padding-xs);
+  }
+
   .cart-rewards--page {
     padding-block-start: 0;
   }
