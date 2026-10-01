@@ -680,3 +680,46 @@ summary .svg-wrapper {
     -webkit-mask-image: none !important;
     mask-image: none !important;
 }
+
+/* Calendly popup (assets/calendly-popup.js): a close button you can see.
+
+   Calendly's widget.css draws the close as a 19px white X pinned 25px from the window's
+   top-right corner, well away from the popup and easy to miss on the dimmed page. This
+   makes it a solid circle at the popup's own top-right corner, with the theme's close icon
+   (the cart drawer's X) in place of Calendly's white one. The offsets repeat widget.css's
+   popup box: width 80% held between 900px and 1000px, height 90% up to 700px, centred.
+   widget.css loads after this file, so `body` lifts these rules above its own. The mask
+   URL is relative to this file, so it resolves to the theme's assets/icon-close.svg. */
+body .calendly-overlay .calendly-popup-close {
+    top: calc(50% - min(45%, 350px));
+    right: calc(50% - clamp(450px, 40%, 500px));
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-background);
+}
+
+body .calendly-overlay .calendly-popup-close::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-foreground);
+    -webkit-mask: url(icon-close.svg) center / 28px no-repeat;
+    mask: url(icon-close.svg) center / 28px no-repeat;
+}
+
+/* Below 976px Calendly pins the popup 50px from the top at full width; the button sits in
+   that strip. */
+@media (max-width: 975px) {
+    body .calendly-overlay .calendly-popup-close {
+        top: 7px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+    }
+
+    body .calendly-overlay .calendly-popup-close::before {
+        -webkit-mask-size: 24px;
+        mask-size: 24px;
+    }
+}
