@@ -55,6 +55,25 @@
     assign render_choose = true
   endif
 
+  # Personalizer options and add-ons (blocks/_personalizer-options, blocks/_product-addons)
+  # are choices the shopper makes before adding, so a direct "Add" would drop them. Those
+  # products always go through the quick-add modal, which holds the same blocks.
+  assign personalizer_options = product.metafields.personalizer.options.value
+  assign product_addons = product.metafields.custom.addons.value
+  assign has_shopper_choices = false
+  if personalizer_options != blank and personalizer_options.size > 0
+    assign has_shopper_choices = true
+  endif
+  if product_addons != blank and product_addons.size > 0
+    assign has_shopper_choices = true
+  endif
+
+  if has_shopper_choices
+    assign initial_button = 'choose'
+    assign render_add = false
+    assign render_choose = true
+  endif
+
   # Icon-only style: a small square plus button in the media corner (see quick-add-styles).
   assign quick_add_icon_only = false
   if settings.quick_add_style == 'icon'
@@ -81,6 +100,8 @@
     Display "Choose" button and show the quick-add modal if:
       - There is only one product option, and it is displayed as swatches on the product card, and no variant is selected, or the selected variant is unavailable
       - There is more than one product option
+      - The product has personalizer options (metafield personalizer.options) or add-ons (metafield custom.addons),
+        whatever its variants: those are chosen in the modal's blocks, so a direct "Add" would skip them
 
   Both buttons are only rendered together for a single-option product with interactive swatches, because
   that is the only shape whose data-quick-add-button can flip live (choose -> add) when a swatch is selected.

@@ -293,6 +293,7 @@
       data-form-id="{{ product_form_id }}"
       data-parent-title="{{ product.title | escape }}"
       data-property-name="{{ block.settings.property_name | default: 'Add-on for' | escape }}"
+      data-quick-add-keep
       {{ block.shopify_attributes }}
     >
       <div class="product-addons__panel">
@@ -360,6 +361,7 @@
       data-parent-title="{{ product.title | escape }}"
       data-property-name="{{ block.settings.property_name | default: 'Add-on for' | escape }}"
       data-note="{{ block.settings.note | escape }}"
+      data-quick-add-keep
       {{ block.shopify_attributes }}
     >
       <personalizer-select class="personalizer-option personalizer-select" data-chosen>

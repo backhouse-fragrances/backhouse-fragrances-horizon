@@ -4,6 +4,22 @@
   fetchpriority="low"
 ></script>
 
+{%- comment -%}
+  Elements for the blocks kept in the modal (data-quick-add-keep). The modal's content is
+  fetched and morphed in, and a script tag that arrives that way never runs, so the blocks'
+  own script tags do nothing there.
+{%- endcomment -%}
+<script
+  src="{{ 'personalizer-options.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+<script
+  src="{{ 'product-addons.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
 {% render 'dialog-styles' %}
 
 <quick-add-dialog id="quick-add-dialog">
