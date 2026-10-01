@@ -1,5 +1,6 @@
 import { Component } from '@theme/component';
 import { StandardEvents } from '@shopify/events';
+import { ThemeEvents } from '@theme/events';
 
 /**
  * @typedef {object} Refs
@@ -43,12 +44,14 @@ class CartRecommendations extends Component {
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener(StandardEvents.cartLinesUpdate, this.#handleCartUpdate);
+    document.addEventListener(ThemeEvents.cartSectionRestored, this.#handleSectionRestored);
     this.#loadRecommendations();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener(StandardEvents.cartLinesUpdate, this.#handleCartUpdate);
+    document.removeEventListener(ThemeEvents.cartSectionRestored, this.#handleSectionRestored);
     this.#activeFetch?.abort();
   }
 
@@ -69,6 +72,17 @@ class CartRecommendations extends Component {
       .catch((error) => {
         if (error?.name !== 'AbortError') console.warn('[cart-recommendations] Event promise rejected:', error);
       });
+  };
+
+  /**
+   * Refills the widget after the cart drawer is re-rendered on a back/forward restore.
+   * The drawer morph (`component-cart-items.js`, on `pageshow`) replaces this element's
+   * children with the server render, which is only the empty placeholder, and neither
+   * `connectedCallback` nor `cartLinesUpdate` runs then. Forced, because the cart may have
+   * changed on the page the shopper came back from.
+   */
+  #handleSectionRestored = () => {
+    this.#loadRecommendations({ force: true });
   };
 
   /**
