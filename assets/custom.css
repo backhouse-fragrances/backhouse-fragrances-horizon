@@ -361,6 +361,22 @@ footer .utilities {
     height: var(--icon-size-md);
 }
 
+/* Quick-add modal, grid gallery with the thumbnail rail (product-media-gallery-content-styles).
+   In the modal the rail sat on the dialog edge, 20px plus its ring padding away from the photos,
+   and its sticky top took the page header height, so it started below the first photo. Here it
+   gets a left inset, the same small gap as between the photos (the ring padding alone), and
+   pins to the top of the gallery. */
+@media screen and (min-width: 750px) {
+    .quick-add-modal__content .media-gallery--grid-thumbnails .media-gallery__grid-layout {
+        column-gap: 0;
+        padding-inline-start: var(--padding-sm);
+    }
+
+    .quick-add-modal__content .media-gallery__grid-thumbnails {
+        top: 0;
+    }
+}
+
 /* Header dropdown submenus: sentence case and Light weight, independent of the top-level nav.
    .dropdown-menu__link and .mega-menu__link(--parent) share --menu-child-font-weight /
    --menu-child-font-case / --menu-parent-font-weight / --menu-parent-font-case with the
