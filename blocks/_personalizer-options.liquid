@@ -25,6 +25,10 @@
   controls disabled and the script lifts both once the condition holds - so it is never
   submitted, and never blocks add to cart as a required field the shopper could not see.
 
+  An option that links products (`linkedProduct` or `choiceProducts`) is a bundle choice
+  from the BF Bundle app. This block can't add linked items to the cart, so it skips those
+  options and leaves them to the BF Bundle app block.
+
   Replaces the Infinite Options app widget, which injects its own container regardless of
   whether its app embed is enabled.
 {%- enddoc -%}
@@ -35,9 +39,16 @@
   assign personalizer_options = product.metafields.personalizer.options.value
   assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
   assign placeholder = block_settings.placeholder | default: 'Choose…'
+
+  assign shown_option_count = 0
+  for personalizer_option in personalizer_options
+    if personalizer_option.linkedProduct == blank and personalizer_option.choiceProducts == blank
+      assign shown_option_count = shown_option_count | plus: 1
+    endif
+  endfor
 %}
 
-{% if personalizer_options == blank or personalizer_options.size == 0 %}
+{% if shown_option_count == 0 %}
   {% if request.design_mode %}
     <div
       class="personalizer personalizer--empty spacing-style"
@@ -63,6 +74,9 @@
     {{ block.shopify_attributes }}
   >
     {% for personalizer_option in personalizer_options %}
+      {%- if personalizer_option.linkedProduct != blank or personalizer_option.choiceProducts != blank -%}
+        {%- continue -%}
+      {%- endif -%}
       {% liquid
         assign field_id = 'Personalizer-' | append: block.id | append: '-' | append: forloop.index0
         assign property_name = 'properties[' | append: personalizer_option.label | append: ']'
