@@ -706,6 +706,13 @@ summary .svg-wrapper {
     display: none;
 }
 
+/* Klaviyo's signup tab ("Get 10% Off", a fixed .kl-teaser-<form id> at z-index 90000)
+   floated over the bottom of the cart drawer on phones, on top of the summary and Check out.
+   Hidden while the cart drawer is open; it comes back when the drawer closes. */
+body:has(#cart-drawer[open]) [class*='kl-teaser-'] {
+    display: none !important;
+}
+
 /* Cart drawer on phones: larger -/+ and trash icons. The buttons already have 44px tap
    areas; the icons (14px and 20px) made them look smaller than they are. Icon size only,
    so the row layout does not change. */
