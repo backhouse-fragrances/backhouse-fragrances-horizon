@@ -1,5 +1,7 @@
 import { Component } from '@theme/component';
-import { debounce, onAnimationEnd, prefersReducedMotion } from '@theme/utilities';
+// requestIdleCallback comes from the utilities (it falls back to setTimeout): Safari has no
+// global requestIdleCallback, so the bare call threw "Can't find variable" on every page.
+import { debounce, onAnimationEnd, prefersReducedMotion, requestIdleCallback } from '@theme/utilities';
 import { sectionRenderer } from '@theme/section-renderer';
 import { morph } from '@theme/morph';
 import { RecentlyViewed } from '@theme/recently-viewed-products';
