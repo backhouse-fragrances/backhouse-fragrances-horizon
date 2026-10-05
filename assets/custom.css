@@ -698,6 +698,21 @@ summary .svg-wrapper {
     transition: opacity var(--animation-speed, 0.15s) ease;
 }
 
+/* Cart drawer on phones: larger -/+ and trash icons. The buttons already have 44px tap
+   areas; the icons (14px and 20px) made them look smaller than they are. Icon size only,
+   so the row layout does not change. */
+@media screen and (max-width: 749px) {
+    .cart-drawer__items .quantity-selector svg {
+        width: var(--icon-size-sm);
+        height: var(--icon-size-sm);
+    }
+
+    .cart-drawer__items .cart-items__remove svg {
+        width: var(--icon-size-lg);
+        height: var(--icon-size-lg);
+    }
+}
+
 /* Calendly popup (assets/calendly-popup.js): a close button you can see.
 
    Calendly's widget.css draws the close as a 19px white X pinned 25px from the window's
