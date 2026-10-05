@@ -326,37 +326,11 @@
               },
               "block_order": []
             },
-            "text_Ab3pyT": {
-              "type": "text",
-              "name": "t:names.text",
+            "custom_liquid_cant_decide": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
               "settings": {
-                "text": "<p>Can't decide? Click <a href=\"https://backhousefragrances.com/pages/corporate-gifting#gifting-form\" target=\"_blank\" title=\"https://backhousefragrances.com/pages/corporate-gifting#gifting-form\"><strong>here</strong></a> to get in touch with the backhouse team.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": true,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0,
-                "custom_class": ""
+                "custom_liquid": "{%- comment -%} Only on the Custom Mini Candles collection and on products with Corporate in the title. {%- endcomment -%}\n{%- liquid\n  assign collection_handles = product.collections | map: 'handle'\n  assign title = product.title | downcase\n-%}\n{%- if collection_handles contains 'custom-minis' or title contains 'corporate' -%}\n<div class=\"rte product-contact-note\"><p>Can't decide? Click <a href=\"/pages/corporate-gifting#gifting-form\" target=\"_blank\"><strong>here</strong></a> to get in touch with the backhouse team.</p></div>\n{%- endif -%}"
               },
               "blocks": {}
             },
@@ -634,7 +608,7 @@
             "personalizer_options",
             "product_addons",
             "buy_buttons_eYQEYi",
-            "text_Ab3pyT",
+            "custom_liquid_cant_decide",
             "text_aEtTtq",
             "share_buttons",
             "accordion_product_info"
