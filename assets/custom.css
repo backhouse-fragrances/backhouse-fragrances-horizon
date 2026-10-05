@@ -717,9 +717,10 @@ body:has(#cart-drawer[open]) [class*='kl-teaser-'] {
    Klaviyo always stretches a rectangle teaser across the screen on mobile (left: 0 and
    right: 0, ignoring its width setting) and pins its close X to the top corner, so the
    tab is released from the right edge and sizes to its text, with even padding and the
-   X inside on the right, vertically centered. The thin ring Klaviyo draws when the tab
-   takes focus goes for mouse and touch; keyboard focus keeps it. Colors, font, text and
-   margins still come from the form's teaser settings in Klaviyo. */
+   X inside on the right, vertically centered. Klaviyo moves focus to the tab when its
+   popup closes and draws a thin ring around it; browsers treat that programmatic focus as
+   keyboard focus even after a click, so the ring is dropped outright. Colors, font, text
+   and margins still come from the form's teaser settings in Klaviyo. */
 [class*='kl-teaser-'] {
     right: auto !important;
     width: auto !important;
@@ -729,9 +730,6 @@ body:has(#cart-drawer[open]) [class*='kl-teaser-'] {
 [class*='kl-teaser-'] [class*='Teaser-pointer'] {
     padding-inline-start: 18px !important;
     padding-inline-end: 48px !important;
-}
-
-[class*='kl-teaser-'] [class*='Teaser-pointer']:not(:focus-visible) {
     outline: none !important;
 }
 
