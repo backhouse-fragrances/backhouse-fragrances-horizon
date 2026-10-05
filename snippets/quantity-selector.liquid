@@ -29,6 +29,17 @@
   else
     assign min_quantity = variant.quantity_rule.min | default: 1
   endif
+
+  # The product form starts at the product's "Default quantity" (metafield custom.default_quantity)
+  # when it is set above the minimum, e.g. 25 on the custom minis, where the setup fee is waived
+  # from 25. Shoppers can still step down to the minimum. Cart lines keep their own quantity.
+  assign starting_quantity = in_cart_quantity | default: variant.quantity_rule.min | default: 1
+  if line_index == null and in_cart_quantity == blank
+    assign default_quantity = product.metafields.custom.default_quantity.value | default: 0
+    if default_quantity > starting_quantity
+      assign starting_quantity = default_quantity
+    endif
+  endif
 %}
 
 <div
@@ -63,7 +74,7 @@
     <input
       type="number"
       name="{% if line_index %}updates[]{% else %}quantity{% endif %}"
-      value="{{ in_cart_quantity | default: variant.quantity_rule.min | default: 1 }}"
+      value="{{ starting_quantity }}"
       data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
       min="{{ min_quantity }}"
       data-min="{{ variant.quantity_rule.min | default: 1 }}"
