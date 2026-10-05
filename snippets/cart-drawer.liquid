@@ -40,9 +40,15 @@
     </div>
   {% endcapture %}
 
+  {%- comment -%}
+    no-persist: on wide screens Horizon reopens a drawer that was open when the shopper left
+    the page. A cart left docked then made the next cart icon click close it, so shoppers
+    clicked it again and again. The cart drawer starts closed on every page instead.
+  {%- endcomment -%}
   <theme-drawer
     id="cart-drawer"
     data-skip-node-update
+    no-persist
   >
     <dialog
       ref="panel"
