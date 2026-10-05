@@ -274,8 +274,13 @@
     {% endif %}
     form="cart-form"
   >
+    {%- comment -%}
+      The total rides on the button, as the old cart drawer showed it ("Checkout • $48"):
+      the same cart.total_price as the estimated total above, without trailing zeros.
+    {%- endcomment -%}
     <span class="button-text">
       {{ 'content.checkout' | t }}
+      {%- unless cart == empty %} • <bdi>{{ cart.total_price | money_without_trailing_zeros }}</bdi>{% endunless %}
     </span>
   </button>
 

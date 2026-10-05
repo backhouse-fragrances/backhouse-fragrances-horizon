@@ -681,6 +681,16 @@ summary .svg-wrapper {
     mask-image: none !important;
 }
 
+/* Cart drawer: the summary (gift message, total, Check out) follows the content.
+
+   Horizon gives it `margin-top: auto`, which pins it to the bottom of the drawer, so with
+   a short cart Check out sat below a large empty space. Without the auto margin it comes
+   straight after the lines and suggestions. A long cart is unchanged: the lines box
+   shrinks and scrolls, so the summary stays in view at the bottom. */
+.cart-drawer__content > .cart-drawer__summary {
+    margin-top: 0;
+}
+
 /* Calendly popup (assets/calendly-popup.js): a close button you can see.
 
    Calendly's widget.css draws the close as a 19px white X pinned 25px from the window's

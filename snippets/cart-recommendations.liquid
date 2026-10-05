@@ -62,14 +62,10 @@
     wrapper so the cart page instance is untouched.
   */
   /*
-    .cart-drawer__items does not grow, so with a short cart the sticky summary
-    leaves dead space above itself. Let the items box grow only while the widget
-    is present, and push the widget to its bottom, so it sits directly above the
-    gift-message collapse. Grow, never shrink-to-zero: a long cart still scrolls.
+    The widget follows the last line directly. It used to be pushed to the bottom of a
+    growing items box, which left a gap under the lines and kept the checkout button at
+    the bottom of the drawer; the summary now follows the content (assets/custom.css).
   */
-  .cart-drawer__items:has(> .cart-drawer__recommendations cart-recommendations) {
-    flex-grow: 1;
-  }
 
   /*
     The carets overhang into the side padding only; never show a horizontal bar.
@@ -81,10 +77,6 @@
   .theme-drawer__dialog .cart-drawer__items:has(> .cart-drawer__recommendations cart-recommendations),
   .theme-drawer__dialog .cart-drawer__content:has(cart-recommendations) {
     overflow-x: clip;
-  }
-
-  .cart-drawer__items > .cart-drawer__recommendations {
-    margin-block-start: auto;
   }
 
   .cart-drawer__recommendations .cart-recommendations__inner {
