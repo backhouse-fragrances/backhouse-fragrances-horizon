@@ -126,6 +126,26 @@
     >
       {{ cart_icon }}
     </button>
+    {%- comment -%}
+      A tap on the cart icon before the drawer's script has run is dropped by Horizon (on a
+      slow phone the icon is on screen a couple of seconds before that). Inline so it is
+      listening from the start: it marks the icon busy at once, which custom.css dims, and
+      opens the drawer as soon as <theme-drawer> is defined. Once it is, Horizon's own
+      on:click handles every tap and this steps aside.
+    {%- endcomment -%}
+    <script>
+      document.addEventListener('click', function (event) {
+        var trigger = event.target instanceof Element && event.target.closest('[aria-controls="cart-drawer"]');
+        if (!trigger || customElements.get('theme-drawer') || trigger.hasAttribute('aria-busy')) return;
+
+        trigger.setAttribute('aria-busy', 'true');
+        customElements.whenDefined('theme-drawer').then(function () {
+          trigger.removeAttribute('aria-busy');
+          var drawer = document.getElementById('cart-drawer');
+          if (drawer && !drawer.hasAttribute('open')) drawer.open();
+        });
+      });
+    </script>
   {% else %}
     <a
       href="{{ routes.cart_url }}"

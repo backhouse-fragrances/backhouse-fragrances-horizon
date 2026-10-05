@@ -691,6 +691,13 @@ summary .svg-wrapper {
     margin-top: 0;
 }
 
+/* Header cart icon tapped before the cart drawer is ready (snippets/header-actions.liquid):
+   dimmed until the drawer opens, so the tap visibly registered. */
+.header-actions__action[aria-busy='true'] {
+    opacity: 0.4;
+    transition: opacity var(--animation-speed, 0.15s) ease;
+}
+
 /* Calendly popup (assets/calendly-popup.js): a close button you can see.
 
    Calendly's widget.css draws the close as a 19px white X pinned 25px from the window's
