@@ -713,27 +713,32 @@ body:has(#cart-drawer[open]) [class*='kl-teaser-'] {
     display: none !important;
 }
 
-/* Klaviyo's signup tab on phones: a compact tab at the bottom left instead of a bar.
+/* Klaviyo's signup tab: a compact tab at the bottom left, the same on every screen.
    Klaviyo always stretches a rectangle teaser across the screen on mobile (left: 0 and
-   right: 0, ignoring its width setting), so the tab is released from the right edge and
-   sizes to its text. Its close X moves inside, on the right. Colors, font, text and
+   right: 0, ignoring its width setting) and pins its close X to the top corner, so the
+   tab is released from the right edge and sizes to its text, with even padding and the
+   X inside on the right, vertically centered. The thin ring Klaviyo draws when the tab
+   takes focus goes for mouse and touch; keyboard focus keeps it. Colors, font, text and
    margins still come from the form's teaser settings in Klaviyo. */
-@media screen and (max-width: 749px) {
-    [class*='kl-teaser-'] {
-        right: auto !important;
-        width: auto !important;
-        max-width: calc(100vw - 40px);
-    }
+[class*='kl-teaser-'] {
+    right: auto !important;
+    width: auto !important;
+    max-width: calc(100vw - 40px);
+}
 
-    [class*='kl-teaser-'] [class*='Teaser-pointer'] {
-        padding-inline-end: 44px !important;
-    }
+[class*='kl-teaser-'] [class*='Teaser-pointer'] {
+    padding-inline-start: 18px !important;
+    padding-inline-end: 48px !important;
+}
 
-    [class*='kl-teaser-'] .klaviyo-close-form {
-        top: 50% !important;
-        right: 12px !important;
-        transform: translateY(-50%);
-    }
+[class*='kl-teaser-'] [class*='Teaser-pointer']:not(:focus-visible) {
+    outline: none !important;
+}
+
+[class*='kl-teaser-'] .klaviyo-close-form {
+    top: 50% !important;
+    right: 14px !important;
+    transform: translateY(-50%);
 }
 
 /* Cart drawer on phones: larger -/+ and trash icons. The buttons already have 44px tap
