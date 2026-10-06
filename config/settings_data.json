@@ -74,7 +74,7 @@
     "show_add_discount_code": false,
     "show_installments": false,
     "show_accelerated_checkout_buttons": true,
-    "cart_rewards_enabled": true,
+    "cart_rewards_enabled": false,
     "icon_stroke": "default",
     "palette_input_border": "{{ settings.color_palette.color3 }}",
     "input_border_width": 1,
