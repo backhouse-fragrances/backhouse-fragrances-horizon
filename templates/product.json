@@ -226,28 +226,18 @@
               },
               "blocks": {}
             },
-            "simple_bundles": {
-              "type": "shopify://apps/simple-bundles-kits/blocks/infinite-options-selector/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+            "bf_bundle_bh_personalizer_options_m9DhxP": {
+              "type": "shopify://apps/bf-bundle/blocks/bh-personalizer-options/01a0feee-39f4-7e87-b308-090f86610d33",
               "settings": {
-                "select_placeholder": "Please select an option",
-                "disable_oos_options": true,
-                "show_price_variance": true,
-                "rank_options_by_price_diff": true,
-                "custom_css": "",
-                "custom_js": "(function () {\n  function hideSingleOptions() {\n    var root = document.getElementById('simple-bundles-io-options');\n    if (!root) return;\n    root.querySelectorAll('select').forEach(function (select) {\n      var real = Array.prototype.filter.call(select.options, function (o) { return o.value.trim() !== ''; });\n      if (real.length !== 1) return;\n      if (!real[0].disabled && select.value !== real[0].value) {\n        select.value = real[0].value;\n        select.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      select.hidden = true;\n      var label = root.querySelector('label[for=\"' + select.id + '\"]');\n      if (label) label.hidden = true;\n    });\n  }\n  hideSingleOptions();\n  new MutationObserver(hideSingleOptions).observe(document.body, { childList: true, subtree: true });\n})();"
-              }
-            },
-            "personalizer_options": {
-              "type": "_personalizer-options",
-              "settings": {
+                "product": "{{closest.product}}",
                 "placeholder": "Choose…",
                 "required_message": "Please choose at least one option.",
-                "padding-block-start": 0,
-                "padding-block-end": 8,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "product_form_id_prefix": "BuyButtons-ProductForm-",
+                "padding_top": 0,
+                "padding_bottom": 8,
+                "padding_left": 0,
+                "padding_right": 0
+              }
             },
             "product_addons": {
               "type": "_product-addons",
@@ -604,8 +594,7 @@
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
-            "simple_bundles",
-            "personalizer_options",
+            "bf_bundle_bh_personalizer_options_m9DhxP",
             "product_addons",
             "buy_buttons_eYQEYi",
             "custom_liquid_cant_decide",

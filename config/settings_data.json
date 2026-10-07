@@ -99,26 +99,6 @@
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "blocks": {
-      "16022891438198749303": {
-        "type": "shopify://apps/simple-bundles-kits/blocks/byob/e553276b-36b2-446d-b80a-aa47fe5f96ac",
-        "disabled": false,
-        "settings": {
-          "image_ratio": "adapt",
-          "cart_position": "right",
-          "horizontal_margins": 15,
-          "picker_columns": "3",
-          "button_style": "filled",
-          "hide_product_section": true,
-          "show_mini_cart_description": true,
-          "accent_color": "#000000",
-          "text_color": "#000000",
-          "surface_color": "#ffffff",
-          "muted_color": "#808080",
-          "border_color": "#d1d1d1",
-          "border_radius": 2,
-          "custom_css": ""
-        }
-      },
       "124348908681409149": {
         "type": "shopify://apps/simple-bundles-kits/blocks/simple-bundles-v2/e553276b-36b2-446d-b80a-aa47fe5f96ac",
         "disabled": true,
@@ -204,8 +184,28 @@
         "disabled": false,
         "settings": {}
       },
-      "10312807297210203588": {
-        "type": "shopify://apps/aftersell/blocks/utm-triggers/509ec35d-0632-4dfc-a105-fa799cd9d149",
+      "16022891438198749303": {
+        "type": "shopify://apps/simple-bundles-kits/blocks/byob/e553276b-36b2-446d-b80a-aa47fe5f96ac",
+        "disabled": true,
+        "settings": {
+          "image_ratio": "adapt",
+          "cart_position": "right",
+          "horizontal_margins": 15,
+          "picker_columns": "3",
+          "button_style": "filled",
+          "hide_product_section": true,
+          "show_mini_cart_description": true,
+          "accent_color": "#000000",
+          "text_color": "#000000",
+          "surface_color": "#ffffff",
+          "muted_color": "#808080",
+          "border_color": "#d1d1d1",
+          "border_radius": 2,
+          "custom_css": ""
+        }
+      },
+      "4555573140414873975": {
+        "type": "shopify://apps/bf-bundle/blocks/bh-personalizer-embed/01a0feee-39f4-7e87-b308-090f86610d33",
         "disabled": false,
         "settings": {}
       }
