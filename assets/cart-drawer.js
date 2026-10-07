@@ -19,6 +19,24 @@ class CartDrawerComponent extends Component {
   /** @type {number} */
   #summaryThreshold = 0.5;
 
+  /**
+   * Re-measures the sticky summary whenever the summary or the dialog changes size.
+   *
+   * The open and add-to-cart measurements can run before the drawer re-renders: the first
+   * add to an empty cart is measured while the drawer still shows the empty state, with no
+   * summary, so it was left unpinned and the checkout button scrolled away. Watching the
+   * summary also catches the accelerated checkout buttons rendering late and window resizes.
+   */
+  #resizeObserver = new ResizeObserver(() => {
+    if (this.#dialog?.open) this.#updateStickyState();
+  });
+
+  /** Swaps the observed summary when a re-render adds, replaces or removes it. */
+  #mutationObserver = new MutationObserver(() => this.#observeSummary());
+
+  /** @type {Element | null} */
+  #observedSummary = null;
+
   /** @type {import('@theme/theme-drawer').ThemeDrawer | null} */
   get #themeDrawer() {
     return /** @type {import('@theme/theme-drawer').ThemeDrawer | null} */ (this.closest('theme-drawer'));
@@ -35,6 +53,11 @@ class CartDrawerComponent extends Component {
     this.#themeDrawer?.addEventListener(DrawerOpenEvent.eventName, this.#handleDrawerOpen);
     this.addEventListener(ThemeEvents.cartSectionRestored, this.#handleCartSectionRestored);
 
+    const dialog = this.#dialog;
+    if (dialog) this.#resizeObserver.observe(dialog);
+    this.#mutationObserver.observe(this, { childList: true, subtree: true });
+    this.#observeSummary();
+
     // The restore path sets [open] before this module loads, so the
     // theme-drawer:open event will have already fired. Use the attribute
     // check so this works even before <theme-drawer> upgrades.
@@ -48,6 +71,24 @@ class CartDrawerComponent extends Component {
     document.removeEventListener(StandardEvents.cartLinesUpdate, this.#handleCartLinesUpdate);
     this.#themeDrawer?.removeEventListener(DrawerOpenEvent.eventName, this.#handleDrawerOpen);
     this.removeEventListener(ThemeEvents.cartSectionRestored, this.#handleCartSectionRestored);
+    this.#resizeObserver.disconnect();
+    this.#mutationObserver.disconnect();
+    this.#observedSummary = null;
+  }
+
+  #observeSummary() {
+    const summary = this.#dialog?.querySelector('.cart-drawer__summary') ?? null;
+    if (summary === this.#observedSummary) return;
+
+    if (this.#observedSummary) this.#resizeObserver.unobserve(this.#observedSummary);
+    this.#observedSummary = summary;
+
+    // observe() reports the current size right away, which re-measures.
+    if (summary) {
+      this.#resizeObserver.observe(summary);
+    } else if (this.#dialog?.open) {
+      this.#updateStickyState();
+    }
   }
 
   /**
