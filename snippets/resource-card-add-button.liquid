@@ -48,6 +48,9 @@
   if product_addons != blank and product_addons.size > 0
     assign has_shopper_choices = true
   endif
+  if product.metafields.custom.addon_group.value != blank
+    assign has_shopper_choices = true
+  endif
 
 %}
 
