@@ -691,6 +691,15 @@ summary .svg-wrapper {
     margin-top: 0;
 }
 
+/* Cart drawer: half the room above the gift message (Horizon pads the summary 24px on
+   desktop, 16px on phones). That top padding is also the fade the lines scroll under, so
+   the mask shrinks with it. An unpinned summary still drops the mask (Horizon's
+   [cart-summary-sticky='false'] rule is more specific). */
+.cart-drawer__content > .cart-drawer__summary {
+    padding-block-start: var(--padding-md, 12px);
+    mask-image: linear-gradient(to bottom, transparent, black var(--padding-md, 12px));
+}
+
 /* Header cart icon tapped before the cart drawer is ready (snippets/header-actions.liquid):
    dimmed until the drawer opens, so the tap visibly registered. */
 .header-actions__action[aria-busy='true'] {
