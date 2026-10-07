@@ -2,11 +2,15 @@
   Renders a control that adds a second product to the cart together with the one being
   viewed.
 
-  Reads `product.metafields.custom.addons.value` - a list of product references. A blank
-  entry, an add-on that is sold out and the product itself are left out. Each add-on is
-  shown with its title minus the `trim_suffix` setting taken off the end (case ignored,
-  along with the space before it), and the price of its first available variant. There are
-  two looks, chosen with the `layout` setting:
+  Reads `product.metafields.custom.addon_group.value` - an Add-on group metaobject
+  (`product_addon_group`) whose `heading` replaces the `heading` setting and whose
+  `variants` (list of variant references) are the add-ons. Without a group it falls back
+  to `product.metafields.custom.addons.value`, a list of product references, offering each
+  product's first available variant under the `heading` setting. A blank entry, an add-on
+  that is sold out and the product itself are left out. Each add-on is shown with its
+  product title minus the `trim_suffix` setting taken off the end (case ignored, along
+  with the space before it), plus the variant title when the product has variants, and
+  its price. There are two looks, chosen with the `layout` setting:
 
   `dropdown` - "No thanks" (the default) plus one row per add-on. The price goes in the
   heading when every add-on costs the same, on each row when they differ, and a note under
@@ -31,11 +35,22 @@
 
 {% liquid
   assign product = closest.product
-  assign addons = product.metafields.custom.addons.value
   assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
   assign field_id = 'ProductAddons-' | append: block.id
   assign none_label = block.settings.none_label | default: 'No thanks'
   assign heading = block.settings.heading
+
+  # Both sources end up as a list of variants. An Add-on group brings its own heading; the
+  # older Add-ons metafield lists products, each offering its first available variant.
+  assign addon_group = product.metafields.custom.addon_group.value
+  if addon_group != blank
+    assign addon_variants = addon_group.variants.value
+    if addon_group.heading.value != blank
+      assign heading = addon_group.heading.value
+    endif
+  else
+    assign addon_variants = product.metafields.custom.addons.value | map: 'selected_or_first_available_variant'
+  endif
 
   assign is_card = false
   if block.settings.layout == 'card'
@@ -56,12 +71,12 @@
   assign first_price = nil
   assign same_price = true
 
-  for addon in addons
-    if addon == blank or addon.available == false or addon.id == product.id
+  for variant in addon_variants
+    if variant == blank or variant.available == false or variant.product.id == product.id
       continue
     endif
 
-    assign price = addon.selected_or_first_available_variant.price
+    assign price = variant.price
     if usable_count == 0
       assign first_price = price
     elsif price != first_price
@@ -79,7 +94,7 @@
       {{ block.shopify_attributes }}
     >
       <p class="product-addons__note">
-        This product has no add-ons set on its Add-ons metafield yet.
+        This product has no add-ons yet. Pick an Add-on group (or fill the Add-ons metafield) on the product.
       </p>
     </div>
   {% endif %}
@@ -103,11 +118,11 @@
     assign card_price_text = ''
   -%}
 
-  {%- for addon in addons -%}
+  {%- for variant in addon_variants -%}
     {%- liquid
       # The same test as the first pass, so both passes agree on which rows exist.
       assign is_usable = true
-      if addon == blank or addon.available == false or addon.id == product.id
+      if variant == blank or variant.available == false or variant.product.id == product.id
         assign is_usable = false
       endif
     -%}
@@ -115,7 +130,7 @@
     {%- if is_usable -%}
       {%- liquid
         assign row_index = row_index | plus: 1
-        assign variant = addon.selected_or_first_available_variant
+        assign addon = variant.product
         assign price_text = variant.price | money_without_trailing_zeros
 
         assign display_name = addon.title
@@ -130,17 +145,21 @@
             endif
           endif
         endif
+        unless addon.has_only_default_variant
+          assign display_name = display_name | append: ' - ' | append: variant.title
+        endunless
 
         assign row_text = display_name | escape
         unless same_price
           assign row_text = row_text | append: ' (+' | append: price_text | append: ')'
         endunless
 
+        assign addon_image = variant.featured_image | default: addon.featured_image
         assign thumb_1x = ''
         assign thumb_2x = ''
-        if is_card and addon.featured_image != blank
-          assign thumb_1x = addon.featured_image | image_url: width: 160 | escape
-          assign thumb_2x = addon.featured_image | image_url: width: 320 | escape
+        if is_card and addon_image != blank
+          assign thumb_1x = addon_image | image_url: width: 160 | escape
+          assign thumb_2x = addon_image | image_url: width: 320 | escape
         endif
 
         if is_card and row_index == 0
@@ -493,6 +512,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
+      "info": "Used when the product has no Add-on group. A group's own heading wins.",
       "default": "Add a candle"
     },
     {
