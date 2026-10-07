@@ -36,9 +36,13 @@
   assign product_form_id = 'ResourceCard-ProductForm-' | append: product.id
 
   assign personalizer_options = product.metafields.personalizer.options.value
+  assign included_items = product.metafields.personalizer.included_items.value
   assign product_addons = product.metafields.custom.addons.value
   assign has_shopper_choices = false
   if personalizer_options != blank and personalizer_options.size > 0
+    assign has_shopper_choices = true
+  endif
+  if included_items != blank and included_items.size > 0
     assign has_shopper_choices = true
   endif
   if product_addons != blank and product_addons.size > 0
