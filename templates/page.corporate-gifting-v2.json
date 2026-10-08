@@ -4536,7 +4536,7 @@
       },
       "custom_css": [
         ".featured-product-content-top {margin-block-end: 16px;}",
-        ".featured-product__button {align-self: center;}"
+        ".featured-product__button {align-self: center; margin-block-start: 16px;}"
       ],
       "settings": {
         "product": "corporate-hurricane-candle",
