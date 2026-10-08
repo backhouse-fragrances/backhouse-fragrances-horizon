@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_nVb9n9": {
@@ -3965,234 +3974,6 @@
         "section_id": ""
       }
     },
-    "divider_booking": {
-      "type": "divider",
-      "disabled": true,
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "section_booking": {
-      "type": "section",
-      "disabled": true,
-      "blocks": {
-        "anchor": {
-          "type": "custom-liquid",
-          "name": "t:names.custom_liquid",
-          "settings": {
-            "custom_liquid": "<div id=\"book-a-meeting\"></div>"
-          },
-          "blocks": {}
-        },
-        "heading": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Book a consultation</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.5rem",
-            "enable_mobile_size": true,
-            "mobile_font_size": "1.125rem",
-            "line_height": "tight",
-            "letter_spacing": "loose",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "custom_class": ""
-          },
-          "blocks": {}
-        },
-        "embed": {
-          "type": "custom-liquid",
-          "name": "t:names.custom_liquid",
-          "settings": {
-            "custom_liquid": "<div class=\"calendly-inline-widget\" data-url=\"https://calendly.com/hello-backhousefragrances/new-meeting\" style=\"min-width:320px;height:700px;\"></div>\n<script type=\"text/javascript\" src=\"https://assets.calendly.com/assets/external/widget.js\" async></script>"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "anchor",
-        "heading",
-        "embed"
-      ],
-      "custom_css": [
-        "#book-a-meeting {scroll-margin-block-start: 100px;}",
-        "div:has(> .calendly-inline-widget) {width: 100%;}",
-        ".calendly-inline-widget {width: 100%; max-width: 1000px; margin-inline: auto;}",
-        "@media screen and (max-width: 749px) {.calendly-inline-widget {height: 900px !important; }}"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "page-width",
-        "full_width_on_mobile": false,
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 72,
-        "padding-block-end": 72,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": false,
-        "section_id": ""
-      }
-    },
-    "section_self_service": {
-      "type": "section",
-      "blocks": {
-        "heading": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Looking for quick self-service gifting?</p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1rem",
-            "enable_mobile_size": true,
-            "mobile_font_size": "1.25rem",
-            "line_height": "tight",
-            "letter_spacing": "loose",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "custom_class": ""
-          },
-          "blocks": {}
-        },
-        "link": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Explore Self-Service Gifting Options →",
-            "link": "shopify://pages/self-service-corporate-gifting",
-            "open_in_new_tab": false,
-            "style_class": "button-unstyled",
-            "custom_button_background": "{{ settings.color_palette.foreground }}",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "link_text_color": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "link"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "full-width",
-        "full_width_on_mobile": false,
-        "section_height": "custom",
-        "section_height_custom": 55,
-        "background_media": "image",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image": "shopify://shop_images/Self-Service_Gifting-Full-Width-cropped.jpg",
-        "background_image_position": "cover",
-        "toggle_overlay": true,
-        "overlay_color": "#00000040",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": false,
-        "section_id": ""
-      }
-    },
     "divider_ask_ai": {
       "type": "divider",
       "name": "t:names.divider",
@@ -5236,9 +5017,6 @@
     "section_faq",
     "divider_contact",
     "section_contact",
-    "divider_booking",
-    "section_booking",
-    "section_self_service",
     "main"
   ]
 }
