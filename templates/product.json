@@ -255,6 +255,14 @@
               },
               "blocks": {}
             },
+            "custom_liquid_XALDfc": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<script id=\"attn-waitlist-eligibility\" type=\"application/json\">{\n{%- liquid\nfor variant in product.variants\nassign eligibility = 'false'\nif variant.inventory_quantity <= 0\nassign eligibility = 'true'\nendif\nassign entry = '\"' | append: variant.id | append: '\":' | append: eligibility\nunless forloop.last\nassign entry = entry | append: ','\nendunless\n\necho entry\nendfor\n-%}\n}</script>\n<div id=\"attn-waitlist-trigger\"></div>"
+              },
+              "blocks": {}
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -596,6 +604,7 @@
             "variant_picker_R3rGDr",
             "bf_bundle_bh_personalizer_options_m9DhxP",
             "product_addons",
+            "custom_liquid_XALDfc",
             "buy_buttons_eYQEYi",
             "custom_liquid_cant_decide",
             "text_aEtTtq",
@@ -823,6 +832,8 @@
                     "type_preset": "h6",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
