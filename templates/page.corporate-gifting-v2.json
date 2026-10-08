@@ -4464,6 +4464,7 @@
     },
     "divider_products": {
       "type": "divider",
+      "disabled": true,
       "name": "t:names.divider",
       "settings": {
         "background_color": "",
@@ -4494,7 +4495,10 @@
           "type": "_featured-product",
           "name": "t:names.product",
           "static": true,
-          "settings": {},
+          "settings": {
+            "show_button": true,
+            "button_label": "Shop now"
+          },
           "blocks": {
             "featured-product-title": {
               "type": "product-title",
@@ -4502,7 +4506,7 @@
               "static": true,
               "settings": {
                 "width": "100%",
-                "type_preset": "h5"
+                "type_preset": "h2"
               }
             },
             "featured-product-price": {
@@ -4528,6 +4532,9 @@
           }
         }
       },
+      "custom_css": [
+        ".featured-product-content-top {margin-block-end: 16px;}"
+      ],
       "settings": {
         "product": "corporate-hurricane-candle",
         "layout": "media-left",
