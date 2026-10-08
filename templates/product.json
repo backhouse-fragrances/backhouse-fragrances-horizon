@@ -239,22 +239,6 @@
                 "padding_right": 0
               }
             },
-            "product_addons": {
-              "type": "_product-addons",
-              "settings": {
-                "layout": "card",
-                "heading": "Add an extra candle",
-                "none_label": "No thanks",
-                "trim_suffix": "candle",
-                "note": "added with your gift set",
-                "property_name": "Add-on for",
-                "padding-block-start": 0,
-                "padding-block-end": 8,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "buy_buttons_B8JgcJ": {
               "type": "buy-buttons",
               "name": "t:names.product_buy_buttons",
@@ -316,6 +300,22 @@
                 }
               },
               "block_order": []
+            },
+            "product_addons": {
+              "type": "_product-addons",
+              "settings": {
+                "layout": "card",
+                "heading": "Add an extra candle",
+                "none_label": "No thanks",
+                "trim_suffix": "candle",
+                "note": "added with your gift set",
+                "property_name": "Add-on for",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             },
             "custom_liquid_XALDfc": {
               "type": "custom-liquid",
@@ -604,8 +604,8 @@
             "group_icgrde",
             "variant_picker_R3rGDr",
             "bf_bundle_bh_personalizer_options_m9DhxP",
-            "product_addons",
             "buy_buttons_B8JgcJ",
+            "product_addons",
             "custom_liquid_XALDfc",
             "custom_liquid_cant_decide",
             "text_aEtTtq",
