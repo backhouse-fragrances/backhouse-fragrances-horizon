@@ -21,6 +21,11 @@
       {%- content_for 'block', type: 'swatches', id: 'featured-product-swatches' -%}
     </div>
   {% endif %}
+  {% if block.settings.show_button and closest.product != blank %}
+    <a href="{{ closest.product.url }}" class="button featured-product__button">
+      {{- block.settings.button_label | escape -}}
+    </a>
+  {% endif %}
 {% endcapture %}
 
 {% render 'product-card',
@@ -37,6 +42,11 @@
     align-items: baseline;
     gap: var(--gap-sm);
   }
+
+  /* Optional "Show button" CTA under the product image, linking to the selected product. */
+  .featured-product__button {
+    margin-block-start: var(--gap-sm);
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -47,6 +57,20 @@
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "info": "Links to the selected product",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now",
+      "visible_if": "{{ block.settings.show_button }}"
     }
   ]
 }
