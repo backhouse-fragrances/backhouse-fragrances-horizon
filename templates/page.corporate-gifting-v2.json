@@ -3313,7 +3313,7 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Shop Bulk Gifts ",
+                    "label": "Shop Bulk Gifts",
                     "link": "https://gifting.backhousefragrances.com/bulk-orders",
                     "open_in_new_tab": false,
                     "show_arrow": true,
@@ -3513,7 +3513,7 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Send to Multiple Addresses ",
+                    "label": "Send to Multiple Addresses",
                     "link": "https://gifting.backhousefragrances.com/",
                     "open_in_new_tab": false,
                     "show_arrow": true,
