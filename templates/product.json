@@ -239,6 +239,14 @@
                 "padding_right": 0
               }
             },
+            "custom_liquid_XALDfc": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<script id=\"attn-waitlist-eligibility\" type=\"application/json\">{\n{%- liquid\nfor variant in product.variants\nassign eligibility = 'false'\nif variant.inventory_quantity <= 0\nassign eligibility = 'true'\nendif\nassign entry = '\"' | append: variant.id | append: '\":' | append: eligibility\nunless forloop.last\nassign entry = entry | append: ','\nendunless\n\necho entry\nendfor\n-%}\n}</script>\n<div id=\"attn-waitlist-trigger\"></div>"
+              },
+              "blocks": {}
+            },
             "buy_buttons_B8JgcJ": {
               "type": "buy-buttons",
               "name": "t:names.product_buy_buttons",
@@ -314,14 +322,6 @@
                 "padding-block-end": 8,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "custom_liquid_XALDfc": {
-              "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
-              "settings": {
-                "custom_liquid": "<script id=\"attn-waitlist-eligibility\" type=\"application/json\">{\n{%- liquid\nfor variant in product.variants\nassign eligibility = 'false'\nif variant.inventory_quantity <= 0\nassign eligibility = 'true'\nendif\nassign entry = '\"' | append: variant.id | append: '\":' | append: eligibility\nunless forloop.last\nassign entry = entry | append: ','\nendunless\n\necho entry\nendfor\n-%}\n}</script>\n<div id=\"attn-waitlist-trigger\"></div>"
               },
               "blocks": {}
             },
@@ -604,9 +604,9 @@
             "group_icgrde",
             "variant_picker_R3rGDr",
             "bf_bundle_bh_personalizer_options_m9DhxP",
+            "custom_liquid_XALDfc",
             "buy_buttons_B8JgcJ",
             "product_addons",
-            "custom_liquid_XALDfc",
             "custom_liquid_cant_decide",
             "text_aEtTtq",
             "share_buttons",
