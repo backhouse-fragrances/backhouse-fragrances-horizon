@@ -663,6 +663,7 @@
     },
     "divider_steps": {
       "type": "divider",
+      "disabled": true,
       "name": "t:names.divider",
       "settings": {
         "background_color": "",
@@ -674,8 +675,7 @@
         "alignment_horizontal": "center",
         "padding-block-start": 0,
         "padding-block-end": 0
-      },
-      "disabled": true
+      }
     },
     "section_steps": {
       "type": "section",
@@ -1285,6 +1285,7 @@
         "intro",
         "steps"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -1324,8 +1325,7 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
-      "disabled": true
+      }
     },
     "section_talk_details": {
       "type": "section",
@@ -2121,6 +2121,7 @@
         "heading",
         "quotes"
       ],
+      "disabled": true,
       "custom_css": [
         ".image-block {border-radius: 50%; overflow: hidden;}",
         ".testimonial-quote {font-style: italic;}"
@@ -2164,8 +2165,7 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
-      "disabled": true
+      }
     },
     "media_why_backhouse": {
       "type": "media-with-content",
@@ -4979,6 +4979,65 @@
         "padding-block-end": 0
       }
     },
+    "featured_product": {
+      "type": "featured-product",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "name": "t:names.product_media",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/HOLIDAY_CORPORATE_1_video_placeholder_web.jpg",
+            "image_position": "cover"
+          }
+        },
+        "featured-product": {
+          "type": "_featured-product",
+          "name": "t:names.product",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "featured-product-title": {
+              "type": "product-title",
+              "name": "t:names.title",
+              "static": true,
+              "settings": {
+                "width": "100%",
+                "type_preset": "h5"
+              }
+            },
+            "featured-product-price": {
+              "type": "_featured-product-price",
+              "name": "t:names.price",
+              "static": true,
+              "settings": {}
+            },
+            "featured-product-gallery": {
+              "type": "_featured-product-gallery",
+              "name": "t:names.image",
+              "static": true,
+              "settings": {}
+            },
+            "featured-product-swatches": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "static": true,
+              "settings": {
+                "hide_padding": true
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "product": "corporate-hurricane-candle",
+        "layout": "media-left",
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "anchor_gift_guide": {
       "type": "custom-liquid",
       "custom_css": [
@@ -5001,6 +5060,7 @@
     "divider_ask_ai",
     "section_ask_ai",
     "divider_products",
+    "featured_product",
     "product_list_corporate",
     "divider_steps",
     "section_steps",
