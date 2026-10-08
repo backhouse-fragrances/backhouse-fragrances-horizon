@@ -4489,7 +4489,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/HOLIDAY_CORPORATE_1_video_placeholder_web.jpg",
+            "image": "shopify://shop_images/backhouse-fragrances-custom-mini-candles-personalized-event-corporate-favors-9757060.jpg",
             "image_position": "cover"
           }
         },
@@ -4541,7 +4541,7 @@
         ".featured-product__button {align-self: center; margin-block-start: 16px;}"
       ],
       "settings": {
-        "product": "corporate-hurricane-candle",
+        "product": "custom-corporate-minis",
         "layout": "media-left",
         "background_color": "",
         "padding-block-start": 0,
