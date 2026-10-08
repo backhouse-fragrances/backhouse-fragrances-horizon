@@ -4510,7 +4510,8 @@
                 "width": "100%",
                 "type_preset": "h3",
                 "enable_mobile_size": true,
-                "mobile_font_size": "1rem"
+                "mobile_font_size": "1rem",
+                "alignment": "center"
               }
             },
             "featured-product-price": {
@@ -4537,8 +4538,8 @@
         }
       },
       "custom_css": [
-        ".featured-product-content-top {margin-block-end: 16px;}",
-        ".featured-product__button {align-self: center; margin-block-start: 16px;}"
+        ".featured-product-content-top {order: 1; flex-direction: column; align-items: center; gap: 8px; margin-block-start: 16px;}",
+        ".featured-product__button {order: 2; align-self: center; margin-block-start: 16px;}"
       ],
       "settings": {
         "product": "custom-corporate-minis",
