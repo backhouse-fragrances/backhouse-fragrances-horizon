@@ -4506,7 +4506,9 @@
               "static": true,
               "settings": {
                 "width": "100%",
-                "type_preset": "h2"
+                "type_preset": "h3",
+                "enable_mobile_size": true,
+                "mobile_font_size": "1rem"
               }
             },
             "featured-product-price": {
