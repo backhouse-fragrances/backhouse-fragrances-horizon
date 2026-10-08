@@ -134,7 +134,7 @@
             "mobile_gap": 12,
             "width": "fit-content",
             "custom_width": 100,
-            "width_mobile": "fit-content",
+            "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
@@ -180,7 +180,7 @@
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
@@ -199,7 +199,7 @@
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
@@ -668,7 +668,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Let’s talk details →",
+            "label": "Let’s talk details",
             "link": "#gifting-form",
             "open_in_new_tab": false,
             "style_class": "button-unstyled",
@@ -679,7 +679,8 @@
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
-            "custom_width_mobile": 100
+            "custom_width_mobile": 100,
+            "show_arrow": true
           },
           "blocks": {}
         }
@@ -774,7 +775,7 @@
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
@@ -823,7 +824,7 @@
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
@@ -872,7 +873,7 @@
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
-                "width_mobile": "fit-content",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100
               },
               "blocks": {}
@@ -3784,7 +3785,7 @@
                     "link_text_color": "",
                     "width": "fit-content",
                     "custom_width": 100,
-                    "width_mobile": "fit-content",
+                    "width_mobile": "custom",
                     "custom_width_mobile": 100
                   }
                 }
