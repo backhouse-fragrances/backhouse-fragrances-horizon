@@ -1071,7 +1071,8 @@
         }
       },
       "custom_css": [
-        ".text-block p + p {margin-block-start: var(--padding-md);}"
+        ".text-block p + p {margin-block-start: var(--padding-md);}",
+        "@media screen and (max-width: 749px) {.media-with-content {grid-template-areas: 'content content content' 'media media media';}}"
       ],
       "settings": {
         "media_position": "left",
@@ -3551,7 +3552,8 @@
         "ways"
       ],
       "custom_css": [
-        ".button-unstyled {text-transform: uppercase; letter-spacing: var(--letter-spacing-loose); text-decoration: underline; text-underline-offset: 6px;}"
+        ".button-unstyled {text-transform: uppercase; letter-spacing: var(--letter-spacing-loose); text-decoration: underline; text-underline-offset: 6px;}",
+        ".text-block ul {padding-inline-start: 1.25em;}"
       ],
       "settings": {
         "content_direction": "column",
@@ -3804,7 +3806,8 @@
         }
       },
       "custom_css": [
-        ".media-with-content {--media-height: 50vw !important; --media-height-mobile: 100vw !important;}"
+        ".media-with-content {--media-height: 50vw !important; --media-height-mobile: 100vw !important;}",
+        ".text-block ul {padding-inline-start: 1.25em;}"
       ],
       "settings": {
         "media_position": "left",
@@ -4512,7 +4515,8 @@
                 "type_preset": "h3",
                 "enable_mobile_size": true,
                 "mobile_font_size": "1rem",
-                "alignment": "center"
+                "alignment": "center",
+                "max_width": "none"
               }
             },
             "featured-product-price": {
