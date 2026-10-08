@@ -31,10 +31,40 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}
+  {%- if block_settings.show_arrow -%}
+    <span class="button__label-with-icon">
+      {{ block_settings.label }}
+      <svg
+        class="button__arrow-icon"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable="false"
+        aria-hidden="true"
+      >
+        {% render 'icon', icon: 'arrow' %}
+      </svg>
+    </span>
+  {%- else -%}
+    {{ block_settings.label }}
+  {%- endif -%}
 </a>
 
 {% stylesheet %}
+  /* Button setting "Show arrow icon": the theme's own arrow icon after the label, in the
+     label's colour. The wrapper keeps label and icon on one line inside the grid button. */
+  .button__label-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  .button__arrow-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+
   /* Button style "Link": a 1px rule in the label's own colour, sitting under the text.
      Scoped to this class rather than .button-unstyled, which the theme reuses for facet
      clear-all links, header actions and disclosure toggles that must stay unlined.
