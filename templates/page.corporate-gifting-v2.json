@@ -1896,6 +1896,37 @@
         "padding-block-end": 0
       }
     },
+    "1791566689ae1f7ad6": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "featured_product": {
       "type": "featured-product",
       "blocks": {
@@ -4632,53 +4663,6 @@
         "add_section_id": false,
         "section_id": ""
       }
-    },
-    "1791566689ae1f7ad6": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_9c76844_hy7bxN": {
-          "type": "ai_gen_block_9c76844",
-          "settings": {
-            "featured_product": "custom-corporate-minis",
-            "heading": "Crafted to leave a lasting impression",
-            "description": "<p>Elevate your next corporate event, client appreciation program, or employee recognition initiative with our hand-poured custom mini candles. Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p>",
-            "link_label": "Explore the product",
-            "desktop_width_percent": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_9c76844_hy7bxN"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
     }
   },
   "order": [
@@ -4690,6 +4674,7 @@
     "divider_testimonials",
     "carousel_testimonials",
     "divider_products",
+    "1791566689ae1f7ad6",
     "featured_product",
     "product_list_corporate",
     "section_talk_details",
@@ -4705,7 +4690,6 @@
     "divider_faq",
     "section_faq",
     "divider_contact",
-    "section_contact",
-    "1791566689ae1f7ad6"
+    "section_contact"
   ]
 }
