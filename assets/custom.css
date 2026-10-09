@@ -715,6 +715,26 @@ summary .svg-wrapper {
     display: none;
 }
 
+/* Product details: the Attentive waitlist Custom liquid block (templates/product.json) always
+   holds its eligibility <script> and #attn-waitlist-trigger, which Attentive keeps hidden
+   unless the variant can join a waitlist, so the rule above never matches it. Unwrap its
+   <div> so the trigger is the column's flex child itself: no gap while it is hidden or still
+   empty, the normal gap once Attentive shows it. */
+.product-details .group-block-content > div:not([class]):has(> #attn-waitlist-trigger) {
+    display: contents;
+}
+
+#attn-waitlist-trigger:empty {
+    display: none;
+}
+
+/* Product details: the BF Bundle personalizer app block prints nothing on products without
+   personalizer options, but Shopify's app block wrapper stays as a zero-height flex child
+   and takes a gap. Hide the wrapper until it holds an element. */
+.shopify-app-block[id*='bh_personalizer_options']:not(:has(*)) {
+    display: none;
+}
+
 /* Klaviyo's signup tab ("Get 10% Off", a fixed .kl-teaser-<form id> at z-index 90000)
    floated over the bottom of the cart drawer on phones, on top of the summary and Check out.
    Hidden while the cart drawer is open; it comes back when the drawer closes. */
