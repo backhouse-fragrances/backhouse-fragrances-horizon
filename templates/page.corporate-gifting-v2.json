@@ -575,7 +575,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Shop Bulk Gifts",
-                    "link": "https://gifting.backhousefragrances.com/bulk-orders",
+                    "link": "#gifting-form",
                     "open_in_new_tab": false,
                     "show_arrow": true,
                     "style_class": "button-unstyled",
@@ -779,7 +779,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Send to Multiple Addresses",
-                    "link": "https://gifting.backhousefragrances.com/",
+                    "link": "#gifting-form",
                     "open_in_new_tab": false,
                     "show_arrow": true,
                     "style_class": "button-unstyled",
