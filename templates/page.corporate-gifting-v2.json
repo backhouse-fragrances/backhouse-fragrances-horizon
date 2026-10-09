@@ -1044,7 +1044,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Send an E-Gift",
-                    "link": "https://gifting.backhousefragrances.com/",
+                    "link": "#gifting-form",
                     "open_in_new_tab": false,
                     "show_arrow": false,
                     "style_class": "button-custom",
