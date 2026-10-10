@@ -8,6 +8,7 @@
   @param {string} [style] - Custom inline styles for the group block.
   @param {string} [background_color] - The background color of the group block.
   @param {string} [block_id] - The ID of the group block.
+  @param {object} [section] - The section the group is rendered in; lets a grid-section column size its background image
 
   @example
   {% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
@@ -53,6 +54,8 @@
     ></a>
   {%- endif -%}
 
+  {% capture group_media_sizes %}{% render 'grid-item-sizes', section: section, settings: settings %}{% endcapture %}
+  {% assign group_media_sizes = group_media_sizes | strip %}
   <div class="group-block__media-wrapper">
     {% render 'background-media',
       background_media: settings.background_media,
@@ -60,6 +63,7 @@
       background_video_position: settings.video_position,
       background_image: settings.background_image,
       background_image_position: settings.background_image_position,
+      sizes: group_media_sizes,
       placeholder: settings.placeholder
     %}
     {% if settings.toggle_overlay %}

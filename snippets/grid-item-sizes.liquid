@@ -1,0 +1,63 @@
+{%- doc -%}
+  Echoes a `sizes` attribute for media that sits inside a grid-section column.
+
+  grid-section lays its items out as `columns` equal columns from 750px up and as
+  `mobile_columns` columns (or a mobile carousel of `mobile_card_size` cards) below.
+  Media inside an item can never be wider than its column, so this errs one step
+  larger than the real slot (vw, so bigger screens still get bigger files) and
+  leaves the caller's fallback untouched outside a grid-section.
+
+  @param {object} section - The section the item is rendered in
+  @param {object} [settings] - The item's settings (width, custom_width, width_mobile, custom_width_mobile)
+  @param {string} [fallback] - Echoed when the section is not a grid or carousel layout
+
+  @example
+  {% capture media_sizes %}{% render 'grid-item-sizes', section: section, settings: block.settings %}{% endcapture %}
+{%- enddoc -%}
+
+{%- liquid
+  assign result = fallback
+  assign layout_type = section.settings.layout_type
+
+  if layout_type == 'grid' or layout_type == 'carousel'
+    assign columns = section.settings.columns | default: 1 | times: 1
+    if columns < 1
+      assign columns = 1
+    endif
+
+    assign desktop_vw = 100.0 | divided_by: columns | ceil
+    if layout_type == 'carousel' and section.settings.peek_desktop
+      assign desktop_vw = 67
+    endif
+    if settings.width == 'custom' and settings.custom_width != blank
+      assign desktop_vw = desktop_vw | times: settings.custom_width | divided_by: 100.0 | ceil
+    endif
+
+    assign mobile_vw = 100
+    if layout_type == 'grid' and section.settings.carousel_on_mobile != true
+      assign mobile_columns = section.settings.mobile_columns | default: 1 | times: 1
+      if mobile_columns > 1
+        assign mobile_vw = 100.0 | divided_by: mobile_columns | ceil
+      endif
+    else
+      assign card_size = section.settings.mobile_card_size | default: '100%'
+      if card_size contains 'cqw'
+        assign mobile_vw = card_size | remove: 'cqw' | strip | times: 1
+      endif
+    endif
+    if settings.width_mobile == 'custom' and settings.custom_width_mobile != blank
+      assign mobile_vw = mobile_vw | times: settings.custom_width_mobile | divided_by: 100.0 | ceil
+    endif
+
+    if desktop_vw < 1
+      assign desktop_vw = 1
+    endif
+    if mobile_vw < 1
+      assign mobile_vw = 1
+    endif
+
+    assign result = '(min-width: 750px) ' | append: desktop_vw | append: 'vw, ' | append: mobile_vw | append: 'vw'
+  endif
+
+  echo result
+-%}

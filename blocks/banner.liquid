@@ -38,6 +38,9 @@
   endif
 %}
 
+{% capture banner_media_sizes %}{% render 'grid-item-sizes', section: section, settings: block_settings %}{% endcapture %}
+{% assign banner_media_sizes = banner_media_sizes | strip %}
+
 {% render 'contrast-override',
   background_color: block_settings.background_color,
   section_id: block.id,
@@ -82,6 +85,7 @@
       background_video_position: block_settings.video_position,
       background_image: block_settings.background_image,
       background_image_position: block_settings.background_image_position,
+      sizes: banner_media_sizes,
       block: block,
       section: section
     %}

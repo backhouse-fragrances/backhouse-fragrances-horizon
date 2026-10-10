@@ -218,7 +218,15 @@ export class ProductCard extends ProductCardLink {
 
   #preloadNextPreviewImage() {
     const currentSlide = this.refs.slideshow?.slides?.[this.refs.slideshow?.current];
-    currentSlide?.nextElementSibling?.querySelector('img[loading="lazy"]')?.removeAttribute('loading');
+    const image = currentSlide?.nextElementSibling?.querySelector('img[loading="lazy"]');
+    if (!(image instanceof HTMLImageElement)) return;
+
+    // `sizes="auto"` is only defined for lazy images; once eager it resolves to 100vw,
+    // so fall back to the static list before dropping the lazy attribute.
+    const sizes = image.getAttribute('sizes');
+    if (sizes?.startsWith('auto,')) image.setAttribute('sizes', sizes.replace(/^auto,\s*/, ''));
+
+    image.removeAttribute('loading');
   }
 
   /**

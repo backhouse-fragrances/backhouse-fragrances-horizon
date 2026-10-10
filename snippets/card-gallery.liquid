@@ -179,8 +179,10 @@
                 assign loading = featured_media_loading
                 assign sizes = featured_media_sizes
               else
+                # Not `auto, …`: product-card.js un-lazies the next slide and the neighbour slides
+                # sit under content-visibility: auto, and in both cases `auto` resolves to 100vw.
                 assign loading = 'lazy'
-                assign sizes = 'auto, ' | append: image_sizes
+                assign sizes = image_sizes
               endif
 
               assign class = media_class | replace: '[media_type]', media.media_type | append: media_class_suffix
