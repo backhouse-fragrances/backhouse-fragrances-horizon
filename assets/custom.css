@@ -825,3 +825,21 @@ body .calendly-overlay .calendly-popup-close::before {
         mask-size: 24px;
     }
 }
+
+/* ==========================================================================
+   Shopify chat bubble above the mobile sticky add-to-cart bar
+   The chat launcher (<shopify-chat>, Shopify's chat app embed) is pinned bottom-right
+   and sits on top of the sticky add-to-cart button. The launcher lives in a shadow
+   root, so it can't be styled directly; its bottom offset is exposed as the
+   --shopify-chat-activator-offset custom property (the embed sets it to 20px on :root).
+   While the bar is shown (data-stuck="true", mobile bottom bar only), lift the bubble
+   by the bar's height + 12px. Bar height = 2 x --padding-sm + 52px button, plus the
+   home-indicator inset the bar adds under its controls.
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  body:has(sticky-add-to-cart[data-variant-available='true'] .sticky-add-to-cart__bar[data-stuck='true']) {
+    --shopify-chat-activator-offset: calc(
+      var(--padding-sm) * 2 + 52px + var(--safe-area-inset-bottom, 0px) + 12px
+    );
+  }
+}
