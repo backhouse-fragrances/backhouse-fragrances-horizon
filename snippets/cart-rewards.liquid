@@ -289,12 +289,13 @@
     display: flex;
     flex: none;
     flex-direction: column;
-    gap: var(--gap-xs);
+    gap: var(--gap-2xs);
     padding-block: var(--padding-lg);
   }
 
   .cart-rewards--drawer {
     padding-block-start: var(--padding-xs);
+    padding-block-end: var(--padding-sm);
     padding-inline: var(--cart-drawer-padding);
     margin-block-end: var(--margin-lg);
     border-block-end: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
@@ -320,15 +321,12 @@
 
   /*
     The bar is inset by half a marker so a marker sitting on 0% or 100% stays inside the container.
-    Its height reserves two label lines, so the layout does not move when a label wraps.
+    Its height follows the tallest tier (marker plus the label lines it really uses), so a one line
+    label leaves no empty line below it.
   */
   .cart-rewards__bar {
     position: relative;
     margin-inline: calc(var(--cart-rewards-marker-size) / 2);
-    min-height: calc(
-      var(--cart-rewards-marker-size) + var(--cart-rewards-label-gap) + var(--cart-rewards-label-lines) *
-        var(--cart-rewards-label-line)
-    );
     container-type: inline-size;
   }
 
@@ -352,17 +350,24 @@
     transition: width var(--animation-speed) var(--animation-easing);
   }
 
+  /* Every tier shares one grid cell, so the list is as tall as its tallest tier. */
   .cart-rewards__tiers {
+    display: grid;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .cart-rewards__tier {
-    position: absolute;
-    top: 0;
+    position: relative;
+    grid-area: 1 / 1;
+    justify-self: start;
     left: var(--cart-rewards-position);
     translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cart-rewards-label-gap);
     width: var(--cart-rewards-marker-size);
     color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
   }
@@ -397,11 +402,9 @@
     height: 1.125rem;
   }
 
+  /* The label is wider than its tier and overflows it evenly, or one way when pinned to an edge. */
   .cart-rewards__label {
-    position: absolute;
-    top: calc(var(--cart-rewards-marker-size) + var(--cart-rewards-label-gap));
-    left: 50%;
-    translate: -50% 0;
+    flex: none;
     display: -webkit-box;
     width: max-content;
     max-width: min(8rem, calc(var(--cart-rewards-label-share, 100) * 1cqw));
@@ -429,16 +432,19 @@
     );
   }
 
+  .cart-rewards__tier[data-edge='start'] {
+    align-items: flex-start;
+  }
+
+  .cart-rewards__tier[data-edge='end'] {
+    align-items: flex-end;
+  }
+
   .cart-rewards__tier[data-edge='start'] .cart-rewards__label {
-    left: 0;
-    translate: none;
     text-align: start;
   }
 
   .cart-rewards__tier[data-edge='end'] .cart-rewards__label {
-    right: 0;
-    left: auto;
-    translate: none;
     text-align: end;
   }
 
