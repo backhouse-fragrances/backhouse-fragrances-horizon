@@ -42,6 +42,8 @@
 
   # Stock Horizon only auto-rotates the slideshow section. Autoplay needs the loop too:
   # without `infinite` the slideshow clamps at the last slide and the timer stops there.
+  # No pause/play button: Horizon puts it in the dots row, whose space-between layout then
+  # pushes the dots off centre. Hovering pauses it, and a swipe stops it for good.
   assign autoplay = section.settings.autoplay | default: false
 
   assign slide_position = block.settings.position
@@ -70,7 +72,7 @@
     {%- endcomment -%}
     {%- render 'slideshow-controls',
       style: 'dots',
-      autoplay: autoplay,
+      autoplay: false,
       item_count: slide_count,
       show_arrows: false,
       arrows_on_media: false,
