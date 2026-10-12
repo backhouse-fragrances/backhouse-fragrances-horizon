@@ -1903,9 +1903,9 @@
           "type": "ai_gen_block_79e3646",
           "settings": {
             "featured_product": "custom-corporate-minis",
-            "heading": "A considered gift",
-            "description": "<p>Thoughtful fragrance gifts, made to bring a little calm to everyday rituals.</p>",
-            "button_label": "Explore the gift",
+            "heading": "A branded gift your clients and employees will remember.",
+            "description": "<p>Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p>",
+            "button_label": "{{ closest.product.title }}",
             "desktop_width_percent": 90,
             "heading_size": 28,
             "body_size": 16,
