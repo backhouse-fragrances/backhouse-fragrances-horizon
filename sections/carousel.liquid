@@ -166,6 +166,24 @@
       "visible_if": "{{ section.settings.icons_style != 'none' }}"
     },
     {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:settings.auto_rotate_slides",
+      "default": false,
+      "info": "Loops back to the first slide. Pauses on hover and after a swipe."
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:settings.speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "visible_if": "{{ section.settings.autoplay }}"
+    },
+    {
       "type": "header",
       "content": "t:content.padding"
     },
