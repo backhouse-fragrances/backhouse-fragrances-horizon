@@ -4565,6 +4565,7 @@
       "block_order": [
         "link"
       ],
+      "disabled": true,
       "custom_css": [
         ".button-unstyled {text-transform: uppercase; letter-spacing: var(--letter-spacing-loose); text-decoration: underline; text-underline-offset: 6px;}",
         ".section-content-wrapper {max-width: 980px; margin-inline: auto;}"
