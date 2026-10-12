@@ -1898,6 +1898,33 @@
     },
     "1791566689ae1f7ad6": {
       "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_79e3646_iABbfB": {
+          "type": "ai_gen_block_79e3646",
+          "settings": {
+            "featured_product": "custom-corporate-minis",
+            "heading": "A considered gift",
+            "description": "<p>Thoughtful fragrance gifts, made to bring a little calm to everyday rituals.</p>",
+            "button_label": "Explore the gift",
+            "desktop_width_percent": 90,
+            "heading_size": 28,
+            "body_size": 16,
+            "image_size": 100,
+            "product_placement": "left",
+            "text_color": "#1C1C1C",
+            "background_color": "#FFFFFF",
+            "button_style": "filled",
+            "button_background_color": "#1C1C1C",
+            "button_text_color": "#FFFFFF",
+            "padding_top": 40,
+            "padding_bottom": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_79e3646_iABbfB"
+      ],
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
