@@ -2256,15 +2256,15 @@
             "desktop_width_percent": 100,
             "heading_size": 28,
             "body_size": 16,
-            "image_size": 65,
+            "image_size": 75,
             "product_placement": "left",
             "text_color": "#1c1c1c",
             "background_color": "{{ settings.color_palette.color3 }}",
             "button_style": "filled",
             "button_background_color": "{{ settings.color_palette.background }}",
             "button_text_color": "{{ settings.color_palette.foreground }}",
-            "padding_top": 10,
-            "padding_bottom": 10
+            "padding_top": 0,
+            "padding_bottom": 0
           },
           "blocks": {}
         }
