@@ -236,6 +236,14 @@
                 "padding_right": 0
               }
             },
+            "attentive_waitlist": {
+              "type": "custom-liquid",
+              "name": "Attentive waitlist",
+              "settings": {
+                "custom_liquid": "{%- comment -%} Attentive waitlist: only on products with the \"Show Attentive waitlist\" metafield (custom.attentive_waitlist) ticked. {%- endcomment -%}\n{%- if product.metafields.custom.attentive_waitlist.value -%}\n<script id=\"attn-waitlist-eligibility\" type=\"application/json\">{\n{%- liquid\nfor variant in product.variants\nassign eligibility = 'false'\nif variant.inventory_quantity <= 0\nassign eligibility = 'true'\nendif\nassign entry = '\"' | append: variant.id | append: '\":' | append: eligibility\nunless forloop.last\nassign entry = entry | append: ','\nendunless\n\necho entry\nendfor\n-%}\n}</script>\n<div id=\"attn-waitlist-trigger\"></div>\n{%- endif -%}"
+              },
+              "blocks": {}
+            },
             "buy_buttons_B8JgcJ": {
               "type": "buy-buttons",
               "name": "t:names.product_buy_buttons",
@@ -593,6 +601,7 @@
             "group_icgrde",
             "variant_picker_R3rGDr",
             "bf_bundle_bh_personalizer_options_m9DhxP",
+            "attentive_waitlist",
             "buy_buttons_B8JgcJ",
             "product_addons",
             "custom_liquid_cant_decide",
