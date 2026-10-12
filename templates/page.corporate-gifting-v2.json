@@ -1990,185 +1990,6 @@
         "padding-block-end": 64
       }
     },
-    "1791566689ae1f7ad6": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_79e3646_iABbfB": {
-          "type": "ai_gen_block_79e3646",
-          "settings": {
-            "featured_product": "custom-corporate-minis",
-            "heading": "A branded gift your clients and employees will remember.",
-            "description": "<p>Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p>",
-            "button_label": "{{ closest.product.title }}",
-            "desktop_width_percent": 100,
-            "heading_size": 28,
-            "body_size": 16,
-            "image_size": 100,
-            "product_placement": "left",
-            "text_color": "#1c1c1c",
-            "background_color": "{{ settings.color_palette.color3 }}",
-            "button_style": "filled",
-            "button_background_color": "{{ settings.color_palette.background }}",
-            "button_text_color": "{{ settings.color_palette.foreground }}",
-            "padding_top": 40,
-            "padding_bottom": 40
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_79e3646_iABbfB"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "full-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "featured_product": {
-      "type": "featured-product",
-      "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "name": "t:names.product_media",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/backhouse-fragrances-custom-mini-candles-personalized-event-corporate-favors-9757060.jpg",
-            "link": "",
-            "video_loop": true,
-            "video_autoplay": false,
-            "image_position": "cover",
-            "video_position": "cover"
-          },
-          "blocks": {}
-        },
-        "featured-product": {
-          "type": "_featured-product",
-          "name": "t:names.product",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "show_button": true,
-            "button_label": "Shop now"
-          },
-          "blocks": {
-            "featured-product-title": {
-              "type": "product-title",
-              "name": "t:names.title",
-              "static": true,
-              "settings": {
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": true,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "featured-product-price": {
-              "type": "_featured-product-price",
-              "name": "t:names.price",
-              "static": true,
-              "settings": {
-                "show_sale_price_first": true,
-                "type_preset": ""
-              },
-              "blocks": {}
-            },
-            "featured-product-gallery": {
-              "type": "_featured-product-gallery",
-              "name": "t:names.image",
-              "static": true,
-              "settings": {
-                "image_ratio": "adapt",
-                "constrain_to_viewport": "contain"
-              },
-              "blocks": {}
-            },
-            "featured-product-swatches": {
-              "type": "swatches",
-              "name": "t:names.swatches",
-              "static": true,
-              "settings": {
-                "product_swatches_alignment": "flex-start",
-                "product_swatches_alignment_mobile": "flex-start",
-                "hide_padding": true,
-                "product_swatches_padding_top": 4,
-                "product_swatches_padding_bottom": 0,
-                "product_swatches_padding_left": 0,
-                "product_swatches_padding_right": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
-        }
-      },
-      "custom_css": [
-        ".featured-product-content-top {order: 1; flex-direction: column; align-items: center; gap: 8px; margin-block-start: 16px;}",
-        ".featured-product__button {order: 2; align-self: center; margin-block-start: 16px;}"
-      ],
-      "settings": {
-        "product": "custom-corporate-minis",
-        "layout": "media-left",
-        "background_color": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "anchor_gift_guide": {
-      "type": "custom-liquid",
-      "custom_css": [
-        "#gift-guide {scroll-margin-top: var(--header-height, 80px);}"
-      ],
-      "settings": {
-        "custom_liquid": "<div id=\"gift-guide\"></div>",
-        "background_color": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "marquee_occasions": {
       "type": "marquee",
       "blocks": {
@@ -2420,6 +2241,185 @@
         "padding-block-start": 28,
         "padding-block-end": 28,
         "gap_between_elements": 80
+      }
+    },
+    "1791566689ae1f7ad6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_79e3646_iABbfB": {
+          "type": "ai_gen_block_79e3646",
+          "settings": {
+            "featured_product": "custom-corporate-minis",
+            "heading": "A branded gift your clients and employees will remember.",
+            "description": "<p>Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p>",
+            "button_label": "{{ closest.product.title }}",
+            "desktop_width_percent": 100,
+            "heading_size": 28,
+            "body_size": 16,
+            "image_size": 100,
+            "product_placement": "left",
+            "text_color": "#1c1c1c",
+            "background_color": "{{ settings.color_palette.color3 }}",
+            "button_style": "filled",
+            "button_background_color": "{{ settings.color_palette.background }}",
+            "button_text_color": "{{ settings.color_palette.foreground }}",
+            "padding_top": 40,
+            "padding_bottom": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_79e3646_iABbfB"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "featured_product": {
+      "type": "featured-product",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "name": "t:names.product_media",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/backhouse-fragrances-custom-mini-candles-personalized-event-corporate-favors-9757060.jpg",
+            "link": "",
+            "video_loop": true,
+            "video_autoplay": false,
+            "image_position": "cover",
+            "video_position": "cover"
+          },
+          "blocks": {}
+        },
+        "featured-product": {
+          "type": "_featured-product",
+          "name": "t:names.product",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "show_button": true,
+            "button_label": "Shop now"
+          },
+          "blocks": {
+            "featured-product-title": {
+              "type": "product-title",
+              "name": "t:names.title",
+              "static": true,
+              "settings": {
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "featured-product-price": {
+              "type": "_featured-product-price",
+              "name": "t:names.price",
+              "static": true,
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": ""
+              },
+              "blocks": {}
+            },
+            "featured-product-gallery": {
+              "type": "_featured-product-gallery",
+              "name": "t:names.image",
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt",
+                "constrain_to_viewport": "contain"
+              },
+              "blocks": {}
+            },
+            "featured-product-swatches": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "static": true,
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": true,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "custom_css": [
+        ".featured-product-content-top {order: 1; flex-direction: column; align-items: center; gap: 8px; margin-block-start: 16px;}",
+        ".featured-product__button {order: 2; align-self: center; margin-block-start: 16px;}"
+      ],
+      "settings": {
+        "product": "custom-corporate-minis",
+        "layout": "media-left",
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "anchor_gift_guide": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "#gift-guide {scroll-margin-top: var(--header-height, 80px);}"
+      ],
+      "settings": {
+        "custom_liquid": "<div id=\"gift-guide\"></div>",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "media_why_backhouse": {
@@ -4621,10 +4621,10 @@
     "divider_products",
     "hero_3CBxQk",
     "carousel_testimonials",
+    "marquee_occasions",
     "1791566689ae1f7ad6",
     "featured_product",
     "anchor_gift_guide",
-    "marquee_occasions",
     "media_why_backhouse",
     "divider_occasions",
     "section_ask_ai",
