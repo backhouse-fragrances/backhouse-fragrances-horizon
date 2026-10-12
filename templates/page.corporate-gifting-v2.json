@@ -1238,6 +1238,116 @@
         "padding-block-end": 0
       }
     },
+    "divider_products": {
+      "type": "divider",
+      "disabled": true,
+      "name": "t:names.divider",
+      "settings": {
+        "background_color": "",
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "hero_3CBxQk": {
+      "type": "hero",
+      "blocks": {
+        "text_yw8P3x": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "button_Fi9QVR": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Download Our Gift Guide",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "show_arrow": false,
+            "style_class": "button-secondary",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_yw8P3x",
+        "button_Fi9QVR"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/backhouse-hand-wash-gift-box-custom-corporate-Planwise.jpg",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-end",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-end",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "background_color": "",
+        "toggle_overlay": true,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
     "carousel_testimonials": {
       "type": "carousel",
       "blocks": {
@@ -1880,22 +1990,6 @@
         "padding-block-end": 64
       }
     },
-    "divider_products": {
-      "type": "divider",
-      "disabled": true,
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "1791566689ae1f7ad6": {
       "type": "_blocks",
       "blocks": {
@@ -2062,100 +2156,6 @@
         "padding-block-end": 0
       }
     },
-    "hero_3CBxQk": {
-      "type": "hero",
-      "blocks": {
-        "text_yw8P3x": {
-          "type": "text",
-          "settings": {
-            "text": "",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "custom_class": ""
-          },
-          "blocks": {}
-        },
-        "button_Fi9QVR": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Download Our Gift Guide",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "show_arrow": false,
-            "style_class": "button-secondary",
-            "custom_button_background": "{{ settings.color_palette.foreground }}",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "link_text_color": "",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_yw8P3x",
-        "button_Fi9QVR"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/backhouse-hand-wash-gift-box-custom-corporate-Planwise.jpg",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-end",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-end",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "background_color": "",
-        "toggle_overlay": true,
-        "overlay_color": "#00000026",
-        "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 40,
-        "padding-block-end": 40
-      }
-    },
     "section_talk_details": {
       "type": "section",
       "blocks": {
@@ -2271,6 +2271,7 @@
           "blocks": {
             "inner": {
               "type": "group",
+              "disabled": true,
               "settings": {
                 "link": "",
                 "open_in_new_tab": false,
@@ -2399,6 +2400,7 @@
           ]
         }
       },
+      "disabled": true,
       "custom_css": [
         ".text-block p + p {margin-block-start: var(--padding-md);}",
         "@media screen and (max-width: 749px) {.media-with-content {grid-template-areas: \"content content content\" \"media media media\"; }}"
@@ -2706,7 +2708,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/imgi_102_DSC_2026_web.jpg",
+            "image": "shopify://shop_images/HOLIDAY_CORPORATE_1_video_placeholder_web.jpg",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
@@ -3113,7 +3115,7 @@
                     "body": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We&rsquo;ll walk you through timing from the very first conversation.</p>",
+                        "text": "<p>We’ll walk you through timing from the very first conversation.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -4616,24 +4618,24 @@
     "media_egifting",
     "marquee_clients",
     "divider_testimonials",
-    "carousel_testimonials",
     "divider_products",
+    "hero_3CBxQk",
+    "carousel_testimonials",
     "1791566689ae1f7ad6",
     "featured_product",
-    "hero_3CBxQk",
-    "section_talk_details",
     "anchor_gift_guide",
     "media_why_backhouse",
     "divider_occasions",
     "marquee_occasions",
+    "section_ask_ai",
     "divider_logistics",
     "media_logistics",
     "divider_ask_ai",
-    "section_ask_ai",
     "divider_faq",
     "section_faq",
     "divider_contact",
     "section_contact",
-    "product_list_corporate"
+    "product_list_corporate",
+    "section_talk_details"
   ]
 }
