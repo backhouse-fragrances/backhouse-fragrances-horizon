@@ -2255,7 +2255,7 @@
             "button_label": "{{ closest.product.title }}",
             "desktop_width_percent": 100,
             "heading_size": 28,
-            "body_size": 16,
+            "body_size": 18,
             "image_size": 75,
             "product_placement": "left",
             "text_color": "#1c1c1c",
@@ -3639,53 +3639,6 @@
                 "answer"
               ]
             },
-            "faq_4": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "What’s the difference between self-service and custom gifting?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "answer": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Self-service gifting lets you order directly from our storefront. Custom gifting offers branded packaging, curated sets, and concierge support.</p>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": true,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0,
-                    "custom_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "answer"
-              ]
-            },
             "faq_5": {
               "type": "_accordion-row",
               "settings": {
@@ -3973,7 +3926,6 @@
             "faq_1",
             "faq_2",
             "faq_3",
-            "faq_4",
             "faq_5",
             "faq_6",
             "faq_7",
