@@ -2254,7 +2254,7 @@
             "heading": "A branded gift your clients and employees will remember.",
             "description": "<p>Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p><p></p>",
             "button_label": "{{ closest.product.title }}",
-            "desktop_width_percent": 100,
+            "desktop_width_percent": 95,
             "heading_size": 28,
             "body_size": 18,
             "image_size": 75,
