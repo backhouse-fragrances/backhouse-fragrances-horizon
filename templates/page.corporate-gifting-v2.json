@@ -2264,8 +2264,8 @@
             "button_style": "filled",
             "button_background_color": "{{ settings.color_palette.background }}",
             "button_text_color": "{{ settings.color_palette.foreground }}",
-            "padding_top": 0,
-            "padding_bottom": 0
+            "padding_top": 5,
+            "padding_bottom": 5
           },
           "blocks": {}
         }
