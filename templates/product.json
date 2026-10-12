@@ -9,20 +9,6 @@
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "custom-liquid",
-      "custom_css": [
-        "@media screen and (max-width: 749px) {.section {padding-block-end: 12px; }}"
-      ],
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "{% render 'breadcrumbs' %}",
-        "background_color": "",
-        "section_width": "page-width",
-        "padding-block-start": 16,
-        "padding-block-end": 0
-      }
-    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -926,7 +912,6 @@
     }
   },
   "order": [
-    "breadcrumbs",
     "main",
     "divider_aAYmDY",
     "178953492882341c0c",
