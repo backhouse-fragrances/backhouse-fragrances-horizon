@@ -1238,22 +1238,6 @@
         "padding-block-end": 0
       }
     },
-    "divider_products": {
-      "type": "divider",
-      "disabled": true,
-      "name": "t:names.divider",
-      "settings": {
-        "background_color": "",
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "section_width": "full-width",
-        "thickness": 0.5,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "hero_3CBxQk": {
       "type": "hero",
       "blocks": {
@@ -2244,6 +2228,199 @@
         "gap_between_elements": 80
       }
     },
+    "media_custom_minis": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "name": "t:names.media",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/backhouse-fragrances-custom-mini-candles-personalized-event-corporate-favors-5932246.jpg",
+            "link": "shopify://products/custom-corporate-minis",
+            "video_loop": true,
+            "video_autoplay": false,
+            "image_position": "cover",
+            "video_position": "cover"
+          },
+          "blocks": {}
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "name": "t:names.content",
+          "static": true,
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 24
+          },
+          "blocks": {
+            "inner": {
+              "type": "group",
+              "settings": {
+                "link": "",
+                "open_in_new_tab": false,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "reverse_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "custom_mobile_alignment": false,
+                "mobile_vertical_alignment": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 20,
+                "enable_mobile_gap": false,
+                "mobile_gap": 12,
+                "width": "custom",
+                "custom_width": 72,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "enable_mobile_radius": false,
+                "mobile_border_radius": 0,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "css_class": ""
+              },
+              "blocks": {
+                "heading": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>A branded gift your clients and employees will remember.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.5rem",
+                    "enable_mobile_size": true,
+                    "mobile_font_size": "1.125rem",
+                    "line_height": "tight",
+                    "letter_spacing": "loose",
+                    "case": "uppercase",
+                    "wrap": "pretty",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_mobile_padding": false,
+                    "mobile-padding-block-start": 0,
+                    "mobile-padding-block-end": 0,
+                    "mobile-padding-inline-start": 0,
+                    "mobile-padding-inline-end": 0,
+                    "custom_class": ""
+                  },
+                  "blocks": {}
+                },
+                "body": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Each candle is personalized with your logo, custom message, or branding — beautifully packaged and ready to gift!</p>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "enable_mobile_size": true,
+                    "mobile_font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_mobile_padding": false,
+                    "mobile-padding-block-start": 0,
+                    "mobile-padding-block-end": 0,
+                    "mobile-padding-inline-start": 0,
+                    "mobile-padding-inline-end": 0,
+                    "custom_class": ""
+                  },
+                  "blocks": {}
+                },
+                "button": {
+                  "type": "button",
+                  "name": "t:names.button",
+                  "settings": {
+                    "label": "Shop Custom Mini Candles",
+                    "link": "shopify://products/custom-corporate-minis",
+                    "open_in_new_tab": false,
+                    "show_arrow": false,
+                    "style_class": "button-custom",
+                    "custom_button_background": "{{ settings.color_palette.background }}",
+                    "custom_button_text": "{{ settings.color_palette.foreground }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 100
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "heading",
+                "body",
+                "button"
+              ]
+            }
+          },
+          "block_order": [
+            "inner"
+          ]
+        }
+      },
+      "custom_css": [
+        ".media-with-content {--media-height: 50vw !important; --media-height-mobile: 100vw !important;}"
+      ],
+      "settings": {
+        "media_position": "left",
+        "media_width": "medium",
+        "media_height": "80svh",
+        "section_width": "full-width",
+        "extend_media": true,
+        "background_color": "{{ settings.color_palette.color3 }}",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "1791566689ae1f7ad6": {
       "type": "_blocks",
       "blocks": {
@@ -2300,7 +2477,8 @@
         "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
+      },
+      "disabled": true
     },
     "featured_product": {
       "type": "featured-product",
@@ -4572,10 +4750,10 @@
     "media_egifting",
     "marquee_clients",
     "divider_testimonials",
-    "divider_products",
     "hero_3CBxQk",
     "carousel_testimonials",
     "marquee_occasions",
+    "media_custom_minis",
     "1791566689ae1f7ad6",
     "featured_product",
     "anchor_gift_guide",
