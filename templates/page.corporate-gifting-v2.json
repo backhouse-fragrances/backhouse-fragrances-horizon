@@ -956,7 +956,7 @@
                     "letter_spacing": "loose",
                     "case": "uppercase",
                     "wrap": "pretty",
-                    "text_color": "{{ settings.color_palette.background }}",
+                    "text_color": "{{ settings.color_palette.foreground }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -976,7 +976,7 @@
                 "body": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Running out of time? Don&rsquo;t have their addresses? Send a digital gift recipients can redeem on their own time, no address required.</p>",
+                    "text": "<p>Running out of time? Don’t have their addresses? Send a digital gift recipients can redeem on their own time, no address required.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -989,7 +989,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "{{ settings.color_palette.background }}",
+                    "text_color": "{{ settings.color_palette.foreground }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -1022,7 +1022,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "{{ settings.color_palette.background }}",
+                    "text_color": "{{ settings.color_palette.foreground }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -1083,7 +1083,7 @@
         "media_height": "80svh",
         "section_width": "full-width",
         "extend_media": true,
-        "background_color": "{{ settings.color_palette.foreground }}",
+        "background_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -1450,7 +1450,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&ldquo;Our guests and clients love receiving a gift of backhouse candles. We love the elegant branding and local inspiration behind each scent. It&rsquo;s so easy to work with Danielle and her team - they always deliver the best service.&rdquo;</p>",
+                    "text": "<p>“Our guests and clients love receiving a gift of backhouse candles. We love the elegant branding and local inspiration behind each scent. It’s so easy to work with Danielle and her team - they always deliver the best service.”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1914,8 +1914,8 @@
             "text_color": "#1c1c1c",
             "background_color": "{{ settings.color_palette.color3 }}",
             "button_style": "filled",
-            "button_background_color": "#1c1c1c",
-            "button_text_color": "#ffffff",
+            "button_background_color": "{{ settings.color_palette.background }}",
+            "button_text_color": "{{ settings.color_palette.foreground }}",
             "padding_top": 40,
             "padding_bottom": 40
           },
@@ -1960,6 +1960,7 @@
         "media": {
           "type": "_media-without-appearance",
           "name": "t:names.product_media",
+          "disabled": true,
           "static": true,
           "settings": {
             "media_type": "image",
@@ -1975,6 +1976,7 @@
         "featured-product": {
           "type": "_featured-product",
           "name": "t:names.product",
+          "disabled": true,
           "static": true,
           "settings": {
             "show_button": true,
@@ -2060,15 +2062,81 @@
         "padding-block-end": 0
       }
     },
-    "product_list_corporate": {
-      "type": "product-list",
+    "hero_3CBxQk": {
+      "type": "hero",
       "blocks": {
-        "view_all": {
+        "text_zTDcYT": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>New arrivals</h2>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "text_yw8P3x": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Made with care and unconditionally loved by our customers.</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 32,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "button_Fi9QVR": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "View all",
-            "link": "shopify://collections/corporate-gifting",
+            "label": "Download Our Gift Guide",
+            "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "show_arrow": false,
             "style_class": "button",
@@ -2082,254 +2150,43 @@
             "custom_width_mobile": 100
           },
           "blocks": {}
-        },
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0
-          },
-          "blocks": {
-            "title": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h2>Corporate Gifting</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.5rem",
-                "enable_mobile_size": true,
-                "mobile_font_size": "1.25rem",
-                "line_height": "tight",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "title"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 20,
-            "enable_mobile_gap": true,
-            "mobile_gap": 16,
-            "background_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_card_group_FqrqMi": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 10,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "product_title_R8Rz7K": {
-                  "type": "product-title",
-                  "name": "t:names.product_title",
-                  "settings": {
-                    "width": "fit-content",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "h6",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "rating_badge_LrHhPm": {
-                  "type": "rating-badge",
-                  "name": "t:names.rating_badge",
-                  "settings": {
-                    "display_mode": "rating",
-                    "hide_text": false,
-                    "show_single_star": false,
-                    "show_empty": false,
-                    "alignment": "left",
-                    "text_color": ""
-                  },
-                  "blocks": {}
-                },
-                "price_Ux3CXh": {
-                  "type": "price",
-                  "name": "t:names.product_price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "custom",
-                    "width": "fit-content",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "text_color": "",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "product_title_R8Rz7K",
-                "rating_badge_LrHhPm",
-                "price_Ux3CXh"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_card_group_FqrqMi"
-          ]
         }
       },
       "block_order": [
-        "view_all"
+        "text_zTDcYT",
+        "text_yw8P3x",
+        "button_Fi9QVR"
       ],
+      "name": "t:names.hero",
       "settings": {
-        "collection": "corporate-gifting",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "carousel_contain_width": true,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 24,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
         "section_width": "page-width",
-        "horizontal_alignment": "center",
-        "gap": 28,
+        "section_height": "large",
+        "section_height_custom": 50,
         "background_color": "",
-        "padding-block-start": 56,
-        "padding-block-end": 56
+        "toggle_overlay": true,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "section_talk_details": {
@@ -2413,185 +2270,6 @@
         "custom_liquid": "<div id=\"gift-guide\"></div>",
         "background_color": "",
         "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "slideshow_gift_guide": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_1": {
-          "type": "_slide",
-          "settings": {
-            "media_type_1": "image",
-            "image_1": "shopify://shop_images/Backhouse-34_web.jpg",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "flex-end",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 12,
-            "background_color": "",
-            "toggle_overlay": true,
-            "overlay_color": "#00000080",
-            "overlay_style": "gradient",
-            "gradient_direction": "to top",
-            "padding-block-start": 48,
-            "padding-block-end": 80,
-            "padding-inline-start": 48,
-            "padding-inline-end": 48
-          },
-          "blocks": {
-            "link": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Download Our Gift Guide",
-                "link": "https://cdn.shopify.com/s/files/1/0152/2076/8868/files/Backhouse_Holiday_Corporate_Gifting_Lookbook_2026.pdf?v=1790792391",
-                "open_in_new_tab": true,
-                "show_arrow": true,
-                "style_class": "button-custom",
-                "custom_button_background": "{{ settings.color_palette.background }}",
-                "custom_button_text": "{{ settings.color_palette.foreground }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "link"
-          ]
-        },
-        "slide_2": {
-          "type": "_slide",
-          "settings": {
-            "media_type_1": "image",
-            "image_1": "shopify://shop_images/Backhouse-Gifting-Banner-02.jpg",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "flex-end",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 12,
-            "background_color": "",
-            "toggle_overlay": true,
-            "overlay_color": "#00000080",
-            "overlay_style": "gradient",
-            "gradient_direction": "to top",
-            "padding-block-start": 48,
-            "padding-block-end": 80,
-            "padding-inline-start": 48,
-            "padding-inline-end": 48
-          },
-          "blocks": {
-            "link": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Download Our Gift Guide",
-                "link": "https://cdn.shopify.com/s/files/1/0152/2076/8868/files/Backhouse_Holiday_Corporate_Gifting_Lookbook_2026.pdf?v=1790792391",
-                "open_in_new_tab": true,
-                "show_arrow": true,
-                "style_class": "button-custom",
-                "custom_button_background": "{{ settings.color_palette.background }}",
-                "custom_button_text": "{{ settings.color_palette.foreground }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "link"
-          ]
-        },
-        "slide_3": {
-          "type": "_slide",
-          "settings": {
-            "media_type_1": "image",
-            "image_1": "shopify://shop_images/Backhouse-Gifting-Banner-03.jpg",
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "flex-end",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 12,
-            "background_color": "",
-            "toggle_overlay": true,
-            "overlay_color": "#00000080",
-            "overlay_style": "gradient",
-            "gradient_direction": "to top",
-            "padding-block-start": 48,
-            "padding-block-end": 80,
-            "padding-inline-start": 48,
-            "padding-inline-end": 48
-          },
-          "blocks": {
-            "link": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Download Our Gift Guide",
-                "link": "https://cdn.shopify.com/s/files/1/0152/2076/8868/files/Backhouse_Holiday_Corporate_Gifting_Lookbook_2026.pdf?v=1790792391",
-                "open_in_new_tab": true,
-                "show_arrow": true,
-                "style_class": "button-custom",
-                "custom_button_background": "{{ settings.color_palette.background }}",
-                "custom_button_text": "{{ settings.color_palette.foreground }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "link"
-          ]
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "custom_css": [
-        ".button-custom {font-size: 1rem; --button-padding-block: 18px; --button-padding-inline: 40px;}",
-        "slideshow-controls[controls-on-media][pagination-position=\"center\"] {width: fit-content; left: auto; right: 48px; justify-content: flex-end;}",
-        "slideshow-controls {mix-blend-mode: normal;}"
-      ],
-      "settings": {
-        "display_mode": "full_frame",
-        "section_width": "full-width",
-        "full_frame_on_mobile": false,
-        "slideshow_gap": 12,
-        "corner_radius": 0,
-        "slide_height": "medium",
-        "content_position": "on-media",
-        "background_color": "",
-        "icons_style": "none",
-        "icons_shape": "none",
-        "slideshow_controls_style": "dots",
-        "autoplay": true,
-        "autoplay_speed": 5,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -2712,7 +2390,7 @@
                 "list": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&#10022; Elevated, universally loved fragrances</p><p>&#10022; Hands-on concierge support</p><p>&#10022; Attention to detail from concept to delivery</p><p>&#10022; Seamless logistics and fulfillment</p><p>&#10022; A gifting experience that feels personal&mdash;not promotional</p>",
+                    "text": "<p>✦ Elevated, universally loved fragrances</p><p>✦ Hands-on concierge support</p><p>✦ Attention to detail from concept to delivery</p><p>✦ Seamless logistics and fulfillment</p><p>✦ A gifting experience that feels personal—not promotional</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -4690,6 +4368,278 @@
         "add_section_id": false,
         "section_id": ""
       }
+    },
+    "product_list_corporate": {
+      "type": "product-list",
+      "blocks": {
+        "view_all": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "View all",
+            "link": "shopify://collections/corporate-gifting",
+            "open_in_new_tab": false,
+            "show_arrow": false,
+            "style_class": "button",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
+          },
+          "blocks": {
+            "title": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Corporate Gifting</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.5rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "1.25rem",
+                "line_height": "tight",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 20,
+            "enable_mobile_gap": true,
+            "mobile_gap": 16,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_card_group_FqrqMi": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 10,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "product_title_R8Rz7K": {
+                  "type": "product-title",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "width": "fit-content",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h6",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "rating_badge_LrHhPm": {
+                  "type": "rating-badge",
+                  "name": "t:names.rating_badge",
+                  "settings": {
+                    "display_mode": "rating",
+                    "hide_text": false,
+                    "show_single_star": false,
+                    "show_empty": false,
+                    "alignment": "left",
+                    "text_color": ""
+                  },
+                  "blocks": {}
+                },
+                "price_Ux3CXh": {
+                  "type": "price",
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "custom",
+                    "width": "fit-content",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "product_title_R8Rz7K",
+                "rating_badge_LrHhPm",
+                "price_Ux3CXh"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_card_group_FqrqMi"
+          ]
+        }
+      },
+      "block_order": [
+        "view_all"
+      ],
+      "settings": {
+        "collection": "corporate-gifting",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "carousel_contain_width": true,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 24,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 28,
+        "background_color": "",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
     }
   },
   "order": [
@@ -4703,10 +4653,9 @@
     "divider_products",
     "1791566689ae1f7ad6",
     "featured_product",
-    "product_list_corporate",
+    "hero_3CBxQk",
     "section_talk_details",
     "anchor_gift_guide",
-    "slideshow_gift_guide",
     "media_why_backhouse",
     "divider_occasions",
     "marquee_occasions",
@@ -4717,6 +4666,7 @@
     "divider_faq",
     "section_faq",
     "divider_contact",
-    "section_contact"
+    "section_contact",
+    "product_list_corporate"
   ]
 }
