@@ -1,6 +1,221 @@
+{% doc %}
+  @prompt
+    Create a gifting product highlight block with an equal-width split layout on desktop: a selectable linked product on one half, and an editable heading, rich text, and product-link button on the other. Stack the halves on mobile.
+    
+    Match the existing theme’s heading and body fonts, font weights, and letter spacing by default. Do not use separate or hard-coded fonts.
+    
+    Include these editing controls in the block settings:
+    
+    Featured product
+    Heading and rich text
+    Product-link button label
+    Desktop content width
+    Heading size and body text size
+    Text and background colors
+    Button style
+    Top and bottom padding
+    Product image size
+    Product placement on the left or right
+    Both the product image and button should link to the selected product’s page. Keep the default design simple and consistent with the theme. Add this as a new block within the selected existing section, without changing or removing the original Gifting product highlight block.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-gifting-highlight-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding-block: {{ block.settings.padding_top }}px {{ block.settings.padding_bottom }}px;
+    color: {{ block.settings.text_color }};
+    background: {{ block.settings.background_color }};
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(24px, 5vw, 72px);
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__media {
+    width: {{ block.settings.image_size }}%;
+    justify-self: center;
+    overflow: hidden;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__media img,
+  .ai-gifting-highlight-{{ ai_gen_id }}__placeholder svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__placeholder {
+    position: relative;
+    background: #f1f0ec;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__placeholder svg {
+    color: #77736d;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__empty {
+    position: absolute;
+    inset: auto 12px 12px;
+    color: #333333;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__content {
+    max-width: 560px;
+    justify-self: center;
+    width: 100%;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__heading {
+    margin: 0 0 20px;
+    color: inherit;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+    letter-spacing: var(--heading-letter-spacing, inherit);
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__body {
+    margin-bottom: 28px;
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-weight: var(--font-body--weight);
+    font-size: {{ block.settings.body_size }}px;
+    line-height: 1.65;
+    letter-spacing: inherit;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__body > :first-child { margin-top: 0; }
+  .ai-gifting-highlight-{{ ai_gen_id }}__body > :last-child { margin-bottom: 0; }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 12px 26px;
+    border: 1px solid;
+    border-radius: 0;
+    font: inherit;
+    font-family: var(--font-body--family);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__button--filled {
+    color: {{ block.settings.button_text_color }};
+    background: {{ block.settings.button_background_color }};
+    border-color: {{ block.settings.button_background_color }};
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__button--outline {
+    color: {{ block.settings.text_color }};
+    background: transparent;
+    border-color: currentColor;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__button:hover {
+    opacity: 0.82;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}__button:focus-visible,
+  .ai-gifting-highlight-{{ ai_gen_id }}__image-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .ai-gifting-highlight-{{ ai_gen_id }}--image-right .ai-gifting-highlight-{{ ai_gen_id }}__media { grid-column: 2; grid-row: 1; }
+  .ai-gifting-highlight-{{ ai_gen_id }}--image-right .ai-gifting-highlight-{{ ai_gen_id }}__content { grid-column: 1; grid-row: 1; }
+  .ai-gifting-highlight-{{ ai_gen_id }}--image-left .ai-gifting-highlight-{{ ai_gen_id }}__media { grid-column: 1; grid-row: 1; }
+  .ai-gifting-highlight-{{ ai_gen_id }}--image-left .ai-gifting-highlight-{{ ai_gen_id }}__content { grid-column: 2; grid-row: 1; }
+
+  @media screen and (max-width: 749px) {
+    .ai-gifting-highlight-{{ ai_gen_id }}__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+      width: 100%;
+    }
+
+    .ai-gifting-highlight-{{ ai_gen_id }}__media,
+    .ai-gifting-highlight-{{ ai_gen_id }}__content {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .ai-gifting-highlight-{{ ai_gen_id }}__heading { font-size: min({{ block.settings.heading_size }}px, 9vw); }
+  }
+{% endstyle %}
+
+<div class="ai-gifting-highlight-{{ ai_gen_id }} ai-gifting-highlight-{{ ai_gen_id }}--image-{{ block.settings.product_placement }}" {{ block.shopify_attributes }}>
+  <div class="ai-gifting-highlight-{{ ai_gen_id }}__inner">
+    <div class="ai-gifting-highlight-{{ ai_gen_id }}__media">
+      {% if block.settings.featured_product != blank %}
+        <a class="ai-gifting-highlight-{{ ai_gen_id }}__image-link" href="{{ block.settings.featured_product.url }}" aria-label="{{ block.settings.featured_product.title | escape }}">
+          {% if block.settings.featured_product.featured_image %}
+            {{ block.settings.featured_product.featured_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.featured_product.featured_image.alt | default: block.settings.featured_product.title | escape }}
+          {% else %}
+            <div class="ai-gifting-highlight-{{ ai_gen_id }}__placeholder">{{ 'product-apparel-1' | placeholder_svg_tag }}<span class="ai-gifting-highlight-{{ ai_gen_id }}__empty">Add a product image to complete this highlight.</span></div>
+          {% endif %}
+        </a>
+      {% else %}
+        <div class="ai-gifting-highlight-{{ ai_gen_id }}__placeholder">{{ 'product-apparel-1' | placeholder_svg_tag }}<span class="ai-gifting-highlight-{{ ai_gen_id }}__empty">Select a featured product to display its image.</span></div>
+      {% endif %}
+    </div>
+    <div class="ai-gifting-highlight-{{ ai_gen_id }}__content">
+      {% if block.settings.heading != blank %}<h2 class="ai-gifting-highlight-{{ ai_gen_id }}__heading">{{ block.settings.heading | escape }}</h2>{% endif %}
+      {% if block.settings.description != blank %}<div class="ai-gifting-highlight-{{ ai_gen_id }}__body">{{ block.settings.description }}</div>{% endif %}
+      {% if block.settings.featured_product != blank and block.settings.button_label != blank %}
+        <a class="ai-gifting-highlight-{{ ai_gen_id }}__button ai-gifting-highlight-{{ ai_gen_id }}__button--{{ block.settings.button_style }}" href="{{ block.settings.featured_product.url }}">{{ block.settings.button_label | escape }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Gifting product highlight",
+  "settings": [
+    { "type": "header", "content": "Product and content" },
+    { "type": "product", "id": "featured_product", "label": "Featured product" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A considered gift" },
+    { "type": "richtext", "id": "description", "label": "Rich text", "default": "<p>Thoughtful fragrance gifts, made to bring a little calm to everyday rituals.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore the gift" },
+    { "type": "header", "content": "Layout and type" },
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop content width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 90 },
+    { "type": "range", "id": "heading_size", "label": "Heading size", "min": 18, "max": 48, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "image_size", "label": "Product image size", "min": 60, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "select", "id": "product_placement", "label": "Product placement", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "header", "content": "Colors and button" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1C1C1C" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "filled", "label": "Filled" }, { "value": "outline", "label": "Outline" }], "default": "filled" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#1C1C1C" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40 }
+  ],
+  "presets": [{ "name": "Gifting product highlight" }],
+  "tag": null,
+  "class": "gifting-product-highlight"
+}
 {% endschema %}
