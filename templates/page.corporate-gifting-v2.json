@@ -3370,7 +3370,7 @@
         "media_height": "80svh",
         "section_width": "full-width",
         "extend_media": true,
-        "background_color": "",
+        "background_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
