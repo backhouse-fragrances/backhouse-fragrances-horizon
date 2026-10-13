@@ -39,7 +39,7 @@
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "background_color": "#F5F5F5",
+        "background_color": "#f5f5f5",
         "divider_width": 0.5,
         "divider_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 15,
@@ -112,7 +112,7 @@
         "divider_size": "page-width",
         "divider_color": "",
         "border_width": 0.5,
-        "bottom_border_color": "{{ settings.color_palette.color3 }}",
+        "bottom_border_color": "{{ settings.color_palette.foreground }}",
         "actions_display_style": "text",
         "actions_font_size": "0.8125rem",
         "actions_font": "subheading",
