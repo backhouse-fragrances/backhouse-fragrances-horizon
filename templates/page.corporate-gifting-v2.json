@@ -588,7 +588,8 @@
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 }
               },
               "block_order": [
@@ -792,7 +793,8 @@
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 }
               },
               "block_order": [
@@ -1057,7 +1059,8 @@
                     "width_mobile": "custom",
                     "custom_width_mobile": 100
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 }
               },
               "block_order": [
