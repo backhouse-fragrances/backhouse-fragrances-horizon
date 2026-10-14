@@ -506,7 +506,7 @@
                     "text_product_details": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We use a proprietary blended soy/vegetable wax,&nbsp;phthalate-free premium fragrance oil, and&nbsp;lead-free wick.</p>",
+                        "text": "<p>We use a proprietary wax blend,&nbsp;phthalate-free premium fragrance oil, and&nbsp;lead-free wick.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
