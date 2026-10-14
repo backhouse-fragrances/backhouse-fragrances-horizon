@@ -200,7 +200,12 @@
     border-radius: 0;
     background: var(--quick-add-background, var(--color-background));
     backdrop-filter: none;
-    translate: 0 5px;
+
+    /* The rise-on-hover offset is desktop only: on mobile the button is always shown and
+       there is no hover to lift it, so the offset left it sitting 5px low in the corner. */
+    @media screen and (min-width: 750px) {
+      translate: 0 5px;
+    }
   }
 
   .quick-add--icon .quick-add__button.add-to-cart-button {
