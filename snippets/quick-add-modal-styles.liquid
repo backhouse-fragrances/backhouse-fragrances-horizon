@@ -208,6 +208,12 @@
     }
   }
 
+  /* Add-ons are offered on the product page only. The modal does not load product-addons.js,
+     so a ticked add-on here would not reach the cart. */
+  .quick-add-modal__content product-addons {
+    display: none;
+  }
+
   .quick-add-modal__content .product-media-container__zoom-button {
     cursor: default;
   }
