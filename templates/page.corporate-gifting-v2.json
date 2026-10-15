@@ -1717,7 +1717,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&ldquo;We received so many rave reviews and comments from our partners who received them about the incredible scents and beautiful packaging. Exceeded expectations for a high level gift experience for corporate gifting. Definitely recommend and plan to use again!&rdquo;</p>",
+                    "text": "<p>“We received so many rave reviews and comments from our partners who received them about the incredible scents and beautiful packaging. Exceeded expectations for a high level gift experience for corporate gifting. Definitely recommend and plan to use again!”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1975,7 +1975,7 @@
         "icons_style": "arrow",
         "icons_shape": "none",
         "autoplay": true,
-        "autoplay_speed": 3,
+        "autoplay_speed": 5,
         "padding-block-start": 64,
         "padding-block-end": 64
       }
