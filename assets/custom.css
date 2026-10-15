@@ -843,3 +843,18 @@ body .calendly-overlay .calendly-popup-close::before {
     );
   }
 }
+
+/* ==========================================================================
+   Cart drawer fields: no Safari zoom on focus
+   iOS Safari zooms the page when a focused field's font is under 16px. The gift note
+   textarea and the discount code input are set at --font-size--sm (14px) in
+   cart-summary.liquid, so tapping either one zoomed the drawer and left it offset.
+   16px at touch widths keeps the drawer put; desktop keeps the smaller size. The
+   .cart-actions ancestor outranks the compiled single-class rules that load after this file.
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  .cart-actions .cart-note__instructions,
+  .cart-actions .cart-discount__input {
+    font-size: max(1rem, var(--font-size--sm));
+  }
+}
