@@ -1975,7 +1975,7 @@
         "icons_style": "arrow",
         "icons_shape": "none",
         "autoplay": true,
-        "autoplay_speed": 7,
+        "autoplay_speed": 3,
         "padding-block-start": 64,
         "padding-block-end": 64
       }
