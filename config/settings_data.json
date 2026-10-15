@@ -110,28 +110,6 @@
         "disabled": true,
         "settings": {}
       },
-      "15683396631634586217": {
-        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": false,
-        "settings": {
-          "greeting_message": "Hi there — whether you're gifting or splurging on yourself, we'd love to help!",
-          "show_featured_products": true,
-          "featured_products": [],
-          "background_color": "#FFFFFF",
-          "font_color": "#000000",
-          "agent_invert_activator_colors": true,
-          "button_color": "#5c5c5c",
-          "button_icon": "chat_bubble",
-          "button_text": "no_text",
-          "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "agent_inherit_fonts": true,
-          "agent_font": "system_ui_n4",
-          "agent_font_size": 14,
-          "agent_activator_font_size": 16,
-          "agent_border_radius": 16
-        }
-      },
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
@@ -177,6 +155,28 @@
         "type": "shopify://apps/bf-bundle/blocks/bh-personalizer-embed/01a0feee-39f4-7e87-b308-090f86610d33",
         "disabled": false,
         "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "greeting_message": "Hi there — whether you're gifting or splurging on yourself, we'd love to help!",
+          "show_featured_products": true,
+          "featured_products": [],
+          "background_color": "#ffffff",
+          "font_color": "#000000",
+          "agent_invert_activator_colors": true,
+          "button_color": "#5c5c5c",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "agent_inherit_fonts": true,
+          "agent_font": "system_ui_n4",
+          "agent_font_size": 14,
+          "agent_activator_font_size": 16,
+          "agent_border_radius": 16
+        }
       }
     },
     "color_palette": {
