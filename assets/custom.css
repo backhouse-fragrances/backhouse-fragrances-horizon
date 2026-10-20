@@ -737,9 +737,13 @@ summary .svg-wrapper {
 
 /* Klaviyo's signup tab ("Get 10% Off", a fixed .kl-teaser-<form id> at z-index 90000)
    floated over the bottom of the cart drawer on phones, on top of the summary and Check out.
-   Hidden while the cart drawer is open; it comes back when the drawer closes. */
+   Hidden while the cart drawer is open; it comes back when the drawer closes.
+   visibility, not display: when the popup closes, Klaviyo keeps its full-screen layer
+   (invisible, but still catching clicks) until the tab's slide-in animation ends, and a
+   display: none tab never animates. With the drawer open on desktop that left every click
+   dead, Check out included. */
 body:has(#cart-drawer[open]) [class*='kl-teaser-'] {
-    display: none !important;
+    visibility: hidden !important;
 }
 
 /* Klaviyo's signup tab: a compact tab at the bottom left, the same on every screen.
