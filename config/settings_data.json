@@ -74,6 +74,7 @@
     "show_add_discount_code": false,
     "show_installments": false,
     "show_accelerated_checkout_buttons": true,
+    "empty_cart_button_link": "shopify://collections/shop-all-products",
     "cart_rewards_enabled": true,
     "cart_rewards_color": "{{ settings.color_palette.color1 }}",
     "icon_stroke": "default",
