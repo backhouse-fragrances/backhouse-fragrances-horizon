@@ -1589,6 +1589,14 @@
         "visible_if": "{{ settings.cart_type == 'drawer' }}"
       },
       {
+        "type": "checkbox",
+        "id": "cart_drawer_recommendations",
+        "label": "Show product recommendations in cart drawer",
+        "info": "The \"We think you'll love these\" products under the cart items. The cart page has its own Cart recommendations section.",
+        "default": false,
+        "visible_if": "{{ settings.cart_type == 'drawer' }}"
+      },
+      {
         "type": "header",
         "content": "t:content.cart_features"
       },
