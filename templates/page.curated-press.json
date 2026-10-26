@@ -225,6 +225,19 @@
     "marquee_press_logos": {
       "type": "marquee",
       "blocks": {
+        "icon_UKHgEh": {
+          "type": "icon",
+          "name": "t:names.icon",
+          "settings": {
+            "icon": "price_tag",
+            "image_upload": "shopify://shop_images/daily_pilot_950x535_1_0_0_0_0.png",
+            "width": 116,
+            "link": "",
+            "open_in_new_tab": false,
+            "icon_color": ""
+          },
+          "blocks": {}
+        },
         "logo_1": {
           "type": "icon",
           "settings": {
@@ -251,6 +264,7 @@
         }
       },
       "block_order": [
+        "icon_UKHgEh",
         "logo_1",
         "logo_2"
       ],
@@ -715,7 +729,7 @@
                 "image": {
                   "type": "image",
                   "settings": {
-                    "image": "shopify://shop_images/Backhouse_fragrances_featured_in_C_manazine.jpg",
+                    "image": "shopify://shop_images/backhouse-barista-blonde-professional-kitchen-newport-beach-28309194621000000000.jpg",
                     "link": "",
                     "image_ratio": "square",
                     "width": "fill",
