@@ -53,7 +53,8 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
             "custom_class": ""
-          }
+          },
+          "blocks": {}
         },
         "body": {
           "type": "text",
@@ -85,7 +86,8 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
             "custom_class": ""
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -114,7 +116,6 @@
         "background_media": "none",
         "background_color": "",
         "video_position": "cover",
-        "background_image": "",
         "background_image_position": "cover",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
@@ -170,7 +171,8 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
             "custom_class": ""
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -198,7 +200,6 @@
         "background_media": "none",
         "background_color": "",
         "video_position": "cover",
-        "background_image": "",
         "background_image_position": "cover",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
@@ -233,7 +234,8 @@
             "link": "",
             "open_in_new_tab": false,
             "icon_color": ""
-          }
+          },
+          "blocks": {}
         },
         "logo_2": {
           "type": "icon",
@@ -244,24 +246,13 @@
             "link": "",
             "open_in_new_tab": false,
             "icon_color": ""
-          }
-        },
-        "logo_3": {
-          "type": "icon",
-          "settings": {
-            "icon": "apple",
-            "image_upload": "shopify://shop_images/Press_Page_-_C_Magazine_Logo.webp",
-            "width": 92,
-            "link": "",
-            "open_in_new_tab": false,
-            "icon_color": ""
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "logo_1",
-        "logo_2",
-        "logo_3"
+        "logo_2"
       ],
       "settings": {
         "movement_direction": "normal",
@@ -318,7 +309,6 @@
             "background_media": "none",
             "background_color": "",
             "video_position": "cover",
-            "background_image": "",
             "background_image_position": "cover",
             "toggle_overlay": false,
             "overlay_color": "#00000026",
@@ -374,7 +364,8 @@
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0,
                 "custom_class": ""
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -415,7 +406,6 @@
                 "background_media": "none",
                 "background_color": "",
                 "video_position": "cover",
-                "background_image": "",
                 "background_image_position": "cover",
                 "aspect_ratio": "adapt",
                 "toggle_overlay": false,
@@ -450,7 +440,8 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "title": {
                   "type": "text",
@@ -482,7 +473,8 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "body": {
                   "type": "text",
@@ -514,7 +506,8 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "link": {
                   "type": "button",
@@ -523,6 +516,7 @@
                     "label": "Backhouse Fragrances featured in The Wall Street Journal",
                     "link": "/blogs/press/backhouse-fragrances-featured-in-the-wall-street-journal-s-best-gifts-under-100-guide",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -532,7 +526,8 @@
                     "custom_width": 100,
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -557,7 +552,6 @@
                 "background_media": "none",
                 "background_color": "",
                 "video_position": "cover",
-                "background_image": "",
                 "background_image_position": "cover",
                 "aspect_ratio": "adapt",
                 "toggle_overlay": false,
@@ -592,7 +586,8 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "title": {
                   "type": "text",
@@ -624,7 +619,8 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "body": {
                   "type": "text",
@@ -656,7 +652,8 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "link": {
                   "type": "button",
@@ -665,6 +662,7 @@
                     "label": "Backhouse Fragrances featured in Real Simple",
                     "link": "/blogs/press/backhouse-fragrances-featured-in-real-simple-magazine",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -674,7 +672,8 @@
                     "custom_width": 100,
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -699,7 +698,6 @@
                 "background_media": "none",
                 "background_color": "",
                 "video_position": "cover",
-                "background_image": "",
                 "background_image_position": "cover",
                 "aspect_ratio": "adapt",
                 "toggle_overlay": false,
@@ -734,12 +732,13 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "title": {
                   "type": "text",
                   "settings": {
-                    "text": "<h3>COASTAL CALM</h3>",
+                    "text": "<p>ROOM TO GROW</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -766,12 +765,13 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "body": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Featured in C Magazine's wellness guide to new bathing rituals — placed alongside Esalen Institute and other luxury wellness experiences. Our Apolena sea salt candle was selected as part of a curated ritual for refreshing the body and soul.</p>",
+                    "text": "<p>Featured in the Daily Pilot, where reporter Matt Szabo traced our move from a converted garage in Newport Heights to a 3,500-square-foot warehouse in Costa Mesa, more than ten times the size of where it all began. The story also explores the places behind our candle names and what comes next, from diffusers to new gift sets.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -798,15 +798,17 @@
                     "mobile-padding-inline-start": 0,
                     "mobile-padding-inline-end": 0,
                     "custom_class": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "link": {
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Backhouse Fragrances featured in C Magazine",
-                    "link": "/blogs/press/backhouse-fragrances-featured-in-c-magazine",
+                    "label": "Backhouse Fragrances featured in Daily Pilot",
+                    "link": "https://www.latimes.com/socal/daily-pilot/news/story/2026-08-28/glowing-up-newport-beach-candle-brand-outgrows-its-backyard-roots",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -816,7 +818,8 @@
                     "custom_width": 100,
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -836,7 +839,7 @@
       },
       "custom_css": [
         ".button-unstyled {text-decoration: underline; text-underline-offset: 6px;}",
-        "@media screen and (max-width: 749px) {.section-carousel {--padding-block-start: 24px !important; --padding-block-end: 24px !important;}}"
+        "@media screen and (max-width: 749px) {.section-carousel {--padding-block-start: 24px !important; --padding-block-end: 24px !important; }}"
       ],
       "settings": {
         "columns": 3,
@@ -847,6 +850,8 @@
         "controls_style": "none",
         "icons_style": "none",
         "icons_shape": "none",
+        "autoplay": false,
+        "autoplay_speed": 5,
         "padding-block-start": 64,
         "padding-block-end": 64
       }
@@ -899,7 +904,8 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
             "custom_class": ""
-          }
+          },
+          "blocks": {}
         },
         "buttons": {
           "type": "group",
@@ -928,7 +934,6 @@
             "background_media": "none",
             "background_color": "",
             "video_position": "cover",
-            "background_image": "",
             "background_image_position": "cover",
             "toggle_overlay": false,
             "overlay_color": "#00000026",
@@ -961,6 +966,7 @@
                 "label": "View our complete press archive",
                 "link": "/blogs/press",
                 "open_in_new_tab": false,
+                "show_arrow": false,
                 "style_class": "button-secondary",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
                 "custom_button_text": "{{ settings.color_palette.background }}",
@@ -970,7 +976,8 @@
                 "custom_width": 100,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
-              }
+              },
+              "blocks": {}
             },
             "button_inquiries": {
               "type": "button",
@@ -979,6 +986,7 @@
                 "label": "Press Inquiries",
                 "link": "mailto:press@backhousefragrances.com?subject=Press%20Inquiry%20%E2%80%94%20Backhouse%20Fragrances",
                 "open_in_new_tab": false,
+                "show_arrow": false,
                 "style_class": "button-secondary",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
                 "custom_button_text": "{{ settings.color_palette.background }}",
@@ -988,7 +996,8 @@
                 "custom_width": 100,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -1023,7 +1032,6 @@
         "background_media": "none",
         "background_color": "",
         "video_position": "cover",
-        "background_image": "",
         "background_image_position": "cover",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
