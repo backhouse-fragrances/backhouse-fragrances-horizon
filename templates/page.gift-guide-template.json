@@ -16,11 +16,45 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Holiday Gift Guide</h2>",
+            "text": "<h1>Holiday Gift Guide</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
+        "text_qjawkq": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Finding the right gift should feel as good as giving it. Our holiday gift guide is organized by who you're shopping for and what you want to spend, so you can check every name off your list with something they'll use and remember. Every Backhouse candle is designed in Newport Beach and made with our proprietary coconut wax blend.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h1",
+            "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "enable_mobile_size": false,
@@ -48,12 +82,14 @@
         }
       },
       "block_order": [
-        "text_QzNLBp"
+        "text_QzNLBp",
+        "text_qjawkq"
       ],
       "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/backhouse-corporate-gifting-aeg-newport-beach-lit-candle.jpg",
+        "media_type_1": "video",
+        "image_1": "shopify://shop_images/backhouse-gift-box-white-red-holiday-studio-newport-beach-77742720091000000000.jpg",
+        "video_1": "shopify://files/videos/HOLIDAY GIFT BOXES.mp4",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -67,11 +103,11 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
         "section_width": "page-width",
-        "section_height": "auto",
+        "section_height": "large",
         "section_height_custom": 50,
         "background_color": "",
         "toggle_overlay": true,
@@ -87,40 +123,6 @@
     "main": {
       "type": "main-page",
       "blocks": {
-        "heading": {
-          "type": "text",
-          "name": "t:names.title",
-          "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.5rem",
-            "enable_mobile_size": true,
-            "mobile_font_size": "1.125rem",
-            "line_height": "tight",
-            "letter_spacing": "loose",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "custom_class": ""
-          },
-          "blocks": {}
-        },
         "page-content": {
           "type": "page-content",
           "settings": {
@@ -130,7 +132,6 @@
         }
       },
       "block_order": [
-        "heading",
         "page-content"
       ],
       "custom_css": [
