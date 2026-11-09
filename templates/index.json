@@ -2234,10 +2234,44 @@
     "17942667684d820465": {
       "type": "_blocks",
       "blocks": {
+        "text_ykA7c9": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Follow us <a href=\"https://www.instagram.com/backhousefragrances\" target=\"_blank\" title=\"https://www.instagram.com/backhousefragrances\">@backhousefragrances</a></h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
+          },
+          "blocks": {}
+        },
         "instafeed_app_block_VcqLWw": {
           "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
           "settings": {
-            "title": "Follow us @backhousefragrances",
+            "title": "",
             "title_color": "",
             "title_size_v2": 0,
             "alignment": "center",
@@ -2254,6 +2288,7 @@
         }
       },
       "block_order": [
+        "text_ykA7c9",
         "instafeed_app_block_VcqLWw"
       ],
       "settings": {
@@ -2262,7 +2297,7 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
         "section_width": "full-width",
