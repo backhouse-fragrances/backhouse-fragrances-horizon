@@ -87,6 +87,7 @@
             "label": "SHOP THE BACKHOUSE",
             "link": "shopify://collections/shop-all-products",
             "open_in_new_tab": false,
+            "show_arrow": false,
             "style_class": "button-custom",
             "custom_button_background": "{{ settings.color_palette.background }}",
             "custom_button_text": "{{ settings.color_palette.foreground }}",
@@ -280,6 +281,7 @@
                     "label": "CANDLES",
                     "link": "shopify://collections/shop-all-candles",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -436,6 +438,7 @@
                     "label": "GIFTING",
                     "link": "shopify://collections/gift-box-collection",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -592,6 +595,7 @@
                     "label": "HAND WASH",
                     "link": "shopify://collections/hand-wash",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -748,6 +752,7 @@
                     "label": "CUSTOM CORPORATE GIFTING",
                     "link": "shopify://pages/corporate-gifting",
                     "open_in_new_tab": false,
+                    "show_arrow": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -1090,6 +1095,8 @@
                     "type_preset": "h6",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1439,6 +1446,8 @@
                     "type_preset": "h6",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -2166,6 +2175,7 @@
             "label": "REQUEST A SAMPLE PACK",
             "link": "shopify://products/the-scent-sample-pack",
             "open_in_new_tab": false,
+            "show_arrow": false,
             "style_class": "button-unstyled",
             "custom_button_background": "{{ settings.color_palette.background }}",
             "custom_button_text": "{{ settings.color_palette.foreground }}",
@@ -2220,6 +2230,60 @@
         "padding-block-start": 40,
         "padding-block-end": 40
       }
+    },
+    "17942667684d820465": {
+      "type": "_blocks",
+      "blocks": {
+        "instafeed_app_block_VcqLWw": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_VcqLWw"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
@@ -2231,6 +2295,7 @@
     "product_list_Ny3Ppy",
     "marquee_q8TTeY",
     "grid_section_ic8Xq2",
-    "hero_A4iNdR"
+    "hero_A4iNdR",
+    "17942667684d820465"
   ]
 }
