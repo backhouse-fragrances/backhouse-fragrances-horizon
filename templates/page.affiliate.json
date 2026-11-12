@@ -1305,166 +1305,126 @@
         "padding-block-end": 0
       }
     },
-    "media_become": {
-      "type": "media-with-content",
+    "section_UkGq69": {
+      "type": "section",
       "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "name": "t:names.media",
-          "static": true,
+        "text_AnmhJW": {
+          "type": "text",
           "settings": {
-            "media_type": "image",
-            "image": "shopify://shop_images/IMG_7530.heic",
-            "link": "",
-            "video_loop": true,
-            "video_autoplay": false,
-            "image_position": "cover",
-            "video_position": "cover"
+            "text": "<h2>PARTNER WITH US</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
           },
           "blocks": {}
         },
-        "content": {
-          "type": "_content-without-appearance",
-          "name": "t:names.content",
-          "static": true,
+        "contact_form_7m9WNP": {
+          "type": "contact-form",
           "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 100,
+            "background_color": "",
+            "input_style": "default",
+            "input_background_color": "{{ settings.color_palette.background }}",
+            "input_text_color": "{{ settings.color_palette.foreground }}",
+            "input_border_color": "{{ settings.color_palette.foreground }}",
+            "border_width": 1,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
-            "inner": {
-              "type": "group",
+            "submit-button": {
+              "type": "contact-form-submit-button",
+              "static": true,
               "settings": {
-                "link": "",
-                "open_in_new_tab": false,
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "reverse_on_mobile": false,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "custom_mobile_alignment": false,
-                "mobile_vertical_alignment": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 20,
-                "enable_mobile_gap": false,
-                "mobile_gap": 12,
-                "width": "custom",
-                "custom_width": 68,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "enable_mobile_radius": false,
-                "mobile_border_radius": 0,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0,
-                "css_class": ""
+                "label": "Submit",
+                "style_class": "button",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
-              "blocks": {
-                "heading": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<h2>Become An Affiliate</h2>",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "custom",
-                    "font": "var(--font-heading--family)",
-                    "font_size": "1.8rem",
-                    "enable_mobile_size": true,
-                    "mobile_font_size": "1.25rem",
-                    "line_height": "tight",
-                    "letter_spacing": "loose",
-                    "case": "uppercase",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0,
-                    "custom_class": ""
-                  },
-                  "blocks": {}
-                },
-                "link": {
-                  "type": "button",
-                  "name": "t:names.button",
-                  "settings": {
-                    "label": "Click Here To Sign Up",
-                    "link": "https://ui.awin.com/merchant-profile/76566",
-                    "open_in_new_tab": false,
-                    "show_arrow": false,
-                    "style_class": "button-unstyled",
-                    "custom_button_background": "{{ settings.color_palette.foreground }}",
-                    "custom_button_text": "{{ settings.color_palette.background }}",
-                    "custom_button_border": "{{ settings.color_palette.background }}",
-                    "link_text_color": "",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "heading",
-                "link"
-              ]
+              "blocks": {}
             }
           },
-          "block_order": [
-            "inner"
-          ]
+          "block_order": []
         }
       },
-      "disabled": true,
-      "custom_css": [
-        ".media-with-content {--media-height: 75vw !important; --media-height-mobile: 150vw !important;}",
-        ".button-unstyled {font-size: 1.75rem; letter-spacing: 0.2em; text-decoration: none;}",
-        "@media screen and (max-width: 749px) {.button-unstyled {font-size: 1.25rem; font-weight: 400; }}"
+      "block_order": [
+        "text_AnmhJW",
+        "contact_form_7m9WNP"
       ],
+      "name": "t:names.contact_form",
       "settings": {
-        "media_position": "left",
-        "media_width": "medium",
-        "media_height": "80svh",
-        "section_width": "full-width",
-        "extend_media": true,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-width",
+        "full_width_on_mobile": false,
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
         "background_color": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 32,
+        "padding-block-end": 32,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
       }
     },
     "divider_ltk": {
@@ -1581,7 +1541,7 @@
     "media_perks",
     "media_with_content_3UgMhQ",
     "divider_become",
-    "media_become",
+    "section_UkGq69",
     "divider_ltk",
     "1794525468056e8831"
   ]
