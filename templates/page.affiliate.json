@@ -59,7 +59,7 @@
         "text_G9gaNz": {
           "type": "text",
           "settings": {
-            "text": "<p>Made with care and unconditionally loved by our customers.</p>",
+            "text": "<p>For creators, editors, and planners who care about the details.</p>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
@@ -72,7 +72,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "",
+            "text_color": "{{ settings.color_palette.background }}",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
