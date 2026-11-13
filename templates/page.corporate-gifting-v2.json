@@ -1482,7 +1482,7 @@
                 "stars": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>",
+                    "text": "<p>★★★★★</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -1886,7 +1886,7 @@
                 "quote": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>&ldquo;We purchased them as holiday presents for our clients, and they were a hit. The Lido scent is absolutely amazing, and the packaging&mdash;including the box and ribbon&mdash;is gift-ready. The team was a pleasure to work with&mdash;professional, responsive, and detail-oriented.&rdquo;</p>",
+                    "text": "<p>“The candles sent to our 170 clients were such a success. This team is so easy to work with and care very much of the quality of their work. We couldn't be more happy as well as grateful we found them. You better believe we will be using them again next year!”</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
