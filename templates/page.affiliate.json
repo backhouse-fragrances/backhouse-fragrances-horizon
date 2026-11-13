@@ -94,7 +94,7 @@
           "name": "t:names.button",
           "settings": {
             "label": "Join Now",
-            "link": "#affiliate-contact",
+            "link": "/pages/affiliates#contact-affiliate",
             "open_in_new_tab": false,
             "show_arrow": false,
             "style_class": "button",
