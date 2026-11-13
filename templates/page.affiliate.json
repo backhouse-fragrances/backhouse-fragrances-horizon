@@ -1308,6 +1308,14 @@
     "section_UkGq69": {
       "type": "section",
       "blocks": {
+        "custom_liquid_xUhG6Q": {
+          "type": "custom-liquid",
+          "name": "t:names.custom_liquid",
+          "settings": {
+            "custom_liquid": "<div id=\"contact-affiliate\"></div>"
+          },
+          "blocks": {}
+        },
         "text_AnmhJW": {
           "type": "text",
           "settings": {
@@ -1382,6 +1390,7 @@
         }
       },
       "block_order": [
+        "custom_liquid_xUhG6Q",
         "text_AnmhJW",
         "contact_form_7m9WNP"
       ],
