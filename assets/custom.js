@@ -40,3 +40,50 @@
     }
   }).observe(document.documentElement, { childList: true, subtree: true });
 })();
+
+/*
+ * Cart express buttons: Shop Pay only.
+ *
+ * Apple Pay and Google Pay in the cart open the wallet sheet straight away, so the buyer never
+ * sees the checkout page or its pre-ticked "Email me with news and offers" box. After the cart
+ * got express buttons (Oct 5 2026), new Apple Pay buyers getting subscribed fell from 84% to
+ * about 30%. Shop Pay opens its own checkout, which shows the box, so it stays. Apple Pay and
+ * Google Pay are still offered at the top of the checkout page.
+ *
+ * Shopify draws the wallets inside a closed shadow root and reads `wallet-configs` only when the
+ * element connects: editing the attribute afterwards does nothing, and hiding a button with CSS
+ * leaves its empty slot behind (custom.css still hides them as a fallback). So a cart element
+ * that lists those wallets is swapped for a fresh one without them. morph.js keeps an existing
+ * element across cart updates, but the drawer can insert a new one, hence the observer.
+ */
+(() => {
+  const TAG = 'shopify-accelerated-checkout-cart';
+  const DROP = new Set(['apple_pay', 'google_pay']);
+
+  const filter = (element) => {
+    let configs;
+    try {
+      configs = JSON.parse(element.getAttribute('wallet-configs') || '[]');
+    } catch {
+      return;
+    }
+    if (!Array.isArray(configs) || !configs.some((config) => DROP.has(config?.name))) return;
+
+    const fresh = document.createElement(TAG);
+    for (const { name, value } of element.attributes) fresh.setAttribute(name, value);
+    fresh.setAttribute('wallet-configs', JSON.stringify(configs.filter((config) => !DROP.has(config?.name))));
+    element.replaceWith(fresh);
+  };
+
+  for (const element of document.querySelectorAll(TAG)) filter(element);
+
+  new MutationObserver((records) => {
+    for (const record of records) {
+      for (const node of record.addedNodes) {
+        if (!(node instanceof Element)) continue;
+        if (node.localName === TAG) filter(node);
+        else if (node.firstElementChild) for (const element of node.querySelectorAll(TAG)) filter(element);
+      }
+    }
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();

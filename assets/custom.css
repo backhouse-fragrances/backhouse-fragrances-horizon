@@ -862,3 +862,15 @@ body .calendly-overlay .calendly-popup-close::before {
     font-size: max(1rem, var(--font-size--sm));
   }
 }
+
+/* ==========================================================================
+   Cart express buttons: Shop Pay only
+   Apple Pay and Google Pay in the cart skip the checkout page and its pre-ticked email
+   sign-up box; custom.js rebuilds the cart's express buttons without them. This rule only
+   covers the moment before that script runs, so the buttons never flash in. On its own it
+   would leave an empty slot, since Shopify reserves the space inside its shadow root.
+   ========================================================================== */
+shopify-accelerated-checkout-cart shopify-apple-pay-button,
+shopify-accelerated-checkout-cart shopify-google-pay-button {
+  display: none;
+}
