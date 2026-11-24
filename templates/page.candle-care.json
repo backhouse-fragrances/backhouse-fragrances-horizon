@@ -550,7 +550,7 @@
             "faq_7": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Do you ship to Hawaii?",
+                "heading": "Do you ship to Hawaii and Alaska?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -559,7 +559,7 @@
                 "answer": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We do ship orders to Hawaii - however, we charge a flat rate of $10 for every order regardless of order value that is shipped to Hawaii due to higher shipping prices. Every order shipped to Hawaii will be shipped via USPS. </p>",
+                    "text": "<p>Yes, we ship to Hawaii and Alaska. Because shipping there costs more, orders to Hawaii and Alaska have a flat rate of $10, regardless of order value. All other US orders ship for a $7 flat rate. Orders to Hawaii are shipped via USPS.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
