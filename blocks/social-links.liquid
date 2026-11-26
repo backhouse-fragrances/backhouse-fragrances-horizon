@@ -10,7 +10,7 @@
     {% endstyle %}
   {% endif %}
   {% liquid
-    assign social_links = 'facebook_url,instagram_url,youtube_url,tiktok_url,twitter_url,threads_url,linkedin_url,bluesky_url,snapchat_url,pinterest_url,tumblr_url,vimeo_url,custom_url' | split: ','
+    assign social_links = 'facebook_url,instagram_url,youtube_url,tiktok_url,twitter_url,threads_url,linkedin_url,bluesky_url,snapchat_url,pinterest_url,spotify_url,tumblr_url,vimeo_url,custom_url' | split: ','
   %}
 
   {% for link_key in social_links %}
@@ -41,6 +41,8 @@
             assign platform = 'snapchat'
           when 'pinterest_url'
             assign platform = 'pinterest'
+          when 'spotify_url'
+            assign platform = 'spotify'
           when 'tumblr_url'
             assign platform = 'tumblr'
           when 'vimeo_url'
@@ -261,6 +263,11 @@
       "type": "url",
       "id": "pinterest_url",
       "label": "t:options.pinterest"
+    },
+    {
+      "type": "url",
+      "id": "spotify_url",
+      "label": "Spotify"
     },
     {
       "type": "url",
